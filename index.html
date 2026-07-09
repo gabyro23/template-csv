@@ -42,13 +42,13 @@
                     </svg>
                 </div>
                 <div>
-                    <h1 class="text-lg font-bold text-slate-900 tracking-tight">CSV Template & Data Hub</h1>
-                    <p class="text-xs text-slate-500">Aprovisionamiento con análisis léxico inteligente de URLs</p>
+                    <h1 class="text-lg font-bold text-slate-900 tracking-tight font-sans">CSV Template & Data Hub</h1>
+                    <p class="text-xs text-slate-500 font-medium font-sans font-sans">Herramienta de aprovisionamiento ágil para AdOps</p>
                 </div>
             </div>
             <div class="flex items-center space-x-2">
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                    Semicolons (;) Separator
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 font-semibold font-sans">
+                    Listo para usar (; separated)
                 </span>
             </div>
         </div>
@@ -66,9 +66,9 @@
                     </svg>
                 </div>
                 <div class="ml-3">
-                    <h3 class="text-sm font-medium text-blue-800">Detección de Idioma Léxica Activada</h3>
-                    <p class="text-xs text-blue-700 mt-1">
-                        El sistema ahora analiza las palabras clave del propio dominio (ej: <code>radiocentro.com</code>, <code>lecturas.com</code>, <code>ecuavisa.com</code>) para detectar automáticamente el idioma y asignarle el ID numérico correspondiente (Español = 2) sin importar si usan la extensión genérica .com.
+                    <h3 class="text-sm font-semibold text-blue-800 font-sans">Flujo de Placements Optimizado</h3>
+                    <p class="text-xs text-blue-700 mt-1 font-sans">
+                        ¡Se ha eliminado la tabla intermedia de dominios base para simplificar el flujo! Ahora solo cargas tus URLs en el importador masivo de la izquierda y ves directamente el resultado final en la matriz de salida.
                     </p>
                 </div>
             </div>
@@ -83,7 +83,7 @@
                 <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
                     <div class="flex items-center space-x-2 mb-4">
                         <span class="flex items-center justify-center w-6 h-6 rounded-full bg-brand-100 text-brand-600 text-xs font-bold">1</span>
-                        <h2 class="text-md font-semibold text-slate-950">Selecciona el Entorno</h2>
+                        <h2 class="text-md font-semibold text-slate-950 font-sans">Selecciona el Entorno</h2>
                     </div>
                     
                     <div class="grid grid-cols-1 gap-2.5">
@@ -97,8 +97,8 @@
                                     </svg>
                                 </div>
                                 <div>
-                                    <h3 class="font-semibold text-xs text-slate-900">Web</h3>
-                                    <p class="text-[10px] text-slate-500">Sitios web escritorio / mobile</p>
+                                    <h3 class="font-semibold text-xs text-slate-900 font-sans">Web</h3>
+                                    <p class="text-[10px] text-slate-500 font-sans">Sitios web escritorio / mobile</p>
                                 </div>
                             </div>
                             <span class="w-4 h-4 rounded-full border border-slate-300 flex items-center justify-center" id="radio-env-web"></span>
@@ -106,7 +106,7 @@
 
                         <!-- Botón In-App -->
                         <button type="button" onclick="selectEnvironment('in-app')" id="btn-env-in-app" 
-                            class="flex items-center justify-between p-3.5 rounded-xl border-2 transition-all-300 text-left hover:bg-slate-50 focus:outline-none">
+                            class="flex items-center justify-between p-3.5 rounded-xl border-2 transition-all-300 text-left hover:bg-slate-50 focus:outline-none font-sans font-sans">
                             <div class="flex items-center space-x-3">
                                 <div class="p-2 bg-slate-100 rounded-lg text-slate-600" id="icon-env-in-app">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -114,8 +114,8 @@
                                     </svg>
                                 </div>
                                 <div>
-                                    <h3 class="font-semibold text-xs text-slate-900">In-App</h3>
-                                    <p class="text-[10px] text-slate-500">Apps nativas (iOS y Android)</p>
+                                    <h3 class="font-semibold text-xs text-slate-900 font-sans font-sans">In-App</h3>
+                                    <p class="text-[10px] text-slate-500 font-sans">Apps nativas (iOS y Android)</p>
                                 </div>
                             </div>
                             <span class="w-4 h-4 rounded-full border border-slate-300 flex items-center justify-center" id="radio-env-in-app"></span>
@@ -123,7 +123,7 @@
 
                         <!-- Botón CTV -->
                         <button type="button" onclick="selectEnvironment('ctv')" id="btn-env-ctv" 
-                            class="flex items-center justify-between p-3.5 rounded-xl border-2 transition-all-300 text-left hover:bg-slate-50 focus:outline-none">
+                            class="flex items-center justify-between p-3.5 rounded-xl border-2 transition-all-300 text-left hover:bg-slate-50 focus:outline-none font-sans font-sans">
                             <div class="flex items-center space-x-3">
                                 <div class="p-2 bg-slate-100 rounded-lg text-slate-600" id="icon-env-ctv">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -131,8 +131,8 @@
                                     </svg>
                                 </div>
                                 <div>
-                                    <h3 class="font-semibold text-xs text-slate-900">CTV</h3>
-                                    <p class="text-[10px] text-slate-500">Connected TV y Streaming</p>
+                                    <h3 class="font-semibold text-xs text-slate-900 font-sans">CTV</h3>
+                                    <p class="text-[10px] text-slate-500 font-sans">Connected TV y Streaming</p>
                                 </div>
                             </div>
                             <span class="w-4 h-4 rounded-full border border-slate-300 flex items-center justify-center" id="radio-env-ctv"></span>
@@ -144,28 +144,28 @@
                 <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
                     <div class="flex items-center space-x-2 mb-4">
                         <span class="flex items-center justify-center w-6 h-6 rounded-full bg-brand-100 text-brand-600 text-xs font-bold">2</span>
-                        <h2 class="text-md font-semibold text-slate-950">¿Qué deseas crear?</h2>
+                        <h2 class="text-md font-semibold text-slate-950 font-sans">¿Qué deseas crear?</h2>
                     </div>
 
                     <div class="grid grid-cols-2 gap-3">
                         <button type="button" onclick="selectType('sites')" id="btn-type-sites"
-                            class="flex flex-col items-center justify-center p-4 rounded-xl border-2 transition-all-300 hover:bg-slate-50 text-center focus:outline-none">
+                            class="flex flex-col items-center justify-center p-4 rounded-xl border-2 transition-all-300 hover:bg-slate-50 text-center focus:outline-none font-sans">
                             <div class="p-2.5 rounded-full bg-slate-100 text-slate-600 mb-2" id="icon-type-sites">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                                 </svg>
                             </div>
-                            <span class="font-semibold text-xs text-slate-900">Sites / Bundles</span>
+                            <span class="font-semibold text-xs text-slate-900 font-sans">Sites / Bundles</span>
                         </button>
 
                         <button type="button" onclick="selectType('placements')" id="btn-type-placements"
-                            class="flex flex-col items-center justify-center p-4 rounded-xl border-2 transition-all-300 hover:bg-slate-50 text-center focus:outline-none">
+                            class="flex flex-col items-center justify-center p-4 rounded-xl border-2 transition-all-300 hover:bg-slate-50 text-center focus:outline-none font-sans">
                             <div class="p-2.5 rounded-full bg-slate-100 text-slate-600 mb-2" id="icon-type-placements">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
                                 </svg>
                             </div>
-                            <span class="font-semibold text-xs text-slate-900">Placements</span>
+                            <span class="font-semibold text-xs text-slate-900 font-sans font-sans">Placements</span>
                         </button>
                     </div>
                 </div>
@@ -176,62 +176,103 @@
                         <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                         </svg>
-                        <h2 class="text-sm font-semibold text-slate-950">Importar desde Excel / Sheets</h2>
+                        <h2 class="text-sm font-semibold text-slate-950 font-sans font-sans">Importar desde Excel / Sheets</h2>
                     </div>
-                    <p class="text-[11px] text-slate-500 mb-3">
-                        Copia una lista de URLs en tu Excel y pégala aquí. El sistema extraerá únicamente el dominio principal de cada una automáticamente.
+                    <p class="text-[11px] text-slate-500 mb-3 font-sans">
+                        Copia una lista de URLs en tu Excel y pégala aquí. El sistema procesará los dominios aplicando limpieza automática de dominios raíces.
                     </p>
                     <textarea id="import-pastearea" disabled
-                        class="w-full h-24 p-2 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white transition-all resize-none"
+                        class="w-full h-24 p-2 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white transition-all resize-none font-mono"
                         placeholder="Primero selecciona un entorno y tipo para activar..."></textarea>
                     <button onclick="importFromPaste()" id="btn-import-execute" disabled
-                        class="w-full mt-2 inline-flex items-center justify-center px-4 py-2 text-xs font-semibold rounded-lg text-white bg-brand-600 hover:bg-brand-700 transition-all focus:outline-none shadow-sm disabled:bg-slate-100 disabled:text-slate-400 disabled:cursor-not-allowed">
+                        class="w-full mt-2 inline-flex items-center justify-center px-4 py-2 text-xs font-semibold rounded-lg text-white bg-brand-600 hover:bg-brand-700 transition-all focus:outline-none shadow-sm disabled:bg-slate-100 disabled:text-slate-400 disabled:cursor-not-allowed font-sans">
                         Procesar e Importar
                     </button>
                 </div>
 
-                <!-- SECCIÓN: LEYENDA DE CÓDIGOS -->
-                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 space-y-3">
-                    <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
+                <!-- SECCIÓN: LEYENDA DINÁMICA DE CÓDIGOS -->
+                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 space-y-4 font-sans">
+                    <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5 font-sans">
                         <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                         </svg>
                         Leyenda de Identificadores (IDs)
                     </h3>
-                    <div class="space-y-2 text-[11px] text-slate-600 leading-relaxed">
+                    
+                    <!-- LEYENDA COMÚN -->
+                    <div id="legend-common" class="hidden text-[11px] text-slate-600 leading-relaxed border-b border-slate-100 pb-3">
                         <div>
-                            <span class="font-bold text-slate-900 block">Environments:</span>
+                            <span class="font-bold text-slate-900 block font-sans">Environments:</span>
                             <span class="bg-slate-100 px-1 py-0.5 rounded text-slate-800">1</span> = Web | 
                             <span class="bg-slate-100 px-1 py-0.5 rounded text-slate-800">3</span> = AMP
                         </div>
-                        <div class="border-t border-slate-100 pt-2">
-                            <span class="font-bold text-slate-900 block mb-1">Language IDs mapeados:</span>
-                            <div class="grid grid-cols-2 gap-x-2 gap-y-1">
-                                <div><span class="font-semibold text-slate-800">1</span>: Inglés (en)</div>
-                                <div><span class="font-semibold text-slate-800">2</span>: Español (es)</div>
-                                <div><span class="font-semibold text-slate-800">3</span>: Francés (fr)</div>
-                                <div><span class="font-semibold text-slate-800">4</span>: Alemán (de)</div>
-                                <div><span class="font-semibold text-slate-800">5</span>: Italiano (it)</div>
-                                <div><span class="font-semibold text-slate-800">6</span>: Chino (zh)</div>
-                                <div><span class="font-semibold text-slate-800">7</span>: Japonés (ja)</div>
-                                <div><span class="font-semibold text-slate-800">8</span>: Portugués (pt)</div>
-                                <div><span class="font-semibold text-slate-800">9</span>: Ruso (ru)</div>
-                                <div><span class="font-semibold text-slate-800">10</span>: Coreano (ko)</div>
+                    </div>
+
+                    <!-- LEYENDA EXCLUSIVA SITES -->
+                    <div id="legend-sites" class="hidden space-y-2 text-[11px] text-slate-600 leading-relaxed">
+                        <span class="font-bold text-slate-900 block uppercase tracking-wide text-[10px] text-amber-700 font-sans">Mapeo: Web / Sites</span>
+                        <div>
+                            <span class="font-semibold text-slate-800 block mb-1 font-sans">Language IDs asignados:</span>
+                            <div class="grid grid-cols-2 gap-x-2 gap-y-1 font-mono">
+                                <div><span class="font-bold text-slate-800">1</span>: Inglés (en)</div>
+                                <div><span class="font-bold text-slate-800">2</span>: Español (es)</div>
+                                <div><span class="font-bold text-slate-800">3</span>: Francés (fr)</div>
+                                <div><span class="font-bold text-slate-800">4</span>: Alemán (de)</div>
+                                <div><span class="font-bold text-slate-800">5</span>: Italiano (it)</div>
+                                <div><span class="font-bold text-slate-800">6</span>: Chino (zh)</div>
+                                <div><span class="font-bold text-slate-800">7</span>: Japonés (ja)</div>
+                                <div><span class="font-bold text-slate-800">8</span>: Portugués (pt)</div>
+                                <div><span class="font-bold text-slate-800">9</span>: Ruso (ru)</div>
+                                <div><span class="font-bold text-slate-800">10</span>: Coreano (ko)</div>
                             </div>
+                        </div>
+                    </div>
+
+                    <!-- LEYENDA EXCLUSIVA PLACEMENTS -->
+                    <div id="legend-placements" class="hidden space-y-2 text-[11px] text-slate-600 leading-relaxed">
+                        <span class="font-bold text-slate-900 block uppercase tracking-wide text-[10px] text-blue-700 font-sans">Mapeo: Web / Placements</span>
+                        <div class="space-y-1">
+                            <div><strong class="text-slate-800 font-sans">Type (Tipos):</strong></div>
+                            <ul class="list-disc pl-4 space-y-0.5 font-sans">
+                                <li><span class="font-semibold font-sans">3</span>: Display / Banner (default)</li>
+                                <li><span class="font-semibold font-sans">1</span>: Skin</li>
+                                <li><span class="font-semibold font-sans">2</span>: Video</li>
+                                <li><span class="font-semibold font-sans">4</span>: Native</li>
+                            </ul>
+                        </div>
+                        <div class="space-y-1 pt-1">
+                            <div><strong class="text-slate-800 font-sans">Formats (Formatos mapeados):</strong></div>
+                            <ul class="list-disc pl-4 space-y-0.5">
+                                <li>Display: <span class="font-mono">300x250, 728x90, 320x50</span>...</li>
+                                <li>Video Instream: <span class="font-mono">17</span></li>
+                                <li>Video Outstream: <span class="font-mono">18</span></li>
+                                <li>Skin: <span class="font-mono">10, 11, 22</span></li>
+                                <li>Native: <span class="font-mono">222</span></li>
+                            </ul>
+                        </div>
+                        <div class="space-y-1 pt-1 font-sans">
+                            <div><strong class="text-slate-800 font-sans">Prebid:</strong></div>
+                            <ul class="list-disc pl-4 space-y-0.5">
+                                <li><span class="font-semibold font-sans">1</span>: Header bidding (default)</li>
+                                <li><span class="font-semibold font-sans">0</span>: Tag Based</li>
+                            </ul>
+                        </div>
+                        <div class="pt-1 font-sans font-sans">
+                            <strong class="text-slate-800 font-sans">Native:</strong> Siempre <span class="font-mono font-semibold">1</span>
                         </div>
                     </div>
                 </div>
 
             </div>
 
-            <!-- Panel Derecho: Editor de Cabeceras, Datos y Configuración Global (8 Cols) -->
+            <!-- Panel Derecho: Editor, Configuraciones Globales y Matrix (8 Cols) -->
             <div class="lg:col-span-8 space-y-6">
                 
                 <!-- SECCIÓN CONTENEDORA PRINCIPAL DEL EDITOR -->
                 <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
                     
                     <!-- Cabecera Activa y descarga -->
-                    <div class="p-6 border-b border-slate-100 bg-slate-50 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div class="p-6 border-b border-slate-100 bg-slate-50 flex flex-col sm:flex-row sm:items-center justify-between gap-4 font-sans font-sans">
                         <div>
                             <span class="text-xs font-bold text-brand-600 uppercase tracking-widest block mb-1">Configuración Activa</span>
                             <h2 class="text-lg font-bold text-slate-900" id="active-template-title">
@@ -249,114 +290,199 @@
                         </div>
                     </div>
 
-                    <!-- NUEVA SECCIÓN: VALORES GLOBALES POR DEFECTO -->
-                    <div id="global-defaults-panel" class="hidden p-6 border-b border-slate-100 bg-amber-50/50">
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="flex items-center space-x-2">
-                                <div class="p-1.5 bg-amber-100 text-amber-700 rounded-lg">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                    </svg>
+                    <!-- SECCIÓN: VALORES GLOBALES POR DEFECTO (Dual Sites / Placements) -->
+                    <div id="global-defaults-panel" class="hidden p-6 border-b border-slate-100">
+                        
+                        <!-- CONTROLES GLOBALES PARA WEB SITES -->
+                        <div id="global-sites-controls" class="hidden space-y-4">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-2">
+                                    <div class="p-1.5 bg-amber-100 text-amber-700 rounded-lg">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        </svg>
+                                    </div>
+                                    <h3 class="text-xs font-bold text-amber-900 uppercase tracking-wider font-sans font-sans">Valores Predeterminados Globales (Web / Sites)</h3>
                                 </div>
-                                <h3 class="text-xs font-bold text-amber-900 uppercase tracking-wider">Valores Predeterminados Globales (Web / Sites)</h3>
+                                <span class="text-[10px] bg-amber-100 text-amber-800 px-2 py-0.5 rounded font-semibold font-mono">Output: Numérico</span>
                             </div>
-                            <span class="text-[10px] bg-amber-100 text-amber-800 px-2 py-0.5 rounded font-medium font-mono">Output: Numérico</span>
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                                <!-- Environment -->
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">environment</label>
+                                    <select id="global-env" onchange="updateGlobalDefault('environment', this.value)"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 font-semibold text-slate-800 font-mono">
+                                        <option value="1" selected>1 (Web)</option>
+                                        <option value="3">3 (AMP)</option>
+                                    </select>
+                                </div>
+                                <!-- child_lt14 -->
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">child_lt14</label>
+                                    <select id="global-lt14" onchange="updateGlobalDefault('child_lt14', this.value)"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 font-mono">
+                                        <option value="0" selected>0 (Falso)</option>
+                                        <option value="1">1 (Verdadero)</option>
+                                    </select>
+                                </div>
+                                <!-- child_bt1418 -->
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">child_bt1418</label>
+                                    <select id="global-bt1418" onchange="updateGlobalDefault('child_bt1418', this.value)"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 font-mono">
+                                        <option value="0" selected>0 (Falso)</option>
+                                        <option value="1">1 (Verdadero)</option>
+                                    </select>
+                                </div>
+                                <!-- gambling -->
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans font-sans">gambling</label>
+                                    <select id="global-gambling" onchange="updateGlobalDefault('gambling', this.value)"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 font-mono">
+                                        <option value="1" selected>1 (Verdadero)</option>
+                                        <option value="0">0 (Falso)</option>
+                                    </select>
+                                </div>
+                                <!-- alcohol -->
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">alcohol</label>
+                                    <select id="global-alcohol" onchange="updateGlobalDefault('alcohol', this.value)"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 font-mono">
+                                        <option value="1" selected>1 (Verdadero)</option>
+                                        <option value="0">0 (Falso)</option>
+                                    </select>
+                                </div>
+                                <!-- prebid -->
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">prebid</label>
+                                    <select id="global-prebid" onchange="updateGlobalDefault('prebid', this.value)"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 font-mono">
+                                        <option value="1" selected>1 (Verdadero)</option>
+                                        <option value="0">0 (Falso)</option>
+                                    </select>
+                                </div>
+                                <!-- ortb -->
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">ortb</label>
+                                    <select id="global-ortb" onchange="updateGlobalDefault('ortb', this.value)"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 font-mono">
+                                        <option value="0" selected>0 (Falso)</option>
+                                        <option value="1">1 (Verdadero)</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
-                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                            <!-- Environment (Selección Numérica) -->
-                            <div>
-                                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">environment</label>
-                                <select id="global-env" onchange="updateGlobalDefault('environment', this.value)"
-                                    class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 font-semibold text-slate-800 font-mono">
-                                    <option value="1" selected>1 (Web)</option>
-                                    <option value="3">3 (AMP)</option>
-                                </select>
+
+                        <!-- CONTROLES GLOBALES PARA WEB PLACEMENTS -->
+                        <div id="global-placements-controls" class="hidden space-y-5">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-2">
+                                    <div class="p-1.5 bg-blue-100 text-blue-700 rounded-lg">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                                        </svg>
+                                    </div>
+                                    <h3 class="text-xs font-bold text-blue-900 uppercase tracking-wider font-sans">Valores Predeterminados Globales (Web / Placements)</h3>
+                                </div>
+                                <span class="text-[10px] bg-blue-100 text-blue-800 px-2 py-0.5 rounded font-semibold font-mono">Multivariable</span>
                             </div>
-                            <!-- child_lt14 -->
-                            <div>
-                                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">child_lt14</label>
-                                <select id="global-lt14" onchange="updateGlobalDefault('child_lt14', this.value)"
-                                    class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 font-mono">
-                                    <option value="0" selected>0 (Falso)</option>
-                                    <option value="1">1 (Verdadero)</option>
-                                </select>
+
+                            <!-- Campos Fijos que Afectan a Todas las Columnas -->
+                            <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 bg-slate-50 p-4 rounded-xl border border-slate-200/60">
+                                <!-- Publisher ID -->
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">Publisher ID</label>
+                                    <input type="text" id="global-plac-pub" oninput="updateGlobalPlacementDefault('publisher', this.value)" value="1001"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500 font-semibold font-mono text-slate-800" />
+                                </div>
+                                <!-- Devices -->
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">Devices</label>
+                                    <input type="text" id="global-plac-devices" oninput="updateGlobalPlacementDefault('devices', this.value)" value="desktop,mobile,tablet"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500 font-mono text-slate-800" />
+                                </div>
+                                <!-- Native (Siempre 1) -->
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">Native</label>
+                                    <input type="text" value="1" disabled
+                                        class="w-full px-2.5 py-1.5 text-xs bg-slate-100 border border-slate-100 text-slate-400 font-semibold font-mono rounded-lg cursor-not-allowed text-center" />
+                                </div>
+                                <!-- Prebid Select -->
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">Prebid</label>
+                                    <select id="global-plac-prebid" onchange="updateGlobalPlacementDefault('prebid', this.value)"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500 font-semibold text-slate-800">
+                                        <option value="1" selected>1 (Header Bidding)</option>
+                                        <option value="0">0 (Tag Based)</option>
+                                    </select>
+                                </div>
+                                <!-- Environment Select -->
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">Environment</label>
+                                    <select id="global-plac-env" onchange="updateGlobalPlacementDefault('environment', this.value)"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500 font-semibold text-slate-800 font-mono">
+                                        <option value="1" selected>1 (Web)</option>
+                                        <option value="3">3 (AMP)</option>
+                                    </select>
+                                </div>
                             </div>
-                            <!-- child_bt1418 -->
-                            <div>
-                                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">child_bt1418</label>
-                                <select id="global-bt1418" onchange="updateGlobalDefault('child_bt1418', this.value)"
-                                    class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 font-mono">
-                                    <option value="0" selected>0 (Falso)</option>
-                                    <option value="1">1 (Verdadero)</option>
-                                </select>
-                            </div>
-                            <!-- gambling -->
-                            <div>
-                                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">gambling</label>
-                                <select id="global-gambling" onchange="updateGlobalDefault('gambling', this.value)"
-                                    class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 font-mono">
-                                    <option value="1" selected>1 (Verdadero)</option>
-                                    <option value="0">0 (Falso)</option>
-                                </select>
-                            </div>
-                            <!-- alcohol -->
-                            <div>
-                                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">alcohol</label>
-                                <select id="global-alcohol" onchange="updateGlobalDefault('alcohol', this.value)"
-                                    class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 font-mono">
-                                    <option value="1" selected>1 (Verdadero)</option>
-                                    <option value="0">0 (Falso)</option>
-                                </select>
-                            </div>
-                            <!-- prebid -->
-                            <div>
-                                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">prebid</label>
-                                <select id="global-prebid" onchange="updateGlobalDefault('prebid', this.value)"
-                                    class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 font-mono">
-                                    <option value="1" selected>1 (Verdadero)</option>
-                                    <option value="0">0 (Falso)</option>
-                                </select>
-                            </div>
-                            <!-- ortb -->
-                            <div>
-                                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">ortb</label>
-                                <select id="global-ortb" onchange="updateGlobalDefault('ortb', this.value)"
-                                    class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 font-mono">
-                                    <option value="0" selected>0 (Falso)</option>
-                                    <option value="1">1 (Verdadero)</option>
-                                </select>
+
+                            <!-- Campos Variables: Type, Formats y Name -->
+                            <div class="space-y-4 pt-2">
+                                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-t border-slate-200/60 pt-4">
+                                    <span class="block text-[11px] font-bold text-slate-500 uppercase font-sans">Configuración de Combinaciones</span>
+                                    
+                                    <!-- BOTÓN TOGGLE: Seleccionar URL para nombre del placement -->
+                                    <button type="button" id="btn-toggle-domain-prefix" onclick="toggleDomainInName()"
+                                        class="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-bold transition-all shadow-sm focus:outline-none bg-blue-600 text-white font-sans">
+                                        ✓ Seleccionar URL para nombre del placement (Activo)
+                                    </button>
+                                </div>
+                                
+                                <div id="placement-configs-container" class="space-y-3">
+                                    <!-- Se inyecta dinámicamente vía Javascript -->
+                                </div>
+
+                                <button type="button" onclick="addPlacementConfig()" 
+                                    class="inline-flex items-center px-3 py-1.5 border border-dashed border-blue-500 text-xs font-semibold rounded-lg text-blue-600 bg-white hover:bg-blue-50 transition-all focus:outline-none font-sans">
+                                    <svg class="w-3.5 h-3.5 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                                    </svg>
+                                    + Duplicar / Añadir Tipo y Formato
+                                </button>
                             </div>
                         </div>
+
                     </div>
 
                     <!-- Editor Rápido de Columnas (Estructura) -->
                     <div class="p-6 border-b border-slate-100 bg-white">
                         <div class="flex items-center justify-between mb-3">
-                            <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider">Cabeceras del Template</h3>
-                            <span class="text-xs text-amber-600 font-semibold">Separador: Punto y coma (;)</span>
+                            <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider font-sans font-sans">Cabeceras del Template</h3>
+                            <span class="text-xs text-amber-600 font-semibold font-sans">Separador: Punto y coma (;)</span>
                         </div>
                         <div class="flex gap-2">
                             <input type="text" id="column-editor-input" oninput="updateColumnsFromInput()" 
-                                class="flex-1 px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white transition-all" 
+                                class="flex-1 px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white transition-all font-mono" 
                                 placeholder="Selecciona un entorno y tipo..." disabled />
                             <button onclick="resetToDefaultColumns()" id="reset-columns-btn" disabled
-                                class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-lg text-xs font-medium transition-all focus:outline-none"
+                                class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-lg text-xs font-semibold transition-all focus:outline-none font-sans"
                                 title="Restaurar columnas por defecto">
                                 Restaurar
                             </button>
                         </div>
                     </div>
 
-                    <!-- Grid de Datos Interactivos (Hojas de cálculo) -->
-                    <div class="p-6">
+                    <!-- Grid de Datos Interactivos (Hojas de cálculo) (SE OCULTA EN WEB/PLACEMENTS) -->
+                    <div id="manual-grid-section" class="p-6">
                         <div class="flex items-center justify-between mb-4">
                             <div>
-                                <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider">Editor de Datos (Introduce tus registros)</h3>
-                                <p class="text-[11px] text-slate-400" id="data-editor-description">Escribe directamente en cualquier celda para añadir tu información.</p>
+                                <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider font-sans" id="data-editor-title">Editor de Datos (Introduce tus registros)</h3>
+                                <p class="text-[11px] text-slate-400 font-sans" id="data-editor-description">Escribe directamente en cualquier celda para añadir tu información.</p>
                             </div>
                             <button onclick="addNewDataRow()" id="btn-add-row" disabled
-                                class="inline-flex items-center px-3 py-1.5 border border-brand-500 text-xs font-medium rounded-lg text-brand-600 bg-white hover:bg-brand-50 transition-all focus:outline-none font-sans">
+                                class="inline-flex items-center px-3 py-1.5 border border-brand-500 text-xs font-semibold rounded-lg text-brand-600 bg-white hover:bg-brand-50 transition-all focus:outline-none font-sans">
                                 <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                                 </svg>
@@ -366,7 +492,7 @@
                         
                         <!-- Tabla Editora -->
                         <div class="overflow-x-auto border border-slate-200 rounded-xl bg-slate-50 max-h-[400px]">
-                            <table class="min-w-full divide-y divide-slate-200 text-left text-sm text-slate-600 table-auto">
+                            <table class="min-w-full divide-y divide-slate-200 text-left text-sm text-slate-600 table-auto font-sans">
                                 <thead class="bg-slate-100 text-slate-700 uppercase text-[10px] tracking-wider sticky top-0 z-10 shadow-sm" id="preview-thead">
                                     <tr>
                                         <th class="px-4 py-3 font-semibold text-center text-slate-400" colspan="100%">
@@ -385,12 +511,50 @@
                         </div>
                     </div>
 
+                    <!-- Vista previa final para placements combinados (SE MUESTRA EXCLUSIVAMENTE EN WEB/PLACEMENTS) -->
+                    <div id="placement-matrix-preview-section" class="hidden p-6 border-t border-slate-100 bg-slate-50/50">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-2">
+                            <div>
+                                <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider font-sans">Vista Previa del Output (Placements Combinados)</h3>
+                                <p class="text-[10px] text-slate-400 font-sans">Esta es la matriz final multiplicada que se guardará en tu archivo CSV.</p>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-[10px] bg-blue-100 text-blue-800 px-2 py-1 rounded font-semibold font-mono" id="placement-preview-counter">0 Placements</span>
+                                <!-- NUEVO: BOTÓN DE RESETEO DE DOMINIOS -->
+                                <button type="button" onclick="clearBaseDomains()" 
+                                    class="inline-flex items-center px-2 py-1 bg-red-50 hover:bg-red-100 text-red-600 rounded text-[10px] font-bold transition-all border border-red-200 focus:outline-none font-sans">
+                                    Limpiar Dominios
+                                </button>
+                            </div>
+                        </div>
+                        <div class="overflow-x-auto border border-slate-200 rounded-xl bg-white max-h-[300px]">
+                            <table class="min-w-full divide-y divide-slate-200 text-left text-xs text-slate-600 table-auto">
+                                <thead class="bg-slate-100/80 text-slate-700 font-sans">
+                                    <tr>
+                                        <th class="px-3 py-2 border-b border-slate-200 font-sans">publisher</th>
+                                        <th class="px-3 py-2 border-b border-slate-200 font-sans">domain</th>
+                                        <th class="px-3 py-2 border-b border-slate-200 font-sans">name</th>
+                                        <th class="px-3 py-2 border-b border-slate-200 font-sans">type</th>
+                                        <th class="px-3 py-2 border-b border-slate-200 font-sans">formats</th>
+                                        <th class="px-3 py-2 border-b border-slate-200 font-sans">devices</th>
+                                        <th class="px-3 py-2 border-b border-slate-200 font-sans">native</th>
+                                        <th class="px-3 py-2 border-b border-slate-200 font-sans">prebid</th>
+                                        <th class="px-3 py-2 border-b border-slate-200 font-sans">environment</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-200 font-mono" id="placement-matrix-preview-tbody">
+                                    <!-- Se inyecta dinámicamente vía Javascript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
                     <!-- Mensajes flotantes / Feedback -->
                     <div id="toast-message" class="hidden mx-6 mb-6 p-4 bg-green-50 text-green-800 rounded-xl border border-green-200 flex items-center space-x-2">
                         <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        <span class="text-sm font-medium" id="toast-text">¡Archivo generado correctamente!</span>
+                        <span class="text-sm font-medium font-sans" id="toast-text">¡Archivo generado correctamente!</span>
                     </div>
 
                 </div>
@@ -403,8 +567,8 @@
 
     <!-- Footer -->
     <footer class="bg-white border-t border-slate-200 mt-auto py-6">
-        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-400">
-            CSV Template Hub &copy; 2026. Diseñado para optimizar flujos internos de publicidad digital.
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-400 font-sans">
+            CSV Template Hub &copy; 2026. Optimización avanzada de aprovisionamiento.
         </div>
     </footer>
 
@@ -414,15 +578,35 @@
         let selectedEnvironment = null; // 'web' | 'in-app' | 'ctv'
         let selectedType = null;        // 'sites' | 'placements'
 
-        // Valores de configuración global para Web / Sites con nuevos defaults configurados
+        // Estructura de dominios base de entrada (Para Web Placements)
+        let baseDomains = [{ domain: 'eldiario.es', baseName: 'eldiario_es' }];
+
+        // Flag de botón toggle: concatenar dominio por delante del nombre (default: true)
+        let includeDomainInName = true;
+
+        // Combinaciones de Type & Formats & Name (Para Web Placements con Cambio 1)
+        let placementConfigs = [
+            { id: 1, type: '3', formats: '300x250,728x90', name: 'display' } // Por defecto Display con nombre customizable
+        ];
+
+        // Valores de configuración global para Web / Sites
         let webSitesGlobalDefaults = {
             environment: '1', 
             child_lt14: '0',
             child_bt1418: '0',
-            gambling: '1', // Default: 1
-            alcohol: '1',  // Default: 1
+            gambling: '1',
+            alcohol: '1',
             prebid: '1',
-            ortb: '0'      // Default: 0
+            ortb: '0'
+        };
+
+        // Valores de configuración global para Web / Placements (fijos que afectan a todo)
+        let webPlacementsGlobalDefaults = {
+            publisher: '1001',
+            devices: 'desktop,mobile,tablet',
+            native: '1', // Siempre 1
+            prebid: '1',
+            environment: '1'
         };
 
         // Estructuras de datos preconfiguradas con cabeceras reales e IDs numéricos mapeados
@@ -431,12 +615,12 @@
                 'sites': {
                     title: 'Web - Sites & Bundles',
                     columns: ['url', 'language_id', 'environment', 'child_lt14', 'child_bt1418', 'gambling', 'alcohol', 'prebid', 'ortb'],
-                    sample: ['eldiario.es', '2', '1', '0', '0', '1', '1', '1', '0'] // '2' = es, '1' = Web, gambling=1, alcohol=1, ortb=0
+                    sample: ['eldiario.es', '2', '1', '0', '0', '1', '1', '1', '0']
                 },
                 'placements': {
                     title: 'Web - Placements',
                     columns: ['publisher', 'domain', 'name', 'type', 'formats', 'devices', 'native', 'prebid', 'environment'],
-                    sample: ['Editorial_Group', 'eldiario.es', 'Top_Banner', 'display', '728x90,300x250', 'desktop,mobile', '0', '1', '1'] // '1' = environment Web
+                    sample: ['1001', 'eldiario.es', 'eldiario_es_display', '3', '300x250,728x90', 'desktop,mobile,tablet', '1', '1', '1']
                 }
             },
             'in-app': {
@@ -465,57 +649,35 @@
             }
         };
 
-        // Almacenará las columnas activas y las filas de datos reales del usuario
+        // Almacenará las columnas activas y las filas de datos finales del usuario
         let currentColumns = [];
-        let gridRows = []; // Array de arrays conteniendo strings
+        let gridRows = []; // Representa la data final lista para descargar
 
         // Función específica para limpiar las URLs y extraer el dominio principal de manera estricta
         function cleanUrl(url) {
             if (!url) return '';
             let clean = url.toLowerCase().trim();
-            
-            // 1. Eliminar protocolos (http:// y https://)
             clean = clean.replace(/^(https?:\/\/)?/, '');
-            
-            // 2. Aislar el host/dominio de cualquier path de ruta, puerto o parámetro
             let host = clean.split(/[/?#:]/)[0];
-            
-            // 3. Quitar el prefijo redundante "www." si existe al principio
             host = host.replace(/^www\./, '');
-            
-            // 4. Quitar puntos finales accidentales
             host = host.replace(/\.+$/, '');
-            
             return host;
         }
 
         // Función inteligente avanzada para detectar automáticamente el código de idioma y retornar su ID numérico
-        // Valida en cascada: Path de la URL, subdominios, TLD y finalmente análisis de palabras del dominio (Léxico)
         function detectLanguage(url) {
             if (!url) return 1; // Default a Inglés (1)
             let clean = url.toLowerCase().trim();
-            
-            // Limpieza preliminar rápida de protocolo y de "www."
             clean = clean.replace(/^(https?:\/\/)?(www\.)?/, '');
             
             const segments = clean.split('/');
             const host = segments[0];
             
-            // Map de conversión genérico de ISO codes (2 letras) a ID numérico del template
             const langCodeToIdMap = {
-                'en': 1, // Inglés
-                'es': 2, // Español
-                'fr': 3, // Francés
-                'de': 4, // Alemán
-                'it': 5, // Italiano
-                'zh': 6, // Chino
-                'ja': 7, // Japonés
-                'pt': 8, // Portugués
-                'ru': 9, // Ruso
-                'ko': 10 // Coreano
+                'en': 1, 'es': 2, 'fr': 3, 'de': 4, 'it': 5, 'zh': 6, 'ja': 7, 'pt': 8, 'ru': 9, 'ko': 10
             };
 
-            // REGLA 1: Revisar directorios/paths dentro de la URL (ej: cnn.com/es/noticia)
+            // REGLA 1: Revisar directorios/paths
             if (segments.length > 1) {
                 const firstPathSegment = segments[1].split('-')[0].split('_')[0];
                 if (langCodeToIdMap[firstPathSegment]) {
@@ -523,7 +685,7 @@
                 }
             }
 
-            // REGLA 2: Revisar subdominios del host (ej: es.wikipedia.org)
+            // REGLA 2: Revisar subdominios
             const hostParts = host.split('.');
             if (hostParts.length > 2) {
                 const potentialSubdomainLang = hostParts[0];
@@ -532,7 +694,7 @@
                 }
             }
 
-            // REGLA 3: Revisar el TLD territorial de respaldo (ej: .es -> 2, .cl -> 2, .fr -> 3)
+            // REGLA 3: Revisar el TLD territorial de respaldo
             if (hostParts.length > 1) {
                 const tld = hostParts[hostParts.length - 1];
                 const tldMap = {
@@ -551,11 +713,9 @@
                 }
             }
 
-            // REGLA 4: Análisis léxico / Semántico del Dominio (¡Mejora clave!)
-            // Extrae el nombre del sitio (ej: "radiocentro" de "radiocentro.com") y busca raíces/palabras clave
+            // REGLA 4: Análisis léxico / Semántico del Dominio
             const domainName = hostParts.length > 1 ? hostParts[hostParts.length - 2] : host;
 
-            // Palabras o raíces en Español (ID: 2)
             const spanishTriggers = [
                 'centro', 'lectura', 'avisa', 'ecua', 'diario', 'noticia', 'prensa', 'gaceta', 'heraldo', 'correo', 
                 'tribuna', 'deporte', 'receta', 'cocina', 'viaje', 'empleo', 'vivienda', 'tienda', 'compra', 'venta', 
@@ -572,7 +732,6 @@
                 'beber', 'restaurante', 'comida', 'gastronomia', 'vinos', 'cerveza', 'copa', 'cafe', 'te', 'chocolate'
             ];
 
-            // Palabras o raíces en Francés (ID: 3)
             const frenchTriggers = [
                 'monde', 'journal', 'presse', 'nouvelle', 'actu', 'france', 'paris', 'soleil', 'temps', 'meteo', 
                 'recette', 'cuisine', 'voyage', 'emploi', 'maison', 'achat', 'vente', 'jeu', 'musique', 'cinema', 
@@ -581,7 +740,6 @@
                 'eclair', 'depeche', 'figaro', 'parisien', 'liberation', 'humanite', 'lexpress', 'nouvel', 'obs'
             ];
 
-            // Palabras o raíces en Alemán (ID: 4)
             const germanTriggers = [
                 'welt', 'zeitung', 'presse', 'nachrichten', 'deutsch', 'berlin', 'sonne', 'wetter', 'rezept', 
                 'kueche', 'reise', 'job', 'haus', 'kauf', 'verkauf', 'spiel', 'musik', 'kino', 'gesundheit', 
@@ -590,7 +748,6 @@
                 'spiegel', 'fokus', 'zeit', 'sueddeutsche', 'allgemeine', 'rundschau', 'anzeiger', 'kurier'
             ];
 
-            // Palabras o raíces en Portugués (ID: 8)
             const portugueseTriggers = [
                 'imprensa', 'tempo', 'clima', 'receita', 'cozinha', 
                 'viagem', 'emprego', 'venda', 'saude', 'coracao', 'liberdade', 'povo', 'cidade', 'lisboa',
@@ -598,7 +755,6 @@
                 'observador', 'expresso', 'manhã', 'record'
             ];
 
-            // Palabras o raíces en Italiano (ID: 5)
             const italianTriggers = [
                 'giornale', 'stampa', 'paese', 'ricetta', 'cucina', 
                 'viaggio', 'lavoro', 'acquisto', 'vendita', 'salute', 
@@ -607,10 +763,7 @@
                 'messaggero', 'secolo', 'nazione', 'giorno', 'foglio', 'panorama'
             ];
 
-            // Helper para comprobar si el dominio contiene alguna de las raíces
-            const containsAny = (str, list) => {
-                return list.some(trigger => str.includes(trigger));
-            };
+            const containsAny = (str, list) => list.some(trigger => str.includes(trigger));
 
             if (containsAny(domainName, spanishTriggers)) return 2;
             if (containsAny(domainName, frenchTriggers)) return 3;
@@ -618,23 +771,16 @@
             if (containsAny(domainName, portugueseTriggers)) return 8;
             if (containsAny(domainName, italianTriggers)) return 5;
 
-            return 1; // Default a Inglés (1) si no se halla ninguna coincidencia léxica
+            return 1; // Default a Inglés
         }
 
-        // Modifica un valor del panel por defecto global y actualiza la vista y filas
+        // Modifica un valor del panel por defecto global (SITES)
         function updateGlobalDefault(field, value) {
             webSitesGlobalDefaults[field] = value;
             
-            // Si estamos en Web/Sites, actualizamos automáticamente todas las columnas vinculadas
             if (selectedEnvironment === 'web' && selectedType === 'sites') {
                 const colIndexMap = {
-                    'environment': 2,
-                    'child_lt14': 3,
-                    'child_bt1418': 4,
-                    'gambling': 5,
-                    'alcohol': 6,
-                    'prebid': 7,
-                    'ortb': 8
+                    'environment': 2, 'child_lt14': 3, 'child_bt1418': 4, 'gambling': 5, 'alcohol': 6, 'prebid': 7, 'ortb': 8
                 };
                 const colIdx = colIndexMap[field];
                 if (colIdx !== undefined) {
@@ -646,7 +792,270 @@
             }
         }
 
-        // Selección de Entorno
+        // Modifica un valor del panel por defecto global (PLACEMENTS)
+        function updateGlobalPlacementDefault(field, value) {
+            webPlacementsGlobalDefaults[field] = value;
+            if (selectedEnvironment === 'web' && selectedType === 'placements') {
+                generatePlacementMatrix();
+                renderTable();
+            }
+        }
+
+        // Lógica de botón toggle de dominio por delante
+        function toggleDomainInName() {
+            includeDomainInName = !includeDomainInName;
+            generatePlacementMatrix();
+            renderPlacementConfigUI();
+            renderTable();
+            showToast(includeDomainInName ? "Sincronización del dominio activada en el nombre del placement." : "Nombres de placement independientes activados (sin prefijo de dominio).");
+        }
+
+        // Vacia de forma reactiva el listado de dominios base
+        function clearBaseDomains() {
+            baseDomains = [];
+            generatePlacementMatrix();
+            renderTable();
+            showToast("Lista de dominios base vaciada.");
+        }
+
+        /* --- LÓGICA MULTIPLICADORA / DUPLICADORA DE PLACEMENTS --- */
+
+        // Añadir una nueva combinación de Type + Formats
+        function addPlacementConfig() {
+            const nextId = placementConfigs.length > 0 ? Math.max(...placementConfigs.map(c => c.id)) + 1 : 1;
+            const defaultClone = placementConfigs.length > 0 
+                ? { ...placementConfigs[placementConfigs.length - 1], id: nextId }
+                : { id: nextId, type: '3', formats: '300x250,728x90', name: 'display' };
+            
+            if (defaultClone.type === '3') defaultClone.name = 'display';
+            if (defaultClone.type === '1') defaultClone.name = 'skin';
+            if (defaultClone.type === '2') defaultClone.name = defaultClone.formats === '17' ? 'instream' : 'outstream';
+            if (defaultClone.type === '4') defaultClone.name = 'native';
+
+            placementConfigs.push(defaultClone);
+            renderPlacementConfigUI();
+            generatePlacementMatrix();
+            renderTable();
+        }
+
+        // Eliminar una combinación específica
+        function removePlacementConfig(index) {
+            if (placementConfigs.length > 1) {
+                placementConfigs.splice(index, 1);
+                renderPlacementConfigUI();
+                generatePlacementMatrix();
+                renderTable();
+            }
+        }
+
+        // Cambiar el tipo de un Placement específico
+        function updatePlacementConfigType(index, typeValue) {
+            placementConfigs[index].type = typeValue;
+
+            let autoFormat = '300x250,728x90';
+            let autoName = 'display';
+            
+            if (typeValue === '1') {
+                autoFormat = '10,11,22';
+                autoName = 'skin';
+            }
+            if (typeValue === '2') {
+                autoFormat = '17'; 
+                autoName = 'instream';
+            }
+            if (typeValue === '4') {
+                autoFormat = '222';
+                autoName = 'native';
+            }
+
+            placementConfigs[index].formats = autoFormat;
+            placementConfigs[index].name = autoName;
+            
+            renderPlacementConfigUI();
+            generatePlacementMatrix();
+            renderTable();
+        }
+
+        // Cambiar los formatos de un Placement específico (Soporte 17 o 18 en Video)
+        function updatePlacementConfigFormats(index, formatValue) {
+            placementConfigs[index].formats = formatValue;
+            
+            if (placementConfigs[index].type === '2') {
+                placementConfigs[index].name = formatValue === '17' ? 'instream' : 'outstream';
+            }
+
+            generatePlacementMatrix();
+            renderTable();
+        }
+
+        // Permite modificar manualmente el sufijo/nombre de la combinación
+        function updatePlacementConfigName(index, nameValue) {
+            placementConfigs[index].name = nameValue.toLowerCase().trim().replace(/[^a-z0-9_]/g, '_');
+            generatePlacementMatrix();
+            renderTable();
+        }
+
+        // Renderizar la interfaz visual de las combinaciones variables
+        function renderPlacementConfigUI() {
+            const container = document.getElementById('placement-configs-container');
+            if (!container) return;
+            container.innerHTML = '';
+
+            placementConfigs.forEach((cfg, index) => {
+                const isVideo = cfg.type === '2';
+                let formatsControlHTML = '';
+
+                if (isVideo) {
+                    formatsControlHTML = `
+                        <select onchange="updatePlacementConfigFormats(${index}, this.value)" 
+                            class="w-full px-2 py-1 bg-white border border-slate-200 rounded-lg text-xs font-semibold focus:outline-none focus:ring-1 focus:ring-blue-500 text-slate-800 font-mono">
+                            <option value="17" ${cfg.formats === '17' ? 'selected' : ''}>17 (Instream)</option>
+                            <option value="18" ${cfg.formats === '18' ? 'selected' : ''}>18 (Outstream)</option>
+                        </select>
+                    `;
+                } else if (cfg.type === '4') {
+                    formatsControlHTML = `
+                        <input type="text" value="222" disabled 
+                            class="w-full px-2 py-1 bg-slate-100 border border-slate-200 text-slate-400 font-semibold font-mono rounded-lg text-center text-xs cursor-not-allowed" />
+                    `;
+                } else {
+                    formatsControlHTML = `
+                        <input type="text" oninput="updatePlacementConfigFormats(${index}, this.value)" value="${cfg.formats}" 
+                            class="w-full px-2.5 py-1 bg-white border border-slate-200 rounded-lg text-xs font-mono text-slate-800 focus:outline-none focus:ring-1 focus:ring-blue-500" 
+                            placeholder="${cfg.type === '1' ? 'e.g. 10,11,22' : 'e.g. 300x250'}" />
+                    `;
+                }
+
+                const nameControlHTML = `
+                    <input type="text" oninput="updatePlacementConfigName(${index}, this.value)" value="${cfg.name || ''}" 
+                        class="w-full px-2.5 py-1 bg-white border border-slate-200 rounded-lg text-xs font-semibold text-slate-800 focus:outline-none focus:ring-1 focus:ring-blue-500 font-mono" 
+                        placeholder="e.g. display, skin, video..." />
+                `;
+
+                const isDeleteDisabled = placementConfigs.length === 1;
+                const deleteButtonHTML = `
+                    <button type="button" onclick="removePlacementConfig(${index})" ${isDeleteDisabled ? 'disabled' : ''} 
+                        class="p-1.5 rounded text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors disabled:opacity-30 disabled:cursor-not-allowed" title="Eliminar combinación">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
+                    </button>
+                `;
+
+                const rowDiv = document.createElement('div');
+                rowDiv.className = 'flex items-center gap-2 bg-slate-50 p-3 rounded-xl border border-slate-200/50 shadow-sm';
+                rowDiv.innerHTML = `
+                    <div class="text-[10px] font-bold text-slate-400 select-none px-1">#${index+1}</div>
+                    <div class="flex-1 grid grid-cols-1 sm:grid-cols-3 gap-2">
+                        <div>
+                            <label class="block text-[8px] uppercase text-slate-400 font-bold mb-0.5 font-sans font-sans">Tipo (Type)</label>
+                            <select onchange="updatePlacementConfigType(${index}, this.value)" 
+                                class="w-full px-2 py-1 bg-white border border-slate-200 rounded-lg text-xs font-semibold focus:outline-none focus:ring-1 focus:ring-blue-500 text-slate-800">
+                                <option value="3" ${cfg.type === '3' ? 'selected' : ''}>3 (Display/Banner)</option>
+                                <option value="1" ${cfg.type === '1' ? 'selected' : ''}>1 (Skin)</option>
+                                <option value="2" ${cfg.type === '2' ? 'selected' : ''}>2 (Video)</option>
+                                <option value="4" ${cfg.type === '4' ? 'selected' : ''}>4 (Native)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[8px] uppercase text-slate-400 font-bold mb-0.5 font-sans font-sans">Formatos</label>
+                            ${formatsControlHTML}
+                        </div>
+                        <div>
+                            <label class="block text-[8px] uppercase text-slate-400 font-bold mb-0.5 font-sans">Nombre (sufijo)</label>
+                            ${nameControlHTML}
+                        </div>
+                    </div>
+                    <div class="pt-3">
+                        ${deleteButtonHTML}
+                    </div>
+                `;
+                container.appendChild(rowDiv);
+            });
+
+            const globalToggleBtn = document.getElementById('btn-toggle-domain-prefix');
+            if (globalToggleBtn) {
+                if (includeDomainInName) {
+                    globalToggleBtn.className = 'inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-bold transition-all shadow-sm focus:outline-none bg-blue-600 text-white font-sans';
+                    globalToggleBtn.innerHTML = '✓ Seleccionar URL para nombre del placement (Activo)';
+                } else {
+                    globalToggleBtn.className = 'inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-bold transition-all shadow-sm focus:outline-none bg-slate-200 text-slate-700 hover:bg-slate-300 font-sans';
+                    globalToggleBtn.innerHTML = '✗ Seleccionar URL para nombre del placement (Inactivo)';
+                }
+            }
+        }
+
+        // Motor del Producto Cartesiano Avanzado
+        function generatePlacementMatrix() {
+            if (selectedEnvironment !== 'web' || selectedType !== 'placements') return;
+
+            gridRows = [];
+            baseDomains.forEach(base => {
+                placementConfigs.forEach(cfg => {
+                    const cleanedDom = cleanUrl(base.domain);
+                    const coreName = cfg.name || 'placement';
+
+                    let finalPlacementName = coreName;
+                    if (includeDomainInName) {
+                        if (cleanedDom) {
+                            finalPlacementName = `${cleanedDom}_${coreName}`;
+                        }
+                    }
+
+                    gridRows.push([
+                        webPlacementsGlobalDefaults.publisher,
+                        cleanedDom,
+                        finalPlacementName,
+                        cfg.type,
+                        cfg.formats,
+                        webPlacementsGlobalDefaults.devices,
+                        webPlacementsGlobalDefaults.native,
+                        webPlacementsGlobalDefaults.prebid,
+                        webPlacementsGlobalDefaults.environment
+                    ]);
+                });
+            });
+
+            renderMatrixPreviewTable();
+        }
+
+        // Renderiza la tabla de Placements Combinados resultante
+        function renderMatrixPreviewTable() {
+            const container = document.getElementById('placement-matrix-preview-section');
+            const tbody = document.getElementById('placement-matrix-preview-tbody');
+            const counter = document.getElementById('placement-preview-counter');
+
+            if (selectedEnvironment === 'web' && selectedType === 'placements') {
+                container.classList.remove('hidden');
+                counter.innerText = `${gridRows.length} Placements`;
+                tbody.innerHTML = '';
+
+                if (gridRows.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="9" class="px-3 py-8 text-center italic text-slate-400 font-sans">No hay dominios base cargados. Pega una lista de URLs en el importador de la izquierda...</td></tr>`;
+                    return;
+                }
+
+                gridRows.forEach(row => {
+                    const tr = document.createElement('tr');
+                    tr.className = 'hover:bg-slate-50 transition-all-300';
+                    row.forEach((val, i) => {
+                        const td = document.createElement('td');
+                        td.className = i === 2 
+                            ? 'px-3 py-2 border-b border-slate-200 font-bold text-slate-900 font-mono' 
+                            : 'px-3 py-2 border-b border-slate-200 text-slate-500 font-mono';
+                        td.innerText = val !== undefined ? val : '';
+                        tr.appendChild(td);
+                    });
+                    tbody.appendChild(tr);
+                });
+            } else {
+                container.classList.add('hidden');
+            }
+        }
+
+
+        /* --- SELECCIÓN DE FILTROS --- */
+
         function selectEnvironment(env) {
             selectedEnvironment = env;
             
@@ -676,7 +1085,6 @@
             checkSelectionComplete();
         }
 
-        // Selección de tipo de recurso
         function selectType(type) {
             selectedType = type;
 
@@ -701,59 +1109,100 @@
             checkSelectionComplete();
         }
 
-        // Comprobación de selección inicial
+        // Manejo y refresco de estado en base a los selectores e inputs (SÍNCRO)
         function checkSelectionComplete() {
             if (selectedEnvironment && selectedType) {
                 const template = templatesData[selectedEnvironment][selectedType];
-                
-                // Establecer cabeceras del template seleccionado
                 currentColumns = [...template.columns];
 
-                // Cargar datos del grid
+                const gPanel = document.getElementById('global-defaults-panel');
+                const gSites = document.getElementById('global-sites-controls');
+                const gPlacements = document.getElementById('global-placements-controls');
+
+                const legendCommon = document.getElementById('legend-common');
+                const legendSites = document.getElementById('legend-sites');
+                const legendPlacements = document.getElementById('legend-placements');
+
+                const manualGrid = document.getElementById('manual-grid-section');
+                const matrixPreview = document.getElementById('placement-matrix-preview-section');
+
+                legendCommon.classList.remove('hidden');
+
                 if (selectedEnvironment === 'web' && selectedType === 'sites') {
-                    // Inicializar con la regla de Web Sites con nuevos defaults configurados
+                    legendSites.classList.remove('hidden');
+                    legendPlacements.classList.add('hidden');
+                    
+                    // Mostrar entrada manual para Web Sites
+                    manualGrid.classList.remove('hidden');
+                    matrixPreview.classList.add('hidden');
+
                     gridRows = [[
-                        template.sample[0], // url (eldiario.es)
-                        detectLanguage(template.sample[0]), // ID de idioma auto (número)
-                        webSitesGlobalDefaults.environment, // 1 (Web) o 3 (AMP)
+                        template.sample[0], // eldiario.es
+                        detectLanguage(template.sample[0]), 
+                        webSitesGlobalDefaults.environment, 
                         webSitesGlobalDefaults.child_lt14,
                         webSitesGlobalDefaults.child_bt1418,
-                        webSitesGlobalDefaults.gambling, // 1
-                        webSitesGlobalDefaults.alcohol,  // 1
-                        webSitesGlobalDefaults.prebid,   // 1
-                        webSitesGlobalDefaults.ortb      // 0
+                        webSitesGlobalDefaults.gambling, 
+                        webSitesGlobalDefaults.alcohol,  
+                        webSitesGlobalDefaults.prebid,   
+                        webSitesGlobalDefaults.ortb      
                     ]];
                     
-                    // Mostrar panel global
-                    document.getElementById('global-defaults-panel').classList.remove('hidden');
-                    document.getElementById('data-editor-description').innerText = "Solo puedes editar la columna 'url'. El language_id se asignará numéricamente de forma automática (buscando en subdominio, ruta o TLD) y el resto de las columnas heredará el valor global.";
-                } else {
+                    gPanel.classList.remove('hidden');
+                    gSites.classList.remove('hidden');
+                    gPlacements.classList.add('hidden');
+                    
+                    document.getElementById('data-editor-title').innerText = "Editor de Datos (Sites de Entrada)";
+                    document.getElementById('data-editor-description').innerText = "Solo puedes editar la columna 'url'. El ID de idioma se asignará automáticamente (buscando en subdominio, ruta o TLD) y el resto de las columnas heredará los valores globales.";
+                } 
+                else if (selectedEnvironment === 'web' && selectedType === 'placements') {
+                    legendSites.classList.add('hidden');
+                    legendPlacements.classList.remove('hidden');
+                    
+                    // ELIMINADO EL PASO 3 DE INPUT MANUAL PARA PLACEMENTS
+                    manualGrid.classList.add('hidden'); 
+                    matrixPreview.classList.remove('hidden');
+
+                    gPanel.classList.remove('hidden');
+                    gSites.classList.add('hidden');
+                    gPlacements.classList.remove('hidden');
+                    
+                    renderPlacementConfigUI();
+                    generatePlacementMatrix();
+                }
+                else {
+                    // Caso general (In-App, CTV)
+                    legendSites.classList.add('hidden');
+                    legendPlacements.classList.add('hidden');
+
+                    manualGrid.classList.remove('hidden');
+                    matrixPreview.classList.add('hidden');
+
                     gridRows = [[...template.sample]];
-                    // Ocultar panel global
-                    document.getElementById('global-defaults-panel').classList.add('hidden');
+                    gPanel.classList.add('hidden');
+                    gSites.classList.add('hidden');
+                    gPlacements.classList.add('hidden');
+                    
+                    document.getElementById('data-editor-title').innerText = "Editor de Datos (Introduce tus registros)";
                     document.getElementById('data-editor-description').innerText = "Escribe directamente en cualquier celda para añadir tu información.";
                 }
 
-                // Actualizar título
                 document.getElementById('active-template-title').innerText = template.title;
                 
-                // Activar Inputs y botones de estructura
                 const inputEditor = document.getElementById('column-editor-input');
                 inputEditor.disabled = false;
                 inputEditor.value = currentColumns.join('; ');
                 
                 document.getElementById('reset-columns-btn').disabled = false;
-
-                // Activar botones de fila e Importador
                 document.getElementById('btn-add-row').disabled = false;
+                
                 document.getElementById('import-pastearea').disabled = false;
                 document.getElementById('import-pastearea').value = "";
-                document.getElementById('import-pastearea').placeholder = selectedEnvironment === 'web' && selectedType === 'sites' 
-                    ? "Pega aquí una lista de URLs / Dominios de Excel..."
-                    : "Pega aquí tus datos copiados de Excel...";
+                document.getElementById('import-pastearea').placeholder = (selectedEnvironment === 'web') 
+                    ? "Pega aquí una lista de URLs de Excel..."
+                    : "Pega aquí tus datos de Excel...";
                 document.getElementById('btn-import-execute').disabled = false;
 
-                // Activar botón de descarga
                 const dwnBtn = document.getElementById('download-btn');
                 dwnBtn.disabled = false;
                 dwnBtn.classList.remove('bg-slate-400', 'cursor-not-allowed');
@@ -763,7 +1212,7 @@
             }
         }
 
-        // Renderizado del Grid dinámico de datos
+        // Renderizado del Grid de Datos Base
         function renderTable() {
             const thead = document.getElementById('preview-thead');
             const tbody = document.getElementById('preview-tbody');
@@ -772,38 +1221,38 @@
             tbody.innerHTML = '';
 
             if (currentColumns.length === 0) {
-                thead.innerHTML = `<tr><th class="px-6 py-4 text-center text-slate-400" colspan="100%">No hay cabeceras activas</th></tr>`;
+                thead.innerHTML = `<tr><th class="px-6 py-4 text-center text-slate-400 font-sans" colspan="100%">No hay cabeceras activas</th></tr>`;
                 return;
             }
 
-            // 1. Renderizar Cabeceras <th> + Columna Extra para eliminar
+            const isWebSites = (selectedEnvironment === 'web' && selectedType === 'sites');
+
+            // 1. Renderizar Cabeceras dependientes del contexto
             const trHead = document.createElement('tr');
             currentColumns.forEach(colName => {
                 const th = document.createElement('th');
-                th.className = 'px-4 py-3 text-xs font-semibold text-slate-700 border-b border-slate-200 bg-slate-100 min-w-[140px]';
+                th.className = 'px-4 py-3 text-xs font-semibold text-slate-700 border-b border-slate-200 bg-slate-100 font-sans min-w-[140px]';
                 th.innerText = colName.trim();
                 trHead.appendChild(th);
             });
-            // Cabecera Acción
+
             const thAction = document.createElement('th');
-            thAction.className = 'px-4 py-3 text-xs font-semibold text-slate-700 border-b border-slate-200 bg-slate-100 text-center w-12';
+            thAction.className = 'px-4 py-3 text-xs font-semibold text-slate-700 border-b border-slate-200 bg-slate-100 text-center w-12 font-sans';
             thAction.innerText = 'Acción';
             trHead.appendChild(thAction);
             thead.appendChild(trHead);
 
-            // 2. Renderizar filas de datos reales del usuario
+            // 2. Renderizar filas (Solo aplica para Sites u otros entornos)
             if (gridRows.length === 0) {
                 tbody.innerHTML = `
                     <tr>
-                        <td class="px-6 py-8 text-center text-slate-400 italic" colspan="100%">
-                            No hay datos en la tabla. Haz clic en "Añadir Fila" para crear un registro o usa el importador de Excel.
+                        <td class="px-6 py-8 text-center text-slate-400 italic font-sans" colspan="100%">
+                            No hay datos en la tabla. Haz clic en "Añadir Fila" o usa el importador.
                         </td>
                     </tr>
                 `;
                 return;
             }
-
-            const isWebSites = (selectedEnvironment === 'web' && selectedType === 'sites');
 
             gridRows.forEach((row, rowIndex) => {
                 const tr = document.createElement('tr');
@@ -816,35 +1265,26 @@
                     const input = document.createElement('input');
                     input.type = 'text';
                     
-                    // Condición específica para Web / Sites
                     if (isWebSites) {
                         if (colIndex === 0) {
-                            // URL: Editable
                             input.className = 'w-full px-2 py-1 text-sm bg-white border border-slate-200 rounded focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all font-medium text-slate-900';
                             input.disabled = false;
                         } else {
-                            // Language y demás: Lectura exclusiva (se auto-completan con números)
                             input.className = 'w-full px-2 py-1 text-sm bg-slate-100/70 border border-slate-100 text-slate-500 rounded cursor-not-allowed select-none font-mono text-center';
                             input.disabled = true;
                         }
                     } else {
-                        // Comportamiento regular editable en otros templates
                         input.className = 'w-full px-2 py-1 text-sm bg-transparent border border-transparent rounded hover:border-slate-200 focus:bg-white focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all';
                         input.disabled = false;
                     }
 
                     input.value = row[colIndex] !== undefined ? row[colIndex] : '';
                     
-                    // Al escribir, guardamos el dato de forma directa e intentamos calcular el lenguaje
                     input.oninput = (e) => {
                         gridRows[rowIndex][colIndex] = e.target.value;
-                        
-                        // Si es Web/Sites y cambiaron el URL (col 0), recalculamos lenguaje (col 1) de forma asíncrona
                         if (isWebSites && colIndex === 0) {
                             const newLangId = detectLanguage(e.target.value);
                             gridRows[rowIndex][1] = newLangId;
-                            
-                            // Buscar el input del idioma en el DOM para actualizar su valor
                             const rowInputs = tr.querySelectorAll('input');
                             if (rowInputs && rowInputs[1]) {
                                 rowInputs[1].value = newLangId;
@@ -852,14 +1292,12 @@
                         }
                     };
 
-                    // MEJORA: Al perder foco en la columna URL, se limpia instantáneamente a su formato raíz
                     if (isWebSites && colIndex === 0) {
                         input.onblur = (e) => {
                             const cleaned = cleanUrl(e.target.value);
                             e.target.value = cleaned;
                             gridRows[rowIndex][0] = cleaned;
                             
-                            // Forzar recalculado estricto del lenguaje usando el dominio ya limpio
                             const newLangId = detectLanguage(cleaned);
                             gridRows[rowIndex][1] = newLangId;
                             
@@ -874,7 +1312,6 @@
                     tr.appendChild(td);
                 });
 
-                // Botón eliminar fila
                 const tdAction = document.createElement('td');
                 tdAction.className = 'px-3 py-2 border-b border-slate-200 text-center';
                 
@@ -887,22 +1324,18 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                     </svg>
                 `;
-                deleteBtn.title = "Eliminar fila";
-
                 tdAction.appendChild(deleteBtn);
                 tr.appendChild(tdAction);
                 tbody.appendChild(tr);
             });
         }
 
-        // Añade una nueva fila vacía en la tabla
+        // Añadir fila a la tabla Sites u otros entornos
         function addNewDataRow() {
-            let newRow;
             if (selectedEnvironment === 'web' && selectedType === 'sites') {
-                newRow = [
-                    '', // url
-                    '1', // language default ID (Inglés = 1)
-                    webSitesGlobalDefaults.environment, // '1' o '3'
+                const newRow = [
+                    '', '1', 
+                    webSitesGlobalDefaults.environment, 
                     webSitesGlobalDefaults.child_lt14,
                     webSitesGlobalDefaults.child_bt1418,
                     webSitesGlobalDefaults.gambling,
@@ -910,23 +1343,16 @@
                     webSitesGlobalDefaults.prebid,
                     webSitesGlobalDefaults.ortb
                 ];
+                gridRows.push(newRow);
+                renderTable();
             } else {
-                newRow = Array(currentColumns.length).fill('');
+                const newRow = Array(currentColumns.length).fill('');
+                gridRows.push(newRow);
+                renderTable();
             }
-            
-            gridRows.push(newRow);
-            renderTable();
-            
-            // Auto focus al primer elemento (URL) de la nueva fila añadida
-            setTimeout(() => {
-                const inputs = document.querySelectorAll('#preview-tbody tr input');
-                if (inputs.length > 0) {
-                    inputs[inputs.length - currentColumns.length].focus();
-                }
-            }, 50);
         }
 
-        // Elimina una fila del array de datos
+        // Eliminar fila de datos en Site u otros
         function removeDataRow(index) {
             gridRows.splice(index, 1);
             renderTable();
@@ -945,11 +1371,11 @@
             const tempNewRows = [];
             
             const isWebSites = (selectedEnvironment === 'web' && selectedType === 'sites');
+            const isWebPlacements = (selectedEnvironment === 'web' && selectedType === 'placements');
 
             rawLines.forEach(line => {
                 if (line.trim() === '') return;
                 
-                // Separamos la línea para obtener las celdas individuales
                 let cells = [];
                 if (line.includes('\t')) {
                     cells = line.split('\t');
@@ -960,16 +1386,14 @@
                 }
 
                 if (isWebSites) {
-                    // Tomamos el valor de la URL pegada y lo limpiamos de forma inmediata
                     const pastedUrl = cells[0].trim();
                     const cleanedUrl = cleanUrl(pastedUrl);
                     const detectedLangId = detectLanguage(cleanedUrl);
                     
-                    // Generamos el registro de Web Sites inyectando las globales (con IDs numéricos y URL limpia)
                     const parsedRow = [
-                        cleanedUrl, // URL perfectamente limpia!
-                        detectedLangId, // language id detectado sobre la url limpia
-                        webSitesGlobalDefaults.environment, // '1' o '3'
+                        cleanedUrl,
+                        detectedLangId,
+                        webSitesGlobalDefaults.environment,
                         webSitesGlobalDefaults.child_lt14,
                         webSitesGlobalDefaults.child_bt1418,
                         webSitesGlobalDefaults.gambling,
@@ -978,8 +1402,21 @@
                         webSitesGlobalDefaults.ortb
                     ];
                     tempNewRows.push(parsedRow);
-                } else {
-                    // Importación normal
+                } 
+                else if (isWebPlacements) {
+                    const pastedUrl = cells[0].trim();
+                    const cleanedDomain = cleanUrl(pastedUrl);
+                    
+                    let placementName = '';
+                    if (cells.length > 1 && cells[1].trim() !== '') {
+                        placementName = cells[1].trim();
+                    } else {
+                        placementName = cleanedDomain ? cleanedDomain.replace(/\./g, '_') : '';
+                    }
+
+                    tempNewRows.push({ domain: cleanedDomain, baseName: placementName });
+                }
+                else {
                     const parsedRow = Array(currentColumns.length).fill('');
                     currentColumns.forEach((_, colIdx) => {
                         if (cells[colIdx] !== undefined) {
@@ -993,12 +1430,22 @@
             });
 
             if (tempNewRows.length > 0) {
-                // REGLA SOLICITADA: Elimina el ejemplo por defecto (eldiario.es) de forma automática si es el único registro activo
-                if (gridRows.length === 1 && (gridRows[0][0] === 'eldiario.es' || gridRows[0][0] === '')) {
-                    gridRows = [...tempNewRows];
+                if (isWebPlacements) {
+                    // Si solo estaba el ejemplo inicial, sobreescribe
+                    if (baseDomains.length === 1 && (baseDomains[0].domain === 'eldiario.es' || baseDomains[0].domain === '')) {
+                        baseDomains = [...tempNewRows];
+                    } else {
+                        baseDomains = [...baseDomains, ...tempNewRows];
+                    }
+                    generatePlacementMatrix();
                 } else {
-                    gridRows = [...gridRows, ...tempNewRows];
+                    if (gridRows.length === 1 && (gridRows[0][0] === 'eldiario.es' || gridRows[0][0] === '')) {
+                        gridRows = [...tempNewRows];
+                    } else {
+                        gridRows = [...gridRows, ...tempNewRows];
+                    }
                 }
+                
                 renderTable();
                 document.getElementById('import-pastearea').value = "";
                 showToast(`¡Importadas ${importedCount} fila(s) limpias con éxito!`);
@@ -1012,7 +1459,6 @@
                                 .map(c => c.trim())
                                 .filter(c => c.length > 0);
             
-            // Adaptar las filas de datos ya existentes a la nueva longitud
             gridRows = gridRows.map(row => {
                 const adjustedRow = Array(currentColumns.length).fill('');
                 currentColumns.forEach((_, i) => {
@@ -1033,7 +1479,6 @@
                 currentColumns = [...template.columns];
                 document.getElementById('column-editor-input').value = currentColumns.join('; ');
                 
-                // Reiniciar los datos según el tipo
                 if (selectedEnvironment === 'web' && selectedType === 'sites') {
                     const cleanedSampleUrl = cleanUrl(template.sample[0]);
                     gridRows = [[
@@ -1047,7 +1492,16 @@
                         webSitesGlobalDefaults.prebid,
                         webSitesGlobalDefaults.ortb
                     ]];
-                } else {
+                } 
+                else if (selectedEnvironment === 'web' && selectedType === 'placements') {
+                    baseDomains = [{ domain: 'eldiario.es', baseName: 'eldiario_es' }];
+                    placementConfigs = [{ id: 1, type: '3', formats: '300x250,728x90', name: 'display' }];
+                    includeDomainInName = true;
+                    
+                    renderPlacementConfigUI();
+                    generatePlacementMatrix();
+                }
+                else {
                     gridRows = [[...template.sample]];
                 }
                 
@@ -1059,35 +1513,20 @@
         // Descarga el CSV con TODOS los datos actuales de la tabla separados por ";"
         function downloadCSV() {
             if (currentColumns.length === 0) return;
+            
+            if (selectedEnvironment === 'web' && selectedType === 'placements') {
+                generatePlacementMatrix();
+            }
+
             if (gridRows.length === 0) {
                 showToast("Por favor, añade al menos una fila de datos antes de descargar.");
                 return;
             }
 
-            // Fila 1: Cabeceras
             const headerRow = currentColumns.join(';');
             
-            // Filas de datos del usuario
-            const isWebSites = (selectedEnvironment === 'web' && selectedType === 'sites');
-
             const dataRows = gridRows.map(row => {
-                let rowToSave = [...row];
-                
-                // Garantizar de forma estricta que Web/Sites guarde las globales configuradas en el panel
-                if (isWebSites) {
-                    const finalCleanUrl = cleanUrl(rowToSave[0]);
-                    rowToSave[0] = finalCleanUrl;
-                    rowToSave[1] = detectLanguage(finalCleanUrl);
-                    rowToSave[2] = webSitesGlobalDefaults.environment; // Solo '1' o '3'
-                    rowToSave[3] = webSitesGlobalDefaults.child_lt14;
-                    rowToSave[4] = webSitesGlobalDefaults.child_bt1418;
-                    rowToSave[5] = webSitesGlobalDefaults.gambling;
-                    rowToSave[6] = webSitesGlobalDefaults.alcohol;
-                    rowToSave[7] = webSitesGlobalDefaults.prebid;
-                    rowToSave[8] = webSitesGlobalDefaults.ortb;
-                }
-
-                return rowToSave.map(cellValue => {
+                return row.map(cellValue => {
                     const val = cellValue !== undefined && cellValue !== null ? cellValue.toString() : '';
                     if (val.includes(';') || val.includes('"') || val.includes('\n')) {
                         return `"${val.replace(/"/g, '""')}"`;
@@ -1098,7 +1537,6 @@
             
             const csvContent = [headerRow, ...dataRows].join('\n');
 
-            // Descarga del blob
             const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
             const filename = `config_${selectedEnvironment}_${selectedType}.csv`;
             
