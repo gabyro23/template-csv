@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Plantillas de Configuración - CSV</title>
+    <!-- Tailwind CSS para un diseño moderno y fluido -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .transition-all-300 {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-sans">
+
+    <!-- Encabezado / Navbar -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="p-2 bg-brand-100 text-brand-600 rounded-lg">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-lg font-bold text-slate-900 tracking-tight">CSV Template & Data Hub</h1>
+                    <p class="text-xs text-slate-500">Herramienta interna de aprovisionamiento con limpieza automática de dominios</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-2">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                    Semicolons (;) Separator
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Alerta informativa -->
+        <div class="mb-8 bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg shadow-sm">
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <svg class="h-5 w-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1.09m0-2v-2m0-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <div class="ml-3">
+                    <h3 class="text-sm font-medium text-blue-800">Nuevos Valores Default Configurados</h3>
+                    <p class="text-xs text-blue-700 mt-1">
+                        Se han aplicado los defaults exactos: gambling=1, alcohol=1, ortb=0. Al importar datos, el sistema eliminará automáticamente el ejemplo 'eldiario.es' si está presente.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- Panel Izquierdo: Configuración de Filtros (4 Cols) -->
+            <div class="lg:col-span-4 space-y-6">
+                
+                <!-- SECCIÓN 1: Seleccionar Entorno (Environment) -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <span class="flex items-center justify-center w-6 h-6 rounded-full bg-brand-100 text-brand-600 text-xs font-bold">1</span>
+                        <h2 class="text-md font-semibold text-slate-950">Selecciona el Entorno</h2>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 gap-2.5">
+                        <!-- Botón Web -->
+                        <button type="button" onclick="selectEnvironment('web')" id="btn-env-web" 
+                            class="flex items-center justify-between p-3.5 rounded-xl border-2 transition-all-300 text-left hover:bg-slate-50 focus:outline-none">
+                            <div class="flex items-center space-x-3">
+                                <div class="p-2 bg-slate-100 rounded-lg text-slate-600" id="icon-env-web">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-xs text-slate-900">Web</h3>
+                                    <p class="text-[10px] text-slate-500">Sitios web escritorio / mobile</p>
+                                </div>
+                            </div>
+                            <span class="w-4 h-4 rounded-full border border-slate-300 flex items-center justify-center" id="radio-env-web"></span>
+                        </button>
+
+                        <!-- Botón In-App -->
+                        <button type="button" onclick="selectEnvironment('in-app')" id="btn-env-in-app" 
+                            class="flex items-center justify-between p-3.5 rounded-xl border-2 transition-all-300 text-left hover:bg-slate-50 focus:outline-none">
+                            <div class="flex items-center space-x-3">
+                                <div class="p-2 bg-slate-100 rounded-lg text-slate-600" id="icon-env-in-app">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-xs text-slate-900">In-App</h3>
+                                    <p class="text-[10px] text-slate-500">Apps nativas (iOS y Android)</p>
+                                </div>
+                            </div>
+                            <span class="w-4 h-4 rounded-full border border-slate-300 flex items-center justify-center" id="radio-env-in-app"></span>
+                        </button>
+
+                        <!-- Botón CTV -->
+                        <button type="button" onclick="selectEnvironment('ctv')" id="btn-env-ctv" 
+                            class="flex items-center justify-between p-3.5 rounded-xl border-2 transition-all-300 text-left hover:bg-slate-50 focus:outline-none">
+                            <div class="flex items-center space-x-3">
+                                <div class="p-2 bg-slate-100 rounded-lg text-slate-600" id="icon-env-ctv">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-xs text-slate-900">CTV</h3>
+                                    <p class="text-[10px] text-slate-500">Connected TV y Streaming</p>
+                                </div>
+                            </div>
+                            <span class="w-4 h-4 rounded-full border border-slate-300 flex items-center justify-center" id="radio-env-ctv"></span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN 2: Seleccionar Objetivo / Tipo de Recurso -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <span class="flex items-center justify-center w-6 h-6 rounded-full bg-brand-100 text-brand-600 text-xs font-bold">2</span>
+                        <h2 class="text-md font-semibold text-slate-950">¿Qué deseas crear?</h2>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <button type="button" onclick="selectType('sites')" id="btn-type-sites"
+                            class="flex flex-col items-center justify-center p-4 rounded-xl border-2 transition-all-300 hover:bg-slate-50 text-center focus:outline-none">
+                            <div class="p-2.5 rounded-full bg-slate-100 text-slate-600 mb-2" id="icon-type-sites">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                                </svg>
+                            </div>
+                            <span class="font-semibold text-xs text-slate-900">Sites / Bundles</span>
+                        </button>
+
+                        <button type="button" onclick="selectType('placements')" id="btn-type-placements"
+                            class="flex flex-col items-center justify-center p-4 rounded-xl border-2 transition-all-300 hover:bg-slate-50 text-center focus:outline-none">
+                            <div class="p-2.5 rounded-full bg-slate-100 text-slate-600 mb-2" id="icon-type-placements">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                                </svg>
+                            </div>
+                            <span class="font-semibold text-xs text-slate-900">Placements</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN IMPORTADOR EXCEL -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <div class="flex items-center space-x-2 mb-2">
+                        <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                        </svg>
+                        <h2 class="text-sm font-semibold text-slate-950">Importar desde Excel / Sheets</h2>
+                    </div>
+                    <p class="text-[11px] text-slate-500 mb-3">
+                        Copia una lista de URLs en tu Excel y pégala aquí. El sistema extraerá únicamente el dominio principal de cada una automáticamente.
+                    </p>
+                    <textarea id="import-pastearea" disabled
+                        class="w-full h-24 p-2 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white transition-all resize-none"
+                        placeholder="Primero selecciona un entorno y tipo para activar..."></textarea>
+                    <button onclick="importFromPaste()" id="btn-import-execute" disabled
+                        class="w-full mt-2 inline-flex items-center justify-center px-4 py-2 text-xs font-semibold rounded-lg text-white bg-brand-600 hover:bg-brand-700 transition-all focus:outline-none shadow-sm disabled:bg-slate-100 disabled:text-slate-400 disabled:cursor-not-allowed">
+                        Procesar e Importar
+                    </button>
+                </div>
+
+                <!-- SECCIÓN: LEYENDA DE CÓDIGOS -->
+                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 space-y-3">
+                    <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
+                        <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                        </svg>
+                        Leyenda de Identificadores (IDs)
+                    </h3>
+                    <div class="space-y-2 text-[11px] text-slate-600 leading-relaxed">
+                        <div>
+                            <span class="font-bold text-slate-900 block">Environments:</span>
+                            <span class="bg-slate-100 px-1 py-0.5 rounded text-slate-800">1</span> = Web | 
+                            <span class="bg-slate-100 px-1 py-0.5 rounded text-slate-800">3</span> = AMP
+                        </div>
+                        <div class="border-t border-slate-100 pt-2">
+                            <span class="font-bold text-slate-900 block mb-1">Language IDs mapeados:</span>
+                            <div class="grid grid-cols-2 gap-x-2 gap-y-1">
+                                <div><span class="font-semibold text-slate-800">1</span>: Inglés (en)</div>
+                                <div><span class="font-semibold text-slate-800">2</span>: Español (es)</div>
+                                <div><span class="font-semibold text-slate-800">3</span>: Francés (fr)</div>
+                                <div><span class="font-semibold text-slate-800">4</span>: Alemán (de)</div>
+                                <div><span class="font-semibold text-slate-800">5</span>: Italiano (it)</div>
+                                <div><span class="font-semibold text-slate-800">6</span>: Chino (zh)</div>
+                                <div><span class="font-semibold text-slate-800">7</span>: Japonés (ja)</div>
+                                <div><span class="font-semibold text-slate-800">8</span>: Portugués (pt)</div>
+                                <div><span class="font-semibold text-slate-800">9</span>: Ruso (ru)</div>
+                                <div><span class="font-semibold text-slate-800">10</span>: Coreano (ko)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Panel Derecho: Editor de Cabeceras, Datos y Configuración Global (8 Cols) -->
+            <div class="lg:col-span-8 space-y-6">
+                
+                <!-- SECCIÓN CONTENEDORA PRINCIPAL DEL EDITOR -->
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                    
+                    <!-- Cabecera Activa y descarga -->
+                    <div class="p-6 border-b border-slate-100 bg-slate-50 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div>
+                            <span class="text-xs font-bold text-brand-600 uppercase tracking-widest block mb-1">Configuración Activa</span>
+                            <h2 class="text-lg font-bold text-slate-900" id="active-template-title">
+                                Selecciona opciones a la izquierda
+                            </h2>
+                        </div>
+                        <div>
+                            <button onclick="downloadCSV()" id="download-btn" disabled
+                                class="w-full sm:w-auto inline-flex items-center justify-center px-5 py-2.5 border border-transparent text-sm font-semibold rounded-xl text-white bg-slate-400 cursor-not-allowed shadow-sm transition-all duration-150 focus:outline-none">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                </svg>
+                                Descargar CSV (; separated)
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- NUEVA SECCIÓN: VALORES GLOBALES POR DEFECTO -->
+                    <div id="global-defaults-panel" class="hidden p-6 border-b border-slate-100 bg-amber-50/50">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center space-x-2">
+                                <div class="p-1.5 bg-amber-100 text-amber-700 rounded-lg">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>
+                                </div>
+                                <h3 class="text-xs font-bold text-amber-900 uppercase tracking-wider">Valores Predeterminados Globales (Web / Sites)</h3>
+                            </div>
+                            <span class="text-[10px] bg-amber-100 text-amber-800 px-2 py-0.5 rounded font-medium font-mono">Output: Numérico</span>
+                        </div>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                            <!-- Environment (Selección Numérica) -->
+                            <div>
+                                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">environment</label>
+                                <select id="global-env" onchange="updateGlobalDefault('environment', this.value)"
+                                    class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 font-semibold text-slate-800 font-mono">
+                                    <option value="1" selected>1 (Web)</option>
+                                    <option value="3">3 (AMP)</option>
+                                </select>
+                            </div>
+                            <!-- child_lt14 -->
+                            <div>
+                                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">child_lt14</label>
+                                <select id="global-lt14" onchange="updateGlobalDefault('child_lt14', this.value)"
+                                    class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 font-mono">
+                                    <option value="0" selected>0 (Falso)</option>
+                                    <option value="1">1 (Verdadero)</option>
+                                </select>
+                            </div>
+                            <!-- child_bt1418 -->
+                            <div>
+                                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">child_bt1418</label>
+                                <select id="global-bt1418" onchange="updateGlobalDefault('child_bt1418', this.value)"
+                                    class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 font-mono">
+                                    <option value="0" selected>0 (Falso)</option>
+                                    <option value="1">1 (Verdadero)</option>
+                                </select>
+                            </div>
+                            <!-- gambling -->
+                            <div>
+                                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">gambling</label>
+                                <select id="global-gambling" onchange="updateGlobalDefault('gambling', this.value)"
+                                    class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 font-mono">
+                                    <option value="1" selected>1 (Verdadero)</option>
+                                    <option value="0">0 (Falso)</option>
+                                </select>
+                            </div>
+                            <!-- alcohol -->
+                            <div>
+                                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">alcohol</label>
+                                <select id="global-alcohol" onchange="updateGlobalDefault('alcohol', this.value)"
+                                    class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 font-mono">
+                                    <option value="1" selected>1 (Verdadero)</option>
+                                    <option value="0">0 (Falso)</option>
+                                </select>
+                            </div>
+                            <!-- prebid -->
+                            <div>
+                                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">prebid</label>
+                                <select id="global-prebid" onchange="updateGlobalDefault('prebid', this.value)"
+                                    class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 font-mono">
+                                    <option value="1" selected>1 (Verdadero)</option>
+                                    <option value="0">0 (Falso)</option>
+                                </select>
+                            </div>
+                            <!-- ortb -->
+                            <div>
+                                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">ortb</label>
+                                <select id="global-ortb" onchange="updateGlobalDefault('ortb', this.value)"
+                                    class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 font-mono">
+                                    <option value="0" selected>0 (Falso)</option>
+                                    <option value="1">1 (Verdadero)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Editor Rápido de Columnas (Estructura) -->
+                    <div class="p-6 border-b border-slate-100 bg-white">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider">Cabeceras del Template</h3>
+                            <span class="text-xs text-amber-600 font-semibold">Separador: Punto y coma (;)</span>
+                        </div>
+                        <div class="flex gap-2">
+                            <input type="text" id="column-editor-input" oninput="updateColumnsFromInput()" 
+                                class="flex-1 px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white transition-all" 
+                                placeholder="Selecciona un entorno y tipo..." disabled />
+                            <button onclick="resetToDefaultColumns()" id="reset-columns-btn" disabled
+                                class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-lg text-xs font-medium transition-all focus:outline-none"
+                                title="Restaurar columnas por defecto">
+                                Restaurar
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Grid de Datos Interactivos (Hojas de cálculo) -->
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider">Editor de Datos (Introduce tus registros)</h3>
+                                <p class="text-[11px] text-slate-400" id="data-editor-description">Escribe directamente en cualquier celda para añadir tu información.</p>
+                            </div>
+                            <button onclick="addNewDataRow()" id="btn-add-row" disabled
+                                class="inline-flex items-center px-3 py-1.5 border border-brand-500 text-xs font-medium rounded-lg text-brand-600 bg-white hover:bg-brand-50 transition-all focus:outline-none font-sans">
+                                <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                                </svg>
+                                Añadir Fila
+                            </button>
+                        </div>
+                        
+                        <!-- Tabla Editora -->
+                        <div class="overflow-x-auto border border-slate-200 rounded-xl bg-slate-50 max-h-[400px]">
+                            <table class="min-w-full divide-y divide-slate-200 text-left text-sm text-slate-600 table-auto">
+                                <thead class="bg-slate-100 text-slate-700 uppercase text-[10px] tracking-wider sticky top-0 z-10 shadow-sm" id="preview-thead">
+                                    <tr>
+                                        <th class="px-4 py-3 font-semibold text-center text-slate-400" colspan="100%">
+                                            No hay ninguna selección activa
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-200 bg-white" id="preview-tbody">
+                                    <tr>
+                                        <td class="px-6 py-12 text-center text-slate-400 italic" colspan="100%">
+                                            Selecciona un entorno y un tipo de recurso a la izquierda para empezar a introducir datos en la tabla.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Mensajes flotantes / Feedback -->
+                    <div id="toast-message" class="hidden mx-6 mb-6 p-4 bg-green-50 text-green-800 rounded-xl border border-green-200 flex items-center space-x-2">
+                        <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span class="text-sm font-medium" id="toast-text">¡Archivo generado correctamente!</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 mt-auto py-6">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-400">
+            CSV Template Hub &copy; 2026. Diseñado para optimizar flujos internos de publicidad digital.
+        </div>
+    </footer>
+
+    <!-- LÓGICA JAVASCRIPT -->
+    <script>
+        // Variables globales de Estado
+        let selectedEnvironment = null; // 'web' | 'in-app' | 'ctv'
+        let selectedType = null;        // 'sites' | 'placements'
+
+        // Valores de configuración global para Web / Sites con nuevos defaults configurados
+        let webSitesGlobalDefaults = {
+            environment: '1', 
+            child_lt14: '0',
+            child_bt1418: '0',
+            gambling: '1', // Default: 1
+            alcohol: '1',  // Default: 1
+            prebid: '1',
+            ortb: '0'      // Default: 0
+        };
+
+        // Estructuras de datos preconfiguradas con cabeceras reales e IDs numéricos mapeados
+        const templatesData = {
+            'web': {
+                'sites': {
+                    title: 'Web - Sites & Bundles',
+                    columns: ['url', 'language_id', 'environment', 'child_lt14', 'child_bt1418', 'gambling', 'alcohol', 'prebid', 'ortb'],
+                    sample: ['eldiario.es', '2', '1', '0', '0', '1', '1', '1', '0'] // '2' = es, '1' = Web, gambling=1, alcohol=1, ortb=0
+                },
+                'placements': {
+                    title: 'Web - Placements',
+                    columns: ['publisher', 'domain', 'name', 'type', 'formats', 'devices', 'native', 'prebid', 'environment'],
+                    sample: ['Editorial_Group', 'eldiario.es', 'Top_Banner', 'display', '728x90,300x250', 'desktop,mobile', '0', '1', '1'] // '1' = environment Web
+                }
+            },
+            'in-app': {
+                'sites': {
+                    title: 'In-App - Apps & Bundles',
+                    columns: ['app_id', 'app_name', 'bundle_id', 'store_url', 'os_platform', 'status'],
+                    sample: ['app_102', 'Sudoku Solver', 'com.games.sudoku', 'https://play.google.com/store', 'Android', 'ACTIVE']
+                },
+                'placements': {
+                    title: 'In-App - Placements',
+                    columns: ['placement_id', 'placement_name', 'app_id', 'ad_format', 'position', 'interstitial_supported'],
+                    sample: ['pl_ia_72', 'Main_Menu_Banner', 'app_102', 'Display', 'Bottom', 'FALSE']
+                }
+            },
+            'ctv': {
+                'sites': {
+                    title: 'CTV - Channels & Apps',
+                    columns: ['channel_id', 'channel_name', 'app_bundle', 'store_id', 'platform_type', 'status'],
+                    sample: ['ch_roku_classic', 'Classic Movies', 'tv.roku.classic', 'R10293', 'Roku_OS', 'ACTIVE']
+                },
+                'placements': {
+                    title: 'CTV - Placements',
+                    columns: ['placement_id', 'placement_name', 'channel_id', 'vast_version', 'skip_offset', 'max_duration'],
+                    sample: ['pl_ctv_midroll', 'Midroll_Premium', 'ch_roku_classic', 'VAST 4.0', '10', '30']
+                }
+            }
+        };
+
+        // Almacenará las columnas activas y las filas de datos reales del usuario
+        let currentColumns = [];
+        let gridRows = []; // Array de arrays conteniendo strings
+
+        // Función específica para limpiar las URLs y extraer el dominio principal de manera estricta
+        function cleanUrl(url) {
+            if (!url) return '';
+            let clean = url.toLowerCase().trim();
+            
+            // 1. Eliminar protocolos (http:// y https://)
+            clean = clean.replace(/^(https?:\/\/)?/, '');
+            
+            // 2. Aislar el host/dominio de cualquier path de ruta, puerto o parámetro
+            let host = clean.split(/[/?#:]/)[0];
+            
+            // 3. Quitar el prefijo redundante "www." si existe al principio
+            host = host.replace(/^www\./, '');
+            
+            // 4. Quitar puntos finales accidentales
+            host = host.replace(/\.+$/, '');
+            
+            return host;
+        }
+
+        // Función inteligente avanzada para detectar automáticamente el código de idioma y retornar su ID numérico
+        function detectLanguage(url) {
+            if (!url) return 1; // Default a Inglés (1)
+            let clean = url.toLowerCase().trim();
+            
+            // Limpieza preliminar rápida de protocolo y de "www."
+            clean = clean.replace(/^(https?:\/\/)?(www\.)?/, '');
+            
+            const segments = clean.split('/');
+            const host = segments[0];
+            
+            // Map de conversión genérico de ISO codes (2 letras) a ID numérico del template
+            const langCodeToIdMap = {
+                'en': 1, // Inglés
+                'es': 2, // Español
+                'fr': 3, // Francés
+                'de': 4, // Alemán
+                'it': 5, // Italiano
+                'zh': 6, // Chino
+                'ja': 7, // Japonés
+                'pt': 8, // Portugués
+                'ru': 9, // Ruso
+                'ko': 10 // Coreano
+            };
+
+            // REGLA 1: Revisar directorios/paths dentro de la URL
+            if (segments.length > 1) {
+                const firstPathSegment = segments[1].split('-')[0];
+                if (langCodeToIdMap[firstPathSegment]) {
+                    return langCodeToIdMap[firstPathSegment];
+                }
+            }
+
+            // REGLA 2: Revisar subdominios del host
+            const hostParts = host.split('.');
+            if (hostParts.length > 2) {
+                const potentialSubdomainLang = hostParts[0];
+                if (langCodeToIdMap[potentialSubdomainLang]) {
+                    return langCodeToIdMap[potentialSubdomainLang];
+                }
+            }
+
+            // REGLA 3: Revisar el TLD final
+            if (hostParts.length > 1) {
+                const tld = hostParts[hostParts.length - 1];
+                const tldMap = {
+                    'es': 2, 'cl': 2, 'mx': 2, 'ar': 2, 'co': 2, 'pe': 2, 'uy': 2, 've': 2,
+                    'fr': 3,
+                    'de': 4,
+                    'it': 5,
+                    'zh': 6, 'cn': 6,
+                    'ja': 7, 'jp': 7,
+                    'pt': 8, 'br': 8,
+                    'ru': 9,
+                    'ko': 10, 'kr': 10
+                };
+                if (tldMap[tld]) {
+                    return tldMap[tld];
+                }
+            }
+
+            return 1; // Default a Inglés (1) si no se halla coincidencia clara
+        }
+
+        // Modifica un valor del panel por defecto global y actualiza la vista y filas
+        function updateGlobalDefault(field, value) {
+            webSitesGlobalDefaults[field] = value;
+            
+            // Si estamos en Web/Sites, actualizamos automáticamente todas las columnas vinculadas
+            if (selectedEnvironment === 'web' && selectedType === 'sites') {
+                const colIndexMap = {
+                    'environment': 2,
+                    'child_lt14': 3,
+                    'child_bt1418': 4,
+                    'gambling': 5,
+                    'alcohol': 6,
+                    'prebid': 7,
+                    'ortb': 8
+                };
+                const colIdx = colIndexMap[field];
+                if (colIdx !== undefined) {
+                    gridRows.forEach(row => {
+                        row[colIdx] = value;
+                    });
+                }
+                renderTable();
+            }
+        }
+
+        // Selección de Entorno
+        function selectEnvironment(env) {
+            selectedEnvironment = env;
+            
+            const envs = ['web', 'in-app', 'ctv'];
+            envs.forEach(e => {
+                const btn = document.getElementById(`btn-env-${e}`);
+                const radio = document.getElementById(`radio-env-${e}`);
+                const icon = document.getElementById(`icon-env-${e}`);
+                
+                if (e === env) {
+                    btn.classList.add('border-brand-500', 'bg-brand-50/50');
+                    btn.classList.remove('border-slate-200', 'bg-white');
+                    radio.classList.add('border-brand-500', 'bg-brand-500');
+                    radio.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-white block"></span>`;
+                    icon.classList.add('bg-brand-100', 'text-brand-600');
+                    icon.classList.remove('bg-slate-100', 'text-slate-600');
+                } else {
+                    btn.classList.remove('border-brand-500', 'bg-brand-50/50');
+                    btn.classList.add('border-slate-200', 'bg-white');
+                    radio.classList.remove('border-brand-500', 'bg-brand-500');
+                    radio.innerHTML = '';
+                    icon.classList.remove('bg-brand-100', 'text-brand-600');
+                    icon.classList.add('bg-slate-100', 'text-slate-600');
+                }
+            });
+
+            checkSelectionComplete();
+        }
+
+        // Selección de tipo de recurso
+        function selectType(type) {
+            selectedType = type;
+
+            const types = ['sites', 'placements'];
+            types.forEach(t => {
+                const btn = document.getElementById(`btn-type-${t}`);
+                const icon = document.getElementById(`icon-type-${t}`);
+                
+                if (t === type) {
+                    btn.classList.add('border-brand-500', 'bg-brand-50/50');
+                    btn.classList.remove('border-slate-200', 'bg-white');
+                    icon.classList.add('bg-brand-100', 'text-brand-600');
+                    icon.classList.remove('bg-slate-100', 'text-slate-600');
+                } else {
+                    btn.classList.remove('border-brand-500', 'bg-brand-50/50');
+                    btn.classList.add('border-slate-200', 'bg-white');
+                    icon.classList.remove('bg-brand-100', 'text-brand-600');
+                    icon.classList.add('bg-slate-100', 'text-slate-600');
+                }
+            });
+
+            checkSelectionComplete();
+        }
+
+        // Comprobación de selección inicial
+        function checkSelectionComplete() {
+            if (selectedEnvironment && selectedType) {
+                const template = templatesData[selectedEnvironment][selectedType];
+                
+                // Establecer cabeceras del template seleccionado
+                currentColumns = [...template.columns];
+
+                // Cargar datos del grid
+                if (selectedEnvironment === 'web' && selectedType === 'sites') {
+                    // Inicializar con la regla de Web Sites con nuevos defaults configurados
+                    gridRows = [[
+                        template.sample[0], // url (eldiario.es)
+                        detectLanguage(template.sample[0]), // ID de idioma auto (número)
+                        webSitesGlobalDefaults.environment, // 1 (Web) o 3 (AMP)
+                        webSitesGlobalDefaults.child_lt14,
+                        webSitesGlobalDefaults.child_bt1418,
+                        webSitesGlobalDefaults.gambling, // 1
+                        webSitesGlobalDefaults.alcohol,  // 1
+                        webSitesGlobalDefaults.prebid,   // 1
+                        webSitesGlobalDefaults.ortb      // 0
+                    ]];
+                    
+                    // Mostrar panel global
+                    document.getElementById('global-defaults-panel').classList.remove('hidden');
+                    document.getElementById('data-editor-description').innerText = "Solo puedes editar la columna 'url'. El language_id se asignará numéricamente de forma automática (buscando en subdominio, ruta o TLD) y el resto de las columnas heredará el valor global.";
+                } else {
+                    gridRows = [[...template.sample]];
+                    // Ocultar panel global
+                    document.getElementById('global-defaults-panel').classList.add('hidden');
+                    document.getElementById('data-editor-description').innerText = "Escribe directamente en cualquier celda para añadir tu información.";
+                }
+
+                // Actualizar título
+                document.getElementById('active-template-title').innerText = template.title;
+                
+                // Activar Inputs y botones de estructura
+                const inputEditor = document.getElementById('column-editor-input');
+                inputEditor.disabled = false;
+                inputEditor.value = currentColumns.join('; ');
+                
+                document.getElementById('reset-columns-btn').disabled = false;
+
+                // Activar botones de fila e Importador
+                document.getElementById('btn-add-row').disabled = false;
+                document.getElementById('import-pastearea').disabled = false;
+                document.getElementById('import-pastearea').value = "";
+                document.getElementById('import-pastearea').placeholder = selectedEnvironment === 'web' && selectedType === 'sites' 
+                    ? "Pega aquí una lista de URLs / Dominios de Excel..."
+                    : "Pega aquí tus datos copiados de Excel...";
+                document.getElementById('btn-import-execute').disabled = false;
+
+                // Activar botón de descarga
+                const dwnBtn = document.getElementById('download-btn');
+                dwnBtn.disabled = false;
+                dwnBtn.classList.remove('bg-slate-400', 'cursor-not-allowed');
+                dwnBtn.classList.add('bg-brand-600', 'hover:bg-brand-700');
+
+                renderTable();
+            }
+        }
+
+        // Renderizado del Grid dinámico de datos
+        function renderTable() {
+            const thead = document.getElementById('preview-thead');
+            const tbody = document.getElementById('preview-tbody');
+            
+            thead.innerHTML = '';
+            tbody.innerHTML = '';
+
+            if (currentColumns.length === 0) {
+                thead.innerHTML = `<tr><th class="px-6 py-4 text-center text-slate-400" colspan="100%">No hay cabeceras activas</th></tr>`;
+                return;
+            }
+
+            // 1. Renderizar Cabeceras <th> + Columna Extra para eliminar
+            const trHead = document.createElement('tr');
+            currentColumns.forEach(colName => {
+                const th = document.createElement('th');
+                th.className = 'px-4 py-3 text-xs font-semibold text-slate-700 border-b border-slate-200 bg-slate-100 min-w-[140px]';
+                th.innerText = colName.trim();
+                trHead.appendChild(th);
+            });
+            // Cabecera Acción
+            const thAction = document.createElement('th');
+            thAction.className = 'px-4 py-3 text-xs font-semibold text-slate-700 border-b border-slate-200 bg-slate-100 text-center w-12';
+            thAction.innerText = 'Acción';
+            trHead.appendChild(thAction);
+            thead.appendChild(trHead);
+
+            // 2. Renderizar filas de datos reales del usuario
+            if (gridRows.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td class="px-6 py-8 text-center text-slate-400 italic" colspan="100%">
+                            No hay datos en la tabla. Haz clic en "Añadir Fila" para crear un registro o usa el importador de Excel.
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            const isWebSites = (selectedEnvironment === 'web' && selectedType === 'sites');
+
+            gridRows.forEach((row, rowIndex) => {
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-50 transition-colors';
+
+                currentColumns.forEach((_, colIndex) => {
+                    const td = document.createElement('td');
+                    td.className = 'px-3 py-2 border-b border-slate-200';
+                    
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    
+                    // Condición específica para Web / Sites
+                    if (isWebSites) {
+                        if (colIndex === 0) {
+                            // URL: Editable
+                            input.className = 'w-full px-2 py-1 text-sm bg-white border border-slate-200 rounded focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all font-medium text-slate-900';
+                            input.disabled = false;
+                        } else {
+                            // Language y demás: Lectura exclusiva (se auto-completan con números)
+                            input.className = 'w-full px-2 py-1 text-sm bg-slate-100/70 border border-slate-100 text-slate-500 rounded cursor-not-allowed select-none font-mono text-center';
+                            input.disabled = true;
+                        }
+                    } else {
+                        // Comportamiento regular editable en otros templates
+                        input.className = 'w-full px-2 py-1 text-sm bg-transparent border border-transparent rounded hover:border-slate-200 focus:bg-white focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all';
+                        input.disabled = false;
+                    }
+
+                    input.value = row[colIndex] !== undefined ? row[colIndex] : '';
+                    
+                    // Al escribir, guardamos el dato de forma directa e intentamos calcular el lenguaje
+                    input.oninput = (e) => {
+                        gridRows[rowIndex][colIndex] = e.target.value;
+                        
+                        // Si es Web/Sites y cambiaron el URL (col 0), recalculamos lenguaje (col 1) de forma asíncrona
+                        if (isWebSites && colIndex === 0) {
+                            const newLangId = detectLanguage(e.target.value);
+                            gridRows[rowIndex][1] = newLangId;
+                            
+                            // Buscar el input del idioma en el DOM para actualizar su valor
+                            const rowInputs = tr.querySelectorAll('input');
+                            if (rowInputs && rowInputs[1]) {
+                                rowInputs[1].value = newLangId;
+                            }
+                        }
+                    };
+
+                    // MEJORA: Al perder foco en la columna URL, se limpia instantáneamente a su formato raíz
+                    if (isWebSites && colIndex === 0) {
+                        input.onblur = (e) => {
+                            const cleaned = cleanUrl(e.target.value);
+                            e.target.value = cleaned;
+                            gridRows[rowIndex][0] = cleaned;
+                            
+                            // Forzar recalculado estricto del lenguaje usando el dominio ya limpio
+                            const newLangId = detectLanguage(cleaned);
+                            gridRows[rowIndex][1] = newLangId;
+                            
+                            const rowInputs = tr.querySelectorAll('input');
+                            if (rowInputs && rowInputs[1]) {
+                                rowInputs[1].value = newLangId;
+                            }
+                        };
+                    }
+                    
+                    td.appendChild(input);
+                    tr.appendChild(td);
+                });
+
+                // Botón eliminar fila
+                const tdAction = document.createElement('td');
+                tdAction.className = 'px-3 py-2 border-b border-slate-200 text-center';
+                
+                const deleteBtn = document.createElement('button');
+                deleteBtn.type = 'button';
+                deleteBtn.onclick = () => removeDataRow(rowIndex);
+                deleteBtn.className = 'text-slate-400 hover:text-red-600 p-1 rounded hover:bg-red-50 transition-colors inline-flex items-center justify-center';
+                deleteBtn.innerHTML = `
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                `;
+                deleteBtn.title = "Eliminar fila";
+
+                tdAction.appendChild(deleteBtn);
+                tr.appendChild(tdAction);
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Añade una nueva fila vacía en la tabla
+        function addNewDataRow() {
+            let newRow;
+            if (selectedEnvironment === 'web' && selectedType === 'sites') {
+                newRow = [
+                    '', // url
+                    '1', // language default ID (Inglés = 1)
+                    webSitesGlobalDefaults.environment, // '1' o '3'
+                    webSitesGlobalDefaults.child_lt14,
+                    webSitesGlobalDefaults.child_bt1418,
+                    webSitesGlobalDefaults.gambling,
+                    webSitesGlobalDefaults.alcohol,
+                    webSitesGlobalDefaults.prebid,
+                    webSitesGlobalDefaults.ortb
+                ];
+            } else {
+                newRow = Array(currentColumns.length).fill('');
+            }
+            
+            gridRows.push(newRow);
+            renderTable();
+            
+            // Auto focus al primer elemento (URL) de la nueva fila añadida
+            setTimeout(() => {
+                const inputs = document.querySelectorAll('#preview-tbody tr input');
+                if (inputs.length > 0) {
+                    inputs[inputs.length - currentColumns.length].focus();
+                }
+            }, 50);
+        }
+
+        // Elimina una fila del array de datos
+        function removeDataRow(index) {
+            gridRows.splice(index, 1);
+            renderTable();
+        }
+
+        // Copiar y Pegar desde Excel / Sheets
+        function importFromPaste() {
+            const rawText = document.getElementById('import-pastearea').value.trim();
+            if (!rawText) {
+                showToast("El área de texto está vacía. Copia celdas de Excel primero.");
+                return;
+            }
+
+            const rawLines = rawText.split(/\r?\n/);
+            let importedCount = 0;
+            const tempNewRows = [];
+            
+            const isWebSites = (selectedEnvironment === 'web' && selectedType === 'sites');
+
+            rawLines.forEach(line => {
+                if (line.trim() === '') return;
+                
+                // Separamos la línea para obtener las celdas individuales
+                let cells = [];
+                if (line.includes('\t')) {
+                    cells = line.split('\t');
+                } else if (line.includes(';')) {
+                    cells = line.split(';');
+                } else {
+                    cells = [line];
+                }
+
+                if (isWebSites) {
+                    // Tomamos el valor de la URL pegada y lo limpiamos de forma inmediata
+                    const pastedUrl = cells[0].trim();
+                    const cleanedUrl = cleanUrl(pastedUrl);
+                    const detectedLangId = detectLanguage(cleanedUrl);
+                    
+                    // Generamos el registro de Web Sites inyectando las globales (con IDs numéricos y URL limpia)
+                    const parsedRow = [
+                        cleanedUrl, // URL perfectamente limpia!
+                        detectedLangId, // language id detectado sobre la url limpia
+                        webSitesGlobalDefaults.environment, // '1' o '3'
+                        webSitesGlobalDefaults.child_lt14,
+                        webSitesGlobalDefaults.child_bt1418,
+                        webSitesGlobalDefaults.gambling,
+                        webSitesGlobalDefaults.alcohol,
+                        webSitesGlobalDefaults.prebid,
+                        webSitesGlobalDefaults.ortb
+                    ];
+                    tempNewRows.push(parsedRow);
+                } else {
+                    // Importación normal
+                    const parsedRow = Array(currentColumns.length).fill('');
+                    currentColumns.forEach((_, colIdx) => {
+                        if (cells[colIdx] !== undefined) {
+                            parsedRow[colIdx] = cells[colIdx].trim();
+                        }
+                    });
+                    tempNewRows.push(parsedRow);
+                }
+                
+                importedCount++;
+            });
+
+            if (tempNewRows.length > 0) {
+                // REGLA SOLICITADA: Elimina el ejemplo por defecto (eldiario.es) de forma automática si es el único registro activo
+                if (gridRows.length === 1 && (gridRows[0][0] === 'eldiario.es' || gridRows[0][0] === '')) {
+                    gridRows = [...tempNewRows];
+                } else {
+                    gridRows = [...gridRows, ...tempNewRows];
+                }
+                renderTable();
+                document.getElementById('import-pastearea').value = "";
+                showToast(`¡Importadas ${importedCount} fila(s) limpias con éxito!`);
+            }
+        }
+
+        // Editar la estructura de las columnas en tiempo real
+        function updateColumnsFromInput() {
+            const val = document.getElementById('column-editor-input').value;
+            currentColumns = val.split(';')
+                                .map(c => c.trim())
+                                .filter(c => c.length > 0);
+            
+            // Adaptar las filas de datos ya existentes a la nueva longitud
+            gridRows = gridRows.map(row => {
+                const adjustedRow = Array(currentColumns.length).fill('');
+                currentColumns.forEach((_, i) => {
+                    if (row[i] !== undefined) {
+                        adjustedRow[i] = row[i];
+                    }
+                });
+                return adjustedRow;
+            });
+
+            renderTable();
+        }
+
+        // Restaurar las cabeceras a su estado original de fábrica
+        function resetToDefaultColumns() {
+            if (selectedEnvironment && selectedType) {
+                const template = templatesData[selectedEnvironment][selectedType];
+                currentColumns = [...template.columns];
+                document.getElementById('column-editor-input').value = currentColumns.join('; ');
+                
+                // Reiniciar los datos según el tipo
+                if (selectedEnvironment === 'web' && selectedType === 'sites') {
+                    const cleanedSampleUrl = cleanUrl(template.sample[0]);
+                    gridRows = [[
+                        cleanedSampleUrl,
+                        detectLanguage(cleanedSampleUrl),
+                        webSitesGlobalDefaults.environment,
+                        webSitesGlobalDefaults.child_lt14,
+                        webSitesGlobalDefaults.child_bt1418,
+                        webSitesGlobalDefaults.gambling,
+                        webSitesGlobalDefaults.alcohol,
+                        webSitesGlobalDefaults.prebid,
+                        webSitesGlobalDefaults.ortb
+                    ]];
+                } else {
+                    gridRows = [[...template.sample]];
+                }
+                
+                renderTable();
+                showToast("Template y ejemplo restaurados.");
+            }
+        }
+
+        // Descarga el CSV con TODOS los datos actuales de la tabla separados por ";"
+        function downloadCSV() {
+            if (currentColumns.length === 0) return;
+            if (gridRows.length === 0) {
+                showToast("Por favor, añade al menos una fila de datos antes de descargar.");
+                return;
+            }
+
+            // Fila 1: Cabeceras
+            const headerRow = currentColumns.join(';');
+            
+            // Filas de datos del usuario
+            const isWebSites = (selectedEnvironment === 'web' && selectedType === 'sites');
+
+            const dataRows = gridRows.map(row => {
+                let rowToSave = [...row];
+                
+                // Garantizar de forma estricta que Web/Sites guarde las globales configuradas en el panel
+                if (isWebSites) {
+                    const finalCleanUrl = cleanUrl(rowToSave[0]);
+                    rowToSave[0] = finalCleanUrl;
+                    rowToSave[1] = detectLanguage(finalCleanUrl);
+                    rowToSave[2] = webSitesGlobalDefaults.environment; // Solo '1' o '3'
+                    rowToSave[3] = webSitesGlobalDefaults.child_lt14;
+                    rowToSave[4] = webSitesGlobalDefaults.child_bt1418;
+                    rowToSave[5] = webSitesGlobalDefaults.gambling;
+                    rowToSave[6] = webSitesGlobalDefaults.alcohol;
+                    rowToSave[7] = webSitesGlobalDefaults.prebid;
+                    rowToSave[8] = webSitesGlobalDefaults.ortb;
+                }
+
+                return rowToSave.map(cellValue => {
+                    const val = cellValue !== undefined && cellValue !== null ? cellValue.toString() : '';
+                    if (val.includes(';') || val.includes('"') || val.includes('\n')) {
+                        return `"${val.replace(/"/g, '""')}"`;
+                    }
+                    return val;
+                }).join(';');
+            });
+            
+            const csvContent = [headerRow, ...dataRows].join('\n');
+
+            // Descarga del blob
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const filename = `config_${selectedEnvironment}_${selectedType}.csv`;
+            
+            const link = document.createElement("a");
+            if (link.download !== undefined) {
+                const url = URL.createObjectURL(blob);
+                link.setAttribute("href", url);
+                link.setAttribute("download", filename);
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+
+            showToast(`¡Descargado exitosamente con ${gridRows.length} registros!`);
+        }
+
+        // Mostrar notificaciones Toast
+        function showToast(message) {
+            const toast = document.getElementById('toast-message');
+            const toastText = document.getElementById('toast-text');
+            toastText.innerText = message;
+            toast.classList.remove('hidden');
+            
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 4000);
+        }
+    </script>
+</body>
+</html>
