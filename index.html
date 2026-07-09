@@ -43,7 +43,7 @@
                 </div>
                 <div>
                     <h1 class="text-lg font-bold text-slate-900 tracking-tight">CSV Template & Data Hub</h1>
-                    <p class="text-xs text-slate-500">Herramienta interna de aprovisionamiento con limpieza automática de dominios</p>
+                    <p class="text-xs text-slate-500">Aprovisionamiento con análisis léxico inteligente de URLs</p>
                 </div>
             </div>
             <div class="flex items-center space-x-2">
@@ -66,9 +66,9 @@
                     </svg>
                 </div>
                 <div class="ml-3">
-                    <h3 class="text-sm font-medium text-blue-800">Nuevos Valores Default Configurados</h3>
+                    <h3 class="text-sm font-medium text-blue-800">Detección de Idioma Léxica Activada</h3>
                     <p class="text-xs text-blue-700 mt-1">
-                        Se han aplicado los defaults exactos: gambling=1, alcohol=1, ortb=0. Al importar datos, el sistema eliminará automáticamente el ejemplo 'eldiario.es' si está presente.
+                        El sistema ahora analiza las palabras clave del propio dominio (ej: <code>radiocentro.com</code>, <code>lecturas.com</code>, <code>ecuavisa.com</code>) para detectar automáticamente el idioma y asignarle el ID numérico correspondiente (Español = 2) sin importar si usan la extensión genérica .com.
                     </p>
                 </div>
             </div>
@@ -490,6 +490,7 @@
         }
 
         // Función inteligente avanzada para detectar automáticamente el código de idioma y retornar su ID numérico
+        // Valida en cascada: Path de la URL, subdominios, TLD y finalmente análisis de palabras del dominio (Léxico)
         function detectLanguage(url) {
             if (!url) return 1; // Default a Inglés (1)
             let clean = url.toLowerCase().trim();
@@ -514,15 +515,15 @@
                 'ko': 10 // Coreano
             };
 
-            // REGLA 1: Revisar directorios/paths dentro de la URL
+            // REGLA 1: Revisar directorios/paths dentro de la URL (ej: cnn.com/es/noticia)
             if (segments.length > 1) {
-                const firstPathSegment = segments[1].split('-')[0];
+                const firstPathSegment = segments[1].split('-')[0].split('_')[0];
                 if (langCodeToIdMap[firstPathSegment]) {
                     return langCodeToIdMap[firstPathSegment];
                 }
             }
 
-            // REGLA 2: Revisar subdominios del host
+            // REGLA 2: Revisar subdominios del host (ej: es.wikipedia.org)
             const hostParts = host.split('.');
             if (hostParts.length > 2) {
                 const potentialSubdomainLang = hostParts[0];
@@ -531,18 +532,18 @@
                 }
             }
 
-            // REGLA 3: Revisar el TLD final
+            // REGLA 3: Revisar el TLD territorial de respaldo (ej: .es -> 2, .cl -> 2, .fr -> 3)
             if (hostParts.length > 1) {
                 const tld = hostParts[hostParts.length - 1];
                 const tldMap = {
-                    'es': 2, 'cl': 2, 'mx': 2, 'ar': 2, 'co': 2, 'pe': 2, 'uy': 2, 've': 2,
+                    'es': 2, 'cl': 2, 'mx': 2, 'ar': 2, 'co': 2, 'pe': 2, 'uy': 2, 've': 2, 'bo': 2, 'ec': 2, 'py': 2, 'gt': 2, 'cr': 2, 'hn': 2, 'sv': 2, 'ni': 2, 'pa': 2, 'do': 2, 'pr': 2,
                     'fr': 3,
-                    'de': 4,
+                    'de': 4, 'at': 4, 'ch': 4,
                     'it': 5,
-                    'zh': 6, 'cn': 6,
+                    'cn': 6, 'hk': 6, 'tw': 6,
                     'ja': 7, 'jp': 7,
                     'pt': 8, 'br': 8,
-                    'ru': 9,
+                    'ru': 9, 'by': 9, 'ua': 9, 'kz': 9,
                     'ko': 10, 'kr': 10
                 };
                 if (tldMap[tld]) {
@@ -550,7 +551,74 @@
                 }
             }
 
-            return 1; // Default a Inglés (1) si no se halla coincidencia clara
+            // REGLA 4: Análisis léxico / Semántico del Dominio (¡Mejora clave!)
+            // Extrae el nombre del sitio (ej: "radiocentro" de "radiocentro.com") y busca raíces/palabras clave
+            const domainName = hostParts.length > 1 ? hostParts[hostParts.length - 2] : host;
+
+            // Palabras o raíces en Español (ID: 2)
+            const spanishTriggers = [
+                'centro', 'lectura', 'avisa', 'ecua', 'diario', 'noticia', 'prensa', 'gaceta', 'heraldo', 'correo', 
+                'tribuna', 'deporte', 'receta', 'cocina', 'viaje', 'empleo', 'vivienda', 'tienda', 'compra', 'venta', 
+                'oferta', 'anuncio', 'coche', 'dinero', 'bolsa', 'juego', 'musica', 'salud', 'belleza', 'gente', 
+                'corazon', 'actualidad', 'nacion', 'opinion', 'cronica', 'libertad', 'verdad', 'justicia', 'pueblo', 
+                'ciudad', 'revista', 'canal', 'tele', 'vanguardia', 'confidencial', 'razon', 'semana', 'espan', 
+                'castellano', 'latino', 'america', 'mexic', 'colomb', 'argentin', 'chile', 'venezu', 'peru', 
+                'ecuad', 'boliv', 'paragu', 'urugu', 'carib', 'madrid', 'barcelo', 'sevill', 'valenc', 'bilbao', 
+                'zarago', 'bae', 'univision', 'telemundo', 'rtve', 'antena', 'sexta', 'cinco', 'publico', 'marca',
+                'as', 'pais', 'mundo', 'tiempo', 'clima', 'aviso', 'radio', 'onda', 'ser', 'cope', 'rtve', 'cultural',
+                'educacion', 'colegio', 'escuela', 'instituto', 'universidad', 'banco', 'ahorro', 'seguro', 'vida',
+                'libros', 'arte', 'ciencia', 'tecnologia', 'futbol', 'baloncesto', 'tenis', 'motor', 'auto', 'cine',
+                'peliculas', 'series', 'musica', 'cancion', 'concierto', 'festival', 'fiesta', 'recetas', 'comer',
+                'beber', 'restaurante', 'comida', 'gastronomia', 'vinos', 'cerveza', 'copa', 'cafe', 'te', 'chocolate'
+            ];
+
+            // Palabras o raíces en Francés (ID: 3)
+            const frenchTriggers = [
+                'monde', 'journal', 'presse', 'nouvelle', 'actu', 'france', 'paris', 'soleil', 'temps', 'meteo', 
+                'recette', 'cuisine', 'voyage', 'emploi', 'maison', 'achat', 'vente', 'jeu', 'musique', 'cinema', 
+                'sante', 'beaute', 'mode', 'coeur', 'revue', 'etoile', 'liberte', 'verite', 'peuple', 'ville',
+                'lyon', 'marseille', 'belgique', 'suisse', 'quebec', 'canadien', 'francais', 'quotidien', 'tribune',
+                'eclair', 'depeche', 'figaro', 'parisien', 'liberation', 'humanite', 'lexpress', 'nouvel', 'obs'
+            ];
+
+            // Palabras o raíces en Alemán (ID: 4)
+            const germanTriggers = [
+                'welt', 'zeitung', 'presse', 'nachrichten', 'deutsch', 'berlin', 'sonne', 'wetter', 'rezept', 
+                'kueche', 'reise', 'job', 'haus', 'kauf', 'verkauf', 'spiel', 'musik', 'kino', 'gesundheit', 
+                'schoenheit', 'mode', 'herz', 'magazin', 'stern', 'freiheit', 'wahrheit', 'volk', 'stadt',
+                'muenchen', 'hamburg', 'koeln', 'frankfurt', 'oesterreich', 'schweiz', 'bundes', 'tag', 'blatt',
+                'spiegel', 'fokus', 'zeit', 'sueddeutsche', 'allgemeine', 'rundschau', 'anzeiger', 'kurier'
+            ];
+
+            // Palabras o raíces en Portugués (ID: 8)
+            const portugueseTriggers = [
+                'imprensa', 'tempo', 'clima', 'receita', 'cozinha', 
+                'viagem', 'emprego', 'venda', 'saude', 'coracao', 'liberdade', 'povo', 'cidade', 'lisboa',
+                'porto', 'brasil', 'sao', 'paulo', 'folha', 'globo', 'estadao', 'veja',
+                'observador', 'expresso', 'manhã', 'record'
+            ];
+
+            // Palabras o raíces en Italiano (ID: 5)
+            const italianTriggers = [
+                'giornale', 'stampa', 'paese', 'ricetta', 'cucina', 
+                'viaggio', 'lavoro', 'acquisto', 'vendita', 'salute', 
+                'cuore', 'rivista', 'stella', 'liberta', 'popolo', 'citta',
+                'roma', 'milano', 'torino', 'napoli', 'corriere', 'repubblica', 'gazzetta', 'sole24ore',
+                'messaggero', 'secolo', 'nazione', 'giorno', 'foglio', 'panorama'
+            ];
+
+            // Helper para comprobar si el dominio contiene alguna de las raíces
+            const containsAny = (str, list) => {
+                return list.some(trigger => str.includes(trigger));
+            };
+
+            if (containsAny(domainName, spanishTriggers)) return 2;
+            if (containsAny(domainName, frenchTriggers)) return 3;
+            if (containsAny(domainName, germanTriggers)) return 4;
+            if (containsAny(domainName, portugueseTriggers)) return 8;
+            if (containsAny(domainName, italianTriggers)) return 5;
+
+            return 1; // Default a Inglés (1) si no se halla ninguna coincidencia léxica
         }
 
         // Modifica un valor del panel por defecto global y actualiza la vista y filas
