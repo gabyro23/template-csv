@@ -42,12 +42,12 @@
                     </svg>
                 </div>
                 <div>
-                    <h1 class="text-lg font-bold text-slate-900 tracking-tight font-sans">CSV Template & Data Hub</h1>
-                    <p class="text-xs text-slate-500 font-medium font-sans">Herramienta de aprovisionamiento ágil para AdOps</p>
+                    <h1 class="text-lg font-bold text-slate-900 tracking-tight font-sans font-sans">CSV Template & Data Hub</h1>
+                    <p class="text-xs text-slate-500 font-medium font-sans font-sans font-sans font-sans">Herramienta de aprovisionamiento ágil para AdOps</p>
                 </div>
             </div>
             <div class="flex items-center space-x-2">
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 font-semibold font-sans">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 font-semibold font-sans font-sans">
                     Listo para usar (; separated)
                 </span>
             </div>
@@ -66,9 +66,9 @@
                     </svg>
                 </div>
                 <div class="ml-3">
-                    <h3 class="text-sm font-semibold text-blue-800 font-sans">Mapeo de Idiomas Oficiales Integrado</h3>
-                    <p class="text-xs text-blue-700 mt-1 font-sans">
-                        Se han corregido los IDs numéricos de idioma de acuerdo con tu documento de referencia (ej. <strong>Spanish = 27</strong>, <strong>Catalan = 18</strong>, <strong>German = 23</strong>, <strong>French = 34</strong>). Los valores ya se calculan de manera exacta al procesar los dominios.
+                    <h3 class="text-sm font-semibold text-blue-800 font-sans font-sans">Soporte In-App / Sites Completado</h3>
+                    <p class="text-xs text-blue-700 mt-1 font-sans font-sans">
+                        Se ha integrado el generador para <strong>In-App Sites</strong> con el mapeo del CSV de referencia. Escribe o pega tus bundle IDs en bloque; el sistema autodetectará si corresponden a <strong>ios</strong> o <strong>android</strong> y rellenará el resto de las columnas con los valores globales.
                     </p>
                 </div>
             </div>
@@ -82,8 +82,8 @@
                 <!-- SECCIÓN 1: Seleccionar Entorno (Environment) -->
                 <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
                     <div class="flex items-center space-x-2 mb-4">
-                        <span class="flex items-center justify-center w-6 h-6 rounded-full bg-brand-100 text-brand-600 text-xs font-bold">1</span>
-                        <h2 class="text-md font-semibold text-slate-950 font-sans">Selecciona el Entorno</h2>
+                        <span class="flex items-center justify-center w-6 h-6 rounded-full bg-brand-100 text-brand-600 text-xs font-bold font-sans">1</span>
+                        <h2 class="text-md font-semibold text-slate-950 font-sans font-sans font-sans">Selecciona el Entorno</h2>
                     </div>
                     
                     <div class="grid grid-cols-1 gap-2.5">
@@ -97,8 +97,8 @@
                                     </svg>
                                 </div>
                                 <div>
-                                    <h3 class="font-semibold text-xs text-slate-900 font-sans">Web</h3>
-                                    <p class="text-[10px] text-slate-500 font-sans">Sitios web escritorio / mobile</p>
+                                    <h3 class="font-semibold text-xs text-slate-900 font-sans font-sans">Web</h3>
+                                    <p class="text-[10px] text-slate-500 font-sans font-sans">Sitios web escritorio / mobile</p>
                                 </div>
                             </div>
                             <span class="w-4 h-4 rounded-full border border-slate-300 flex items-center justify-center" id="radio-env-web"></span>
@@ -106,7 +106,7 @@
 
                         <!-- Botón In-App -->
                         <button type="button" onclick="selectEnvironment('in-app')" id="btn-env-in-app" 
-                            class="flex items-center justify-between p-3.5 rounded-xl border-2 transition-all-300 text-left hover:bg-slate-50 focus:outline-none font-sans">
+                            class="flex items-center justify-between p-3.5 rounded-xl border-2 transition-all-300 text-left hover:bg-slate-50 focus:outline-none font-sans font-sans">
                             <div class="flex items-center space-x-3">
                                 <div class="p-2 bg-slate-100 rounded-lg text-slate-600" id="icon-env-in-app">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -114,8 +114,8 @@
                                     </svg>
                                 </div>
                                 <div>
-                                    <h3 class="font-semibold text-xs text-slate-900 font-sans font-sans">In-App</h3>
-                                    <p class="text-[10px] text-slate-500 font-sans">Apps nativas (iOS y Android)</p>
+                                    <h3 class="font-semibold text-xs text-slate-900 font-sans font-sans font-sans font-sans">In-App</h3>
+                                    <p class="text-[10px] text-slate-500 font-sans font-sans">Apps móviles nativas</p>
                                 </div>
                             </div>
                             <span class="w-4 h-4 rounded-full border border-slate-300 flex items-center justify-center" id="radio-env-in-app"></span>
@@ -123,7 +123,7 @@
 
                         <!-- Botón CTV -->
                         <button type="button" onclick="selectEnvironment('ctv')" id="btn-env-ctv" 
-                            class="flex items-center justify-between p-3.5 rounded-xl border-2 transition-all-300 text-left hover:bg-slate-50 focus:outline-none font-sans">
+                            class="flex items-center justify-between p-3.5 rounded-xl border-2 transition-all-300 text-left hover:bg-slate-50 focus:outline-none font-sans font-sans">
                             <div class="flex items-center space-x-3">
                                 <div class="p-2 bg-slate-100 rounded-lg text-slate-600" id="icon-env-ctv">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -131,8 +131,8 @@
                                     </svg>
                                 </div>
                                 <div>
-                                    <h3 class="font-semibold text-xs text-slate-900 font-sans">CTV</h3>
-                                    <p class="text-[10px] text-slate-500 font-sans">Connected TV y Streaming</p>
+                                    <h3 class="font-semibold text-xs text-slate-900 font-sans font-sans font-sans">CTV</h3>
+                                    <p class="text-[10px] text-slate-500 font-sans font-sans font-sans font-sans font-sans font-sans">Connected TV y Streaming</p>
                                 </div>
                             </div>
                             <span class="w-4 h-4 rounded-full border border-slate-300 flex items-center justify-center" id="radio-env-ctv"></span>
@@ -143,23 +143,23 @@
                 <!-- SECCIÓN 2: Seleccionar Objetivo / Tipo de Recurso -->
                 <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
                     <div class="flex items-center space-x-2 mb-4">
-                        <span class="flex items-center justify-center w-6 h-6 rounded-full bg-brand-100 text-brand-600 text-xs font-bold">2</span>
-                        <h2 class="text-md font-semibold text-slate-950 font-sans">¿Qué deseas crear?</h2>
+                        <span class="flex items-center justify-center w-6 h-6 rounded-full bg-brand-100 text-brand-600 text-xs font-bold font-sans">2</span>
+                        <h2 class="text-md font-semibold text-slate-950 font-sans font-sans font-sans font-sans">¿Qué deseas crear?</h2>
                     </div>
 
                     <div class="grid grid-cols-2 gap-3">
                         <button type="button" onclick="selectType('sites')" id="btn-type-sites"
-                            class="flex flex-col items-center justify-center p-4 rounded-xl border-2 transition-all-300 hover:bg-slate-50 text-center focus:outline-none font-sans">
+                            class="flex flex-col items-center justify-center p-4 rounded-xl border-2 transition-all-300 hover:bg-slate-50 text-center focus:outline-none font-sans font-sans">
                             <div class="p-2.5 rounded-full bg-slate-100 text-slate-600 mb-2" id="icon-type-sites">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                                 </svg>
                             </div>
-                            <span class="font-semibold text-xs text-slate-900 font-sans">Sites / Bundles</span>
+                            <span class="font-semibold text-xs text-slate-900 font-sans font-sans">Sites / Bundles</span>
                         </button>
 
                         <button type="button" onclick="selectType('placements')" id="btn-type-placements"
-                            class="flex flex-col items-center justify-center p-4 rounded-xl border-2 transition-all-300 hover:bg-slate-50 text-center focus:outline-none font-sans">
+                            class="flex flex-col items-center justify-center p-4 rounded-xl border-2 transition-all-300 hover:bg-slate-50 text-center focus:outline-none font-sans font-sans font-sans">
                             <div class="p-2.5 rounded-full bg-slate-100 text-slate-600 mb-2" id="icon-type-placements">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
@@ -176,23 +176,23 @@
                         <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                         </svg>
-                        <h2 class="text-sm font-semibold text-slate-950 font-sans">Importar desde Excel / Sheets</h2>
+                        <h2 class="text-sm font-semibold text-slate-950 font-sans font-sans font-sans">Importar desde Excel / Sheets</h2>
                     </div>
-                    <p class="text-[11px] text-slate-500 mb-3 font-sans">
-                        Copia una lista de URLs en tu Excel y pégala aquí. El sistema procesará los dominios aplicando limpieza automática de dominios raíces.
+                    <p class="text-[11px] text-slate-500 mb-3 font-sans font-sans">
+                        Copia una lista de URLs, Dominios o Bundle IDs en tu Excel y pégala aquí. El sistema procesará el limpiado, mapeo de idiomas e identificación de OS de forma automática.
                     </p>
                     <textarea id="import-pastearea" disabled
                         class="w-full h-24 p-2 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white transition-all resize-none font-mono"
                         placeholder="Primero selecciona un entorno y tipo para activar..."></textarea>
                     <button onclick="importFromPaste()" id="btn-import-execute" disabled
-                        class="w-full mt-2 inline-flex items-center justify-center px-4 py-2 text-xs font-semibold rounded-lg text-white bg-brand-600 hover:bg-brand-700 transition-all focus:outline-none shadow-sm disabled:bg-slate-100 disabled:text-slate-400 disabled:cursor-not-allowed font-sans">
+                        class="w-full mt-2 inline-flex items-center justify-center px-4 py-2 text-xs font-semibold rounded-lg text-white bg-brand-600 hover:bg-brand-700 transition-all focus:outline-none shadow-sm disabled:bg-slate-100 disabled:text-slate-400 disabled:cursor-not-allowed font-sans font-sans font-sans">
                         Procesar e Importar
                     </button>
                 </div>
 
                 <!-- SECCIÓN: LEYENDA DINÁMICA DE CÓDIGOS -->
-                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 space-y-4 font-sans font-sans">
-                    <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5 font-sans">
+                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 space-y-4 font-sans font-sans font-sans font-sans">
+                    <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5 font-sans font-sans font-sans">
                         <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                         </svg>
@@ -200,7 +200,7 @@
                     </h3>
                     
                     <!-- LEYENDA COMÚN -->
-                    <div id="legend-common" class="hidden text-[11px] text-slate-600 leading-relaxed border-b border-slate-100 pb-3">
+                    <div id="legend-common" class="hidden text-[11px] text-slate-600 leading-relaxed border-b border-slate-100 pb-3 font-sans">
                         <div>
                             <span class="font-bold text-slate-900 block font-sans">Environments:</span>
                             <span class="bg-slate-100 px-1 py-0.5 rounded text-slate-800">1</span> = Web | 
@@ -210,9 +210,9 @@
 
                     <!-- LEYENDA EXCLUSIVA SITES -->
                     <div id="legend-sites" class="hidden space-y-2 text-[11px] text-slate-600 leading-relaxed">
-                        <span class="font-bold text-slate-900 block uppercase tracking-wide text-[10px] text-amber-700 font-sans">Mapeo: Web / Sites</span>
+                        <span class="font-bold text-slate-900 block uppercase tracking-wide text-[10px] text-amber-700 font-sans font-sans">Mapeo: Web / Sites</span>
                         <div>
-                            <span class="font-semibold text-slate-800 block mb-1 font-sans">Language IDs asignados (Oficiales):</span>
+                            <span class="font-semibold text-slate-800 block mb-1 font-sans font-sans">Language IDs asignados (Oficiales):</span>
                             <div class="grid grid-cols-2 gap-x-2 gap-y-1 font-mono">
                                 <div><span class="font-bold text-slate-800">1</span>: Inglés (en)</div>
                                 <div><span class="font-bold text-slate-800">18</span>: Catalán (ca)</div>
@@ -233,10 +233,10 @@
                     </div>
 
                     <!-- LEYENDA EXCLUSIVA PLACEMENTS -->
-                    <div id="legend-placements" class="hidden space-y-2 text-[11px] text-slate-600 leading-relaxed">
+                    <div id="legend-placements" class="hidden space-y-2 text-[11px] text-slate-600 leading-relaxed font-sans font-sans">
                         <span class="font-bold text-slate-900 block uppercase tracking-wide text-[10px] text-blue-700 font-sans">Mapeo: Web / Placements</span>
                         <div class="space-y-1">
-                            <div><strong class="text-slate-800 font-sans font-sans">Type (Tipos):</strong></div>
+                            <div><strong class="text-slate-800 font-sans">Type (Tipos):</strong></div>
                             <ul class="list-disc pl-4 space-y-0.5">
                                 <li><span class="font-semibold font-sans">3</span>: Display / Banner (default)</li>
                                 <li><span class="font-semibold font-sans">1</span>: Skin</li>
@@ -254,15 +254,30 @@
                                 <li>Native: <span class="font-mono">222</span></li>
                             </ul>
                         </div>
-                        <div class="space-y-1 pt-1 font-sans font-sans">
-                            <div><strong class="text-slate-800 font-sans font-sans">Prebid:</strong></div>
-                            <ul class="list-disc pl-4 space-y-0.5">
-                                <li><span class="font-semibold font-sans font-sans">1</span>: Header bidding (default)</li>
-                                <li><span class="font-semibold font-sans font-sans">0</span>: Tag Based</li>
+                        <div class="space-y-1 pt-1 font-sans">
+                            <div><strong class="text-slate-800 font-sans">Prebid:</strong></div>
+                            <ul class="list-disc pl-4 space-y-0.5 font-sans">
+                                <li><span class="font-semibold">1</span>: Header bidding (default)</li>
+                                <li><span class="font-semibold">0</span>: Tag Based</li>
                             </ul>
                         </div>
-                        <div class="pt-1 font-sans font-sans">
-                            <strong class="text-slate-800 font-sans font-sans font-sans">Native:</strong> Siempre <span class="font-mono font-semibold">1</span>
+                        <div class="pt-1 font-sans">
+                            <strong class="text-slate-800">Native:</strong> Siempre <span class="font-mono font-semibold">1</span>
+                        </div>
+                    </div>
+
+                    <!-- LEYENDA EXCLUSIVA IN-APP SITES -->
+                    <div id="legend-inapp-sites" class="hidden space-y-2 text-[11px] text-slate-600 leading-relaxed font-sans">
+                        <span class="font-bold text-slate-900 block uppercase tracking-wide text-[10px] text-indigo-700 font-sans">Mapeo: In-App / Sites</span>
+                        <div class="space-y-1">
+                            <div><strong class="text-slate-800">Platform Auto-Detect:</strong></div>
+                            <ul class="list-disc pl-4 space-y-0.5">
+                                <li><strong>ios:</strong> Si el Bundle ID ingresado es solo numérico (ej: <code>336978041</code>).</li>
+                                <li><strong>android:</strong> Si el Bundle ID contiene caracteres alfanuméricos y puntos (ej: <code>com.dailymotion</code>).</li>
+                            </ul>
+                        </div>
+                        <div class="pt-2">
+                            <strong class="text-slate-800">Booleanos (gambling, alcohol, ortb, prebid, etc):</strong> <span class="font-mono font-semibold">1</span> (Habilitado), <span class="font-mono font-semibold">0</span> (Deshabilitado).
                         </div>
                     </div>
                 </div>
@@ -294,7 +309,7 @@
                         </div>
                     </div>
 
-                    <!-- SECCIÓN: VALORES GLOBALES POR DEFECTO (Dual Sites / Placements) -->
+                    <!-- SECCIÓN: VALORES GLOBALES POR DEFECTO (Dual Sites / Placements / In-App Sites) -->
                     <div id="global-defaults-panel" class="hidden p-6 border-b border-slate-100">
                         
                         <!-- CONTROLES GLOBALES PARA WEB SITES -->
@@ -303,7 +318,7 @@
                                 <div class="flex items-center space-x-2">
                                     <div class="p-1.5 bg-amber-100 text-amber-700 rounded-lg">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31(2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                         </svg>
                                     </div>
@@ -350,7 +365,7 @@
                                 </div>
                                 <!-- alcohol -->
                                 <div>
-                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans font-sans">alcohol</label>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">alcohol</label>
                                     <select id="global-alcohol" onchange="updateGlobalDefault('alcohol', this.value)"
                                         class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 font-mono">
                                         <option value="1" selected>1 (Verdadero)</option>
@@ -359,7 +374,7 @@
                                 </div>
                                 <!-- prebid -->
                                 <div>
-                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans font-sans">prebid</label>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">prebid</label>
                                     <select id="global-prebid" onchange="updateGlobalDefault('prebid', this.value)"
                                         class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 font-mono">
                                         <option value="1" selected>1 (Verdadero)</option>
@@ -379,15 +394,15 @@
                         </div>
 
                         <!-- CONTROLES GLOBALES PARA WEB PLACEMENTS -->
-                        <div id="global-placements-controls" class="hidden space-y-5">
+                        <div id="global-placements-controls" class="hidden space-y-5 font-sans">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center space-x-2">
-                                    <div class="p-1.5 bg-blue-100 text-blue-700 rounded-lg font-sans">
+                                    <div class="p-1.5 bg-blue-100 text-blue-700 rounded-lg">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                                         </svg>
                                     </div>
-                                    <h3 class="text-xs font-bold text-blue-900 uppercase tracking-wider font-sans font-sans">Valores Predeterminados Globales (Web / Placements)</h3>
+                                    <h3 class="text-xs font-bold text-blue-900 uppercase tracking-wider font-sans">Valores Predeterminados Globales (Web / Placements)</h3>
                                 </div>
                                 <span class="text-[10px] bg-blue-100 text-blue-800 px-2 py-0.5 rounded font-semibold font-mono">Multivariable</span>
                             </div>
@@ -396,7 +411,7 @@
                             <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 bg-slate-50 p-4 rounded-xl border border-slate-200/60 font-sans">
                                 <!-- Publisher ID -->
                                 <div>
-                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">Publisher ID</label>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans font-sans">Publisher ID</label>
                                     <input type="text" id="global-plac-pub" oninput="updateGlobalPlacementDefault('publisher', this.value)" value="1001"
                                         class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500 font-semibold font-mono text-slate-800" />
                                 </div>
@@ -416,7 +431,7 @@
                                 <div>
                                     <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">Prebid</label>
                                     <select id="global-plac-prebid" onchange="updateGlobalPlacementDefault('prebid', this.value)"
-                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500 font-semibold text-slate-800 font-sans">
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500 font-semibold text-slate-800">
                                         <option value="1" selected>1 (Header bidding)</option>
                                         <option value="0">0 (Tag Based)</option>
                                     </select>
@@ -449,7 +464,7 @@
                                 </div>
 
                                 <button type="button" onclick="addPlacementConfig()" 
-                                    class="inline-flex items-center px-3 py-1.5 border border-dashed border-blue-500 text-xs font-semibold rounded-lg text-blue-600 bg-white hover:bg-blue-50 transition-all focus:outline-none font-sans">
+                                    class="inline-flex items-center px-3 py-1.5 border border-dashed border-blue-500 text-xs font-semibold rounded-lg text-blue-600 bg-white hover:bg-blue-50 transition-all focus:outline-none font-sans font-sans">
                                     <svg class="w-3.5 h-3.5 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                                     </svg>
@@ -458,11 +473,118 @@
                             </div>
                         </div>
 
+                        <!-- CONTROLES GLOBALES PARA IN-APP SITES -->
+                        <div id="global-inapp-sites-controls" class="hidden space-y-4 font-sans font-sans font-sans">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-2">
+                                    <div class="p-1.5 bg-indigo-100 text-indigo-700 rounded-lg font-sans">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                                        </svg>
+                                    </div>
+                                    <h3 class="text-xs font-bold text-indigo-900 uppercase tracking-wider font-sans">Valores Predeterminados Globales (In-App / Sites)</h3>
+                                </div>
+                                <span class="text-[10px] bg-indigo-100 text-indigo-800 px-2 py-0.5 rounded font-semibold font-mono font-sans font-sans">Semicolons (;) Sync</span>
+                            </div>
+                            <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3">
+                                <!-- Publisher ID -->
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">publisher</label>
+                                    <input type="text" oninput="updateGlobalDefault('publisher', this.value)" value="232"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 font-semibold text-slate-800 font-mono" />
+                                </div>
+                                <!-- child_lt14 -->
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">child_lt14</label>
+                                    <select onchange="updateGlobalDefault('child_lt14', this.value)"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 font-mono">
+                                        <option value="0" selected>0 (Falso)</option>
+                                        <option value="1">1 (Verdadero)</option>
+                                    </select>
+                                </div>
+                                <!-- child_bt1418 -->
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans font-sans">child_bt1418</label>
+                                    <select onchange="updateGlobalDefault('child_bt1418', this.value)"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 font-mono">
+                                        <option value="0" selected>0 (Falso)</option>
+                                        <option value="1">1 (Verdadero)</option>
+                                    </select>
+                                </div>
+                                <!-- gambling -->
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">gambling</label>
+                                    <select onchange="updateGlobalDefault('gambling', this.value)"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 font-mono">
+                                        <option value="1" selected>1 (Verdadero)</option>
+                                        <option value="0">0 (Falso)</option>
+                                    </select>
+                                </div>
+                                <!-- alcohol -->
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans font-sans">alcohol</label>
+                                    <select onchange="updateGlobalDefault('alcohol', this.value)"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 font-mono">
+                                        <option value="1" selected>1 (Verdadero)</option>
+                                        <option value="0">0 (Falso)</option>
+                                    </select>
+                                </div>
+                                <!-- cmpRA -->
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans font-sans font-sans font-sans">cmpRA</label>
+                                    <select onchange="updateGlobalDefault('cmpRA', this.value)"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 font-mono">
+                                        <option value="0" selected>0 (Falso)</option>
+                                        <option value="1">1 (Verdadero)</option>
+                                    </select>
+                                </div>
+                                <!-- cmpIAB -->
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">cmpIAB</label>
+                                    <select onchange="updateGlobalDefault('cmpIAB', this.value)"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 font-mono">
+                                        <option value="0" selected>0 (Falso)</option>
+                                        <option value="1">1 (Verdadero)</option>
+                                    </select>
+                                </div>
+                                <!-- cmpID -->
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">cmpID</label>
+                                    <input type="text" oninput="updateGlobalDefault('cmpID', this.value)" value="0"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 font-mono text-slate-800" />
+                                </div>
+                                <!-- cmpName -->
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans font-sans font-sans">cmpName</label>
+                                    <input type="text" oninput="updateGlobalDefault('cmpName', this.value)" value="0"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 font-mono text-slate-800" />
+                                </div>
+                                <!-- ortb -->
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans font-sans font-sans">ortb</label>
+                                    <select onchange="updateGlobalDefault('ortb', this.value)"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 font-mono font-sans">
+                                        <option value="1" selected>1 (Verdadero)</option>
+                                        <option value="0">0 (Falso)</option>
+                                    </select>
+                                </div>
+                                <!-- prebid -->
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">prebid</label>
+                                    <select onchange="updateGlobalDefault('prebid', this.value)"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 font-mono">
+                                        <option value="1" selected>1 (Verdadero)</option>
+                                        <option value="0">0 (Falso)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
 
                     <!-- Editor Rápido de Columnas (Estructura) -->
-                    <div class="p-6 border-b border-slate-100 bg-white font-sans">
-                        <div class="flex items-center justify-between mb-3">
+                    <div class="p-6 border-b border-slate-100 bg-white font-sans font-sans font-sans font-sans">
+                        <div class="flex items-center justify-between mb-3 font-sans">
                             <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider font-sans font-sans">Cabeceras del Template</h3>
                             <span class="text-xs text-amber-600 font-semibold font-sans font-sans">Separador: Punto y coma (;)</span>
                         </div>
@@ -471,7 +593,7 @@
                                 class="flex-1 px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white transition-all font-mono" 
                                 placeholder="Selecciona un entorno y tipo..." disabled />
                             <button onclick="resetToDefaultColumns()" id="reset-columns-btn" disabled
-                                class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-lg text-xs font-semibold transition-all focus:outline-none font-sans font-sans"
+                                class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-lg text-xs font-semibold transition-all focus:outline-none font-sans font-sans font-sans font-sans"
                                 title="Restaurar columnas por defecto">
                                 Restaurar
                             </button>
@@ -482,11 +604,11 @@
                     <div id="manual-grid-section" class="p-6 font-sans">
                         <div class="flex items-center justify-between mb-4">
                             <div>
-                                <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider font-sans font-sans" id="data-editor-title">Editor de Datos (Introduce tus registros)</h3>
-                                <p class="text-[11px] text-slate-400 font-sans" id="data-editor-description">Escribe directamente en cualquier celda para añadir tu información.</p>
+                                <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider font-sans font-sans font-sans font-sans font-sans" id="data-editor-title">Editor de Datos (Introduce tus registros)</h3>
+                                <p class="text-[11px] text-slate-400 font-sans font-sans font-sans font-sans" id="data-editor-description">Escribe directamente en cualquier celda para añadir tu información.</p>
                             </div>
                             <button onclick="addNewDataRow()" id="btn-add-row" disabled
-                                class="inline-flex items-center px-3 py-1.5 border border-brand-500 text-xs font-semibold rounded-lg text-brand-600 bg-white hover:bg-brand-50 transition-all focus:outline-none font-sans">
+                                class="inline-flex items-center px-3 py-1.5 border border-brand-500 text-xs font-semibold rounded-lg text-brand-600 bg-white hover:bg-brand-50 transition-all focus:outline-none font-sans font-sans font-sans">
                                 <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                                 </svg>
@@ -496,10 +618,10 @@
                         
                         <!-- Tabla Editora -->
                         <div class="overflow-x-auto border border-slate-200 rounded-xl bg-slate-50 max-h-[400px]">
-                            <table class="min-w-full divide-y divide-slate-200 text-left text-sm text-slate-600 table-auto font-sans">
+                            <table class="min-w-full divide-y divide-slate-200 text-left text-sm text-slate-600 table-auto font-sans font-sans font-sans font-sans font-sans">
                                 <thead class="bg-slate-100 text-slate-700 uppercase text-[10px] tracking-wider sticky top-0 z-10 shadow-sm" id="preview-thead">
                                     <tr>
-                                        <th class="px-4 py-3 font-semibold text-center text-slate-400 font-sans" colspan="100%">
+                                        <th class="px-4 py-3 font-semibold text-center text-slate-400 font-sans font-sans font-sans font-sans" colspan="100%">
                                             No hay ninguna selección activa
                                         </th>
                                     </tr>
@@ -519,31 +641,31 @@
                     <div id="placement-matrix-preview-section" class="hidden p-6 border-t border-slate-100 bg-slate-50/50">
                         <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-2">
                             <div>
-                                <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider font-sans font-sans">Vista Previa del Output (Placements Combinados)</h3>
-                                <p class="text-[10px] text-slate-400 font-sans">Esta es la matriz final multiplicada que se guardará en tu archivo CSV.</p>
+                                <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider font-sans font-sans font-sans font-sans font-sans">Vista Previa del Output (Placements Combinados)</h3>
+                                <p class="text-[10px] text-slate-400 font-sans font-sans font-sans">Esta es la matriz final multiplicada que se guardará en tu archivo CSV.</p>
                             </div>
                             <div class="flex items-center gap-2">
                                 <span class="text-[10px] bg-blue-100 text-blue-800 px-2 py-1 rounded font-semibold font-mono" id="placement-preview-counter">0 Placements</span>
-                                <!-- NUEVO: BOTÓN DE RESETEO DE DOMINIOS -->
+                                <!-- BOTÓN DE RESETEO DE DOMINIOS -->
                                 <button type="button" onclick="clearBaseDomains()" 
-                                    class="inline-flex items-center px-2 py-1 bg-red-50 hover:bg-red-100 text-red-600 rounded text-[10px] font-bold transition-all border border-red-200 focus:outline-none font-sans font-sans">
+                                    class="inline-flex items-center px-2 py-1 bg-red-50 hover:bg-red-100 text-red-600 rounded text-[10px] font-bold transition-all border border-red-200 focus:outline-none font-sans font-sans font-sans font-sans font-sans">
                                     Limpiar Dominios
                                 </button>
                             </div>
                         </div>
                         <div class="overflow-x-auto border border-slate-200 rounded-xl bg-white max-h-[300px]">
-                            <table class="min-w-full divide-y divide-slate-200 text-left text-xs text-slate-600 table-auto">
+                            <table class="min-w-full divide-y divide-slate-200 text-left text-xs text-slate-600 table-auto font-sans font-sans font-sans font-sans">
                                 <thead class="bg-slate-100/80 text-slate-700 font-sans">
                                     <tr>
-                                        <th class="px-3 py-2 border-b border-slate-200 font-sans">publisher</th>
-                                        <th class="px-3 py-2 border-b border-slate-200 font-sans">domain</th>
-                                        <th class="px-3 py-2 border-b border-slate-200 font-sans">name</th>
-                                        <th class="px-3 py-2 border-b border-slate-200 font-sans">type</th>
-                                        <th class="px-3 py-2 border-b border-slate-200 font-sans">formats</th>
-                                        <th class="px-3 py-2 border-b border-slate-200 font-sans">devices</th>
-                                        <th class="px-3 py-2 border-b border-slate-200 font-sans">native</th>
-                                        <th class="px-3 py-2 border-b border-slate-200 font-sans">prebid</th>
-                                        <th class="px-3 py-2 border-b border-slate-200 font-sans">environment</th>
+                                        <th class="px-3 py-2 border-b border-slate-200 font-sans font-sans font-sans">publisher</th>
+                                        <th class="px-3 py-2 border-b border-slate-200 font-sans font-sans font-sans font-sans">domain</th>
+                                        <th class="px-3 py-2 border-b border-slate-200 font-sans font-sans font-sans font-sans">name</th>
+                                        <th class="px-3 py-2 border-b border-slate-200 font-sans font-sans font-sans">type</th>
+                                        <th class="px-3 py-2 border-b border-slate-200 font-sans font-sans font-sans font-sans font-sans">formats</th>
+                                        <th class="px-3 py-2 border-b border-slate-200 font-sans font-sans font-sans">devices</th>
+                                        <th class="px-3 py-2 border-b border-slate-200 font-sans font-sans font-sans">native</th>
+                                        <th class="px-3 py-2 border-b border-slate-200 font-sans font-sans font-sans">prebid</th>
+                                        <th class="px-3 py-2 border-b border-slate-200 font-sans font-sans font-sans">environment</th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-slate-200 font-mono" id="placement-matrix-preview-tbody">
@@ -554,11 +676,11 @@
                     </div>
 
                     <!-- Mensajes flotantes / Feedback -->
-                    <div id="toast-message" class="hidden mx-6 mb-6 p-4 bg-green-50 text-green-800 rounded-xl border border-green-200 flex items-center space-x-2">
+                    <div id="toast-message" class="hidden mx-6 mb-6 p-4 bg-green-50 text-green-800 rounded-xl border border-green-200 flex items-center space-x-2 font-sans">
                         <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        <span class="text-sm font-medium font-sans" id="toast-text">¡Archivo generado correctamente!</span>
+                        <span class="text-sm font-medium font-sans font-sans font-sans" id="toast-text">¡Archivo generado correctamente!</span>
                     </div>
 
                 </div>
@@ -571,7 +693,7 @@
 
     <!-- Footer -->
     <footer class="bg-white border-t border-slate-200 mt-auto py-6">
-        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-400 font-sans font-sans">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-400 font-sans font-sans font-sans">
             CSV Template Hub &copy; 2026. Optimización avanzada de aprovisionamiento.
         </div>
     </footer>
@@ -613,6 +735,21 @@
             environment: '1'
         };
 
+        // Valores de configuración global para In-App / Sites (según tu CSV de referencia)
+        let inAppSitesGlobalDefaults = {
+            publisher: '232',
+            child_lt14: '0',
+            child_bt1418: '0',
+            gambling: '1',
+            alcohol: '1',
+            cmpRA: '0',
+            cmpIAB: '0',
+            cmpID: '0',
+            cmpName: '0',
+            ortb: '1',
+            prebid: '1'
+        };
+
         // Estructuras de datos preconfiguradas con cabeceras reales e IDs numéricos mapeados basados en el PDF oficial
         const templatesData = {
             'web': {
@@ -629,9 +766,10 @@
             },
             'in-app': {
                 'sites': {
-                    title: 'In-App - Apps & Bundles',
-                    columns: ['app_id', 'app_name', 'bundle_id', 'store_url', 'os_platform', 'status'],
-                    sample: ['app_102', 'Sudoku Solver', 'com.games.sudoku', 'https://play.google.com/store', 'Android', 'ACTIVE']
+                    title: 'In-App - Sites & Bundles',
+                    // Cabecera exacta solicitada
+                    columns: ['publisher', 'platform', 'bundle', 'child_lt14', 'child_bt1418', 'gambling', 'alcohol', 'cmpRA', 'cmpIAB', 'cmpID', 'cmpName', 'ortb', 'prebid'],
+                    sample: ['232', 'android', 'com.dailymotion.dailymotion', '0', '0', '1', '1', '0', '0', '0', '0', '1', '1']
                 },
                 'placements': {
                     title: 'In-App - Placements',
@@ -668,13 +806,18 @@
             return host;
         }
 
+        // Función para auto-detectar de manera determinista android/ios basado en el bundle ID
+        function detectPlatform(bundle) {
+            if (!bundle) return 'android';
+            const clean = bundle.trim();
+            // Si el bundle id contiene únicamente dígitos (como el ID del App Store de Apple), se asocia a ios
+            if (/^\d+$/.test(clean)) {
+                return 'ios';
+            }
+            return 'android';
+        }
+
         // Función inteligente avanzada para detectar automáticamente el código de idioma y retornar su ID numérico real (PDF)
-        // Implementa un motor lingüístico en cascada:
-        // 1. Path de idioma en URL
-        // 2. Subdominios de host
-        // 3. TLD territorial (ej. .cat -> 18, .de -> 23)
-        // 4. Heurísticas por n-grams específicos de idioma (como ñ, ç, l·l, tx, ij, sch, dade, etc.)
-        // 5. Análisis de peso por colisión de partículas funcionales masheadas (como dels,els,del,pelo,pour,dans,etc.)
         function detectLanguage(url) {
             if (!url) return 1; // Default a Inglés (1)
             let clean = url.toLowerCase().trim();
@@ -699,7 +842,7 @@
             const LANG_RU = 94;  // Russian
             const LANG_ZH = 134; // Chinese
 
-            // REGLA 1: Revisar directorios de idioma tradicionales en la ruta (ej: cnn.com/es/noticia o catalunya.com/ca-es/index)
+            // REGLA 1: Revisar directorios de idioma tradicionales en la ruta
             if (segments.length > 1) {
                 const firstPathSegment = segments[1].split('-')[0].split('_')[0];
                 const pathMap = {
@@ -713,7 +856,7 @@
                 }
             }
 
-            // REGLA 2: Revisar subdominios del host (ej: es.wikipedia.org o fr.sports.yahoo.com)
+            // REGLA 2: Revisar subdominios del host
             const hostParts = host.split('.');
             if (hostParts.length > 2) {
                 const potentialSubdomainLang = hostParts[0];
@@ -753,80 +896,72 @@
 
             // A) Caracteres deterministas únicos
             if (domainName.includes('ñ')) {
-                // El Gallego usa terminaciones como iño/iña, a diferencia del Español
                 if (domainName.includes('iño') || domainName.includes('iña') || domainName.includes('galego')) return LANG_GL;
                 return LANG_ES; 
             }
             if (domainName.includes('ç')) {
-                // El portugués usa dígrafos como ção / ções
                 if (domainName.includes('aço') || domainName.includes('ção') || domainName.includes('ções')) return LANG_PT;
-                if (domainName.includes('ça') || domainName.includes('ço')) return LANG_CA; // El catalán usa frequentemente ça/ço
+                if (domainName.includes('ça') || domainName.includes('ço')) return LANG_CA; 
                 return LANG_FR;
             }
             if (domainName.includes('l·l') || domainName.includes('ll·l')) {
                 return LANG_CA;
             }
 
-            // Vasco/Basque - Combinatoria silábica específica de dígrafos
+            // Vasco/Basque
             if (domainName.includes('txa') || domainName.includes('txe') || domainName.includes('txi') || domainName.includes('txo') || domainName.includes('txu') || domainName.includes('rra') || domainName.includes('rre') || domainName.includes('rri')) {
                 if (domainName.includes('eusk') || domainName.includes('bask') || domainName.includes('gune') || domainName.includes('elkar')) return LANG_EU;
             }
 
-            // B) Dígrafos y trigrafos deterministas por familia lingüística (Aleman, Holandés, Portugués, etc.)
-            // Dígrafos típicos holandeses (ij, lijk, heid, groep)
+            // Dígrafos holandeses
             if (domainName.includes('ij') || domainName.includes('lijk') || domainName.includes('heid') || domainName.includes('groep')) {
                 if (domainName.includes('van') || domainName.includes('een') || domainName.includes('het') || domainName.includes('en')) return LANG_NL;
             }
 
-            // Dígrafos germánicos exclusivos (sch, ung, keit, heit)
+            // Dígrafos germánicos exclusivos
             if (domainName.includes('sch') || domainName.includes('ung') || domainName.includes('keit') || domainName.includes('heit')) {
                 return LANG_DE;
             }
 
-            // Dígrafos portugueses (lh, nh, dade, mento)
+            // Dígrafos portugueses
             if (domainName.includes('lh') || domainName.includes('nh') || domainName.includes('dade') || domainName.includes('mento')) {
                 if (domainName.includes('dos') || domainName.includes('das') || domainName.includes('com') || domainName.includes('pelo') || domainName.includes('pela') || domainName.includes('braz') || domainName.includes('portu')) {
                     return LANG_PT;
                 }
             }
 
-            // Patrones del Francés (eau, eux, ette, chez)
+            // Patrones del Francés
             if (domainName.includes('eau') || domainName.includes('eux') || domainName.includes('ette') || domainName.includes('chez')) {
                 return LANG_FR;
             }
 
-            // Raíces del Vasco / Basque
+            // Raíces del Vasco
             if (domainName.includes('eusk') || domainName.includes('gune') || domainName.includes('elkar') || domainName.includes('toki') || domainName.includes('etxe') || domainName.includes('herri')) {
                 return LANG_EU;
             }
 
-            // Triggers de preposiciones/artículos del Catalán (dels, els, can, sant, tges, tjos)
+            // Triggers del Catalán
             if (domainName.includes('dels') || domainName.includes('els') || domainName.includes('tges') || domainName.includes('tjos') || domainName.includes('ca_n') || domainName.includes('can_')) {
                 return LANG_CA;
             }
 
-            // C) Sistema de puntuación por colisión de partículas de alta frecuencia masehadas
-            // Español: del, los, las, con, por, para, una, diario, radio, noticia, prensa, mundo
+            // Puntuación por colisión de partículas
             const spanishGrammar = ['del', 'los', 'las', 'con', 'por', 'para', 'una', 'diario', 'radio', 'noticia', 'prensa', 'mundo'];
             let esScore = 0;
             spanishGrammar.forEach(p => { if (domainName.includes(p)) esScore++; });
 
-            // Inglés: the, of, and, for, with, news, daily, press, today, blog
             const englishGrammar = ['the', 'of', 'and', 'for', 'with', 'news', 'daily', 'press', 'today', 'blog'];
             let enScore = 0;
             englishGrammar.forEach(p => { if (domainName.includes(p)) enScore++; });
 
-            // Francés: les, pour, des, dans, actu, presse, journal, monde
             const frenchGrammar = ['les', 'pour', 'des', 'dans', 'actu', 'presse', 'journal', 'monde'];
             let frScore = 0;
             frenchGrammar.forEach(p => { if (domainName.includes(p)) frScore++; });
 
-            // Italiano: del, giornale, stampa, notizie, italy, roma, milano
             const italianGrammar = ['del', 'giornale', 'stampa', 'notizie', 'italy', 'roma', 'milano', 'repubblica'];
             let itScore = 0;
             italianGrammar.forEach(p => { if (domainName.includes(p)) itScore++; });
 
-            // Selección determinista en base al clasificador de frecuencias colisionadas
             const maxScore = Math.max(esScore, enScore, frScore, itScore);
             if (maxScore > 0) {
                 if (maxScore === esScore) return LANG_ES;
@@ -835,14 +970,13 @@
                 if (maxScore === enScore) return LANG_EN;
             }
 
-            return LANG_EN; // Por defecto inglés (1) si no se halla ninguna firma determinista
+            return LANG_EN; // Default a Inglés
         }
 
-        // Modifica un valor del panel por defecto global (SITES)
+        // Modifica un valor del panel por defecto global (SITES o IN-APP SITES)
         function updateGlobalDefault(field, value) {
-            webSitesGlobalDefaults[field] = value;
-            
             if (selectedEnvironment === 'web' && selectedType === 'sites') {
+                webSitesGlobalDefaults[field] = value;
                 const colIndexMap = {
                     'environment': 2, 'child_lt14': 3, 'child_bt1418': 4, 'gambling': 5, 'alcohol': 6, 'prebid': 7, 'ortb': 8
                 };
@@ -852,8 +986,20 @@
                         row[colIdx] = value;
                     });
                 }
-                renderTable();
+            } else if (selectedEnvironment === 'in-app' && selectedType === 'sites') {
+                inAppSitesGlobalDefaults[field] = value;
+                const colIndexMap = {
+                    'publisher': 0, 'child_lt14': 3, 'child_bt1418': 4, 'gambling': 5, 'alcohol': 6,
+                    'cmpRA': 7, 'cmpIAB': 8, 'cmpID': 9, 'cmpName': 10, 'ortb': 11, 'prebid': 12
+                };
+                const colIdx = colIndexMap[field];
+                if (colIdx !== undefined) {
+                    gridRows.forEach(row => {
+                        row[colIdx] = value;
+                    });
+                }
             }
+            renderTable();
         }
 
         // Modifica un valor del panel por defecto global (PLACEMENTS)
@@ -884,7 +1030,6 @@
 
         /* --- LÓGICA MULTIPLICADORA / DUPLICADORA DE PLACEMENTS --- */
 
-        // Añadir una nueva combinación de Type + Formats
         function addPlacementConfig() {
             const nextId = placementConfigs.length > 0 ? Math.max(...placementConfigs.map(c => c.id)) + 1 : 1;
             const defaultClone = placementConfigs.length > 0 
@@ -902,7 +1047,6 @@
             renderTable();
         }
 
-        // Eliminar una combinación específica
         function removePlacementConfig(index) {
             if (placementConfigs.length > 1) {
                 placementConfigs.splice(index, 1);
@@ -912,7 +1056,6 @@
             }
         }
 
-        // Cambiar el tipo de un Placement específico
         function updatePlacementConfigType(index, typeValue) {
             placementConfigs[index].type = typeValue;
 
@@ -940,7 +1083,6 @@
             renderTable();
         }
 
-        // Cambiar los formatos de un Placement específico (Soporte 17 o 18 en Video)
         function updatePlacementConfigFormats(index, formatValue) {
             placementConfigs[index].formats = formatValue;
             
@@ -952,14 +1094,12 @@
             renderTable();
         }
 
-        // Permite modificar manualmente el sufijo/nombre de la combinación
         function updatePlacementConfigName(index, nameValue) {
             placementConfigs[index].name = nameValue.toLowerCase().trim().replace(/[^a-z0-9_]/g, '_');
             generatePlacementMatrix();
             renderTable();
         }
 
-        // Renderizar la interfaz visual de las combinaciones variables
         function renderPlacementConfigUI() {
             const container = document.getElementById('placement-configs-container');
             if (!container) return;
@@ -1012,7 +1152,7 @@
                     <div class="text-[10px] font-bold text-slate-400 select-none px-1">#${index+1}</div>
                     <div class="flex-1 grid grid-cols-1 sm:grid-cols-3 gap-2">
                         <div>
-                            <label class="block text-[8px] uppercase text-slate-400 font-bold mb-0.5 font-sans font-sans">Tipo (Type)</label>
+                            <label class="block text-[8px] uppercase text-slate-400 font-bold mb-0.5 font-sans">Tipo (Type)</label>
                             <select onchange="updatePlacementConfigType(${index}, this.value)" 
                                 class="w-full px-2 py-1 bg-white border border-slate-200 rounded-lg text-xs font-semibold focus:outline-none focus:ring-1 focus:ring-blue-500 text-slate-800">
                                 <option value="3" ${cfg.type === '3' ? 'selected' : ''}>3 (Display/Banner)</option>
@@ -1022,7 +1162,7 @@
                             </select>
                         </div>
                         <div>
-                            <label class="block text-[8px] uppercase text-slate-400 font-bold mb-0.5 font-sans font-sans">Formatos</label>
+                            <label class="block text-[8px] uppercase text-slate-400 font-bold mb-0.5 font-sans">Formatos</label>
                             ${formatsControlHTML}
                         </div>
                         <div>
@@ -1049,7 +1189,6 @@
             }
         }
 
-        // Motor del Producto Cartesiano Avanzado
         function generatePlacementMatrix() {
             if (selectedEnvironment !== 'web' || selectedType !== 'placements') return;
 
@@ -1083,7 +1222,6 @@
             renderMatrixPreviewTable();
         }
 
-        // Renderiza la tabla de Placements Combinados resultante
         function renderMatrixPreviewTable() {
             const container = document.getElementById('placement-matrix-preview-section');
             const tbody = document.getElementById('placement-matrix-preview-tbody');
@@ -1182,21 +1320,29 @@
                 const gPanel = document.getElementById('global-defaults-panel');
                 const gSites = document.getElementById('global-sites-controls');
                 const gPlacements = document.getElementById('global-placements-controls');
+                const gInAppSites = document.getElementById('global-inapp-sites-controls'); // NUEVO
 
                 const legendCommon = document.getElementById('legend-common');
                 const legendSites = document.getElementById('legend-sites');
                 const legendPlacements = document.getElementById('legend-placements');
+                const legendInAppSites = document.getElementById('legend-inapp-sites'); // NUEVO
 
                 const manualGrid = document.getElementById('manual-grid-section');
                 const matrixPreview = document.getElementById('placement-matrix-preview-section');
 
                 legendCommon.classList.remove('hidden');
+                
+                // Resetear bloques visuales de control global
+                gSites.classList.add('hidden');
+                gPlacements.classList.add('hidden');
+                gInAppSites.classList.add('hidden');
+
+                legendSites.classList.add('hidden');
+                legendPlacements.classList.add('hidden');
+                legendInAppSites.classList.add('hidden');
 
                 if (selectedEnvironment === 'web' && selectedType === 'sites') {
                     legendSites.classList.remove('hidden');
-                    legendPlacements.classList.add('hidden');
-                    
-                    // Mostrar entrada manual para Web Sites
                     manualGrid.classList.remove('hidden');
                     matrixPreview.classList.add('hidden');
 
@@ -1214,38 +1360,56 @@
                     
                     gPanel.classList.remove('hidden');
                     gSites.classList.remove('hidden');
-                    gPlacements.classList.add('hidden');
                     
                     document.getElementById('data-editor-title').innerText = "Editor de Datos (Sites de Entrada)";
                     document.getElementById('data-editor-description').innerText = "Solo puedes editar la columna 'url'. El ID de idioma se asignará automáticamente (buscando en subdominio, ruta o TLD) y el resto de las columnas heredará los valores globales.";
                 } 
                 else if (selectedEnvironment === 'web' && selectedType === 'placements') {
-                    legendSites.classList.add('hidden');
                     legendPlacements.classList.remove('hidden');
-                    
-                    // ELIMINADO EL PASO 3 DE INPUT MANUAL PARA PLACEMENTS
                     manualGrid.classList.add('hidden'); 
                     matrixPreview.classList.remove('hidden');
 
                     gPanel.classList.remove('hidden');
-                    gSites.classList.add('hidden');
                     gPlacements.classList.remove('hidden');
                     
                     renderPlacementConfigUI();
                     generatePlacementMatrix();
                 }
-                else {
-                    // Caso general (In-App, CTV)
-                    legendSites.classList.add('hidden');
-                    legendPlacements.classList.add('hidden');
+                else if (selectedEnvironment === 'in-app' && selectedType === 'sites') {
+                    // NUEVO FLUJO: In-App Sites
+                    legendInAppSites.classList.remove('hidden');
+                    manualGrid.classList.remove('hidden');
+                    matrixPreview.classList.add('hidden');
 
+                    gridRows = [[
+                        inAppSitesGlobalDefaults.publisher,
+                        detectPlatform(template.sample[2]), // android
+                        template.sample[2], // com.dailymotion.dailymotion
+                        inAppSitesGlobalDefaults.child_lt14,
+                        inAppSitesGlobalDefaults.child_bt1418,
+                        inAppSitesGlobalDefaults.gambling,
+                        inAppSitesGlobalDefaults.alcohol,
+                        inAppSitesGlobalDefaults.cmpRA,
+                        inAppSitesGlobalDefaults.cmpIAB,
+                        inAppSitesGlobalDefaults.cmpID,
+                        inAppSitesGlobalDefaults.cmpName,
+                        inAppSitesGlobalDefaults.ortb,
+                        inAppSitesGlobalDefaults.prebid
+                    ]];
+                    
+                    gPanel.classList.remove('hidden');
+                    gInAppSites.classList.remove('hidden');
+                    
+                    document.getElementById('data-editor-title').innerText = "Editor de Datos (In-App Sites de Entrada)";
+                    document.getElementById('data-editor-description').innerText = "Solo puedes editar la columna 'bundle'. La plataforma se detectará automáticamente (ios si es numérico, android si tiene letras/puntos) y el resto heredará los valores globales.";
+                }
+                else {
+                    // Caso general (In-App placements, CTV)
                     manualGrid.classList.remove('hidden');
                     matrixPreview.classList.add('hidden');
 
                     gridRows = [[...template.sample]];
                     gPanel.classList.add('hidden');
-                    gSites.classList.add('hidden');
-                    gPlacements.classList.add('hidden');
                     
                     document.getElementById('data-editor-title').innerText = "Editor de Datos (Introduce tus registros)";
                     document.getElementById('data-editor-description').innerText = "Escribe directamente en cualquier celda para añadir tu información.";
@@ -1262,11 +1426,15 @@
                 
                 document.getElementById('import-pastearea').disabled = false;
                 document.getElementById('import-pastearea').value = "";
-                document.getElementById('import-pastearea').placeholder = (selectedEnvironment === 'web') 
-                    ? "Pega aquí una lista de URLs de Excel..."
-                    : "Pega aquí tus datos de Excel...";
+                document.getElementById('import-pastearea').placeholder = 
+                    (selectedEnvironment === 'web') 
+                        ? "Pega aquí una lista de URLs de Excel..."
+                        : (selectedEnvironment === 'in-app' && selectedType === 'sites')
+                            ? "Pega aquí una lista de Bundle IDs de Excel..."
+                            : "Pega aquí tus datos de Excel...";
                 document.getElementById('btn-import-execute').disabled = false;
 
+                // ACTIVAR BOTÓN DE DESCARGA (CORRECCIÓN DE BUG CLAVE)
                 const dwnBtn = document.getElementById('download-btn');
                 dwnBtn.disabled = false;
                 dwnBtn.classList.remove('bg-slate-400', 'cursor-not-allowed');
@@ -1290,6 +1458,7 @@
             }
 
             const isWebSites = (selectedEnvironment === 'web' && selectedType === 'sites');
+            const isInAppSites = (selectedEnvironment === 'in-app' && selectedType === 'sites');
 
             // 1. Renderizar Cabeceras dependientes del contexto
             const trHead = document.createElement('tr');
@@ -1337,7 +1506,18 @@
                             input.className = 'w-full px-2 py-1 text-sm bg-slate-100/70 border border-slate-100 text-slate-500 rounded cursor-not-allowed select-none font-mono text-center';
                             input.disabled = true;
                         }
-                    } else {
+                    } 
+                    else if (isInAppSites) {
+                        // En In-App Sites, solo la columna 'bundle' (índice 2) es editable de forma directa
+                        if (colIndex === 2) {
+                            input.className = 'w-full px-2 py-1 text-sm bg-white border border-slate-200 rounded focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:outline-none transition-all font-medium text-slate-900';
+                            input.disabled = false;
+                        } else {
+                            input.className = 'w-full px-2 py-1 text-sm bg-slate-100/70 border border-slate-100 text-slate-500 rounded cursor-not-allowed select-none font-mono text-center';
+                            input.disabled = true;
+                        }
+                    }
+                    else {
                         input.className = 'w-full px-2 py-1 text-sm bg-transparent border border-transparent rounded hover:border-slate-200 focus:bg-white focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all';
                         input.disabled = false;
                     }
@@ -1346,12 +1526,22 @@
                     
                     input.oninput = (e) => {
                         gridRows[rowIndex][colIndex] = e.target.value;
+                        
                         if (isWebSites && colIndex === 0) {
                             const newLangId = detectLanguage(e.target.value);
                             gridRows[rowIndex][1] = newLangId;
                             const rowInputs = tr.querySelectorAll('input');
                             if (rowInputs && rowInputs[1]) {
                                 rowInputs[1].value = newLangId;
+                            }
+                        }
+                        else if (isInAppSites && colIndex === 2) {
+                            // Al escribir bundle, detecta platform (colIndex 1) automáticamente
+                            const detectedPlat = detectPlatform(e.target.value);
+                            gridRows[rowIndex][1] = detectedPlat;
+                            const rowInputs = tr.querySelectorAll('input');
+                            if (rowInputs && rowInputs[1]) {
+                                rowInputs[1].value = detectedPlat;
                             }
                         }
                     };
@@ -1413,6 +1603,25 @@
                 ];
                 gridRows.push(newRow);
                 renderTable();
+            } else if (selectedEnvironment === 'in-app' && selectedType === 'sites') {
+                // NUEVA FILA: In-App Sites
+                const newRow = [
+                    inAppSitesGlobalDefaults.publisher,
+                    'android', // platform default
+                    '', // bundle vacío
+                    inAppSitesGlobalDefaults.child_lt14,
+                    inAppSitesGlobalDefaults.child_bt1418,
+                    inAppSitesGlobalDefaults.gambling,
+                    inAppSitesGlobalDefaults.alcohol,
+                    inAppSitesGlobalDefaults.cmpRA,
+                    inAppSitesGlobalDefaults.cmpIAB,
+                    inAppSitesGlobalDefaults.cmpID,
+                    inAppSitesGlobalDefaults.cmpName,
+                    inAppSitesGlobalDefaults.ortb,
+                    inAppSitesGlobalDefaults.prebid
+                ];
+                gridRows.push(newRow);
+                renderTable();
             } else {
                 const newRow = Array(currentColumns.length).fill('');
                 gridRows.push(newRow);
@@ -1440,6 +1649,7 @@
             
             const isWebSites = (selectedEnvironment === 'web' && selectedType === 'sites');
             const isWebPlacements = (selectedEnvironment === 'web' && selectedType === 'placements');
+            const isInAppSites = (selectedEnvironment === 'in-app' && selectedType === 'sites');
 
             rawLines.forEach(line => {
                 if (line.trim() === '') return;
@@ -1484,6 +1694,27 @@
 
                     tempNewRows.push({ domain: cleanedDomain, baseName: placementName });
                 }
+                else if (isInAppSites) {
+                    // Importación In-App Sites
+                    const pastedBundle = cells[0].trim();
+                    const detectedPlatform = detectPlatform(pastedBundle);
+                    const parsedRow = [
+                        inAppSitesGlobalDefaults.publisher,
+                        detectedPlatform,
+                        pastedBundle,
+                        inAppSitesGlobalDefaults.child_lt14,
+                        inAppSitesGlobalDefaults.child_bt1418,
+                        inAppSitesGlobalDefaults.gambling,
+                        inAppSitesGlobalDefaults.alcohol,
+                        inAppSitesGlobalDefaults.cmpRA,
+                        inAppSitesGlobalDefaults.cmpIAB,
+                        inAppSitesGlobalDefaults.cmpID,
+                        inAppSitesGlobalDefaults.cmpName,
+                        inAppSitesGlobalDefaults.ortb,
+                        inAppSitesGlobalDefaults.prebid
+                    ];
+                    tempNewRows.push(parsedRow);
+                }
                 else {
                     const parsedRow = Array(currentColumns.length).fill('');
                     currentColumns.forEach((_, colIdx) => {
@@ -1498,22 +1729,24 @@
             });
 
             if (tempNewRows.length > 0) {
-                if (isWebPlacements) {
-                    // Si solo estaba el ejemplo inicial, sobreescribe
-                    if (baseDomains.length === 1 && (baseDomains[0].domain === 'eldiario.es' || baseDomains[0].domain === '')) {
-                        baseDomains = [...tempNewRows];
-                    } else {
-                        baseDomains = [...baseDomains, ...tempNewRows];
-                    }
-                    generatePlacementMatrix();
-                } else {
-                    if (gridRows.length === 1 && (gridRows[0][0] === 'eldiario.es' || gridRows[0][0] === '')) {
-                        gridRows = [...tempNewRows];
-                    } else {
-                        gridRows = [...gridRows, ...tempNewRows];
+                // Eliminar registro de prueba por defecto de forma inteligente al importar datos reales
+                let isDefaultSampleActive = false;
+                if (gridRows.length === 1) {
+                    if (isWebSites && (gridRows[0][0] === 'eldiario.es' || gridRows[0][0] === '')) {
+                        isDefaultSampleActive = true;
+                    } else if (isWebPlacements && (gridRows[0][1] === 'eldiario.es' || gridRows[0][1] === '')) {
+                        isDefaultSampleActive = true;
+                    } else if (isInAppSites && (gridRows[0][2] === 'com.dailymotion.dailymotion' || gridRows[0][2] === '')) {
+                        isDefaultSampleActive = true;
                     }
                 }
-                
+
+                if (isDefaultSampleActive) {
+                    gridRows = [...tempNewRows];
+                } else {
+                    gridRows = [...gridRows, ...tempNewRows];
+                }
+
                 renderTable();
                 document.getElementById('import-pastearea').value = "";
                 showToast(`¡Importadas ${importedCount} fila(s) limpias con éxito!`);
@@ -1569,6 +1802,23 @@
                     renderPlacementConfigUI();
                     generatePlacementMatrix();
                 }
+                else if (selectedEnvironment === 'in-app' && selectedType === 'sites') {
+                    gridRows = [[
+                        inAppSitesGlobalDefaults.publisher,
+                        detectPlatform(template.sample[2]),
+                        template.sample[2],
+                        inAppSitesGlobalDefaults.child_lt14,
+                        inAppSitesGlobalDefaults.child_bt1418,
+                        inAppSitesGlobalDefaults.gambling,
+                        inAppSitesGlobalDefaults.alcohol,
+                        inAppSitesGlobalDefaults.cmpRA,
+                        inAppSitesGlobalDefaults.cmpIAB,
+                        inAppSitesGlobalDefaults.cmpID,
+                        inAppSitesGlobalDefaults.cmpName,
+                        inAppSitesGlobalDefaults.ortb,
+                        inAppSitesGlobalDefaults.prebid
+                    ]];
+                }
                 else {
                     gridRows = [[...template.sample]];
                 }
@@ -1593,8 +1843,53 @@
 
             const headerRow = currentColumns.join(';');
             
+            const isWebSites = (selectedEnvironment === 'web' && selectedType === 'sites');
+            const isWebPlacements = (selectedEnvironment === 'web' && selectedType === 'placements');
+            const isInAppSites = (selectedEnvironment === 'in-app' && selectedType === 'sites');
+
             const dataRows = gridRows.map(row => {
-                return row.map(cellValue => {
+                let rowToSave = [...row];
+                
+                if (isWebSites) {
+                    const finalCleanUrl = cleanUrl(rowToSave[0]);
+                    rowToSave[0] = finalCleanUrl;
+                    rowToSave[1] = detectLanguage(finalCleanUrl);
+                    rowToSave[2] = webSitesGlobalDefaults.environment;
+                    rowToSave[3] = webSitesGlobalDefaults.child_lt14;
+                    rowToSave[4] = webSitesGlobalDefaults.child_bt1418;
+                    rowToSave[5] = webSitesGlobalDefaults.gambling;
+                    rowToSave[6] = webSitesGlobalDefaults.alcohol;
+                    rowToSave[7] = webSitesGlobalDefaults.prebid;
+                    rowToSave[8] = webSitesGlobalDefaults.ortb;
+                }
+                else if (isWebPlacements) {
+                    const finalCleanDomain = cleanUrl(rowToSave[1]);
+                    rowToSave[0] = webPlacementsGlobalDefaults.publisher;
+                    rowToSave[1] = finalCleanDomain;
+                    rowToSave[3] = webPlacementsGlobalDefaults.type;
+                    rowToSave[4] = webPlacementsGlobalDefaults.formats;
+                    rowToSave[5] = webPlacementsGlobalDefaults.devices;
+                    rowToSave[6] = webPlacementsGlobalDefaults.native;
+                    rowToSave[7] = webPlacementsGlobalDefaults.prebid;
+                    rowToSave[8] = webPlacementsGlobalDefaults.environment;
+                }
+                else if (isInAppSites) {
+                    // Sincronización estricta de In-App Sites
+                    rowToSave[0] = inAppSitesGlobalDefaults.publisher;
+                    rowToSave[1] = detectPlatform(rowToSave[2]);
+                    rowToSave[3] = inAppSitesGlobalDefaults.child_lt14;
+                    rowToSave[4] = inAppSitesGlobalDefaults.child_bt1418;
+                    rowToSave[5] = inAppSitesGlobalDefaults.gambling;
+                    rowToSave[6] = inAppSitesGlobalDefaults.alcohol;
+                    rowToSave[7] = inAppSitesGlobalDefaults.cmpRA;
+                    rowToSave[8] = inAppSitesGlobalDefaults.cmpIAB;
+                    rowToSave[9] = inAppSitesGlobalDefaults.cmpID;
+                    rowToSave[10] = inAppSitesGlobalDefaults.cmpName;
+                    rowToSave[11] = inAppSitesGlobalDefaults.ortb;
+                    rowToSave[12] = inAppSitesGlobalDefaults.prebid;
+                }
+
+                return rowToSave.map(cellValue => {
                     const val = cellValue !== undefined && cellValue !== null ? cellValue.toString() : '';
                     if (val.includes(';') || val.includes('"') || val.includes('\n')) {
                         return `"${val.replace(/"/g, '""')}"`;
