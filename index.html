@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generador de Plantillas de Configuración - CSV</title>
+    <title>CSV Template</title>
     <!-- Tailwind CSS para un diseño moderno y fluido -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -51,14 +51,9 @@
                     </svg>
                 </div>
                 <div>
-                    <h1 class="text-lg font-bold text-slate-900 tracking-tight font-sans">CSV Template & Data Hub</h1>
-                    <p class="text-xs text-slate-500 font-medium font-sans">Herramienta de aprovisionamiento ágil para AdOps</p>
+                    <h1 class="text-lg font-bold text-slate-900 tracking-tight">CSV Template</h1>
+                    <p class="text-xs text-slate-500 font-medium">Herramienta para generar los CSV necesarios para la creación de sites y placements.</p>
                 </div>
-            </div>
-            <div class="flex items-center space-x-2">
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 font-semibold font-sans">
-                    Código Reparado y Consolidado
-                </span>
             </div>
         </div>
     </header>
@@ -66,23 +61,6 @@
     <!-- Contenido Principal -->
     <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
-        <!-- Alerta informativa -->
-        <div class="mb-8 bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg shadow-sm">
-            <div class="flex">
-                <div class="flex-shrink-0">
-                    <svg class="h-5 w-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1.09m0-2v-2m0-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                </div>
-                <div class="ml-3">
-                    <h3 class="text-sm font-semibold text-blue-800 font-sans">Carga Masiva de Placements Añadida</h3>
-                    <p class="text-xs text-blue-700 mt-1 font-sans">
-                        Ahora encontrarás una caja de importación dentro de los controles globales de Placements. Pega un listado de nombres y la herramienta generará automáticamente todas esas combinaciones de golpe. El formato <strong>Outstream</strong> también se auto-nombrará.
-                    </p>
-                </div>
-            </div>
-        </div>
-
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
             
             <!-- Panel Izquierdo: Configuración de Filtros (4 Cols) -->
@@ -166,33 +144,114 @@
                     </div>
                 </div>
 
-                <!-- SECCIÓN IMPORTADOR EXCEL -->
+                <!-- CONTENIDO DINÁMICO (SOLO LEYENDAS EN LA IZQUIERDA) -->
+                <div id="left-panel-dynamic-content" class="hidden space-y-6">
+                    <!-- SECCIÓN: LEYENDA DINÁMICA DE CÓDIGOS -->
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 space-y-4 font-sans">
+                        <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5 font-sans">
+                            <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
+                            Leyenda de Identificadores
+                        </h3>
+
+                        <!-- LEYENDA SITES -->
+                        <div id="legend-sites" class="hidden space-y-3 text-[11px] text-slate-600 leading-relaxed font-sans">
+                            <div>
+                                <strong class="text-slate-800">Environment:</strong> <span class="font-mono">1</span> (Web) | <span class="font-mono">3</span> (AMP)<br>
+                                <strong class="text-slate-800">Booleanos:</strong> <span class="font-mono">1</span> (Habilitado) | <span class="font-mono">0</span> (Deshabilitado)
+                            </div>
+                            <div>
+                                <strong class="text-slate-800 block mb-1">Language IDs (Oficiales):</strong>
+                                <div class="grid grid-cols-2 gap-x-2 gap-y-1 font-mono">
+                                    <div><span class="font-bold text-slate-800">1</span>: Inglés (en)</div>
+                                    <div><span class="font-bold text-slate-800">18</span>: Catalán (ca)</div>
+                                    <div><span class="font-bold text-slate-800">23</span>: Alemán (de)</div>
+                                    <div><span class="font-bold text-slate-800">27</span>: Español (es)</div>
+                                    <div><span class="font-bold text-slate-800">29</span>: Vasco (eu)</div>
+                                    <div><span class="font-bold text-slate-800">34</span>: Francés (fr)</div>
+                                    <div><span class="font-bold text-slate-800">38</span>: Gallego (gl)</div>
+                                    <div><span class="font-bold text-slate-800">51</span>: Italiano (it)</div>
+                                    <div><span class="font-bold text-slate-800">53</span>: Japonés (ja)</div>
+                                    <div><span class="font-bold text-slate-800">61</span>: Coreano (ko)</div>
+                                    <div><span class="font-bold text-slate-800">82</span>: Holandés (nl)</div>
+                                    <div><span class="font-bold text-slate-800">89</span>: Portugués (pt)</div>
+                                    <div><span class="font-bold text-slate-800">94</span>: Ruso (ru)</div>
+                                    <div><span class="font-bold text-slate-800">134</span>: Chino (zh)</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- LEYENDA WEB PLACEMENTS -->
+                        <div id="legend-placements" class="hidden space-y-2 text-[11px] text-slate-600 leading-relaxed font-sans">
+                            <div><strong class="text-slate-800">Environment:</strong> <span class="font-mono">1</span> (Web) | <span class="font-mono">3</span> (AMP)</div>
+                            <div><strong class="text-slate-800">Type:</strong> 3 (Display), 1 (Skin), 2 (Video), 4 (Native)</div>
+                            <div><strong class="text-slate-800">Formats:</strong> Display (300x250...), Video (17, 18), Skin (10, 11, 22), Native (222)</div>
+                            <div><strong class="text-slate-800">Prebid / Native:</strong> 1 (Habilitado) | 0 (Tag Based / Falso)</div>
+                        </div>
+
+                        <!-- LEYENDA IN-APP SITES -->
+                        <div id="legend-inapp-sites" class="hidden space-y-2 text-[11px] text-slate-600 leading-relaxed font-sans">
+                            <div>
+                                <strong class="text-slate-800 font-sans">Platform Auto-Detect:</strong><br>
+                                - <strong>ios:</strong> Si el Bundle ID es solo numérico (ej: <span class="font-mono">336978041</span>).<br>
+                                - <strong>android:</strong> Si el Bundle ID contiene alfanuméricos/puntos (ej: <span class="font-mono">com.app</span>).
+                            </div>
+                            <div><strong class="text-slate-800">Booleanos:</strong> <span class="font-mono">1</span> (True/Habilitado) | <span class="font-mono">0</span> (False/Deshabilitado)</div>
+                        </div>
+
+                        <!-- LEYENDA IN-APP PLACEMENTS -->
+                        <div id="legend-inapp-placements" class="hidden space-y-2 text-[11px] text-slate-600 leading-relaxed font-sans">
+                            <div><strong class="text-slate-800">Type:</strong> 3 (Display), 2 (Video)</div>
+                            <div><strong class="text-slate-800">Formats:</strong> Display (320x50, 300x250...), Video (17, 18)</div>
+                            <div><strong class="text-slate-800">Prebid / Native:</strong> 1 (Habilitado) | 0 (Tag Based / Falso)</div>
+                        </div>
+
+                        <!-- LEYENDA CTV SITES -->
+                        <div id="legend-ctv-sites" class="hidden space-y-2 text-[11px] text-slate-600 leading-relaxed font-sans">
+                            <div><strong class="text-slate-800">Platform:</strong> Por defecto <code>ctv</code>, pero es editable.</div>
+                            <div><strong class="text-slate-800">Booleanos:</strong> <span class="font-mono">1</span> (True/Habilitado) | <span class="font-mono">0</span> (False/Deshabilitado)</div>
+                        </div>
+
+                        <!-- LEYENDA CTV PLACEMENTS -->
+                        <div id="legend-ctv-placements" class="hidden space-y-2 text-[11px] text-slate-600 leading-relaxed font-sans">
+                            <div><strong class="text-slate-800">Type:</strong> 3 (Display), 2 (Video)</div>
+                            <div><strong class="text-slate-800">Formats:</strong> Video CTV (152), Video (17, 18), Display (320x50...)</div>
+                            <div><strong class="text-slate-800">Prebid / Native:</strong> 1 (Habilitado) | 0 (Tag Based / Falso)</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Panel Derecho: Editor, Configuraciones Globales y Matrix (8 Cols) -->
+            <div id="right-panel-dynamic-content" class="lg:col-span-8 space-y-6 hidden">
+                
+                <!-- SECCIÓN IMPORTADOR (REUBICADO A LA DERECHA) -->
                 <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col">
                     <div class="flex items-center space-x-2 mb-2">
                         <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                         </svg>
-                        <h2 class="text-sm font-semibold text-slate-950 font-sans">Importador Masivo (Tabla)</h2>
+                        <h2 class="text-sm font-semibold text-slate-950 font-sans">Importador Masivo</h2>
                     </div>
-                    <p id="import-desc" class="text-[11px] text-slate-500 mb-3 font-sans leading-relaxed">
-                        Copia tus datos desde Excel y pégalos en la celda de la izquierda. Si copias 2 columnas a la vez, se dividirán automáticamente garantizando la misma cantidad de filas.
+                    <p id="import-desc" class="text-[11px] text-slate-500 mb-3 leading-relaxed font-sans">
+                        Copia tus datos desde Excel y pégalos en la celda. El sistema los procesará y adaptará automáticamente.
                     </p>
                     
-                    <!-- Contenedor del Editor Dual -->
+                    <!-- Contenedor del Editor -->
                     <div class="flex flex-col border border-slate-200 rounded-lg overflow-hidden shadow-inner flex-1 bg-slate-50">
                         <div class="flex bg-slate-100 text-[10px] font-bold text-slate-500 uppercase tracking-wider border-b border-slate-200">
-                            <div class="flex-1 p-2 truncate" id="import-col-1-header">URL / Bundle</div>
-                            <div class="flex-1 p-2 border-l border-slate-200 truncate" id="import-col-2-header">Name (Opcional)</div>
+                            <div class="flex-1 p-2 truncate font-sans" id="import-col-1-header">URL / Bundle</div>
+                            <div class="flex-1 p-2 border-l border-slate-200 truncate hidden font-sans" id="import-col-2-header">Name (Opcional)</div>
                         </div>
-                        <div class="flex h-36 bg-white relative">
+                        <div class="flex h-32 bg-white relative">
                             <!-- Columna 1 -->
                             <textarea id="import-col-1" wrap="off" onpaste="window.handleGridPaste(event)" disabled
                                 class="sync-scroll flex-1 p-2 text-xs resize-none outline-none font-mono leading-relaxed whitespace-pre overflow-auto focus:bg-blue-50/20 transition-colors placeholder:text-slate-300" 
-                                placeholder="Columna de entrada..."></textarea>
+                                placeholder="Pega los datos aquí..."></textarea>
                             
                             <!-- Columna 2 -->
                             <textarea id="import-col-2" wrap="off" disabled
-                                class="sync-scroll flex-1 p-2 text-xs resize-none outline-none font-mono border-l border-slate-200 leading-relaxed whitespace-pre overflow-auto focus:bg-blue-50/20 transition-colors placeholder:text-slate-300" 
+                                class="sync-scroll flex-1 p-2 text-xs resize-none outline-none font-mono border-l border-slate-200 leading-relaxed whitespace-pre overflow-auto focus:bg-blue-50/20 transition-colors placeholder:text-slate-300 hidden" 
                                 placeholder="Nombres..."></textarea>
                         </div>
                     </div>
@@ -203,170 +262,6 @@
                     </button>
                 </div>
 
-                <!-- SECCIÓN: LEYENDA DINÁMICA DE CÓDIGOS -->
-                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 space-y-4 font-sans">
-                    <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5 font-sans">
-                        <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
-                        Leyenda de Identificadores (IDs)
-                    </h3>
-                    
-                    <div id="legend-common" class="hidden text-[11px] text-slate-600 leading-relaxed border-b border-slate-100 pb-3 font-sans">
-                        <div>
-                            <span class="font-bold text-slate-900 block font-sans">Environments:</span>
-                            <span class="bg-slate-100 px-1 py-0.5 rounded text-slate-800">1</span> = Web | 
-                            <span class="bg-slate-100 px-1 py-0.5 rounded text-slate-800">3</span> = AMP
-                        </div>
-                    </div>
-
-                    <div id="legend-sites" class="hidden space-y-2 text-[11px] text-slate-600 leading-relaxed">
-                        <span class="font-bold text-slate-900 block uppercase tracking-wide text-[10px] text-amber-700 font-sans">Mapeo: Web / Sites</span>
-                        <div>
-                            <span class="font-semibold text-slate-800 block mb-1 font-sans">Language IDs asignados (Oficiales):</span>
-                            <div class="grid grid-cols-2 gap-x-2 gap-y-1 font-mono">
-                                <div><span class="font-bold text-slate-800">1</span>: Inglés (en)</div>
-                                <div><span class="font-bold text-slate-800">18</span>: Catalán (ca)</div>
-                                <div><span class="font-bold text-slate-800">23</span>: Alemán (de)</div>
-                                <div><span class="font-bold text-slate-800">27</span>: Español (es)</div>
-                                <div><span class="font-bold text-slate-800">29</span>: Vasco (eu)</div>
-                                <div><span class="font-bold text-slate-800">34</span>: Francés (fr)</div>
-                                <div><span class="font-bold text-slate-800">38</span>: Gallego (gl)</div>
-                                <div><span class="font-bold text-slate-800">51</span>: Italiano (it)</div>
-                                <div><span class="font-bold text-slate-800">53</span>: Japonés (ja)</div>
-                                <div><span class="font-bold text-slate-800">61</span>: Coreano (ko)</div>
-                                <div><span class="font-bold text-slate-800">82</span>: Holandés (nl)</div>
-                                <div><span class="font-bold text-slate-800">89</span>: Portugués (pt)</div>
-                                <div><span class="font-bold text-slate-800">94</span>: Ruso (ru)</div>
-                                <div><span class="font-bold text-slate-800">134</span>: Chino (zh)</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="legend-placements" class="hidden space-y-2 text-[11px] text-slate-600 leading-relaxed font-sans">
-                        <span class="font-bold text-slate-900 block uppercase tracking-wide text-[10px] text-blue-700 font-sans">Mapeo: Web / Placements</span>
-                        <div class="space-y-1">
-                            <div><strong class="text-slate-800 font-sans">Type (Tipos):</strong></div>
-                            <ul class="list-disc pl-4 space-y-0.5">
-                                <li><span class="font-semibold font-sans">3</span>: Display / Banner (default)</li>
-                                <li><span class="font-semibold font-sans">1</span>: Skin</li>
-                                <li><span class="font-semibold font-sans">2</span>: Video</li>
-                                <li><span class="font-semibold font-sans">4</span>: Native</li>
-                            </ul>
-                        </div>
-                        <div class="space-y-1 pt-1 font-sans">
-                            <div><strong class="text-slate-800 font-sans">Formats (Formatos mapeados):</strong></div>
-                            <ul class="list-disc pl-4 space-y-0.5">
-                                <li>Display: <span class="font-mono">300x250, 728x90, 320x50</span>...</li>
-                                <li>Video Instream: <span class="font-mono">17</span></li>
-                                <li>Video Outstream: <span class="font-mono">18</span></li>
-                                <li>Skin: <span class="font-mono">10, 11, 22</span></li>
-                                <li>Native: <span class="font-mono">222</span></li>
-                            </ul>
-                        </div>
-                        <div class="space-y-1 pt-1 font-sans">
-                            <div><strong class="text-slate-800 font-sans">Prebid:</strong></div>
-                            <ul class="list-disc pl-4 space-y-0.5">
-                                <li><span class="font-semibold font-sans">1</span>: Header bidding (default)</li>
-                                <li><span class="font-semibold font-sans">0</span>: Tag Based</li>
-                            </ul>
-                        </div>
-                        <div class="pt-1 font-sans">
-                            <strong class="text-slate-800 font-sans">Native:</strong> Siempre <span class="font-mono font-semibold">1</span>
-                        </div>
-                    </div>
-
-                    <div id="legend-inapp-sites" class="hidden space-y-2 text-[11px] text-slate-600 leading-relaxed font-sans">
-                        <span class="font-bold text-slate-900 block uppercase tracking-wide text-[10px] text-indigo-700 font-sans">Mapeo: In-App / Sites</span>
-                        <div class="space-y-1">
-                            <div><strong class="text-slate-800 font-sans">Platform Auto-Detect:</strong></div>
-                            <ul class="list-disc pl-4 space-y-0.5">
-                                <li><strong>ios:</strong> Si el Bundle ID ingresado es solo numérico (ej: <code>336978041</code>).</li>
-                                <li><strong>android:</strong> Si el Bundle ID contiene alfanuméricos/puntos (ej: <code>com.app</code>).</li>
-                            </ul>
-                        </div>
-                        <div class="pt-2">
-                            <strong class="text-slate-800 font-sans">Booleanos:</strong> <span class="font-mono font-semibold">1</span> (Habilitado), <span class="font-mono font-semibold">0</span> (Deshabilitado).
-                        </div>
-                    </div>
-
-                    <div id="legend-inapp-placements" class="hidden space-y-2 text-[11px] text-slate-600 leading-relaxed font-sans">
-                        <span class="font-bold text-slate-900 block uppercase tracking-wide text-[10px] text-indigo-700 font-sans">Mapeo: In-App / Placements</span>
-                        <div class="space-y-1">
-                            <div><strong class="text-slate-800 font-sans">Type (Tipos Soportados):</strong></div>
-                            <ul class="list-disc pl-4 space-y-0.5">
-                                <li><span class="font-semibold font-sans">3</span>: Display / Banner (default)</li>
-                                <li><span class="font-semibold font-sans">2</span>: Video</li>
-                            </ul>
-                        </div>
-                        <div class="space-y-1 pt-1 font-sans">
-                            <div><strong class="text-slate-800 font-sans">Formats (Formatos sugeridos):</strong></div>
-                            <ul class="list-disc pl-4 space-y-0.5">
-                                <li>Display: <span class="font-mono">320x50, 300x250</span>...</li>
-                                <li>Video Instream: <span class="font-mono">17</span></li>
-                                <li>Video Outstream: <span class="font-mono">18</span></li>
-                            </ul>
-                        </div>
-                        <div class="space-y-1 pt-1 font-sans">
-                            <div><strong class="text-slate-800 font-sans">Prebid:</strong></div>
-                            <ul class="list-disc pl-4 space-y-0.5">
-                                <li><span class="font-semibold font-sans">1</span>: Header bidding (default)</li>
-                                <li><span class="font-semibold font-sans">0</span>: Tag Based</li>
-                            </ul>
-                        </div>
-                        <div class="pt-1 font-sans">
-                            <strong class="text-slate-800 font-sans">Native:</strong> Siempre <span class="font-mono font-semibold">1</span>
-                        </div>
-                    </div>
-
-                    <div id="legend-ctv-sites" class="hidden space-y-2 text-[11px] text-slate-600 leading-relaxed font-sans">
-                        <span class="font-bold text-slate-900 block uppercase tracking-wide text-[10px] text-purple-700 font-sans">Mapeo: CTV / Sites</span>
-                        <div class="space-y-1">
-                            <div><strong class="text-slate-800 font-sans">Carga de Datos:</strong></div>
-                            <ul class="list-disc pl-4 space-y-0.5">
-                                <li><strong>platform:</strong> Se rellena con <code>ctv</code> por defecto pero es editable.</li>
-                                <li><strong>bundle / name:</strong> Editables directamente en la tabla o a través del importador.</li>
-                            </ul>
-                        </div>
-                        <div class="pt-2">
-                            <strong class="text-slate-800 font-sans">Booleanos:</strong> <span class="font-mono font-semibold">1</span> (Habilitado), <span class="font-mono font-semibold">0</span> (Deshabilitado).
-                        </div>
-                    </div>
-
-                    <div id="legend-ctv-placements" class="hidden space-y-2 text-[11px] text-slate-600 leading-relaxed font-sans">
-                        <span class="font-bold text-slate-900 block uppercase tracking-wide text-[10px] text-purple-700 font-sans">Mapeo: CTV / Placements</span>
-                        <div class="space-y-1">
-                            <div><strong class="text-slate-800 font-sans">Type (Tipos Soportados):</strong></div>
-                            <ul class="list-disc pl-4 space-y-0.5">
-                                <li><span class="font-semibold font-sans">3</span>: Display / Banner</li>
-                                <li><span class="font-semibold font-sans">2</span>: Video (default)</li>
-                            </ul>
-                        </div>
-                        <div class="space-y-1 pt-1 font-sans">
-                            <div><strong class="text-slate-800 font-sans">Formats (Formatos sugeridos):</strong></div>
-                            <ul class="list-disc pl-4 space-y-0.5">
-                                <li>Video Instream CTV: <span class="font-mono font-bold text-purple-700">152</span></li>
-                                <li>Video Instream: <span class="font-mono">17</span></li>
-                                <li>Video Outstream: <span class="font-mono">18</span></li>
-                                <li>Display: <span class="font-mono">320x50, 300x250</span>...</li>
-                            </ul>
-                        </div>
-                        <div class="space-y-1 pt-1 font-sans">
-                            <div><strong class="text-slate-800 font-sans">Prebid:</strong></div>
-                            <ul class="list-disc pl-4 space-y-0.5">
-                                <li><span class="font-semibold font-sans">1</span>: Header bidding (default)</li>
-                                <li><span class="font-semibold font-sans">0</span>: Tag Based</li>
-                            </ul>
-                        </div>
-                        <div class="pt-1 font-sans">
-                            <strong class="text-slate-800 font-sans">Native:</strong> Siempre <span class="font-mono font-semibold">1</span>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- Panel Derecho: Editor, Configuraciones Globales y Matrix (8 Cols) -->
-            <div class="lg:col-span-8 space-y-6">
-                
                 <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden font-sans">
                     
                     <div class="p-6 border-b border-slate-100 bg-slate-50 flex flex-col sm:flex-row sm:items-center justify-between gap-4 font-sans">
@@ -385,7 +280,7 @@
                         </div>
                     </div>
 
-                    <!-- PANELES GLOBALES DE SITES -->
+                    <!-- PANELES GLOBALES -->
                     <div id="global-defaults-panel" class="hidden p-6 border-b border-slate-100">
                         
                         <!-- WEB SITES -->
@@ -397,15 +292,138 @@
                                     </div>
                                     <h3 class="text-xs font-bold text-amber-900 uppercase tracking-wider font-sans">Valores Predeterminados Globales (Web / Sites)</h3>
                                 </div>
+                                <span class="text-[10px] bg-amber-100 text-amber-800 px-2 py-0.5 rounded font-semibold font-mono">Output: Numérico</span>
                             </div>
                             <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                                <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">environment</label><select id="global-env" onchange="updateGlobalDefault('environment', this.value)" class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 font-semibold font-mono"><option value="1" selected>1 (Web)</option><option value="3">3 (AMP)</option></select></div>
-                                <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">child_lt14</label><select id="global-lt14" onchange="updateGlobalDefault('child_lt14', this.value)" class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 font-mono"><option value="0" selected>0 (Falso)</option><option value="1">1 (Verdadero)</option></select></div>
-                                <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">child_bt1418</label><select id="global-bt1418" onchange="updateGlobalDefault('child_bt1418', this.value)" class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 font-mono"><option value="0" selected>0 (Falso)</option><option value="1">1 (Verdadero)</option></select></div>
-                                <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">gambling</label><select id="global-gambling" onchange="updateGlobalDefault('gambling', this.value)" class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 font-mono"><option value="1" selected>1 (Verdadero)</option><option value="0">0 (Falso)</option></select></div>
-                                <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">alcohol</label><select id="global-alcohol" onchange="updateGlobalDefault('alcohol', this.value)" class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 font-mono"><option value="1" selected>1 (Verdadero)</option><option value="0">0 (Falso)</option></select></div>
-                                <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">prebid</label><select id="global-prebid" onchange="updateGlobalDefault('prebid', this.value)" class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 font-mono"><option value="1" selected>1 (Verdadero)</option><option value="0">0 (Falso)</option></select></div>
-                                <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">ortb</label><select id="global-ortb" onchange="updateGlobalDefault('ortb', this.value)" class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 font-mono"><option value="0" selected>0 (Falso)</option><option value="1">1 (Verdadero)</option></select></div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">environment</label>
+                                    <select id="global-env" onchange="updateGlobalDefault('environment', this.value)"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 font-semibold font-mono">
+                                        <option value="1" selected>1 (Web)</option>
+                                        <option value="3">3 (AMP)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">child_lt14</label>
+                                    <select id="global-lt14" onchange="updateGlobalDefault('child_lt14', this.value)"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 font-mono">
+                                        <option value="0" selected>0 (Falso)</option>
+                                        <option value="1">1 (Verdadero)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">child_bt1418</label>
+                                    <select id="global-bt1418" onchange="updateGlobalDefault('child_bt1418', this.value)"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 font-mono">
+                                        <option value="0" selected>0 (Falso)</option>
+                                        <option value="1">1 (Verdadero)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">gambling</label>
+                                    <select id="global-gambling" onchange="updateGlobalDefault('gambling', this.value)"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 font-mono">
+                                        <option value="1" selected>1 (Verdadero)</option>
+                                        <option value="0">0 (Falso)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">alcohol</label>
+                                    <select id="global-alcohol" onchange="updateGlobalDefault('alcohol', this.value)"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 font-mono">
+                                        <option value="1" selected>1 (Verdadero)</option>
+                                        <option value="0">0 (Falso)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">prebid</label>
+                                    <select id="global-prebid" onchange="updateGlobalDefault('prebid', this.value)"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 font-mono">
+                                        <option value="1" selected>1 (Verdadero)</option>
+                                        <option value="0">0 (Falso)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">ortb</label>
+                                    <select id="global-ortb" onchange="updateGlobalDefault('ortb', this.value)"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 font-mono">
+                                        <option value="0" selected>0 (Falso)</option>
+                                        <option value="1">1 (Verdadero)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- PLACEMENTS GLOBALES (WEB, IN-APP, CTV) -->
+                        <div id="global-placements-controls" class="hidden space-y-5 font-sans">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-2">
+                                    <div class="p-1.5 bg-blue-100 text-blue-700 rounded-lg" id="plac-icon-bg">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
+                                    </div>
+                                    <h3 class="text-xs font-bold text-blue-900 uppercase tracking-wider font-sans" id="plac-title-global">Valores Predeterminados Globales (Placements)</h3>
+                                </div>
+                                <span class="text-[10px] bg-blue-100 text-blue-800 px-2 py-0.5 rounded font-semibold font-mono">Multivariable</span>
+                            </div>
+
+                            <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 bg-slate-50 p-4 rounded-xl border border-slate-200/60 font-sans">
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">Publisher ID</label>
+                                    <input type="text" id="global-plac-pub" oninput="updateGlobalPlacementDefault('publisher', this.value)" value="1001"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500 font-semibold font-mono text-slate-800" />
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">Devices</label>
+                                    <input type="text" id="global-plac-devices" oninput="updateGlobalPlacementDefault('devices', this.value)" value="desktop,mobile,tablet"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500 font-mono text-slate-800" />
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans font-sans">Native</label>
+                                    <input type="text" value="1" disabled
+                                        class="w-full px-2.5 py-1.5 text-xs bg-slate-100 border border-slate-100 text-slate-400 font-semibold font-mono rounded-lg cursor-not-allowed text-center" />
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans font-sans">Prebid</label>
+                                    <select id="global-plac-prebid" onchange="updateGlobalPlacementDefault('prebid', this.value)"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500 font-semibold text-slate-800 font-sans">
+                                        <option value="1" selected>1 (Header Bidding)</option>
+                                        <option value="0">0 (Tag Based)</option>
+                                    </select>
+                                </div>
+                                <div id="global-plac-env-container">
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans font-sans font-sans">Environment</label>
+                                    <select id="global-plac-env" onchange="updateGlobalPlacementDefault('environment', this.value)"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500 font-semibold text-slate-800 font-mono">
+                                        <option value="1" selected>1 (Web)</option>
+                                        <option value="3">3 (AMP)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="space-y-4 pt-2">
+                                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-t border-slate-200/60 pt-4">
+                                    <span class="block text-[11px] font-bold text-slate-500 uppercase font-sans">Configuración de Combinaciones</span>
+                                    <button type="button" id="btn-toggle-domain-prefix" onclick="toggleDomainInName()"
+                                        class="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-bold transition-all shadow-sm focus:outline-none bg-blue-600 text-white font-sans">
+                                        ✓ Seleccionar URL para nombre del placement (Activo)
+                                    </button>
+                                </div>
+                                
+                                <!-- Editor masivo para nombres de placements -->
+                                <div class="bg-blue-50/50 p-3 rounded-lg border border-blue-100 flex gap-2">
+                                    <textarea id="bulk-placement-names" wrap="off" rows="1" class="w-full text-xs font-mono p-2 border border-slate-200 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 resize-none overflow-hidden" placeholder="Pega aquí nombres de placements masivos..."></textarea>
+                                    <button onclick="bulkAddPlacementConfigs()" class="bg-blue-600 hover:bg-blue-700 text-white text-[10px] px-3 font-bold rounded uppercase tracking-wider transition-colors shadow-sm whitespace-nowrap">
+                                        Generar Configs
+                                    </button>
+                                </div>
+
+                                <div id="placement-configs-container" class="space-y-3"></div>
+
+                                <button type="button" id="btn-add-plac-config" onclick="addPlacementConfig()" 
+                                    class="inline-flex items-center px-3 py-1.5 border border-dashed border-blue-500 text-xs font-semibold rounded-lg text-blue-600 bg-white hover:bg-blue-50 transition-all focus:outline-none font-sans">
+                                    <svg class="w-3.5 h-3.5 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
+                                    + Añadir Tipo y Formato
+                                </button>
                             </div>
                         </div>
 
@@ -420,94 +438,180 @@
                                 </div>
                             </div>
                             <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3">
-                                <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">publisher</label><input type="text" oninput="updateGlobalDefault('publisher', this.value)" value="232" class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 font-semibold font-mono" /></div>
-                                <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">child_lt14</label><select onchange="updateGlobalDefault('child_lt14', this.value)" class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 font-mono"><option value="0" selected>0 (Falso)</option><option value="1">1 (Verdadero)</option></select></div>
-                                <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">child_bt1418</label><select onchange="updateGlobalDefault('child_bt1418', this.value)" class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 font-mono"><option value="0" selected>0 (Falso)</option><option value="1">1 (Verdadero)</option></select></div>
-                                <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">gambling</label><select onchange="updateGlobalDefault('gambling', this.value)" class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 font-mono"><option value="1" selected>1 (Verdadero)</option><option value="0">0 (Falso)</option></select></div>
-                                <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">alcohol</label><select onchange="updateGlobalDefault('alcohol', this.value)" class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 font-mono"><option value="1" selected>1 (Verdadero)</option><option value="0">0 (Falso)</option></select></div>
-                                <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">cmpRA</label><select onchange="updateGlobalDefault('cmpRA', this.value)" class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 font-mono"><option value="0" selected>0 (Falso)</option><option value="1">1 (Verdadero)</option></select></div>
-                                <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">cmpIAB</label><select onchange="updateGlobalDefault('cmpIAB', this.value)" class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 font-mono"><option value="0" selected>0 (Falso)</option><option value="1">1 (Verdadero)</option></select></div>
-                                <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">cmpID</label><input type="text" oninput="updateGlobalDefault('cmpID', this.value)" value="0" class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 font-mono" /></div>
-                                <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">cmpName</label><input type="text" oninput="updateGlobalDefault('cmpName', this.value)" value="0" class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 font-mono" /></div>
-                                <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">ortb</label><select onchange="updateGlobalDefault('ortb', this.value)" class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 font-mono font-sans"><option value="1" selected>1 (Verdadero)</option><option value="0">0 (Falso)</option></select></div>
-                                <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">prebid</label><select onchange="updateGlobalDefault('prebid', this.value)" class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 font-mono"><option value="1" selected>1 (Verdadero)</option><option value="0">0 (Falso)</option></select></div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">publisher</label>
+                                    <input type="text" oninput="updateGlobalDefault('publisher', this.value)" value="232"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 font-semibold text-slate-800 font-mono" />
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">child_lt14</label>
+                                    <select onchange="updateGlobalDefault('child_lt14', this.value)"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 font-mono">
+                                        <option value="0" selected>0 (Falso)</option>
+                                        <option value="1">1 (Verdadero)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans font-sans">child_bt1418</label>
+                                    <select onchange="updateGlobalDefault('child_bt1418', this.value)"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 font-mono">
+                                        <option value="0" selected>0 (Falso)</option>
+                                        <option value="1">1 (Verdadero)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">gambling</label>
+                                    <select onchange="updateGlobalDefault('gambling', this.value)"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 font-mono">
+                                        <option value="1" selected>1 (Verdadero)</option>
+                                        <option value="0">0 (Falso)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans font-sans">alcohol</label>
+                                    <select onchange="updateGlobalDefault('alcohol', this.value)"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 font-mono">
+                                        <option value="1" selected>1 (Verdadero)</option>
+                                        <option value="0">0 (Falso)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans font-sans font-sans font-sans">cmpRA</label>
+                                    <select onchange="updateGlobalDefault('cmpRA', this.value)"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 font-mono">
+                                        <option value="0" selected>0 (Falso)</option>
+                                        <option value="1">1 (Verdadero)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">cmpIAB</label>
+                                    <select onchange="updateGlobalDefault('cmpIAB', this.value)"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 font-mono">
+                                        <option value="0" selected>0 (Falso)</option>
+                                        <option value="1">1 (Verdadero)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">cmpID</label>
+                                    <input type="text" oninput="updateGlobalDefault('cmpID', this.value)" value="0"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 font-mono" />
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans font-sans font-sans">cmpName</label>
+                                    <input type="text" oninput="updateGlobalDefault('cmpName', this.value)" value="0"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 font-mono" />
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans font-sans font-sans font-sans">ortb</label>
+                                    <select onchange="updateGlobalDefault('ortb', this.value)"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 font-mono font-sans font-sans">
+                                        <option value="1" selected>1 (Verdadero)</option>
+                                        <option value="0">0 (Falso)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">prebid</label>
+                                    <select onchange="updateGlobalDefault('prebid', this.value)"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 font-mono">
+                                        <option value="1" selected>1 (Verdadero)</option>
+                                        <option value="0">0 (Falso)</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
 
                         <!-- CTV SITES -->
-                        <div id="global-ctv-sites-controls" class="hidden space-y-4 font-sans">
+                        <div id="global-ctv-sites-controls" class="hidden space-y-4 font-sans font-sans">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center space-x-2">
                                     <div class="p-1.5 bg-purple-100 text-purple-700 rounded-lg">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z" /></svg>
                                     </div>
-                                    <h3 class="text-xs font-bold text-purple-900 uppercase tracking-wider font-sans">Valores Predeterminados Globales (CTV / Sites)</h3>
+                                    <h3 class="text-xs font-bold text-purple-900 uppercase tracking-wider font-sans font-sans">Valores Predeterminados Globales (CTV / Sites)</h3>
                                 </div>
                             </div>
                             <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3">
-                                <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">publisher</label><input type="text" oninput="updateGlobalDefault('publisher', this.value)" value="1433" class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 font-semibold font-mono" /></div>
-                                <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">child_lt14</label><select onchange="updateGlobalDefault('child_lt14', this.value)" class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 font-mono"><option value="0" selected>0 (Falso)</option><option value="1">1 (Verdadero)</option></select></div>
-                                <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">child_bt1418</label><select onchange="updateGlobalDefault('child_bt1418', this.value)" class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 font-mono"><option value="0" selected>0 (Falso)</option><option value="1">1 (Verdadero)</option></select></div>
-                                <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">gambling</label><select onchange="updateGlobalDefault('gambling', this.value)" class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 font-mono"><option value="1" selected>1 (Verdadero)</option><option value="0">0 (Falso)</option></select></div>
-                                <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">alcohol</label><select onchange="updateGlobalDefault('alcohol', this.value)" class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 font-mono"><option value="1" selected>1 (Verdadero)</option><option value="0">0 (Falso)</option></select></div>
-                                <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">cmpRA</label><select onchange="updateGlobalDefault('cmpRA', this.value)" class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 font-mono"><option value="0" selected>0 (Falso)</option><option value="1">1 (Verdadero)</option></select></div>
-                                <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">cmpIAB</label><select onchange="updateGlobalDefault('cmpIAB', this.value)" class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 font-mono"><option value="0" selected>0 (Falso)</option><option value="1">1 (Verdadero)</option></select></div>
-                                <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">cmpID</label><input type="text" oninput="updateGlobalDefault('cmpID', this.value)" value="0" class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 font-mono" /></div>
-                                <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">cmpName</label><input type="text" oninput="updateGlobalDefault('cmpName', this.value)" value="0" class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 font-mono" /></div>
-                                <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">ortb</label><select onchange="updateGlobalDefault('ortb', this.value)" class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 font-mono font-sans"><option value="1" selected>1 (Verdadero)</option><option value="0">0 (Falso)</option></select></div>
-                                <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">prebid</label><select onchange="updateGlobalDefault('prebid', this.value)" class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 font-mono"><option value="1" selected>1 (Verdadero)</option><option value="0">0 (Falso)</option></select></div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">publisher</label>
+                                    <input type="text" oninput="updateGlobalDefault('publisher', this.value)" value="1433"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 font-semibold font-mono" />
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">child_lt14</label>
+                                    <select onchange="updateGlobalDefault('child_lt14', this.value)"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 font-mono">
+                                        <option value="0" selected>0 (Falso)</option>
+                                        <option value="1">1 (Verdadero)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans font-sans">child_bt1418</label>
+                                    <select onchange="updateGlobalDefault('child_bt1418', this.value)"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 font-mono">
+                                        <option value="0" selected>0 (Falso)</option>
+                                        <option value="1">1 (Verdadero)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">gambling</label>
+                                    <select onchange="updateGlobalDefault('gambling', this.value)"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 font-mono">
+                                        <option value="1" selected>1 (Verdadero)</option>
+                                        <option value="0">0 (Falso)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans font-sans">alcohol</label>
+                                    <select onchange="updateGlobalDefault('alcohol', this.value)"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 font-mono">
+                                        <option value="1" selected>1 (Verdadero)</option>
+                                        <option value="0">0 (Falso)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans font-sans font-sans font-sans font-sans">cmpRA</label>
+                                    <select onchange="updateGlobalDefault('cmpRA', this.value)"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 font-mono">
+                                        <option value="0" selected>0 (Falso)</option>
+                                        <option value="1">1 (Verdadero)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans font-sans">cmpIAB</label>
+                                    <select onchange="updateGlobalDefault('cmpIAB', this.value)"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 font-mono">
+                                        <option value="0" selected>0 (Falso)</option>
+                                        <option value="1">1 (Verdadero)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans font-sans font-sans">cmpID</label>
+                                    <input type="text" oninput="updateGlobalDefault('cmpID', this.value)" value="0"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 font-mono" />
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans font-sans font-sans">cmpName</label>
+                                    <input type="text" oninput="updateGlobalDefault('cmpName', this.value)" value="0"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 font-mono" />
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans font-sans font-sans font-sans">ortb</label>
+                                    <select onchange="updateGlobalDefault('ortb', this.value)"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 font-mono font-sans font-sans">
+                                        <option value="1" selected>1 (Verdadero)</option>
+                                        <option value="0">0 (Falso)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans font-sans font-sans font-sans font-sans">prebid</label>
+                                    <select onchange="updateGlobalDefault('prebid', this.value)"
+                                        class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 font-mono">
+                                        <option value="1" selected>1 (Verdadero)</option>
+                                        <option value="0">0 (Falso)</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-
-                        <!-- PLACEMENTS GLOBALES (WEB, IN-APP Y CTV) -->
-                        <div id="global-placements-controls" class="hidden space-y-5 font-sans">
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center space-x-2">
-                                    <div class="p-1.5 bg-blue-100 text-blue-700 rounded-lg" id="plac-icon-bg">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
-                                    </div>
-                                    <h3 class="text-xs font-bold text-blue-900 uppercase tracking-wider font-sans" id="plac-title-global">Valores Predeterminados Globales (Placements)</h3>
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 bg-slate-50 p-4 rounded-xl border border-slate-200/60 font-sans">
-                                <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">Publisher ID</label><input type="text" id="global-plac-pub" oninput="updateGlobalPlacementDefault('publisher', this.value)" value="1001" class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500 font-semibold font-mono text-slate-800" /></div>
-                                <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">Devices</label><input type="text" id="global-plac-devices" oninput="updateGlobalPlacementDefault('devices', this.value)" value="desktop,mobile,tablet" class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500 font-mono text-slate-800" /></div>
-                                <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">Native</label><input type="text" value="1" disabled class="w-full px-2.5 py-1.5 text-xs bg-slate-100 border border-slate-100 text-slate-400 font-semibold font-mono rounded-lg cursor-not-allowed text-center" /></div>
-                                <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">Prebid</label><select id="global-plac-prebid" onchange="updateGlobalPlacementDefault('prebid', this.value)" class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500 font-semibold text-slate-800 font-sans"><option value="1" selected>1 (Header Bidding)</option><option value="0">0 (Tag Based)</option></select></div>
-                                <div id="global-plac-env-container"><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-sans">Environment</label><select id="global-plac-env" onchange="updateGlobalPlacementDefault('environment', this.value)" class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500 font-semibold text-slate-800 font-mono"><option value="1" selected>1 (Web)</option><option value="3">3 (AMP)</option></select></div>
-                            </div>
-
-                            <div class="space-y-4 pt-2">
-                                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-t border-slate-200/60 pt-4">
-                                    <span class="block text-[11px] font-bold text-slate-500 uppercase font-sans">Configuración de Combinaciones</span>
-                                    <button type="button" id="btn-toggle-domain-prefix" onclick="toggleDomainInName()"
-                                        class="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-bold transition-all shadow-sm focus:outline-none bg-blue-600 text-white font-sans">
-                                        ✓ Seleccionar URL para nombre del placement (Activo)
-                                    </button>
-                                </div>
-                                
-                                <!-- NUEVO: Carga Masiva de Placements -->
-                                <div class="bg-slate-50 p-3 border border-slate-200 rounded-xl shadow-sm flex flex-col gap-2">
-                                    <label class="block text-[10px] font-bold text-slate-500 uppercase">Carga Masiva de Nombres</label>
-                                    <div class="flex flex-col sm:flex-row gap-2">
-                                        <textarea id="bulk-placement-names" rows="2" class="w-full text-xs p-2.5 border border-slate-200 rounded-lg font-mono focus:ring-1 focus:ring-blue-500 focus:outline-none resize-none transition-all placeholder:text-slate-400" placeholder="Pega aquí una lista de nombres de placements desde Excel y se crearán automáticamente..."></textarea>
-                                        <button type="button" onclick="generateConfigsFromNames()" class="w-full sm:w-auto px-4 py-2 bg-blue-100 hover:bg-blue-200 text-blue-700 text-xs font-bold rounded-lg transition-colors whitespace-nowrap shadow-sm">
-                                            Generar Configs
-                                        </button>
-                                    </div>
-                                </div>
-
-                                <div id="placement-configs-container" class="space-y-3"></div>
-
-                                <button type="button" id="btn-add-plac-config" onclick="addPlacementConfig()" 
-                                    class="inline-flex items-center px-3 py-1.5 border border-dashed border-blue-500 text-xs font-semibold rounded-lg text-blue-600 bg-white hover:bg-blue-50 transition-all focus:outline-none font-sans">
-                                    <svg class="w-3.5 h-3.5 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
-                                    + Duplicar / Añadir Tipo y Formato
-                                </button>
-                            </div>
-                        </div>
-
                     </div>
 
                     <!-- Editor Rápido de Columnas (Estructura) -->
@@ -521,7 +625,7 @@
                                 class="flex-1 px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white transition-all font-mono" 
                                 placeholder="Selecciona un entorno y tipo..." disabled />
                             <button onclick="resetToDefaultColumns()" id="reset-columns-btn" disabled
-                                class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-lg text-xs font-semibold transition-all focus:outline-none font-sans font-sans font-sans"
+                                class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-lg text-xs font-semibold transition-all focus:outline-none font-sans font-sans font-sans font-sans font-sans"
                                 title="Restaurar columnas por defecto">
                                 Restaurar
                             </button>
@@ -532,19 +636,19 @@
                     <div id="manual-grid-section" class="p-6 font-sans">
                         <div class="flex items-center justify-between mb-4">
                             <div>
-                                <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider font-sans font-sans font-sans font-sans" id="data-editor-title">Editor de Datos (Introduce tus registros)</h3>
-                                <p class="text-[11px] text-slate-400 font-sans font-sans font-sans" id="data-editor-description">Escribe directamente en cualquier celda para añadir tu información.</p>
+                                <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider font-sans font-sans font-sans font-sans font-sans font-sans" id="data-editor-title">Editor de Datos (Introduce tus registros)</h3>
+                                <p class="text-[11px] text-slate-400 font-sans font-sans font-sans font-sans font-sans" id="data-editor-description">Escribe directamente en cualquier celda para añadir tu información.</p>
                             </div>
                             <button onclick="addNewDataRow()" id="btn-add-row" disabled
-                                class="inline-flex items-center px-3 py-1.5 border border-brand-500 text-xs font-semibold rounded-lg text-brand-600 bg-white hover:bg-brand-50 transition-all focus:outline-none font-sans font-sans">
+                                class="inline-flex items-center px-3 py-1.5 border border-brand-500 text-xs font-semibold rounded-lg text-brand-600 bg-white hover:bg-brand-50 transition-all focus:outline-none font-sans font-sans font-sans">
                                 <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
                                 Añadir Fila
                             </button>
                         </div>
                         <div class="overflow-x-auto border border-slate-200 rounded-xl bg-slate-50 max-h-[400px]">
-                            <table class="min-w-full divide-y divide-slate-200 text-left text-sm text-slate-600 table-auto font-sans font-sans font-sans font-sans">
+                            <table class="min-w-full divide-y divide-slate-200 text-left text-sm text-slate-600 table-auto font-sans font-sans font-sans font-sans font-sans font-sans">
                                 <thead class="bg-slate-100 text-slate-700 uppercase text-[10px] tracking-wider sticky top-0 z-10 shadow-sm" id="preview-thead">
-                                    <tr><th class="px-4 py-3 font-semibold text-center text-slate-400 font-sans font-sans font-sans" colspan="100%">No hay ninguna selección activa</th></tr>
+                                    <tr><th class="px-4 py-3 font-semibold text-center text-slate-400 font-sans font-sans font-sans font-sans font-sans" colspan="100%">No hay ninguna selección activa</th></tr>
                                 </thead>
                                 <tbody class="divide-y divide-slate-200 bg-white" id="preview-tbody">
                                     <tr><td class="px-6 py-12 text-center text-slate-400 italic font-sans" colspan="100%">Selecciona un entorno y un tipo de recurso a la izquierda para empezar a introducir datos en la tabla.</td></tr>
@@ -557,21 +661,21 @@
                     <div id="placement-matrix-preview-section" class="hidden p-6 border-t border-slate-100 bg-slate-50/50">
                         <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-2">
                             <div>
-                                <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider font-sans font-sans font-sans font-sans font-sans">Vista Previa del Output (Placements Combinados)</h3>
-                                <p class="text-[10px] text-slate-400 font-sans font-sans">Esta es la matriz final multiplicada que se guardará en tu archivo CSV.</p>
+                                <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider font-sans font-sans font-sans font-sans font-sans font-sans font-sans font-sans">Vista Previa del Output (Placements Combinados)</h3>
+                                <p class="text-[10px] text-slate-400 font-sans font-sans font-sans">Esta es la matriz final multiplicada que se guardará en tu archivo CSV.</p>
                             </div>
                             <div class="flex items-center gap-2">
                                 <span class="text-[10px] bg-blue-100 text-blue-800 px-2 py-1 rounded font-semibold font-mono" id="placement-preview-counter">0 Placements</span>
                                 <button type="button" onclick="clearBaseDomains()" 
-                                    class="inline-flex items-center px-2 py-1 bg-red-50 hover:bg-red-100 text-red-600 rounded text-[10px] font-bold transition-all border border-red-200 focus:outline-none font-sans font-sans font-sans font-sans">
+                                    class="inline-flex items-center px-2 py-1 bg-red-50 hover:bg-red-100 text-red-600 rounded text-[10px] font-bold transition-all border border-red-200 focus:outline-none font-sans font-sans font-sans font-sans font-sans font-sans">
                                     Limpiar Entradas
                                 </button>
                             </div>
                         </div>
                         <div class="overflow-x-auto border border-slate-200 rounded-xl bg-white max-h-[300px]">
-                            <table class="min-w-full divide-y divide-slate-200 text-left text-xs text-slate-600 table-auto font-sans font-sans">
+                            <table class="min-w-full divide-y divide-slate-200 text-left text-xs text-slate-600 table-auto font-sans font-sans font-sans">
                                 <thead class="bg-slate-100/80 text-slate-700 font-sans">
-                                    <tr><th class="px-3 py-2 border-b border-slate-200 font-sans font-sans">Cargando...</th></tr>
+                                    <tr><th class="px-3 py-2 border-b border-slate-200 font-sans font-sans font-sans font-sans">Cargando...</th></tr>
                                 </thead>
                                 <tbody class="divide-y divide-slate-200 font-mono" id="placement-matrix-preview-tbody">
                                 </tbody>
@@ -579,9 +683,9 @@
                         </div>
                     </div>
 
-                    <div id="toast-message" class="hidden mx-6 mb-6 p-4 bg-green-50 text-green-800 rounded-xl border border-green-200 flex items-center space-x-2 font-sans">
+                    <div id="toast-message" class="hidden mx-6 mb-6 p-4 bg-green-50 text-green-800 rounded-xl border border-green-200 flex items-center space-x-2 font-sans font-sans font-sans">
                         <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                        <span class="text-sm font-medium font-sans font-sans" id="toast-text">¡Archivo generado correctamente!</span>
+                        <span class="text-sm font-medium font-sans font-sans font-sans" id="toast-text">¡Archivo generado correctamente!</span>
                     </div>
 
                 </div>
@@ -590,12 +694,68 @@
     </main>
 
     <footer class="bg-white border-t border-slate-200 mt-auto py-6">
-        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-400 font-sans font-sans">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-400 font-sans font-sans font-sans font-sans">
             CSV Template Hub &copy; 2026. Optimización avanzada de aprovisionamiento.
         </div>
     </footer>
 
+    <!-- LÓGICA JAVASCRIPT CONSOLIDADA -->
     <script>
+        // ============================================================================
+        // MAPEO Y CONFIGURACIONES DE IDIOMA (Basado en el PDF oficial de Languages Codes)
+        // ============================================================================
+        const ccTLDToLanguage = {
+            'es': { iso: '27', name: 'Spanish' },
+            'fr': { iso: '34', name: 'French' },
+            'it': { iso: '51', name: 'Italian' },
+            'de': { iso: '23', name: 'German' },
+            'pt': { iso: '89', name: 'Portuguese' },
+            'br': { iso: '89', name: 'Portuguese' },
+            'uk': { iso: '1',  name: 'English' },
+            'co.uk': { iso: '1', name: 'English' },
+            'mx': { iso: '27', name: 'Spanish' },
+            'ar': { iso: '27', name: 'Spanish' },
+            'cl': { iso: '27', name: 'Spanish' },
+            'co': { iso: '1',  name: 'English' }, 
+            'nl': { iso: '82', name: 'Dutch' },
+            'pl': { iso: '87', name: 'Polish' },
+            'ru': { iso: '94', name: 'Russian' }, 
+            'ja': { iso: '53', name: 'Japanese' },
+            'jp': { iso: '53', name: 'Japanese' },
+            'ca': { iso: '18', name: 'Catalan' },
+            'cat': { iso: '18', name: 'Catalan' }
+        };
+
+        const AVAILABLE_LANGUAGES = [
+            { iso: '1', name: 'English' },
+            { iso: '6', name: 'Arabic' },
+            { iso: '18', name: 'Catalan' },
+            { iso: '20', name: 'Czech' },
+            { iso: '22', name: 'Danish' },
+            { iso: '23', name: 'German' },
+            { iso: '25', name: 'Greek' },
+            { iso: '27', name: 'Spanish' },
+            { iso: '29', name: 'Basque' },
+            { iso: '31', name: 'Finnish' },
+            { iso: '34', name: 'French' },
+            { iso: '38', name: 'Galician' },
+            { iso: '51', name: 'Italian' },
+            { iso: '52', name: 'Hebrew' },
+            { iso: '53', name: 'Japanese' },
+            { iso: '61', name: 'Korean' },
+            { iso: '82', name: 'Dutch' },
+            { iso: '83', name: 'Norwegian' },
+            { iso: '87', name: 'Polish' },
+            { iso: '89', name: 'Portuguese' },
+            { iso: '94', name: 'Russian' },
+            { iso: '98', name: 'Swedish' },
+            { iso: '102', name: 'Turkish' },
+            { iso: '134', name: 'Chinese' }
+        ];
+
+        // ============================================================================
+        // MÓDULO 1: AppConfig
+        // ============================================================================
         const AppConfig = {
             templatesData: {
                 'web': {
@@ -637,6 +797,9 @@
             }
         };
 
+        // ============================================================================
+        // MÓDULO 2: AppState
+        // ============================================================================
         const AppState = {
             env: null,
             type: null,
@@ -655,6 +818,9 @@
             }
         };
 
+        // ============================================================================
+        // MÓDULO 3: AppUtils
+        // ============================================================================
         const AppUtils = {
             cleanUrl(url) {
                 if (!url) return '';
@@ -738,6 +904,9 @@
             }
         };
 
+        // ============================================================================
+        // MÓDULO 4: AppController
+        // ============================================================================
         const AppController = {
             
             init() {
@@ -826,31 +995,25 @@
                 this.showToast("Lista de entradas vaciada.");
             },
 
-            // NUEVO: Generador Masivo de Configuraciones de Placement
-            generateConfigsFromNames() {
+            bulkAddPlacementConfigs() {
                 const textarea = document.getElementById('bulk-placement-names');
-                const rawText = textarea.value.trim();
-                if (!rawText) return this.showToast("Pega una lista de nombres primero.");
+                if (!textarea) return;
+                const namesText = textarea.value.trim();
+                if (!namesText) return this.showToast('Pega al menos un nombre de placement.');
 
-                const lines = rawText.split(/\r?\n/).map(l => l.trim().replace(/[^a-zA-Z0-9_\-]/g, '_')).filter(l => l.length > 0);
-                if (lines.length === 0) return;
-
-                // Limpiar la combinación por defecto si no ha sido modificada por el usuario
-                if (AppState.placementConfigs.length === 1 && ['display', 'instream_ctv', 'skin', 'instream', 'outstream', 'native'].includes(AppState.placementConfigs[0].name)) {
-                    AppState.placementConfigs = [];
-                }
-
-                let defaultType = AppState.env === 'ctv' ? '2' : '3';
+                const names = namesText.split(/\r?\n/).filter(n => n.trim() !== '');
+                
                 let defaultFormats = AppState.env === 'in-app' ? '320x50,300x250' : '300x250,728x90';
                 if (AppState.env === 'ctv') defaultFormats = '152';
+                let defaultType = AppState.env === 'ctv' ? '2' : '3';
 
-                lines.forEach(name => {
-                    const nextId = AppState.placementConfigs.length > 0 ? Math.max(...AppState.placementConfigs.map(c => c.id)) + 1 : 1;
+                AppState.placementConfigs = [];
+                names.forEach((name, idx) => {
                     AppState.placementConfigs.push({
-                        id: nextId,
+                        id: idx + 1,
                         type: defaultType,
                         formats: defaultFormats,
-                        name: name
+                        name: name.trim().toLowerCase().replace(/[^a-z0-9_]/g, '_')
                     });
                 });
 
@@ -858,7 +1021,7 @@
                 this.renderPlacementConfigUI();
                 this.generatePlacementMatrix();
                 this.renderTable();
-                this.showToast(`¡Creadas ${lines.length} combinaciones!`);
+                this.showToast(`${names.length} combinaciones generadas.`);
             },
 
             addPlacementConfig() {
@@ -907,7 +1070,9 @@
 
             updatePlacementConfigFormats(index, formatValue) {
                 AppState.placementConfigs[index].formats = formatValue;
-                
+                if (AppState.placementConfigs[index].type === '2') {
+                    AppState.placementConfigs[index].name = formatValue === '18' ? 'outstream' : (formatValue === '152' ? 'instream_ctv' : 'instream');
+                }
                 this.generatePlacementMatrix();
                 this.renderTable();
             },
@@ -1055,7 +1220,7 @@
 
                     tbody.innerHTML = '';
                     if (AppState.rows.length === 0) {
-                        tbody.innerHTML = `<tr><td colspan="9" class="px-3 py-8 text-center italic text-slate-400">No hay datos base cargados. Utiliza el importador en tabla de la izquierda...</td></tr>`;
+                        tbody.innerHTML = `<tr><td colspan="9" class="px-3 py-8 text-center italic text-slate-400">No hay datos base cargados. Utiliza el importador en tabla de la derecha...</td></tr>`;
                         return;
                     }
                     AppState.rows.forEach(row => {
@@ -1123,6 +1288,10 @@
 
             checkSelectionComplete() {
                 if (AppState.env && AppState.type) {
+                    
+                    document.getElementById('left-panel-dynamic-content').classList.remove('hidden');
+                    document.getElementById('right-panel-dynamic-content').classList.remove('hidden');
+
                     const template = AppConfig.templatesData[AppState.env][AppState.type];
                     AppState.columns = [...template.columns];
 
@@ -1154,7 +1323,7 @@
                     if (showTwoCols) {
                         col2Header.classList.remove('hidden');
                         col2.classList.remove('hidden');
-                        if (importDesc) importDesc.innerText = "Copia tus datos desde Excel y pégalos en la celda de la izquierda. Si copias 2 columnas a la vez (Bundle y Name), se dividirán automáticamente.";
+                        if (importDesc) importDesc.innerText = "Copia tus datos desde Excel y pégalos en la celda de la izquierda. Si copias 2 columnas a la vez (Bundle y Name), se dividirán automáticamente garantizando la misma cantidad de filas.";
                     } else {
                         col2Header.classList.add('hidden');
                         col2.classList.add('hidden');
@@ -1169,8 +1338,6 @@
                     else if (AppState.env === 'ctv' && AppState.type === 'sites') col1Header.innerText = 'Bundle ID';
                     else col1Header.innerText = 'Bundle ID';
 
-
-                    legendCommon.classList.remove('hidden');
                     gSites.classList.add('hidden'); gPlacements.classList.add('hidden'); gInAppSites.classList.add('hidden'); gCtvSites.classList.add('hidden');
                     legendSites.classList.add('hidden'); legendPlacements.classList.add('hidden'); legendInAppSites.classList.add('hidden');
                     if(legendInAppPlacements) legendInAppPlacements.classList.add('hidden');
@@ -1333,73 +1500,87 @@
                     AppState.columns.forEach((_, colIndex) => {
                         const td = document.createElement('td');
                         td.className = 'px-3 py-2 border-b border-slate-200';
-                        const input = document.createElement('input');
-                        input.type = 'text';
                         
-                        if (isWebSites) {
-                            if (colIndex === 0) {
-                                input.className = 'w-full px-2 py-1 text-sm bg-white border border-slate-200 rounded focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all font-medium text-slate-900';
-                                input.disabled = false;
-                            } else {
-                                input.className = 'w-full px-2 py-1 text-sm bg-slate-100/70 border border-slate-100 text-slate-500 rounded cursor-not-allowed select-none font-mono text-center';
-                                input.disabled = true;
-                            }
-                        } 
-                        else if (isInAppSites) {
-                            if (colIndex === 2) {
-                                input.className = 'w-full px-2 py-1 text-sm bg-white border border-slate-200 rounded focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:outline-none transition-all font-medium text-slate-900';
-                                input.disabled = false;
-                            } else {
-                                input.className = 'w-full px-2 py-1 text-sm bg-slate-100/70 border border-slate-100 text-slate-500 rounded cursor-not-allowed select-none font-mono text-center';
-                                input.disabled = true;
-                            }
-                        }
-                        else if (isCtvSites) {
-                            if (colIndex === 1 || colIndex === 2 || colIndex === 3) {
-                                input.className = 'w-full px-2 py-1 text-sm bg-white border border-slate-200 rounded focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none transition-all font-medium text-slate-900';
-                                input.disabled = false;
-                            } else {
-                                input.className = 'w-full px-2 py-1 text-sm bg-slate-100/70 border border-slate-100 text-slate-500 rounded cursor-not-allowed select-none font-mono text-center';
-                                input.disabled = true;
-                            }
-                        }
-                        else {
-                            input.className = 'w-full px-2 py-1 text-sm bg-transparent border border-transparent rounded hover:border-slate-200 focus:bg-white focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all';
-                            input.disabled = false;
-                        }
-
-                        input.value = row[colIndex] !== undefined ? row[colIndex] : '';
-                        
-                        input.oninput = (e) => {
-                            AppState.rows[rowIndex][colIndex] = e.target.value;
-                            if (isWebSites && colIndex === 0) {
-                                const newLangId = AppUtils.detectLanguage(e.target.value);
-                                AppState.rows[rowIndex][1] = newLangId;
-                                const rowInputs = tr.querySelectorAll('input');
-                                if (rowInputs && rowInputs[1]) rowInputs[1].value = newLangId;
-                            }
-                            else if (isInAppSites && colIndex === 2) {
-                                const detectedPlat = AppUtils.detectPlatform(e.target.value);
-                                AppState.rows[rowIndex][1] = detectedPlat;
-                                const rowInputs = tr.querySelectorAll('input');
-                                if (rowInputs && rowInputs[1]) rowInputs[1].value = detectedPlat;
-                            }
-                        };
-
-                        if (isWebSites && colIndex === 0) {
-                            input.onblur = (e) => {
-                                const cleaned = AppUtils.cleanUrl(e.target.value);
-                                e.target.value = cleaned;
-                                AppState.rows[rowIndex][0] = cleaned;
-                                const newLangId = AppUtils.detectLanguage(cleaned);
-                                AppState.rows[rowIndex][1] = newLangId;
-                                const rowInputs = tr.querySelectorAll('input');
-                                if (rowInputs && rowInputs[1]) rowInputs[1].value = newLangId;
+                        if (isWebSites && colIndex === 1) {
+                            // Columna de idioma modificable manualmente en Web/Sites mediante un input de texto directo (solo número)
+                            const input = document.createElement('input');
+                            input.type = 'text';
+                            input.className = 'w-full px-2 py-1 text-sm bg-white border border-slate-200 rounded focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all font-semibold font-mono text-center text-slate-800';
+                            input.value = row[colIndex] !== undefined ? row[colIndex] : '';
+                            input.oninput = (e) => {
+                                AppState.rows[rowIndex][colIndex] = e.target.value;
                             };
+                            td.appendChild(input);
+                            tr.appendChild(td);
+                        } else {
+                            const input = document.createElement('input');
+                            input.type = 'text';
+                            
+                            if (isWebSites) {
+                                if (colIndex === 0) {
+                                    input.className = 'w-full px-2 py-1 text-sm bg-white border border-slate-200 rounded focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all font-medium text-slate-900';
+                                    input.disabled = false;
+                                } else {
+                                    input.className = 'w-full px-2 py-1 text-sm bg-slate-100/70 border border-slate-100 text-slate-500 rounded cursor-not-allowed select-none font-mono text-center';
+                                    input.disabled = true;
+                                }
+                            } 
+                            else if (isInAppSites) {
+                                if (colIndex === 2) {
+                                    input.className = 'w-full px-2 py-1 text-sm bg-white border border-slate-200 rounded focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:outline-none transition-all font-medium text-slate-900';
+                                    input.disabled = false;
+                                } else {
+                                    input.className = 'w-full px-2 py-1 text-sm bg-slate-100/70 border border-slate-100 text-slate-500 rounded cursor-not-allowed select-none font-mono text-center';
+                                    input.disabled = true;
+                                }
+                            }
+                            else if (isCtvSites) {
+                                if (colIndex === 1 || colIndex === 2 || colIndex === 3) {
+                                    input.className = 'w-full px-2 py-1 text-sm bg-white border border-slate-200 rounded focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none transition-all font-medium text-slate-900';
+                                    input.disabled = false;
+                                } else {
+                                    input.className = 'w-full px-2 py-1 text-sm bg-slate-100/70 border border-slate-100 text-slate-500 rounded cursor-not-allowed select-none font-mono text-center';
+                                    input.disabled = true;
+                                }
+                            }
+                            else {
+                                input.className = 'w-full px-2 py-1 text-sm bg-transparent border border-transparent rounded hover:border-slate-200 focus:bg-white focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all';
+                                input.disabled = false;
+                            }
+
+                            input.value = row[colIndex] !== undefined ? row[colIndex] : '';
+                            
+                            input.oninput = (e) => {
+                                AppState.rows[rowIndex][colIndex] = e.target.value;
+                                if (isWebSites && colIndex === 0) {
+                                    const newLangId = AppUtils.detectLanguage(e.target.value);
+                                    AppState.rows[rowIndex][1] = newLangId;
+                                    const rowInputs = tr.querySelectorAll('input');
+                                    if (rowInputs && rowInputs[1]) rowInputs[1].value = newLangId;
+                                }
+                                else if (isInAppSites && colIndex === 2) {
+                                    const detectedPlat = AppUtils.detectPlatform(e.target.value);
+                                    AppState.rows[rowIndex][1] = detectedPlat;
+                                    const rowInputs = tr.querySelectorAll('input');
+                                    if (rowInputs && rowInputs[1]) rowInputs[1].value = detectedPlat;
+                                }
+                            };
+
+                            if (isWebSites && colIndex === 0) {
+                                input.onblur = (e) => {
+                                    const cleaned = AppUtils.cleanUrl(e.target.value);
+                                    e.target.value = cleaned;
+                                    AppState.rows[rowIndex][0] = cleaned;
+                                    const newLangId = AppUtils.detectLanguage(cleaned);
+                                    AppState.rows[rowIndex][1] = newLangId;
+                                    const rowInputs = tr.querySelectorAll('input');
+                                    if (rowInputs && rowInputs[1]) rowInputs[1].value = newLangId;
+                                };
+                            }
+                            
+                            td.appendChild(input);
+                            tr.appendChild(td);
                         }
-                        
-                        td.appendChild(input);
-                        tr.appendChild(td);
                     });
 
                     const tdAction = document.createElement('td');
@@ -1416,7 +1597,11 @@
             },
 
             addNewDataRow() {
-                if (AppState.env === 'web' && AppState.type === 'sites') {
+                if (AppState.type === 'placements') {
+                    AppState.baseDomains.push({ domain: '', baseName: '' });
+                    this.generatePlacementMatrix();
+                    this.renderTable();
+                } else if (AppState.env === 'web' && AppState.type === 'sites') {
                     const newRow = ['', '1', AppState.defaults.webSites.environment, AppState.defaults.webSites.child_lt14, AppState.defaults.webSites.child_bt1418, AppState.defaults.webSites.gambling, AppState.defaults.webSites.alcohol, AppState.defaults.webSites.prebid, AppState.defaults.webSites.ortb];
                     AppState.rows.push(newRow);
                     this.renderTable();
@@ -1495,12 +1680,6 @@
                             AppState.defaults.ctvSites.ortb, AppState.defaults.ctvSites.prebid
                         ]);
                     }
-                    else {
-                        const cells = val1.split(';');
-                        const parsedRow = Array(AppState.columns.length).fill('');
-                        AppState.columns.forEach((_, colIdx) => { if (cells[colIdx] !== undefined) parsedRow[colIdx] = cells[colIdx].trim(); });
-                        tempNewRows.push(parsedRow);
-                    }
                     importedCount++;
                 }
 
@@ -1525,8 +1704,7 @@
                     
                     this.renderTable();
                     document.getElementById('import-col-1').value = "";
-                    const col2 = document.getElementById('import-col-2');
-                    if (col2) col2.value = "";
+                    if(document.getElementById('import-col-2')) document.getElementById('import-col-2').value = "";
                     this.showToast(`¡Importadas ${importedCount} fila(s) limpias con éxito!`);
                 }
             },
@@ -1587,7 +1765,9 @@
 
             downloadCSV() {
                 if (AppState.columns.length === 0) return;
+                
                 if (AppState.type === 'placements') this.generatePlacementMatrix();
+
                 if (AppState.rows.length === 0) return this.showToast("Por favor, añade al menos una fila de datos.");
 
                 const headerRow = AppState.columns.join(';');
@@ -1603,7 +1783,7 @@
                     
                     if (isWebSites) {
                         const finalCleanUrl = AppUtils.cleanUrl(rowToSave[0]);
-                        rowToSave[0] = finalCleanUrl; rowToSave[1] = AppUtils.detectLanguage(finalCleanUrl); rowToSave[2] = AppState.defaults.webSites.environment; rowToSave[3] = AppState.defaults.webSites.child_lt14; rowToSave[4] = AppState.defaults.webSites.child_bt1418; rowToSave[5] = AppState.defaults.webSites.gambling; rowToSave[6] = AppState.defaults.webSites.alcohol; rowToSave[7] = AppState.defaults.webSites.prebid; rowToSave[8] = AppState.defaults.webSites.ortb;
+                        rowToSave[0] = finalCleanUrl; rowToSave[1] = rowToSave[1]; rowToSave[2] = AppState.defaults.webSites.environment; rowToSave[3] = AppState.defaults.webSites.child_lt14; rowToSave[4] = AppState.defaults.webSites.child_bt1418; rowToSave[5] = AppState.defaults.webSites.gambling; rowToSave[6] = AppState.defaults.webSites.alcohol; rowToSave[7] = AppState.defaults.webSites.prebid; rowToSave[8] = AppState.defaults.webSites.ortb;
                     }
                     else if (isWebPlacements) {
                         rowToSave[0] = AppState.defaults.webPlacements.publisher; rowToSave[1] = AppUtils.cleanUrl(rowToSave[1]); rowToSave[3] = AppState.defaults.webPlacements.type; rowToSave[4] = AppState.defaults.webPlacements.formats; rowToSave[5] = AppState.defaults.webPlacements.devices; rowToSave[6] = AppState.defaults.webPlacements.native; rowToSave[7] = AppState.defaults.webPlacements.prebid; rowToSave[8] = AppState.defaults.webPlacements.environment;
@@ -1640,7 +1820,7 @@
             }
         };
 
-        // Exposures y Auto-Init
+        // Exposures globales y Auto-Init
         document.addEventListener('DOMContentLoaded', () => { AppController.init(); });
         
         window.handleGridPaste = (e) => AppController.handleGridPaste(e);
@@ -1650,7 +1830,7 @@
         window.updateGlobalPlacementDefault = (f, v) => AppController.updateGlobalPlacementDefault(f, v);
         window.toggleDomainInName = () => AppController.toggleDomainInName();
         window.clearBaseDomains = () => AppController.clearBaseDomains();
-        window.generateConfigsFromNames = () => AppController.generateConfigsFromNames();
+        window.bulkAddPlacementConfigs = () => AppController.bulkAddPlacementConfigs();
         window.addPlacementConfig = () => AppController.addPlacementConfig();
         window.removePlacementConfig = (i) => AppController.removePlacementConfig(i);
         window.updatePlacementConfigType = (i, v) => AppController.updatePlacementConfigType(i, v);
