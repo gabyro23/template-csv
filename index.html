@@ -1931,34 +1931,12 @@
                 if (AppState.rows.length === 0) return this.showToast("Por favor, procesa o añade al menos una fila de datos.");
 
                 const headerRow = AppState.columns.join(';');
-                const isWebSites = (AppState.env === 'web' && AppState.type === 'sites');
-                const isWebPlacements = (AppState.env === 'web' && AppState.type === 'placements');
-                const isInAppSites = (AppState.env === 'in-app' && AppState.type === 'sites');
-                const isCtvSites = (AppState.env === 'ctv' && AppState.type === 'sites');
-                const isInAppPlacements = (AppState.env === 'in-app' && AppState.type === 'placements');
-                const isCtvPlacements = (AppState.env === 'ctv' && AppState.type === 'placements');
-                const isRon = (AppState.type === 'ron');
 
                 const dataRows = AppState.rows.map(row => {
-                    let rowToSave = [...row];
-                    
-                    if (isWebSites) {
-                        const finalCleanUrl = AppUtils.cleanUrl(rowToSave[0]);
-                        rowToSave[0] = finalCleanUrl; rowToSave[1] = rowToSave[1]; rowToSave[2] = AppState.defaults.webSites.environment; rowToSave[3] = AppState.defaults.webSites.child_lt14; rowToSave[4] = AppState.defaults.webSites.child_bt1418; rowToSave[5] = AppState.defaults.webSites.gambling; rowToSave[6] = AppState.defaults.webSites.alcohol; rowToSave[7] = AppState.defaults.webSites.prebid; rowToSave[8] = AppState.defaults.webSites.ortb;
-                    }
-                    else if (isWebPlacements) {
-                        rowToSave[0] = AppState.defaults.webPlacements.publisher; rowToSave[1] = AppUtils.cleanUrl(rowToSave[1]); rowToSave[3] = AppState.defaults.webPlacements.type; rowToSave[4] = AppState.defaults.webPlacements.formats; rowToSave[5] = AppState.defaults.webPlacements.devices; rowToSave[6] = AppState.defaults.webPlacements.native; rowToSave[7] = AppState.defaults.webPlacements.prebid; rowToSave[8] = AppState.defaults.webPlacements.environment;
-                    }
-                    else if (isInAppSites) {
-                        rowToSave[0] = AppState.defaults.inAppSites.publisher; rowToSave[1] = AppUtils.detectPlatform(rowToSave[2]); rowToSave[3] = AppState.defaults.inAppSites.child_lt14; rowToSave[4] = AppState.defaults.inAppSites.child_bt1418; rowToSave[5] = AppState.defaults.inAppSites.gambling; rowToSave[6] = AppState.defaults.inAppSites.alcohol; rowToSave[7] = AppState.defaults.inAppSites.cmpRA; rowToSave[8] = AppState.defaults.inAppSites.cmpIAB; rowToSave[9] = AppState.defaults.inAppSites.cmpID; rowToSave[10] = AppState.defaults.inAppSites.cmpName; rowToSave[11] = AppState.defaults.inAppSites.ortb; rowToSave[12] = AppState.defaults.inAppSites.prebid;
-                    }
-                    else if (isCtvSites) {
-                        rowToSave[0] = AppState.defaults.ctvSites.publisher; rowToSave[4] = AppState.defaults.ctvSites.child_lt14; rowToSave[5] = AppState.defaults.ctvSites.child_bt1418; rowToSave[6] = AppState.defaults.ctvSites.gambling; rowToSave[7] = AppState.defaults.ctvSites.alcohol; rowToSave[8] = AppState.defaults.ctvSites.cmpRA; rowToSave[9] = AppState.defaults.ctvSites.cmpIAB; rowToSave[10] = AppState.defaults.ctvSites.cmpID; rowToSave[11] = AppState.defaults.ctvSites.cmpName; rowToSave[12] = AppState.defaults.ctvSites.ortb; rowToSave[13] = AppState.defaults.ctvSites.prebid;
-                    }
-                    else if (isInAppPlacements || isCtvPlacements) {
-                        const defs = isCtvPlacements ? AppState.defaults.ctvPlacements : AppState.defaults.inAppPlacements;
-                        rowToSave[0] = defs.publisher; rowToSave[3] = defs.type || rowToSave[3]; rowToSave[4] = defs.formats || rowToSave[4]; rowToSave[5] = defs.devices; rowToSave[6] = defs.native; rowToSave[7] = defs.prebid;
-                    }
+                    // Extraemos únicamente las celdas de la fila que coinciden con las columnas activas.
+                    // Al no forzar los valores por defecto aquí, respetamos cualquier edición manual
+                    // que el usuario haya hecho en la tabla y los formatos de placements generados dinámicamente.
+                    const rowToSave = AppState.columns.map((_, colIndex) => row[colIndex]);
 
                     return rowToSave.map(cellValue => {
                         const val = cellValue !== undefined && cellValue !== null ? cellValue.toString() : '';
