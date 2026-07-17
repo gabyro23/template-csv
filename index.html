@@ -41,7 +41,6 @@
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-sans">
 
-    <!-- Encabezado / Navbar -->
     <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div class="flex items-center space-x-3">
@@ -58,15 +57,12 @@
         </div>
     </header>
 
-    <!-- Contenido Principal -->
     <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
             
-            <!-- Panel Izquierdo: Configuración de Filtros (4 Cols) -->
             <div class="lg:col-span-4 space-y-6">
                 
-                <!-- SECCIÓN 1: Seleccionar Entorno (Environment) -->
                 <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
                     <div class="flex items-center space-x-2 mb-4">
                         <span class="flex items-center justify-center w-6 h-6 rounded-full bg-brand-100 text-brand-600 text-xs font-bold font-sans">1</span>
@@ -118,7 +114,6 @@
                     </div>
                 </div>
 
-                <!-- SECCIÓN 2: Seleccionar Objetivo / Tipo de Recurso -->
                 <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
                     <div class="flex items-center space-x-2 mb-4">
                         <span class="flex items-center justify-center w-6 h-6 rounded-full bg-brand-100 text-brand-600 text-xs font-bold font-sans">2</span>
@@ -152,16 +147,13 @@
                     </div>
                 </div>
 
-                <!-- CONTENIDO DINÁMICO (SOLO LEYENDAS EN LA IZQUIERDA) -->
                 <div id="left-panel-dynamic-content" class="hidden space-y-6">
-                    <!-- SECCIÓN: LEYENDA DINÁMICA DE CÓDIGOS -->
                     <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 space-y-4 font-sans">
                         <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5 font-sans">
                             <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
                             Leyenda de Identificadores
                         </h3>
 
-                        <!-- LEYENDA SITES -->
                         <div id="legend-sites" class="hidden space-y-3 text-[11px] text-slate-600 leading-relaxed font-sans">
                             <div>
                                 <strong class="text-slate-800">Environment:</strong> <span class="font-mono">1</span> (Web) | <span class="font-mono">3</span> (AMP)<br>
@@ -188,7 +180,6 @@
                             </div>
                         </div>
 
-                        <!-- LEYENDA WEB PLACEMENTS -->
                         <div id="legend-placements" class="hidden space-y-2 text-[11px] text-slate-600 leading-relaxed font-sans">
                             <div><strong class="text-slate-800">Environment:</strong> <span class="font-mono">1</span> (Web) | <span class="font-mono">3</span> (AMP)</div>
                             <div><strong class="text-slate-800">Type:</strong> 3 (Display), 1 (Skin), 2 (Video), 4 (Native)</div>
@@ -196,7 +187,6 @@
                             <div><strong class="text-slate-800">Prebid / Native:</strong> 1 (Habilitado) | 0 (Tag Based / Falso)</div>
                         </div>
 
-                        <!-- LEYENDA IN-APP SITES -->
                         <div id="legend-inapp-sites" class="hidden space-y-2 text-[11px] text-slate-600 leading-relaxed font-sans">
                             <div>
                                 <strong class="text-slate-800 font-sans">Platform Auto-Detect:</strong><br>
@@ -206,27 +196,23 @@
                             <div><strong class="text-slate-800">Booleanos:</strong> <span class="font-mono">1</span> (True/Habilitado) | <span class="font-mono">0</span> (False/Deshabilitado)</div>
                         </div>
 
-                        <!-- LEYENDA IN-APP PLACEMENTS -->
                         <div id="legend-inapp-placements" class="hidden space-y-2 text-[11px] text-slate-600 leading-relaxed font-sans">
                             <div><strong class="text-slate-800">Type:</strong> 3 (Display), 2 (Video)</div>
                             <div><strong class="text-slate-800">Formats:</strong> Display (320x50, 300x250...), Video (17, 18)</div>
                             <div><strong class="text-slate-800">Prebid / Native:</strong> 1 (Habilitado) | 0 (Tag Based / Falso)</div>
                         </div>
 
-                        <!-- LEYENDA CTV SITES -->
                         <div id="legend-ctv-sites" class="hidden space-y-2 text-[11px] text-slate-600 leading-relaxed font-sans">
                             <div><strong class="text-slate-800">Platform:</strong> Por defecto <code>ctv</code>, pero es editable.</div>
                             <div><strong class="text-slate-800">Booleanos:</strong> <span class="font-mono">1</span> (True/Habilitado) | <span class="font-mono">0</span> (False/Deshabilitado)</div>
                         </div>
 
-                        <!-- LEYENDA CTV PLACEMENTS -->
                         <div id="legend-ctv-placements" class="hidden space-y-2 text-[11px] text-slate-600 leading-relaxed font-sans">
                             <div><strong class="text-slate-800">Type:</strong> 3 (Display), 2 (Video)</div>
                             <div><strong class="text-slate-800">Formats:</strong> Video CTV (152), Video (17, 18), Display (320x50...)</div>
                             <div><strong class="text-slate-800">Prebid / Native:</strong> 1 (Habilitado) | 0 (Tag Based / Falso)</div>
                         </div>
                         
-                        <!-- LEYENDA RON -->
                         <div id="legend-ron" class="hidden space-y-2 text-[11px] text-slate-600 leading-relaxed font-sans">
                             <span class="font-bold text-slate-900 block uppercase tracking-wide text-[10px] text-teal-700">Mapeo: RON</span>
                             <div class="space-y-1">
@@ -245,14 +231,12 @@
 
             </div>
 
-            <!-- Panel Derecho: Editor, Configuraciones Globales y Matrix (8 Cols) -->
             <div id="right-panel-dynamic-content" class="lg:col-span-8 space-y-6 hidden">
                 
-                <!-- SECCIÓN IMPORTADOR ESTÁNDAR (TEXT AREA) -->
                 <div id="standard-import-container" class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col hidden">
                     <div class="flex items-center space-x-2 mb-2">
                         <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                         </svg>
                         <h2 class="text-sm font-semibold text-slate-950 font-sans">Importador Masivo</h2>
                     </div>
@@ -260,19 +244,16 @@
                         Copia tus datos desde Excel y pégalos en la celda. El sistema los procesará y adaptará automáticamente.
                     </p>
                     
-                    <!-- Contenedor del Editor -->
                     <div class="flex flex-col border border-slate-200 rounded-lg overflow-hidden shadow-inner flex-1 bg-slate-50">
                         <div class="flex bg-slate-100 text-[10px] font-bold text-slate-500 uppercase tracking-wider border-b border-slate-200">
                             <div class="flex-1 p-2 truncate font-sans" id="import-col-1-header">URL / Bundle</div>
                             <div class="flex-1 p-2 border-l border-slate-200 truncate hidden font-sans" id="import-col-2-header">Name (Opcional)</div>
                         </div>
                         <div class="flex h-32 bg-white relative">
-                            <!-- Columna 1 -->
                             <textarea id="import-col-1" wrap="off" onpaste="window.handleGridPaste(event)" disabled
                                 class="sync-scroll flex-1 p-2 text-xs resize-none outline-none font-mono leading-relaxed whitespace-pre overflow-auto focus:bg-blue-50/20 transition-colors placeholder:text-slate-300" 
                                 placeholder="Pega los datos aquí..."></textarea>
                             
-                            <!-- Columna 2 -->
                             <textarea id="import-col-2" wrap="off" disabled
                                 class="sync-scroll flex-1 p-2 text-xs resize-none outline-none font-mono border-l border-slate-200 leading-relaxed whitespace-pre overflow-auto focus:bg-blue-50/20 transition-colors placeholder:text-slate-300 hidden" 
                                 placeholder="Nombres..."></textarea>
@@ -285,7 +266,6 @@
                     </button>
                 </div>
 
-                <!-- SECCIÓN IMPORTADOR RON (FILE UPLOAD) -->
                 <div id="ron-import-container" class="hidden bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col">
                     <div class="flex items-center space-x-2 mb-2">
                         <svg class="w-5 h-5 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -322,7 +302,6 @@
                         </div>
                     </div>
 
-                    <!-- PANELES GLOBALES -->
                     <div id="global-defaults-panel" class="hidden p-6 border-b border-slate-100">
                         
                         <!-- WEB SITES -->
@@ -451,7 +430,6 @@
                                     </button>
                                 </div>
                                 
-                                <!-- Editor masivo para nombres de placements -->
                                 <div class="bg-blue-50/50 p-3 rounded-lg border border-blue-100 flex gap-2 items-end">
                                     <textarea id="bulk-placement-names" wrap="off" rows="3" class="w-full text-xs font-mono p-2 border border-slate-200 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 resize-y min-h-[40px]" placeholder="Pega aquí nombres de placements masivos (uno por línea)..."></textarea>
                                     <button onclick="bulkAddPlacementConfigs()" class="h-10 bg-blue-600 hover:bg-blue-700 text-white text-[10px] px-3 font-bold rounded uppercase tracking-wider transition-colors shadow-sm whitespace-nowrap">
@@ -741,11 +719,7 @@
         </div>
     </footer>
 
-    <!-- LÓGICA JAVASCRIPT CONSOLIDADA -->
     <script>
-        // ============================================================================
-        // MAPEO Y CONFIGURACIONES DE IDIOMA (Basado en el PDF oficial de Languages Codes)
-        // ============================================================================
         const ccTLDToLanguage = {
             'es': { iso: '27', name: 'Spanish' },
             'fr': { iso: '34', name: 'French' },
@@ -768,36 +742,6 @@
             'cat': { iso: '18', name: 'Catalan' }
         };
 
-        const AVAILABLE_LANGUAGES = [
-            { iso: '1', name: 'English' },
-            { iso: '6', name: 'Arabic' },
-            { iso: '18', name: 'Catalan' },
-            { iso: '20', name: 'Czech' },
-            { iso: '22', name: 'Danish' },
-            { iso: '23', name: 'German' },
-            { iso: '25', name: 'Greek' },
-            { iso: '27', name: 'Spanish' },
-            { iso: '29', name: 'Basque' },
-            { iso: '31', name: 'Finnish' },
-            { iso: '34', name: 'French' },
-            { iso: '38', name: 'Galician' },
-            { iso: '51', name: 'Italian' },
-            { iso: '52', name: 'Hebrew' },
-            { iso: '53', name: 'Japanese' },
-            { iso: '61', name: 'Korean' },
-            { iso: '82', name: 'Dutch' },
-            { iso: '83', name: 'Norwegian' },
-            { iso: '87', name: 'Polish' },
-            { iso: '89', name: 'Portuguese' },
-            { iso: '94', name: 'Russian' },
-            { iso: '98', name: 'Swedish' },
-            { iso: '102', name: 'Turkish' },
-            { iso: '134', name: 'Chinese' }
-        ];
-
-        // ============================================================================
-        // MÓDULO 1: AppConfig
-        // ============================================================================
         const AppConfig = {
             templatesData: {
                 'web': {
@@ -854,9 +798,6 @@
             }
         };
 
-        // ============================================================================
-        // MÓDULO 2: AppState
-        // ============================================================================
         const AppState = {
             env: null,
             type: null,
@@ -875,9 +816,6 @@
             }
         };
 
-        // ============================================================================
-        // MÓDULO 3: AppUtils
-        // ============================================================================
         const AppUtils = {
             cleanUrl(url) {
                 if (!url) return '';
@@ -961,9 +899,6 @@
             }
         };
 
-        // ============================================================================
-        // MÓDULO 4: AppController
-        // ============================================================================
         const AppController = {
             
             init() {
@@ -1070,7 +1005,7 @@
                         id: idx + 1,
                         type: defaultType,
                         formats: defaultFormats,
-                        name: name.trim().toLowerCase().replace(/[^a-z0-9_]/g, '_')
+                        name: name.trim() // <-- No modifica casing ni caracteres, tal como se pidió
                     });
                 });
 
@@ -1093,11 +1028,6 @@
                     ? { ...AppState.placementConfigs[AppState.placementConfigs.length - 1], id: nextId }
                     : { id: nextId, type: defaultType, formats: defaultFormats, name: AppState.env === 'ctv' ? 'instream_ctv' : 'display' };
                 
-                if (defaultClone.type === '3') defaultClone.name = 'display';
-                if (defaultClone.type === '1') defaultClone.name = 'skin';
-                if (defaultClone.type === '2') defaultClone.name = defaultClone.formats === '152' ? 'instream_ctv' : (defaultClone.formats === '17' ? 'instream' : 'outstream');
-                if (defaultClone.type === '4') defaultClone.name = 'native';
-
                 AppState.placementConfigs.push(defaultClone);
                 this.renderPlacementConfigUI();
                 this.generatePlacementMatrix();
@@ -1132,15 +1062,18 @@
 
             updatePlacementConfigFormats(index, formatValue) {
                 AppState.placementConfigs[index].formats = formatValue;
+                // Al elegir formato 18 siendo vídeo, actualizamos dinámicamente el nombre base a "outstream"
                 if (AppState.placementConfigs[index].type === '2') {
-                    AppState.placementConfigs[index].name = formatValue === '18' ? 'outstream' : (formatValue === '152' ? 'instream_ctv' : 'instream');
+                    if (formatValue === '18') AppState.placementConfigs[index].name = 'outstream';
+                    else if (formatValue === '152') AppState.placementConfigs[index].name = 'instream_ctv';
+                    else if (formatValue === '17') AppState.placementConfigs[index].name = 'instream';
                 }
                 this.generatePlacementMatrix();
                 this.renderTable();
             },
 
             updatePlacementConfigName(index, nameValue) {
-                AppState.placementConfigs[index].name = nameValue.toLowerCase().trim().replace(/[^a-z0-9_]/g, '_');
+                AppState.placementConfigs[index].name = nameValue; // <-- No sanitizer here, verbatim as requested
                 this.generatePlacementMatrix();
                 this.renderTable();
             },
@@ -1236,10 +1169,11 @@
                 AppState.baseDomains.forEach(base => {
                     AppState.placementConfigs.forEach(cfg => {
                         const cleanedDom = isWeb ? AppUtils.cleanUrl(base.domain) : base.domain.trim();
-                        const coreName = cfg.name || 'placement';
+                        const coreName = cfg.name || 'placement'; // Conserva mayúsculas y espacios tal cual
                         
                         let finalPlacementName = coreName;
                         if (AppState.includeDomainInName && cleanedDom) {
+                            // Se reemplazan los puntos por _ en el dominio, pero se conserva el coreName idéntico, uniéndolos con _
                             finalPlacementName = `${cleanedDom.replace(/\./g, '_')}_${coreName}`;
                         }
 
@@ -1606,6 +1540,9 @@
                             if (colIndex === 0) {
                                 input.className = 'w-full px-2 py-1 text-sm bg-white border border-slate-200 rounded focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all font-medium text-slate-900';
                                 input.disabled = false;
+                            } else if (colIndex === 1) { // Language Editable Input Numerico
+                                input.className = 'w-full px-2 py-1 text-sm bg-white border border-slate-200 rounded focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all font-mono text-center text-slate-900';
+                                input.disabled = false;
                             } else {
                                 input.className = 'w-full px-2 py-1 text-sm bg-slate-100/70 border border-slate-100 text-slate-500 rounded cursor-not-allowed select-none font-mono text-center';
                                 input.disabled = true;
@@ -1778,7 +1715,6 @@
                     }
                     else {
                         const parsedRow = Array(AppState.columns.length).fill('');
-                        // Safely handle plain split pastes if missing mapping
                         if(val1) parsedRow[0] = val1;
                         tempNewRows.push(parsedRow);
                     }
@@ -1825,10 +1761,7 @@
                     const headerLine = lines[0];
                     const delimiter = headerLine.includes(';') ? ';' : ',';
                     
-                    // Función para limpiar comillas dobles y espacios
                     const cleanVal = (val) => val ? val.trim().replace(/^"|"$/g, '').trim() : '';
-                    
-                    // Mapear las cabeceras eliminando las comillas
                     const headers = headerLine.split(delimiter).map(h => cleanVal(h).toLowerCase());
 
                     const domainIdx = headers.findIndex(h => h === 'domain' || h === 'bundle' || h === 'url');
@@ -1843,7 +1776,6 @@
                     for (let i = 1; i < lines.length; i++) {
                         const cells = lines[i].split(delimiter);
                         
-                        // Extraer valores y limpiarlos de comillas
                         const domain = cells[domainIdx] ? cleanVal(cells[domainIdx]) : '';
                         const formatVal = cells[formatIdx] ? cleanVal(cells[formatIdx]) : '';
                         const hash = cells[hashIdx] ? cleanVal(cells[hashIdx]) : '';
@@ -1933,9 +1865,6 @@
                 const headerRow = AppState.columns.join(';');
 
                 const dataRows = AppState.rows.map(row => {
-                    // Extraemos únicamente las celdas de la fila que coinciden con las columnas activas.
-                    // Al no forzar los valores por defecto aquí, respetamos cualquier edición manual
-                    // que el usuario haya hecho en la tabla y los formatos de placements generados dinámicamente.
                     const rowToSave = AppState.columns.map((_, colIndex) => row[colIndex]);
 
                     return rowToSave.map(cellValue => {
@@ -1959,7 +1888,6 @@
             }
         };
 
-        // Exposures globales y Auto-Init
         document.addEventListener('DOMContentLoaded', () => { AppController.init(); });
         
         window.handleGridPaste = (e) => AppController.handleGridPaste(e);
