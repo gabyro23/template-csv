@@ -1211,15 +1211,15 @@
                     counter.innerText = `${AppState.rows.length} Placements | ${uniqueDomains} ${domainLabel} Únicos`;
                     
                     theadTr.innerHTML = isWeb 
-                        ? `<th class="px-3 py-2 border-b border-slate-200">publisher</th><th class="px-3 py-2 border-b border-slate-200">domain</th><th class="px-3 py-2 border-b border-slate-200">name</th><th class="px-3 py-2 border-b border-slate-200">type</th><th class="px-3 py-2 border-b border-slate-200">formats</th><th class="px-3 py-2 border-b border-slate-200">devices</th><th class="px-3 py-2 border-b border-slate-200">native</th><th class="px-3 py-2 border-b border-slate-200">prebid</th><th class="px-3 py-2 border-b border-slate-200">environment</th>`
-                        : `<th class="px-3 py-2 border-b border-slate-200">publisher</th><th class="px-3 py-2 border-b border-slate-200">bundle</th><th class="px-3 py-2 border-b border-slate-200">name</th><th class="px-3 py-2 border-b border-slate-200">type</th><th class="px-3 py-2 border-b border-slate-200">formats</th><th class="px-3 py-2 border-b border-slate-200">devices</th><th class="px-3 py-2 border-b border-slate-200">native</th><th class="px-3 py-2 border-b border-slate-200">prebid</th>`;
+                        ? `<th class="px-3 py-2 border-b border-slate-200">publisher</th><th class="px-3 py-2 border-b border-slate-200">domain</th><th class="px-3 py-2 border-b border-slate-200">name</th><th class="px-3 py-2 border-b border-slate-200">type</th><th class="px-3 py-2 border-b border-slate-200">formats</th><th class="px-3 py-2 border-b border-slate-200">devices</th><th class="px-3 py-2 border-b border-slate-200">native</th><th class="px-3 py-2 border-b border-slate-200">prebid</th><th class="px-3 py-2 border-b border-slate-200">environment</th><th class="px-3 py-2 border-b border-slate-200 text-center w-12">Acción</th>`
+                        : `<th class="px-3 py-2 border-b border-slate-200">publisher</th><th class="px-3 py-2 border-b border-slate-200">bundle</th><th class="px-3 py-2 border-b border-slate-200">name</th><th class="px-3 py-2 border-b border-slate-200">type</th><th class="px-3 py-2 border-b border-slate-200">formats</th><th class="px-3 py-2 border-b border-slate-200">devices</th><th class="px-3 py-2 border-b border-slate-200">native</th><th class="px-3 py-2 border-b border-slate-200">prebid</th><th class="px-3 py-2 border-b border-slate-200 text-center w-12">Acción</th>`;
 
                     tbody.innerHTML = '';
                     if (AppState.rows.length === 0) {
-                        tbody.innerHTML = `<tr><td colspan="9" class="px-3 py-8 text-center italic text-slate-400">No hay datos base cargados. Utiliza el importador en tabla de la derecha...</td></tr>`;
+                        tbody.innerHTML = `<tr><td colspan="10" class="px-3 py-8 text-center italic text-slate-400">No hay datos base cargados. Utiliza el importador en tabla de la derecha...</td></tr>`;
                         return;
                     }
-                    AppState.rows.forEach(row => {
+                    AppState.rows.forEach((row, rowIndex) => {
                         const tr = document.createElement('tr');
                         tr.className = 'hover:bg-slate-50 transition-all-300';
                         row.forEach((val, i) => {
@@ -1228,6 +1228,17 @@
                             td.innerText = val !== undefined ? val : '';
                             tr.appendChild(td);
                         });
+
+                        const tdAction = document.createElement('td');
+                        tdAction.className = 'px-3 py-2 border-b border-slate-200 text-center';
+                        const deleteBtn = document.createElement('button');
+                        deleteBtn.type = 'button';
+                        deleteBtn.onclick = () => this.removePlacementRow(rowIndex);
+                        deleteBtn.className = 'text-slate-400 hover:text-red-600 p-1 rounded hover:bg-red-50 transition-colors inline-flex items-center justify-center';
+                        deleteBtn.innerHTML = `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>`;
+                        tdAction.appendChild(deleteBtn);
+                        tr.appendChild(tdAction);
+
                         tbody.appendChild(tr);
                     });
                 } else {
@@ -1513,12 +1524,10 @@
                     trHead.appendChild(th);
                 });
 
-                if (!isRon) {
-                    const thAction = document.createElement('th');
-                    thAction.className = 'px-4 py-3 text-xs font-semibold text-slate-700 border-b border-slate-200 bg-slate-100 text-center w-12';
-                    thAction.innerText = 'Acción';
-                    trHead.appendChild(thAction);
-                }
+                const thAction = document.createElement('th');
+                thAction.className = 'px-4 py-3 text-xs font-semibold text-slate-700 border-b border-slate-200 bg-slate-100 text-center w-12';
+                thAction.innerText = 'Acción';
+                trHead.appendChild(thAction);
                 thead.appendChild(trHead);
 
                 if (AppState.rows.length === 0) {
@@ -1585,46 +1594,32 @@
                         input.oninput = (e) => {
                             AppState.rows[rowIndex][colIndex] = e.target.value;
                             if (isWebSites && colIndex === 0) {
-                                const newLangId = AppUtils.detectLanguage(e.target.value);
-                                AppState.rows[rowIndex][1] = newLangId;
-                                const rowInputs = tr.querySelectorAll('input');
-                                if (rowInputs && rowInputs[1]) rowInputs[1].value = newLangId;
+                                input.onblur = (e) => {
+                                    const cleaned = AppUtils.cleanUrl(e.target.value);
+                                    e.target.value = cleaned;
+                                    AppState.rows[rowIndex][0] = cleaned;
+                                    const newLangId = AppUtils.detectLanguage(cleaned);
+                                    AppState.rows[rowIndex][1] = newLangId;
+                                    const rowInputs = tr.querySelectorAll('input');
+                                    if (rowInputs && rowInputs[1]) rowInputs[1].value = newLangId;
+                                };
                             }
-                            else if (isInAppSites && colIndex === 2) {
-                                const detectedPlat = AppUtils.detectPlatform(e.target.value);
-                                AppState.rows[rowIndex][1] = detectedPlat;
-                                const rowInputs = tr.querySelectorAll('input');
-                                if (rowInputs && rowInputs[1]) rowInputs[1].value = detectedPlat;
-                            }
-                        };
-
-                        if (isWebSites && colIndex === 0) {
-                            input.onblur = (e) => {
-                                const cleaned = AppUtils.cleanUrl(e.target.value);
-                                e.target.value = cleaned;
-                                AppState.rows[rowIndex][0] = cleaned;
-                                const newLangId = AppUtils.detectLanguage(cleaned);
-                                AppState.rows[rowIndex][1] = newLangId;
-                                const rowInputs = tr.querySelectorAll('input');
-                                if (rowInputs && rowInputs[1]) rowInputs[1].value = newLangId;
-                            };
+                            
+                            td.appendChild(input);
+                            tr.appendChild(td);
                         }
-                        
-                        td.appendChild(input);
-                        tr.appendChild(td);
                     });
 
-                    if (!isRon) {
-                        const tdAction = document.createElement('td');
-                        tdAction.className = 'px-3 py-2 border-b border-slate-200 text-center';
-                        const deleteBtn = document.createElement('button');
-                        deleteBtn.type = 'button';
-                        deleteBtn.onclick = () => this.removeDataRow(rowIndex);
-                        deleteBtn.className = 'text-slate-400 hover:text-red-600 p-1 rounded hover:bg-red-50 transition-colors inline-flex items-center justify-center';
-                        deleteBtn.innerHTML = `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>`;
-                        tdAction.appendChild(deleteBtn);
-                        tr.appendChild(tdAction);
-                    }
+                    const tdAction = document.createElement('td');
+                    tdAction.className = 'px-3 py-2 border-b border-slate-200 text-center';
+                    const deleteBtn = document.createElement('button');
+                    deleteBtn.type = 'button';
+                    deleteBtn.onclick = () => this.removeDataRow(rowIndex);
+                    deleteBtn.className = 'text-slate-400 hover:text-red-600 p-1 rounded hover:bg-red-50 transition-colors inline-flex items-center justify-center';
+                    deleteBtn.innerHTML = `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>`;
+                    tdAction.appendChild(deleteBtn);
+                    tr.appendChild(tdAction);
+
                     tbody.appendChild(tr);
                 });
             },
@@ -1662,6 +1657,11 @@
             removeDataRow(index) {
                 AppState.rows.splice(index, 1);
                 this.renderTable();
+            },
+
+            removePlacementRow(index) {
+                AppState.rows.splice(index, 1);
+                this.renderMatrixPreviewTable();
             },
 
             importFromPaste() {
@@ -1907,6 +1907,7 @@
         window.resetToDefaultColumns = () => AppController.resetToDefaultColumns();
         window.addNewDataRow = () => AppController.addNewDataRow();
         window.removeDataRow = (i) => AppController.removeDataRow(i);
+        window.removePlacementRow = (i) => AppController.removePlacementRow(i);
         window.importFromPaste = () => AppController.importFromPaste();
         window.processRonCSV = () => AppController.processRonCSV();
         window.downloadCSV = () => AppController.downloadCSV();
