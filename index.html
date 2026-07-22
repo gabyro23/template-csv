@@ -186,7 +186,7 @@
                             <span class="text-xs font-bold text-brand-600 uppercase tracking-widest block mb-1">Configuración Activa</span>
                             <h2 class="text-lg font-bold text-slate-900" id="active-template-title">Opciones</h2>
                         </div>
-                        <button onclick="downloadCSV()" id="download-btn" class="px-5 py-2.5 text-sm font-semibold rounded-xl text-white bg-slate-400 cursor-not-allowed" disabled>Descargar CSV</button>
+                        <button onclick="downloadCSV()" id="download-btn" class="px-5 py-2.5 text-sm font-semibold rounded-xl text-white bg-slate-400 cursor-not-allowed transition-all" disabled>Descargar CSV</button>
                     </div>
 
                     <!-- DEFAULTS GLOBALES -->
@@ -306,6 +306,8 @@
         const AppState = {
             env: null, type: null, columns: [], rows: [], baseDomains: [{ domain: 'eldiario.es', baseName: 'eldiario_es' }],
             includeDomainInName: true, placementConfigs: [{ id: 1, type: '3', formats: '300x250,728x90', name: 'display' }],
+            isDefaultData: true, // Bandera para saber si la información en pantalla es el ejemplo por defecto
+            deletedPlacements: new Set(), // Registro de placements eliminados manualmente
             defaults: {
                 webSites: { environment: '1', child_lt14: '0', child_bt1418: '0', gambling: '1', alcohol: '1', prebid: '1', ortb: '0' },
                 webPlacements: { publisher: '1001', devices: 'desktop,mobile,tablet', native: '1', prebid: '1', environment: '1' },
@@ -355,7 +357,13 @@
                 if(AppState.type === 'placements') { this.generatePlacementMatrix(); }
             },
             toggleDomainInName() { AppState.includeDomainInName = !AppState.includeDomainInName; this.generatePlacementMatrix(); this.renderPlacementConfigUI(); },
-            clearBaseDomains() { AppState.baseDomains = []; this.generatePlacementMatrix(); },
+            
+            clearBaseDomains() { 
+                AppState.baseDomains = []; 
+                AppState.isDefaultData = false; // Quitar marca de data default
+                AppState.deletedPlacements.clear(); // Limpiar registro de eliminados
+                this.generatePlacementMatrix(); 
+            },
             
             bulkAddPlacementConfigs() {
                 const t = document.getElementById('bulk-placement-names'); if(!t || !t.value.trim()) return;
@@ -383,10 +391,6 @@
             },
             updatePlacementConfigFormats(i, v) { 
                 AppState.placementConfigs[i].formats = v; 
-                if (AppState.placementConfigs[i].type === '2') {
-                    AppState.placementConfigs[i].name = v === '18' ? 'outstream' : (v === '152' ? 'instream_ctv' : 'instream');
-                    this.renderPlacementConfigUI();
-                }
                 this.generatePlacementMatrix(); 
             },
             updatePlacementConfigName(i, v) { AppState.placementConfigs[i].name = v; this.generatePlacementMatrix(); },
@@ -411,8 +415,11 @@
                     AppState.placementConfigs.forEach(cfg => {
                         const cl = AppState.env==='web'?AppUtils.cleanUrl(b.domain):b.domain.trim();
                         const cN = cfg.name || '';
-                        const fN = AppState.includeDomainInName && cl && cN ? `${cl.replace(/\./g, '_')}_${cN}` : cN; // Exact join, no replace on name
+                        const fN = AppState.includeDomainInName && cl && cN ? `${cl.replace(/\./g, '_')}_${cN}` : cN; 
                         
+                        const key = `${cl}_${fN}_${cfg.type}`;
+                        if (AppState.deletedPlacements.has(key)) return; // Omitir si fue eliminado por el usuario
+
                         if(AppState.env==='web') AppState.rows.push([d.publisher, cl, fN, cfg.type, cfg.formats, d.devices, d.native, d.prebid, d.environment]);
                         else AppState.rows.push([d.publisher, cl, fN, cfg.type, cfg.formats, d.devices, d.native, d.prebid]);
                     });
@@ -464,7 +471,6 @@
                             let css = (cI === 2) ? 'class="w-full border rounded px-1 py-1 text-xs text-center font-bold text-teal-600 focus:border-teal-500 outline-none"' : dis;
                             rH += `<td class="px-2 py-1 border-b"><input type="text" ${css} value="${val}" oninput="AppController.updateCell(${rI}, ${cI}, this.value)" /></td>`;
                         } else {
-                            // Input directo numérico para idioma
                             let typ = isLang ? 'type="number"' : 'type="text"';
                             let css = isLang ? 'class="w-full border rounded px-1 py-1 text-xs text-center font-bold text-brand-600 focus:border-brand-500 outline-none"' : 'class="w-full border border-transparent hover:border-slate-200 rounded px-1 py-1 text-xs focus:border-brand-500 outline-none focus:bg-white"';
                             if (isWebSites && cI > 1) css = 'disabled class="w-full bg-slate-100/50 text-slate-400 border border-transparent rounded px-1 py-1 text-xs text-center"';
@@ -492,12 +498,21 @@
             },
             addNewDataRow() { 
                 if(AppState.type==='ron') return;
+                AppState.isDefaultData = false; // Quitar marca de data por defecto si añade a mano
                 AppState.rows.push(Array(AppState.columns.length).fill('')); 
                 this.renderTable(); 
             },
             removeDataRow(i) { 
-                AppState.rows.splice(i,1); 
-                if(AppState.type==='placements') { this.renderMatrixPreviewTable(); } else { this.renderTable(); } 
+                if (AppState.type === 'placements') {
+                    const row = AppState.rows[i];
+                    const key = `${row[1]}_${row[2]}_${row[3]}`; // domain_name_type
+                    AppState.deletedPlacements.add(key); // Registrar como eliminado
+                    AppState.rows.splice(i, 1);
+                    this.renderMatrixPreviewTable();
+                } else {
+                    AppState.rows.splice(i, 1); 
+                    if(AppState.type==='placements') { this.renderMatrixPreviewTable(); } else { this.renderTable(); } 
+                }
             },
 
             selectEnvironment(env) {
@@ -518,6 +533,10 @@
                 document.getElementById('left-panel-dynamic-content').classList.remove('hidden');
                 document.getElementById('right-panel-dynamic-content').classList.remove('hidden');
                 
+                // Set flag to true as we are loading fresh default sample info
+                AppState.isDefaultData = true;
+                AppState.deletedPlacements.clear(); // Limpiar historial de eliminados al cambiar
+
                 ['sites','placements','inapp-sites','inapp-placements','ctv-sites','ctv-placements','ron'].forEach(id => { const el = document.getElementById(`legend-${id}`); if(el) el.classList.add('hidden'); });
                 ['sites','placements','inapp-sites','ctv-sites'].forEach(id => { const el = document.getElementById(`global-${id}-controls`); if(el) el.classList.add('hidden'); });
                 
@@ -548,14 +567,24 @@
                     document.getElementById(`legend-${AppState.env==='web'?'placements':(AppState.env==='in-app'?'inapp-placements':'ctv-placements')}`).classList.remove('hidden');
                     document.getElementById('global-placements-controls').classList.remove('hidden');
                     document.getElementById('global-plac-env-container').classList.toggle('hidden', AppState.env!=='web');
+                    
+                    // Resetear el ejemplo inicial de placement base en base al entorno
+                    if(AppState.env === 'web') AppState.baseDomains = [{ domain: 'eldiario.es', baseName: 'eldiario_es' }];
+                    else if(AppState.env === 'in-app') AppState.baseDomains = [{ domain: 'com.app.example', baseName: '' }];
+                    else if(AppState.env === 'ctv') AppState.baseDomains = [{ domain: '1227390', baseName: 'ChannelName' }];
+                    
                     this.renderPlacementConfigUI(); this.generatePlacementMatrix();
                 }
 
                 document.getElementById('active-template-title').innerText = t.title;
                 const btnAdd = document.getElementById('btn-add-row'); if(btnAdd) btnAdd.classList.toggle('hidden', isRon);
                 
-                document.getElementById('download-btn').disabled = false;
-                document.getElementById('download-btn').classList.replace('bg-slate-400', 'bg-brand-600');
+                // Activar el botón de descarga y quitar el cursor deshabilitado (Issue 2 fix)
+                const downloadBtn = document.getElementById('download-btn');
+                downloadBtn.disabled = false;
+                downloadBtn.classList.replace('bg-slate-400', 'bg-brand-600');
+                downloadBtn.classList.remove('cursor-not-allowed');
+                downloadBtn.classList.add('hover:bg-brand-700', 'hover:shadow-md');
                 
                 this.renderTable();
             },
@@ -564,6 +593,23 @@
                 const c1 = document.getElementById('import-col-1').value.split(/\r?\n/);
                 const c2 = document.getElementById('import-col-2').value.split(/\r?\n/);
                 let c = 0; const isTwo = AppState.env==='ctv' && AppState.type==='sites';
+                
+                // Verificar si hay datos reales antes de borrar los defaults
+                let hasValidInput = false;
+                for(let i=0; i<(isTwo?Math.max(c1.length,c2.length):c1.length); i++) {
+                    let v1=(c1[i]||'').trim(); let v2=(c2[i]||'').trim();
+                    if(!isTwo && v1.includes('\t')) { const p=v1.split('\t'); v1=p[0].trim(); }
+                    if(v1 || v2) { hasValidInput = true; break; }
+                }
+
+                if (!hasValidInput) return; // Si no pegaron nada, no hacer nada
+
+                // Issue 1 Fix: Si tenemos la data de ejemplo, la limpiamos antes de añadir la nueva data
+                if (AppState.isDefaultData) {
+                    if (AppState.type === 'placements') AppState.baseDomains = [];
+                    else AppState.rows = [];
+                    AppState.isDefaultData = false;
+                }
                 
                 for(let i=0; i<(isTwo?Math.max(c1.length,c2.length):c1.length); i++) {
                     let v1=(c1[i]||'').trim(); let v2=(c2[i]||'').trim();
@@ -606,6 +652,7 @@
                         if(dI===-1||fI===-1||hI===-1) return this.showToast('Falta Domain, Formats o Hash.');
                     }
 
+                    AppState.isDefaultData = false; // Por seguridad, aunque RON empiece vacío
                     let nR = [];
                     
                     if (AppState.env === 'ctv') {
@@ -648,7 +695,6 @@
             downloadCSV() {
                 if(!AppState.columns.length || (!AppState.rows.length && AppState.type!=='placements')) return;
                 
-                // En Placements, la tabla matriz visual es AppState.rows
                 const hR = AppState.columns.join(';');
                 const dR = AppState.rows.map(row => {
                     const rowToSave = AppState.columns.map((_, colIndex) => row[colIndex]);
