@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CSV Template</title>
-    <!-- Tailwind CSS para un diseño moderno y fluido -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -21,6 +20,7 @@
         .transition-all-300 { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         .sync-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
         .sync-scroll::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 3px; }
+        input:focus, select:focus, textarea:focus { outline: none; box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5); border-color: transparent; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-sans">
@@ -34,14 +34,14 @@
                     </svg>
                 </div>
                 <div>
-                    <h1 class="text-lg font-bold text-slate-900 tracking-tight">CSV Template</h1>
-                    <p class="text-xs text-slate-500 font-medium">Herramienta para generar los CSV necesarios para la creación de sites y placements.</p>
+                    <h1 class="text-lg font-bold text-slate-900 tracking-tight">CSV Template Generator</h1>
+                    <p class="text-xs text-slate-500 font-medium">Herramienta integral para Sites y Placements.</p>
                 </div>
             </div>
         </div>
     </header>
 
-    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <main class="flex-1 max-w-[1400px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
             
             <!-- PANEL IZQUIERDO -->
@@ -54,7 +54,7 @@
                         <h2 class="text-md font-semibold text-slate-950">Selecciona el Entorno</h2>
                     </div>
                     
-                    <div class="grid grid-cols-1 gap-2.5">
+                    <div class="grid grid-cols-1 gap-3">
                         <button type="button" onclick="selectEnvironment('web')" id="btn-env-web" class="flex items-center justify-between p-3.5 rounded-xl border-2 transition-all-300 text-left hover:bg-slate-50 focus:outline-none">
                             <div class="flex items-center space-x-3">
                                 <div class="p-2 bg-slate-100 rounded-lg text-slate-600" id="icon-env-web"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" /></svg></div>
@@ -137,7 +137,7 @@
                             <span class="font-bold text-slate-900 block uppercase tracking-wide text-[10px] text-teal-700">Mapeo: RON</span>
                             <div class="space-y-1">
                                 <div><strong class="text-slate-800">Web/In-App:</strong> Format 17 &rarr; instream | 18 &rarr; outstream | Otros &rarr; display. Key = domain/format.</div>
-                                <div class="pt-2"><strong class="text-slate-800">CTV Especial:</strong><br>1) Crea bundle/instream, bundle/outstream, bundle/video (Default 0).<br>2) Identifica el primer Hash del archivo para crear keys maestras: instream, outstream, video (Default 1).</div>
+                                <div class="pt-2"><strong class="text-slate-800">CTV Especial:</strong><br>1) Crea bundle/instream, bundle/outstream, bundle/video.<br>2) Identifica el primer Hash para crear keys maestras.</div>
                             </div>
                         </div>
                     </div>
@@ -160,11 +160,11 @@
                             <div class="flex-1 p-2 border-l border-slate-200 truncate hidden" id="import-col-2-header">Name (Opcional)</div>
                         </div>
                         <div class="flex h-32 bg-white relative">
-                            <textarea id="import-col-1" wrap="off" onpaste="window.handleGridPaste(event)" class="sync-scroll flex-1 p-2 text-xs resize-none outline-none font-mono focus:bg-blue-50/20" placeholder="Pega los datos aquí..."></textarea>
+                            <textarea id="import-col-1" wrap="off" class="sync-scroll flex-1 p-2 text-xs resize-none outline-none font-mono focus:bg-blue-50/20" placeholder="Pega los datos aquí..."></textarea>
                             <textarea id="import-col-2" wrap="off" class="sync-scroll flex-1 p-2 text-xs resize-none outline-none font-mono border-l border-slate-200 focus:bg-blue-50/20 hidden" placeholder="Nombres..."></textarea>
                         </div>
                     </div>
-                    <button onclick="importFromPaste()" id="btn-import-execute" class="w-full mt-4 py-2 text-xs font-bold uppercase rounded-lg text-white bg-brand-600 hover:bg-brand-700 transition-all">Procesar Importación</button>
+                    <button onclick="importFromPaste()" id="btn-import-execute" class="w-full mt-4 py-2.5 text-sm font-bold uppercase rounded-lg text-white bg-green-600 hover:bg-green-700 shadow-sm transition-all">Procesar Datos Pegados</button>
                 </div>
 
                 <!-- IMPORTADOR RON -->
@@ -176,7 +176,7 @@
                     <p class="text-[11px] text-slate-500 mb-3">Sube el archivo para que el sistema procese Domain/Bundle, Formats y Hash.</p>
                     <div class="flex flex-col border border-dashed border-slate-300 rounded-lg p-8 items-center justify-center bg-slate-50">
                         <input type="file" id="ron-csv-upload" accept=".csv" class="mb-4 text-xs text-slate-600 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100 cursor-pointer" />
-                        <button onclick="processRonCSV()" class="px-5 py-2.5 bg-teal-600 text-white text-xs font-bold rounded shadow-sm hover:bg-teal-700">Procesar Archivo CSV</button>
+                        <button onclick="processRonCSV()" class="px-6 py-2.5 bg-teal-600 text-white text-sm font-bold rounded-lg shadow-sm hover:bg-teal-700 transition-all">Procesar Archivo CSV</button>
                     </div>
                 </div>
 
@@ -184,62 +184,62 @@
                     <div class="p-6 border-b border-slate-100 bg-slate-50 flex justify-between items-center">
                         <div>
                             <span class="text-xs font-bold text-brand-600 uppercase tracking-widest block mb-1">Configuración Activa</span>
-                            <h2 class="text-lg font-bold text-slate-900" id="active-template-title">Opciones</h2>
+                            <h2 class="text-xl font-bold text-slate-900" id="active-template-title">Opciones</h2>
                         </div>
-                        <button onclick="downloadCSV()" id="download-btn" class="px-5 py-2.5 text-sm font-semibold rounded-xl text-white bg-slate-400 cursor-not-allowed transition-all" disabled>Descargar CSV</button>
+                        <button onclick="downloadCSV()" id="download-btn" class="px-6 py-2.5 text-sm font-semibold rounded-xl text-white bg-slate-400 cursor-not-allowed transition-all" disabled>Descargar CSV</button>
                     </div>
 
                     <!-- DEFAULTS GLOBALES -->
                     <div id="global-defaults-panel" class="hidden p-6 border-b border-slate-100">
                         <!-- WEB SITES -->
-                        <div id="global-sites-controls" class="hidden grid grid-cols-2 sm:grid-cols-4 gap-3">
-                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">environment</label><select onchange="updateGlobalDefault('environment', this.value)" class="w-full px-2 py-1 text-xs border rounded"><option value="1">1 (Web)</option><option value="3">3 (AMP)</option></select></div>
-                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">child_lt14</label><select onchange="updateGlobalDefault('child_lt14', this.value)" class="w-full px-2 py-1 text-xs border rounded"><option value="0">0</option><option value="1">1</option></select></div>
-                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">child_bt1418</label><select onchange="updateGlobalDefault('child_bt1418', this.value)" class="w-full px-2 py-1 text-xs border rounded"><option value="0">0</option><option value="1">1</option></select></div>
-                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">gambling</label><select onchange="updateGlobalDefault('gambling', this.value)" class="w-full px-2 py-1 text-xs border rounded"><option value="1">1</option><option value="0">0</option></select></div>
-                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">alcohol</label><select onchange="updateGlobalDefault('alcohol', this.value)" class="w-full px-2 py-1 text-xs border rounded"><option value="1">1</option><option value="0">0</option></select></div>
-                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">prebid</label><select onchange="updateGlobalDefault('prebid', this.value)" class="w-full px-2 py-1 text-xs border rounded"><option value="1">1</option><option value="0">0</option></select></div>
-                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">ortb</label><select onchange="updateGlobalDefault('ortb', this.value)" class="w-full px-2 py-1 text-xs border rounded"><option value="0">0</option><option value="1">1</option></select></div>
+                        <div id="global-sites-controls" class="hidden grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-3">
+                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">environment</label><select onchange="updateGlobalDefault('environment', this.value)" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white"><option value="1">1 (Web)</option><option value="3">3 (AMP)</option></select></div>
+                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">child_lt14</label><select onchange="updateGlobalDefault('child_lt14', this.value)" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white"><option value="0">0</option><option value="1">1</option></select></div>
+                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">child_bt1418</label><select onchange="updateGlobalDefault('child_bt1418', this.value)" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white"><option value="0">0</option><option value="1">1</option></select></div>
+                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">gambling</label><select onchange="updateGlobalDefault('gambling', this.value)" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white"><option value="1">1</option><option value="0">0</option></select></div>
+                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">alcohol</label><select onchange="updateGlobalDefault('alcohol', this.value)" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white"><option value="1">1</option><option value="0">0</option></select></div>
+                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">prebid</label><select onchange="updateGlobalDefault('prebid', this.value)" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white"><option value="1">1</option><option value="0">0</option></select></div>
+                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">ortb</label><select onchange="updateGlobalDefault('ortb', this.value)" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white"><option value="0">0</option><option value="1">1</option></select></div>
                         </div>
 
                         <!-- PLACEMENTS -->
-                        <div id="global-placements-controls" class="hidden space-y-5">
-                            <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 bg-slate-50 p-4 rounded-xl border border-slate-200">
-                                <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Publisher ID</label><input type="text" oninput="updateGlobalPlacementDefault('publisher', this.value)" value="1001" class="w-full px-2 py-1 text-xs border rounded" /></div>
-                                <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Devices</label><input type="text" oninput="updateGlobalPlacementDefault('devices', this.value)" value="desktop,mobile,tablet" class="w-full px-2 py-1 text-xs border rounded" /></div>
-                                <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Native</label><input type="text" value="1" disabled class="w-full px-2 py-1 text-xs bg-slate-100 border rounded text-center text-slate-400" /></div>
-                                <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Prebid</label><select onchange="updateGlobalPlacementDefault('prebid', this.value)" class="w-full px-2 py-1 text-xs border rounded"><option value="1">1 (Habilitado)</option><option value="0">0 (Tag Based)</option></select></div>
-                                <div id="global-plac-env-container"><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Environment</label><select onchange="updateGlobalPlacementDefault('environment', this.value)" class="w-full px-2 py-1 text-xs border rounded"><option value="1">1 (Web)</option><option value="3">3 (AMP)</option></select></div>
+                        <div id="global-placements-controls" class="hidden space-y-6">
+                            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 bg-slate-50 p-4 rounded-xl border border-slate-200">
+                                <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Publisher ID</label><input type="text" id="global-plac-pub" oninput="updateGlobalPlacementDefault('publisher', this.value)" value="1001" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white" /></div>
+                                <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Devices</label><input type="text" id="global-plac-dev" oninput="updateGlobalPlacementDefault('devices', this.value)" value="desktop,mobile,tablet" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white" /></div>
+                                <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Native</label><input type="text" value="1" disabled class="w-full px-2 py-1.5 text-xs bg-slate-100 border border-slate-200 rounded text-center text-slate-400" /></div>
+                                <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Prebid</label><select id="global-plac-prebid" onchange="updateGlobalPlacementDefault('prebid', this.value)" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white"><option value="1">1 (Habilitado)</option><option value="0">0 (Tag Based)</option></select></div>
+                                <div id="global-plac-env-container"><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Environment</label><select id="global-plac-env" onchange="updateGlobalPlacementDefault('environment', this.value)" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white"><option value="1">1 (Web)</option><option value="3">3 (AMP)</option></select></div>
                             </div>
                             <div class="space-y-4 pt-2">
-                                <div class="flex justify-between items-center"><span class="text-[11px] font-bold text-slate-500 uppercase">Configuración de Combinaciones</span><button type="button" id="btn-toggle-domain-prefix" onclick="toggleDomainInName()" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-blue-600 text-white">✓ Prefijo URL (Activo)</button></div>
-                                <div class="bg-blue-50/50 p-3 rounded-lg border border-blue-100 flex gap-2 items-end">
-                                    <textarea id="bulk-placement-names" wrap="off" rows="3" class="w-full text-xs font-mono p-2 border border-slate-200 rounded resize-y" placeholder="Pega nombres de placements masivos..."></textarea>
-                                    <button onclick="bulkAddPlacementConfigs()" class="h-10 bg-blue-600 text-white text-[10px] px-3 font-bold rounded uppercase whitespace-nowrap">Generar Configs</button>
+                                <div class="flex justify-between items-center border-b border-slate-200 pb-2"><span class="text-xs font-bold text-slate-800 uppercase">Configuración de Combinaciones</span><button type="button" id="btn-toggle-domain-prefix" onclick="toggleDomainInName()" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-blue-600 hover:bg-blue-700 text-white transition-all shadow-sm">✓ Prefijo URL (Activo)</button></div>
+                                <div class="bg-blue-50/50 p-4 rounded-xl border border-blue-100 flex flex-col sm:flex-row gap-3 items-end shadow-inner">
+                                    <textarea id="bulk-placement-names" wrap="off" rows="2" class="w-full text-xs font-mono p-2 border border-slate-300 rounded resize-y" placeholder="Ej: display_1\ndisplay_2\n(Pegar Nombres Masivos)"></textarea>
+                                    <button onclick="bulkAddPlacementConfigs()" class="h-10 w-full sm:w-auto bg-blue-600 text-white text-[11px] px-4 font-bold rounded uppercase whitespace-nowrap hover:bg-blue-700 shadow-sm transition-all">Generar Configs</button>
                                 </div>
-                                <div id="placement-configs-container" class="space-y-3"></div>
-                                <button type="button" onclick="addPlacementConfig()" class="px-3 py-1.5 border border-dashed border-blue-500 text-xs font-semibold rounded-lg text-blue-600 hover:bg-blue-50">+ Añadir Tipo y Formato</button>
+                                <div id="placement-configs-container" class="space-y-3 mt-4"></div>
+                                <button type="button" onclick="addPlacementConfig()" class="w-full mt-2 px-3 py-2 border border-dashed border-blue-400 text-xs font-semibold rounded-lg text-blue-600 bg-white hover:bg-blue-50 transition-all">+ Añadir Tipo y Formato</button>
                             </div>
                         </div>
 
                         <!-- IN-APP SITES -->
                         <div id="global-inapp-sites-controls" class="hidden grid grid-cols-2 sm:grid-cols-6 gap-3">
-                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">publisher</label><input type="text" oninput="updateGlobalDefault('publisher', this.value)" value="232" class="w-full px-2 py-1 text-xs border rounded" /></div>
-                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">child_lt14</label><select onchange="updateGlobalDefault('child_lt14', this.value)" class="w-full px-2 py-1 text-xs border rounded"><option value="0">0</option><option value="1">1</option></select></div>
-                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">gambling</label><select onchange="updateGlobalDefault('gambling', this.value)" class="w-full px-2 py-1 text-xs border rounded"><option value="1">1</option><option value="0">0</option></select></div>
-                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">alcohol</label><select onchange="updateGlobalDefault('alcohol', this.value)" class="w-full px-2 py-1 text-xs border rounded"><option value="1">1</option><option value="0">0</option></select></div>
-                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">ortb</label><select onchange="updateGlobalDefault('ortb', this.value)" class="w-full px-2 py-1 text-xs border rounded"><option value="1">1</option><option value="0">0</option></select></div>
-                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">prebid</label><select onchange="updateGlobalDefault('prebid', this.value)" class="w-full px-2 py-1 text-xs border rounded"><option value="1">1</option><option value="0">0</option></select></div>
+                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">publisher</label><input type="text" oninput="updateGlobalDefault('publisher', this.value)" value="232" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white" /></div>
+                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">child_lt14</label><select onchange="updateGlobalDefault('child_lt14', this.value)" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white"><option value="0">0</option><option value="1">1</option></select></div>
+                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">gambling</label><select onchange="updateGlobalDefault('gambling', this.value)" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white"><option value="1">1</option><option value="0">0</option></select></div>
+                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">alcohol</label><select onchange="updateGlobalDefault('alcohol', this.value)" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white"><option value="1">1</option><option value="0">0</option></select></div>
+                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">ortb</label><select onchange="updateGlobalDefault('ortb', this.value)" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white"><option value="1">1</option><option value="0">0</option></select></div>
+                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">prebid</label><select onchange="updateGlobalDefault('prebid', this.value)" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white"><option value="1">1</option><option value="0">0</option></select></div>
                         </div>
 
                         <!-- CTV SITES -->
                         <div id="global-ctv-sites-controls" class="hidden grid grid-cols-2 sm:grid-cols-6 gap-3">
-                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">publisher</label><input type="text" oninput="updateGlobalDefault('publisher', this.value)" value="1433" class="w-full px-2 py-1 text-xs border rounded" /></div>
-                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">child_lt14</label><select onchange="updateGlobalDefault('child_lt14', this.value)" class="w-full px-2 py-1 text-xs border rounded"><option value="0">0</option><option value="1">1</option></select></div>
-                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">gambling</label><select onchange="updateGlobalDefault('gambling', this.value)" class="w-full px-2 py-1 text-xs border rounded"><option value="1">1</option><option value="0">0</option></select></div>
-                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">alcohol</label><select onchange="updateGlobalDefault('alcohol', this.value)" class="w-full px-2 py-1 text-xs border rounded"><option value="1">1</option><option value="0">0</option></select></div>
-                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">ortb</label><select onchange="updateGlobalDefault('ortb', this.value)" class="w-full px-2 py-1 text-xs border rounded"><option value="1">1</option><option value="0">0</option></select></div>
-                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">prebid</label><select onchange="updateGlobalDefault('prebid', this.value)" class="w-full px-2 py-1 text-xs border rounded"><option value="1">1</option><option value="0">0</option></select></div>
+                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">publisher</label><input type="text" oninput="updateGlobalDefault('publisher', this.value)" value="1433" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white" /></div>
+                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">child_lt14</label><select onchange="updateGlobalDefault('child_lt14', this.value)" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white"><option value="0">0</option><option value="1">1</option></select></div>
+                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">gambling</label><select onchange="updateGlobalDefault('gambling', this.value)" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white"><option value="1">1</option><option value="0">0</option></select></div>
+                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">alcohol</label><select onchange="updateGlobalDefault('alcohol', this.value)" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white"><option value="1">1</option><option value="0">0</option></select></div>
+                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">ortb</label><select onchange="updateGlobalDefault('ortb', this.value)" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white"><option value="1">1</option><option value="0">0</option></select></div>
+                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">prebid</label><select onchange="updateGlobalDefault('prebid', this.value)" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white"><option value="1">1</option><option value="0">0</option></select></div>
                         </div>
                     </div>
 
@@ -247,11 +247,11 @@
                     <div id="manual-grid-section" class="p-6">
                         <div class="flex justify-between mb-4">
                             <div><h3 class="text-xs font-bold text-slate-500 uppercase" id="data-editor-title">Editor de Datos</h3></div>
-                            <button onclick="addNewDataRow()" id="btn-add-row" class="px-3 py-1.5 border border-brand-500 text-xs font-semibold rounded-lg text-brand-600 bg-white hover:bg-brand-50">+ Añadir Fila</button>
+                            <button onclick="addNewDataRow()" id="btn-add-row" class="px-4 py-1.5 border border-brand-500 text-xs font-semibold rounded-lg text-brand-600 bg-white hover:bg-brand-50 transition-all">+ Añadir Fila</button>
                         </div>
-                        <div class="overflow-x-auto border border-slate-200 rounded-xl bg-slate-50 max-h-[400px]">
+                        <div class="overflow-x-auto border border-slate-200 rounded-xl bg-slate-50 shadow-inner max-h-[400px]">
                             <table class="min-w-full divide-y divide-slate-200 text-left text-sm text-slate-600">
-                                <thead class="bg-slate-100 text-slate-700 uppercase text-[10px] sticky top-0" id="preview-thead"><tr><th>Cargando...</th></tr></thead>
+                                <thead class="bg-slate-200/50 text-slate-700 uppercase text-[10px] sticky top-0" id="preview-thead"><tr><th class="p-4 text-center">Cargando...</th></tr></thead>
                                 <tbody class="divide-y divide-slate-200 bg-white" id="preview-tbody"></tbody>
                             </table>
                         </div>
@@ -261,21 +261,22 @@
                     <div id="placement-matrix-preview-section" class="hidden p-6 border-t border-slate-100 bg-slate-50/50">
                         <div class="flex justify-between items-center mb-4">
                             <h3 class="text-xs font-bold text-slate-700 uppercase">Vista Previa Output (Placements)</h3>
-                            <div class="flex items-center gap-2">
-                                <span class="text-[10px] bg-blue-100 text-blue-800 px-2 py-1 rounded font-mono" id="placement-preview-counter">0 Placements</span>
-                                <button onclick="clearBaseDomains()" class="px-2 py-1 bg-red-50 hover:bg-red-100 text-red-600 rounded text-[10px] border border-red-200">Limpiar Entradas</button>
+                            <div class="flex items-center gap-3">
+                                <span class="text-[10px] bg-blue-100 text-blue-800 px-3 py-1.5 rounded-lg font-mono font-bold border border-blue-200" id="placement-preview-counter">0 Placements</span>
+                                <button onclick="clearBaseDomains()" class="px-3 py-1.5 bg-red-50 hover:bg-red-100 text-red-600 font-bold rounded-lg text-[10px] border border-red-200 transition-all">Vaciar Entradas</button>
                             </div>
                         </div>
-                        <div class="overflow-x-auto border border-slate-200 rounded-xl bg-white max-h-[300px]">
+                        <div class="overflow-x-auto border border-slate-200 rounded-xl bg-white shadow-inner max-h-[400px]">
                             <table class="min-w-full divide-y divide-slate-200 text-left text-xs">
-                                <thead class="bg-slate-100/80 text-slate-700" id="placement-matrix-thead"><tr><th>Cargando...</th></tr></thead>
+                                <thead class="bg-slate-200/50 text-slate-700 uppercase text-[10px] sticky top-0" id="placement-matrix-thead"><tr><th class="p-4 text-center">Cargando...</th></tr></thead>
                                 <tbody class="divide-y divide-slate-200 font-mono" id="placement-matrix-preview-tbody"></tbody>
                             </table>
                         </div>
                     </div>
 
-                    <div id="toast-message" class="hidden mx-6 mb-6 p-4 bg-green-50 text-green-800 rounded-xl border border-green-200 flex items-center space-x-2">
-                        <span class="text-sm font-medium" id="toast-text">¡Acción exitosa!</span>
+                    <div id="toast-message" class="hidden mx-6 mb-6 p-4 bg-green-50 text-green-800 rounded-xl border border-green-200 flex items-center space-x-2 transition-all">
+                        <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        <span class="text-sm font-bold" id="toast-text">¡Acción exitosa!</span>
                     </div>
                 </div>
             </div>
@@ -304,10 +305,12 @@
         };
 
         const AppState = {
-            env: null, type: null, columns: [], rows: [], baseDomains: [{ domain: 'eldiario.es', baseName: 'eldiario_es' }],
-            includeDomainInName: true, placementConfigs: [{ id: 1, type: '3', formats: '300x250,728x90', name: 'display' }],
-            isDefaultData: true, // Bandera para saber si la información en pantalla es el ejemplo por defecto
-            deletedPlacements: new Set(), // Registro de placements eliminados manualmente
+            env: null, type: null, columns: [], rows: [], 
+            baseDomains: [], 
+            isDefaultData: true, // Para rastrear y eliminar el default
+            deletedPlacements: new Set(), // Para que las filas eliminadas en preview no reaparezcan
+            includeDomainInName: true, 
+            placementConfigs: [{ id: 1, type: '3', formats: '300x250,728x90', name: 'display' }],
             defaults: {
                 webSites: { environment: '1', child_lt14: '0', child_bt1418: '0', gambling: '1', alcohol: '1', prebid: '1', ortb: '0' },
                 webPlacements: { publisher: '1001', devices: 'desktop,mobile,tablet', native: '1', prebid: '1', environment: '1' },
@@ -332,7 +335,7 @@
                 }
                 const d = p.length > 1 ? p[p.length - 2] : p[0];
                 if(d.includes('diario') || d.includes('juegos') || d.includes('noticias')) return 27;
-                return 1; // Default English
+                return 1;
             }
         };
 
@@ -346,24 +349,31 @@
                 document.getElementById('toast-message').classList.remove('hidden'); 
                 setTimeout(() => document.getElementById('toast-message').classList.add('hidden'), 4000); 
             },
+            
             updateGlobalDefault(f, v) { 
                 if(AppState.env==='web') AppState.defaults.webSites[f]=v; 
                 else if(AppState.env==='in-app') AppState.defaults.inAppSites[f]=v;
                 else if(AppState.env==='ctv') AppState.defaults.ctvSites[f]=v;
+                
+                // Actualizar inmediatamente en las filas ya renderizadas de la tabla (SITES)
+                const colIndex = AppState.columns.indexOf(f);
+                if (colIndex !== -1) {
+                    AppState.rows.forEach(r => { if (r.length > colIndex) r[colIndex] = v; });
+                }
                 this.renderTable(); 
             },
+            
             updateGlobalPlacementDefault(f, v) {
-                if(AppState.env==='web') AppState.defaults.webPlacements[f]=v; else if(AppState.env==='in-app') AppState.defaults.inAppPlacements[f]=v; else AppState.defaults.ctvPlacements[f]=v;
+                if(AppState.env==='web') AppState.defaults.webPlacements[f]=v; 
+                else if(AppState.env==='in-app') AppState.defaults.inAppPlacements[f]=v; 
+                else AppState.defaults.ctvPlacements[f]=v;
+                
+                // Al regenerar la matriz de placements usa siempre los defaults actuales, así que aplica automático.
                 if(AppState.type === 'placements') { this.generatePlacementMatrix(); }
             },
+
             toggleDomainInName() { AppState.includeDomainInName = !AppState.includeDomainInName; this.generatePlacementMatrix(); this.renderPlacementConfigUI(); },
-            
-            clearBaseDomains() { 
-                AppState.baseDomains = []; 
-                AppState.isDefaultData = false; // Quitar marca de data default
-                AppState.deletedPlacements.clear(); // Limpiar registro de eliminados
-                this.generatePlacementMatrix(); 
-            },
+            clearBaseDomains() { AppState.baseDomains = []; this.generatePlacementMatrix(); },
             
             bulkAddPlacementConfigs() {
                 const t = document.getElementById('bulk-placement-names'); if(!t || !t.value.trim()) return;
@@ -371,7 +381,7 @@
                 let dF = AppState.env==='ctv' ? '152' : (AppState.env==='in-app' ? '320x50,300x250' : '300x250,728x90');
                 let dT = AppState.env==='ctv' ? '2' : '3';
                 AppState.placementConfigs = [];
-                ns.forEach((n, idx) => AppState.placementConfigs.push({ id: idx+1, type: dT, formats: dF, name: n.trim() })); // Exact text
+                ns.forEach((n, idx) => AppState.placementConfigs.push({ id: idx+1, type: dT, formats: dF, name: n.trim() }));
                 t.value = ''; this.renderPlacementConfigUI(); this.generatePlacementMatrix();
             },
             addPlacementConfig() {
@@ -390,6 +400,7 @@
                 AppState.placementConfigs[i].formats = aF; this.renderPlacementConfigUI(); this.generatePlacementMatrix();
             },
             updatePlacementConfigFormats(i, v) { 
+                // CORRECCIÓN: Al cambiar formats, ya NO alteramos el name.
                 AppState.placementConfigs[i].formats = v; 
                 this.generatePlacementMatrix(); 
             },
@@ -398,30 +409,36 @@
             renderPlacementConfigUI() {
                 const c = document.getElementById('placement-configs-container'); if(!c) return; c.innerHTML='';
                 AppState.placementConfigs.forEach((cfg, i) => {
-                    let fH = cfg.type==='4' ? `<input type="text" value="222" disabled class="w-full px-2 py-1 text-xs border rounded bg-slate-100 text-center"/>` : (cfg.type==='2' ? `<select onchange="AppController.updatePlacementConfigFormats(${i}, this.value)" class="w-full px-2 py-1 text-xs border rounded">${AppState.env==='ctv'?`<option value="152" ${cfg.formats==='152'?'selected':''}>152</option>`:''}<option value="17" ${cfg.formats==='17'?'selected':''}>17</option><option value="18" ${cfg.formats==='18'?'selected':''}>18</option></select>` : `<input type="text" oninput="AppController.updatePlacementConfigFormats(${i}, this.value)" value="${cfg.formats}" class="w-full px-2 py-1 text-xs border rounded"/>`);
-                    const nH = `<input type="text" oninput="AppController.updatePlacementConfigName(${i}, this.value)" value="${cfg.name||''}" class="w-full px-2 py-1 text-xs border rounded"/>`;
+                    let fH = cfg.type==='4' ? `<input type="text" value="222" disabled class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-slate-100 text-center text-slate-500 font-mono"/>` : (cfg.type==='2' ? `<select onchange="AppController.updatePlacementConfigFormats(${i}, this.value)" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white font-mono">${AppState.env==='ctv'?`<option value="152" ${cfg.formats==='152'?'selected':''}>152</option>`:''}<option value="17" ${cfg.formats==='17'?'selected':''}>17</option><option value="18" ${cfg.formats==='18'?'selected':''}>18</option></select>` : `<input type="text" oninput="AppController.updatePlacementConfigFormats(${i}, this.value)" value="${cfg.formats}" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white font-mono"/>`);
+                    const nH = `<input type="text" oninput="AppController.updatePlacementConfigName(${i}, this.value)" value="${cfg.name||''}" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white font-mono"/>`;
                     let tO = AppState.env==='web' ? `<option value="3" ${cfg.type==='3'?'selected':''}>3</option><option value="1" ${cfg.type==='1'?'selected':''}>1</option><option value="2" ${cfg.type==='2'?'selected':''}>2</option><option value="4" ${cfg.type==='4'?'selected':''}>4</option>` : `<option value="3" ${cfg.type==='3'?'selected':''}>3</option><option value="2" ${cfg.type==='2'?'selected':''}>2</option>`;
-                    c.innerHTML += `<div class="flex items-center gap-2 bg-slate-50 p-2 rounded-xl border border-slate-200/50"><div class="flex-1 grid grid-cols-3 gap-2"><div><label class="block text-[8px] uppercase text-slate-400 font-bold mb-0.5">Type</label><select onchange="AppController.updatePlacementConfigType(${i}, this.value)" class="w-full px-2 py-1 text-xs border rounded">${tO}</select></div><div><label class="block text-[8px] uppercase text-slate-400 font-bold mb-0.5">Formats</label>${fH}</div><div><label class="block text-[8px] uppercase text-slate-400 font-bold mb-0.5">Name</label>${nH}</div></div><button onclick="AppController.removePlacementConfig(${i})" ${AppState.placementConfigs.length===1?'disabled':''} class="pt-3 text-red-500 font-bold px-2">🗑️</button></div>`;
+                    c.innerHTML += `<div class="flex items-center gap-3 bg-white p-3 rounded-xl border border-slate-200 shadow-sm"><div class="flex-1 grid grid-cols-3 gap-3"><div><label class="block text-[9px] uppercase text-slate-500 font-bold mb-1">Type</label><select onchange="AppController.updatePlacementConfigType(${i}, this.value)" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white font-mono">${tO}</select></div><div><label class="block text-[9px] uppercase text-slate-500 font-bold mb-1">Formats</label>${fH}</div><div><label class="block text-[9px] uppercase text-slate-500 font-bold mb-1">Name</label>${nH}</div></div><button onclick="AppController.removePlacementConfig(${i})" ${AppState.placementConfigs.length===1?'disabled':''} class="mt-4 text-red-500 hover:text-red-700 bg-red-50 hover:bg-red-100 p-2 rounded-lg transition-all font-bold disabled:opacity-50 disabled:cursor-not-allowed">🗑️</button></div>`;
                 });
                 const b = document.getElementById('btn-toggle-domain-prefix');
-                if(b) b.innerHTML = AppState.includeDomainInName ? "✓ Prefijo URL (Activo)" : "✗ Nombre Libre";
+                if(b) {
+                    b.innerHTML = AppState.includeDomainInName ? "✓ Prefijo URL (Activo)" : "✗ Nombre Libre";
+                    b.classList.toggle('bg-blue-600', AppState.includeDomainInName);
+                    b.classList.toggle('bg-slate-500', !AppState.includeDomainInName);
+                }
             },
 
             generatePlacementMatrix() {
                 if(AppState.type!=='placements') return; AppState.rows=[];
                 const d = AppState.env==='web'?AppState.defaults.webPlacements:(AppState.env==='ctv'?AppState.defaults.ctvPlacements:AppState.defaults.inAppPlacements);
+                
                 AppState.baseDomains.forEach(b => {
                     if(!b.domain) return;
                     AppState.placementConfigs.forEach(cfg => {
                         const cl = AppState.env==='web'?AppUtils.cleanUrl(b.domain):b.domain.trim();
                         const cN = cfg.name || '';
-                        const fN = AppState.includeDomainInName && cl && cN ? `${cl.replace(/\./g, '_')}_${cN}` : cN; 
+                        const fN = AppState.includeDomainInName && cl && cN ? `${cl.replace(/\./g, '_')}_${cN}` : cN;
                         
-                        const key = `${cl}_${fN}_${cfg.type}`;
-                        if (AppState.deletedPlacements.has(key)) return; // Omitir si fue eliminado por el usuario
+                        // CORRECCIÓN: Hash único para evitar regenerar los que han sido borrados de la vista previa
+                        const uniqueKey = `${cl}|${fN}|${cfg.type}|${cfg.formats}`;
+                        if (AppState.deletedPlacements.has(uniqueKey)) return;
 
-                        if(AppState.env==='web') AppState.rows.push([d.publisher, cl, fN, cfg.type, cfg.formats, d.devices, d.native, d.prebid, d.environment]);
-                        else AppState.rows.push([d.publisher, cl, fN, cfg.type, cfg.formats, d.devices, d.native, d.prebid]);
+                        if(AppState.env==='web') AppState.rows.push([d.publisher, cl, fN, cfg.type, cfg.formats, d.devices, d.native, d.prebid, d.environment, uniqueKey]);
+                        else AppState.rows.push([d.publisher, cl, fN, cfg.type, cfg.formats, d.devices, d.native, d.prebid, uniqueKey]);
                     });
                 });
                 this.renderMatrixPreviewTable();
@@ -434,12 +451,15 @@
                     const unq = new Set(AppState.baseDomains.map(b=>b.domain).filter(d=>d!=='')).size;
                     document.getElementById('placement-preview-counter').innerText=`${AppState.rows.length} Placements | ${unq} Entradas`;
                     
-                    document.getElementById('placement-matrix-thead').innerHTML = AppState.env==='web' ? `<tr><th class="px-2 py-2">pub</th><th class="px-2 py-2">domain</th><th class="px-2 py-2">name</th><th class="px-2 py-2">type</th><th class="px-2 py-2">formats</th><th class="px-2 py-2">dev</th><th class="px-2 py-2">nat</th><th class="px-2 py-2">preb</th><th class="px-2 py-2">env</th><th class="px-2 py-2 text-center">🗑️</th></tr>` : `<tr><th class="px-2 py-2">pub</th><th class="px-2 py-2">bundle</th><th class="px-2 py-2">name</th><th class="px-2 py-2">type</th><th class="px-2 py-2">formats</th><th class="px-2 py-2">dev</th><th class="px-2 py-2">nat</th><th class="px-2 py-2">preb</th><th class="px-2 py-2 text-center">🗑️</th></tr>`;
+                    document.getElementById('placement-matrix-thead').innerHTML = AppState.env==='web' ? `<tr><th class="px-3 py-2">pub</th><th class="px-3 py-2">domain</th><th class="px-3 py-2">name</th><th class="px-3 py-2">type</th><th class="px-3 py-2">formats</th><th class="px-3 py-2">dev</th><th class="px-3 py-2">nat</th><th class="px-3 py-2">preb</th><th class="px-3 py-2">env</th><th class="px-3 py-2 text-center">🗑️</th></tr>` : `<tr><th class="px-3 py-2">pub</th><th class="px-3 py-2">bundle</th><th class="px-3 py-2">name</th><th class="px-3 py-2">type</th><th class="px-3 py-2">formats</th><th class="px-3 py-2">dev</th><th class="px-3 py-2">nat</th><th class="px-3 py-2">preb</th><th class="px-3 py-2 text-center">🗑️</th></tr>`;
                     tb.innerHTML = '';
                     AppState.rows.forEach((r, idx) => {
-                        let rowHTML = `<tr class="hover:bg-slate-50">`;
-                        r.forEach((v, i) => rowHTML+=`<td class="px-2 py-1 border-b ${i===2?'font-bold text-slate-800':''}">${v}</td>`);
-                        rowHTML+=`<td class="px-2 py-1 border-b text-center"><button onclick="AppController.removeDataRow(${idx})" class="text-red-400 hover:text-red-600">X</button></td></tr>`;
+                        let rowHTML = `<tr class="hover:bg-slate-100 transition-colors">`;
+                        // Cuidado: r.length - 1 porque el último elemento es el uniqueKey, no se debe mostrar ni guardar
+                        for(let i=0; i<r.length-1; i++) {
+                            rowHTML+=`<td class="px-3 py-2 border-b border-slate-200 ${i===2?'font-bold text-slate-800':''}">${r[i]}</td>`;
+                        }
+                        rowHTML+=`<td class="px-3 py-2 border-b border-slate-200 text-center"><button onclick="AppController.removeDataRow(${idx})" class="text-slate-400 hover:text-red-600 bg-slate-100 hover:bg-red-50 rounded px-2 py-1 transition-all">X</button></td></tr>`;
                         tb.innerHTML += rowHTML;
                     });
                 } else c.classList.add('hidden');
@@ -450,8 +470,8 @@
                 const th = document.getElementById('preview-thead'); const tb = document.getElementById('preview-tbody');
                 
                 let headHtml = '<tr>'; 
-                AppState.columns.forEach(c => headHtml += `<th class="px-3 py-2 border-b bg-slate-100">${c}</th>`); 
-                headHtml += '<th class="px-2 py-2 border-b bg-slate-100 text-center">🗑️</th></tr>';
+                AppState.columns.forEach(c => headHtml += `<th class="px-4 py-3 border-b border-slate-200 bg-slate-100">${c}</th>`); 
+                headHtml += '<th class="px-4 py-3 border-b border-slate-200 bg-slate-100 text-center">🗑️</th></tr>';
                 th.innerHTML = headHtml;
                 tb.innerHTML = '';
 
@@ -461,26 +481,26 @@
                 const isRon = (AppState.type === 'ron');
 
                 AppState.rows.forEach((r, rI) => {
-                    let rH = '<tr class="hover:bg-slate-50">';
+                    let rH = '<tr class="hover:bg-slate-50 transition-colors">';
                     AppState.columns.forEach((_, cI) => {
                         let val = r[cI] !== undefined ? r[cI] : '';
                         let isLang = (isWebSites && cI === 1);
                         
                         if (isRon) {
-                            let dis = (cI === 2) ? '' : 'disabled class="w-full bg-slate-100 text-slate-500 border rounded px-1 py-1 text-xs"';
-                            let css = (cI === 2) ? 'class="w-full border rounded px-1 py-1 text-xs text-center font-bold text-teal-600 focus:border-teal-500 outline-none"' : dis;
-                            rH += `<td class="px-2 py-1 border-b"><input type="text" ${css} value="${val}" oninput="AppController.updateCell(${rI}, ${cI}, this.value)" /></td>`;
+                            let dis = (cI === 2) ? '' : 'disabled class="w-full bg-slate-100/50 text-slate-500 border border-transparent rounded px-2 py-1.5 text-xs font-mono"';
+                            let css = (cI === 2) ? 'class="w-full border border-slate-300 rounded px-2 py-1.5 text-xs text-center font-bold text-teal-700 bg-white shadow-sm focus:border-teal-500 focus:ring-1 focus:ring-teal-500 outline-none transition-all"' : dis;
+                            rH += `<td class="px-3 py-2 border-b border-slate-200"><input type="text" ${css} value="${val}" oninput="AppController.updateCell(${rI}, ${cI}, this.value)" /></td>`;
                         } else {
                             let typ = isLang ? 'type="number"' : 'type="text"';
-                            let css = isLang ? 'class="w-full border rounded px-1 py-1 text-xs text-center font-bold text-brand-600 focus:border-brand-500 outline-none"' : 'class="w-full border border-transparent hover:border-slate-200 rounded px-1 py-1 text-xs focus:border-brand-500 outline-none focus:bg-white"';
-                            if (isWebSites && cI > 1) css = 'disabled class="w-full bg-slate-100/50 text-slate-400 border border-transparent rounded px-1 py-1 text-xs text-center"';
-                            if (AppState.env !== 'web' && cI > 2) css = 'disabled class="w-full bg-slate-100/50 text-slate-400 border border-transparent rounded px-1 py-1 text-xs text-center"';
+                            let css = isLang ? 'class="w-full border border-slate-300 rounded px-2 py-1.5 text-xs text-center font-bold text-brand-600 bg-white shadow-sm focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none transition-all"' : 'class="w-full border border-transparent hover:border-slate-300 rounded px-2 py-1.5 text-xs focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:bg-white outline-none transition-all"';
+                            if (isWebSites && cI > 1) css = 'disabled class="w-full bg-slate-100/50 text-slate-500 border border-transparent rounded px-2 py-1.5 text-xs text-center"';
+                            if (AppState.env !== 'web' && cI > 2) css = 'disabled class="w-full bg-slate-100/50 text-slate-500 border border-transparent rounded px-2 py-1.5 text-xs text-center"';
                             
                             let ob = (isWebSites && cI === 0) ? `onblur="AppController.formatUrlCell(${rI}, this)"` : '';
-                            rH += `<td class="px-2 py-1 border-b"><input ${typ} ${css} value="${val}" oninput="AppController.updateCell(${rI}, ${cI}, this.value)" ${ob} /></td>`;
+                            rH += `<td class="px-3 py-2 border-b border-slate-200"><input ${typ} ${css} value="${val}" oninput="AppController.updateCell(${rI}, ${cI}, this.value)" ${ob} /></td>`;
                         }
                     });
-                    rH += `<td class="px-2 py-1 border-b text-center"><button onclick="AppController.removeDataRow(${rI})" class="text-red-400 hover:text-red-600">X</button></td></tr>`;
+                    rH += `<td class="px-3 py-2 border-b border-slate-200 text-center"><button onclick="AppController.removeDataRow(${rI})" class="text-slate-400 hover:text-red-600 bg-slate-100 hover:bg-red-50 rounded px-2 py-1 transition-all">X</button></td></tr>`;
                     tb.innerHTML += rH;
                 });
             },
@@ -498,20 +518,21 @@
             },
             addNewDataRow() { 
                 if(AppState.type==='ron') return;
-                AppState.isDefaultData = false; // Quitar marca de data por defecto si añade a mano
+                AppState.isDefaultData = false; // Al añadir manualmente eliminamos la posibilidad de reset por defecto.
                 AppState.rows.push(Array(AppState.columns.length).fill('')); 
                 this.renderTable(); 
             },
             removeDataRow(i) { 
                 if (AppState.type === 'placements') {
+                    // Cuidado: añadimos el UniqueKey a los eliminados
                     const row = AppState.rows[i];
-                    const key = `${row[1]}_${row[2]}_${row[3]}`; // domain_name_type
-                    AppState.deletedPlacements.add(key); // Registrar como eliminado
+                    const uniqueKey = row[row.length - 1]; // Es la última columna escondida
+                    AppState.deletedPlacements.add(uniqueKey);
                     AppState.rows.splice(i, 1);
                     this.renderMatrixPreviewTable();
                 } else {
-                    AppState.rows.splice(i, 1); 
-                    if(AppState.type==='placements') { this.renderMatrixPreviewTable(); } else { this.renderTable(); } 
+                    AppState.rows.splice(i,1); 
+                    this.renderTable(); 
                 }
             },
 
@@ -519,12 +540,14 @@
                 AppState.env = env; ['web','in-app','ctv'].forEach(e => {
                     document.getElementById(`btn-env-${e}`).classList.toggle('border-brand-500', e===env);
                     document.getElementById(`icon-env-${e}`).classList.toggle('bg-brand-100', e===env);
+                    document.getElementById(`icon-env-${e}`).classList.toggle('text-brand-600', e===env);
                 }); this.checkSelectionComplete();
             },
             selectType(type) {
                 AppState.type = type; ['sites','placements','ron'].forEach(t => {
                     document.getElementById(`btn-type-${t}`).classList.toggle('border-brand-500', t===type);
                     document.getElementById(`icon-type-${t}`).classList.toggle('bg-brand-100', t===type);
+                    document.getElementById(`icon-type-${t}`).classList.toggle('text-brand-600', t===type);
                 }); this.checkSelectionComplete();
             },
 
@@ -533,10 +556,6 @@
                 document.getElementById('left-panel-dynamic-content').classList.remove('hidden');
                 document.getElementById('right-panel-dynamic-content').classList.remove('hidden');
                 
-                // Set flag to true as we are loading fresh default sample info
-                AppState.isDefaultData = true;
-                AppState.deletedPlacements.clear(); // Limpiar historial de eliminados al cambiar
-
                 ['sites','placements','inapp-sites','inapp-placements','ctv-sites','ctv-placements','ron'].forEach(id => { const el = document.getElementById(`legend-${id}`); if(el) el.classList.add('hidden'); });
                 ['sites','placements','inapp-sites','ctv-sites'].forEach(id => { const el = document.getElementById(`global-${id}-controls`); if(el) el.classList.add('hidden'); });
                 
@@ -555,6 +574,10 @@
                     document.getElementById('import-col-2').classList.toggle('hidden', !showTwoCols);
                 }
 
+                // Reiniciar estado "Default Data" siempre que cambiemos de pestaña
+                AppState.isDefaultData = true;
+                AppState.deletedPlacements.clear();
+
                 if (isRon) {
                     document.getElementById('legend-ron').classList.remove('hidden'); AppState.rows = [];
                 } else if(AppState.type==='sites') {
@@ -568,23 +591,24 @@
                     document.getElementById('global-placements-controls').classList.remove('hidden');
                     document.getElementById('global-plac-env-container').classList.toggle('hidden', AppState.env!=='web');
                     
-                    // Resetear el ejemplo inicial de placement base en base al entorno
-                    if(AppState.env === 'web') AppState.baseDomains = [{ domain: 'eldiario.es', baseName: 'eldiario_es' }];
-                    else if(AppState.env === 'in-app') AppState.baseDomains = [{ domain: 'com.app.example', baseName: '' }];
-                    else if(AppState.env === 'ctv') AppState.baseDomains = [{ domain: '1227390', baseName: 'ChannelName' }];
+                    // Sincronizar inputs globales visualmente
+                    const d = AppState.env==='web' ? AppState.defaults.webPlacements : (AppState.env==='ctv' ? AppState.defaults.ctvPlacements : AppState.defaults.inAppPlacements);
+                    const iPub = document.getElementById('global-plac-pub'); if(iPub) iPub.value = d.publisher || '';
+                    const iDev = document.getElementById('global-plac-dev'); if(iDev) iDev.value = d.devices || '';
+                    const iPre = document.getElementById('global-plac-prebid'); if(iPre) iPre.value = d.prebid || '1';
                     
+                    AppState.baseDomains = [{ domain: AppState.env==='ctv'?'1227390':(AppState.env==='in-app'?'com.app.ejemplo':'eldiario.es'), baseName: 'demo' }];
                     this.renderPlacementConfigUI(); this.generatePlacementMatrix();
                 }
 
                 document.getElementById('active-template-title').innerText = t.title;
                 const btnAdd = document.getElementById('btn-add-row'); if(btnAdd) btnAdd.classList.toggle('hidden', isRon);
                 
-                // Activar el botón de descarga y quitar el cursor deshabilitado (Issue 2 fix)
-                const downloadBtn = document.getElementById('download-btn');
-                downloadBtn.disabled = false;
-                downloadBtn.classList.replace('bg-slate-400', 'bg-brand-600');
-                downloadBtn.classList.remove('cursor-not-allowed');
-                downloadBtn.classList.add('hover:bg-brand-700', 'hover:shadow-md');
+                // CORRECCIÓN: Botón de Descargar activado correctamente visualmente
+                const downBtn = document.getElementById('download-btn');
+                downBtn.disabled = false;
+                downBtn.classList.remove('bg-slate-400', 'cursor-not-allowed');
+                downBtn.classList.add('bg-brand-600', 'hover:bg-brand-700', 'cursor-pointer', 'shadow-md');
                 
                 this.renderTable();
             },
@@ -594,18 +618,11 @@
                 const c2 = document.getElementById('import-col-2').value.split(/\r?\n/);
                 let c = 0; const isTwo = AppState.env==='ctv' && AppState.type==='sites';
                 
-                // Verificar si hay datos reales antes de borrar los defaults
-                let hasValidInput = false;
-                for(let i=0; i<(isTwo?Math.max(c1.length,c2.length):c1.length); i++) {
-                    let v1=(c1[i]||'').trim(); let v2=(c2[i]||'').trim();
-                    if(!isTwo && v1.includes('\t')) { const p=v1.split('\t'); v1=p[0].trim(); }
-                    if(v1 || v2) { hasValidInput = true; break; }
-                }
-
-                if (!hasValidInput) return; // Si no pegaron nada, no hacer nada
-
-                // Issue 1 Fix: Si tenemos la data de ejemplo, la limpiamos antes de añadir la nueva data
-                if (AppState.isDefaultData) {
+                // CORRECCIÓN: Eliminar la fila default antes de procesar los pegados
+                let hasValidData = false;
+                for(let i=0; i<c1.length; i++) { if (c1[i].trim()) { hasValidData = true; break; } }
+                
+                if (hasValidData && AppState.isDefaultData) {
                     if (AppState.type === 'placements') AppState.baseDomains = [];
                     else AppState.rows = [];
                     AppState.isDefaultData = false;
@@ -652,36 +669,27 @@
                         if(dI===-1||fI===-1||hI===-1) return this.showToast('Falta Domain, Formats o Hash.');
                     }
 
-                    AppState.isDefaultData = false; // Por seguridad, aunque RON empiece vacío
                     let nR = [];
                     
                     if (AppState.env === 'ctv') {
-                        let firstHash = null;
-                        let firstBundle = null;
+                        let firstHash = null; let firstBundle = null;
                         
                         for(let i=1; i<lines.length; i++) {
                             const cells = lines[i].split(delim);
                             const b = cV(cells[dI]); const hs = cV(cells[hI]); 
                             if(!b || !hs) continue;
-                            
                             if (firstHash === null) { firstHash = hs; firstBundle = b; }
-                            
-                            nR.push([`${b}/instream`, hs, '0', b]);
-                            nR.push([`${b}/outstream`, hs, '0', b]);
-                            nR.push([`${b}/video`, hs, '0', b]);
+                            nR.push([`${b}/instream`, hs, '0', b]); nR.push([`${b}/outstream`, hs, '0', b]); nR.push([`${b}/video`, hs, '0', b]);
                         }
                         
                         if (firstHash !== null) {
-                            nR.push(['instream', firstHash, '1', firstBundle]);
-                            nR.push(['outstream', firstHash, '1', firstBundle]);
-                            nR.push(['video', firstHash, '1', firstBundle]);
+                            nR.push(['instream', firstHash, '1', firstBundle]); nR.push(['outstream', firstHash, '1', firstBundle]); nR.push(['video', firstHash, '1', firstBundle]);
                         }
                     } else {
                         for(let i=1; i<lines.length; i++) {
                             const cells = lines[i].split(delim);
                             const d = cV(cells[dI]); const fV = cV(cells[fI]); const hs = cV(cells[hI]); 
                             if(!d || !hs) continue;
-                            
                             let fS = 'display'; 
                             if(fV==='17') fS='instream'; else if(fV==='18') fS='outstream';
                             nR.push([`${d}/${fS}`, hs, '0', d]);
@@ -697,6 +705,8 @@
                 
                 const hR = AppState.columns.join(';');
                 const dR = AppState.rows.map(row => {
+                    // CORRECCIÓN: Filtramos las columnas basándonos SOLAMENTE en AppState.columns.
+                    // Esto omite la 'uniqueKey' que añadimos oculta al final de los Placements.
                     const rowToSave = AppState.columns.map((_, colIndex) => row[colIndex]);
                     return rowToSave.map(v => {
                         let sv = v!==undefined&&v!==null?v.toString():'';
@@ -712,7 +722,6 @@
         };
 
         document.addEventListener('DOMContentLoaded', () => AppController.init());
-        window.handleGridPaste = (e) => AppController.handleGridPaste(e);
         window.selectEnvironment = (e) => AppController.selectEnvironment(e);
         window.selectType = (t) => AppController.selectType(t);
         window.updateGlobalDefault = (f, v) => AppController.updateGlobalDefault(f, v);
