@@ -42,10 +42,9 @@
     </header>
 
     <main class="flex-1 max-w-[1400px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div class="flex flex-col gap-8">
             
-            <!-- PANEL IZQUIERDO -->
-            <div class="lg:col-span-4 space-y-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
                 
                 <!-- SECCIÓN 1: Seleccionar Entorno -->
                 <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
@@ -54,27 +53,18 @@
                         <h2 class="text-md font-semibold text-slate-950">Selecciona el Entorno</h2>
                     </div>
                     
-                    <div class="grid grid-cols-1 gap-3">
-                        <button type="button" onclick="selectEnvironment('web')" id="btn-env-web" class="flex items-center justify-between p-3.5 rounded-xl border-2 transition-all-300 text-left hover:bg-slate-50 focus:outline-none">
-                            <div class="flex items-center space-x-3">
-                                <div class="p-2 bg-slate-100 rounded-lg text-slate-600" id="icon-env-web"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" /></svg></div>
-                                <div><h3 class="font-semibold text-xs text-slate-900">Web</h3><p class="text-[10px] text-slate-500">Sitios web escritorio / mobile</p></div>
-                            </div>
-                            <span class="w-4 h-4 rounded-full border border-slate-300 flex items-center justify-center" id="radio-env-web"></span>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <button type="button" onclick="selectEnvironment('web')" id="btn-env-web" class="flex flex-col items-center justify-center p-3 rounded-xl border-2 transition-all-300 hover:bg-slate-50 text-center focus:outline-none">
+                            <div class="p-2 bg-slate-100 rounded-lg text-slate-600 mb-2" id="icon-env-web"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" /></svg></div>
+                            <h3 class="font-semibold text-xs text-slate-900">Web</h3>
                         </button>
-                        <button type="button" onclick="selectEnvironment('in-app')" id="btn-env-in-app" class="flex items-center justify-between p-3.5 rounded-xl border-2 transition-all-300 text-left hover:bg-slate-50 focus:outline-none">
-                            <div class="flex items-center space-x-3">
-                                <div class="p-2 bg-slate-100 rounded-lg text-slate-600" id="icon-env-in-app"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg></div>
-                                <div><h3 class="font-semibold text-xs text-slate-900">In-App</h3><p class="text-[10px] text-slate-500">Apps móviles nativas</p></div>
-                            </div>
-                            <span class="w-4 h-4 rounded-full border border-slate-300 flex items-center justify-center" id="radio-env-in-app"></span>
+                        <button type="button" onclick="selectEnvironment('in-app')" id="btn-env-in-app" class="flex flex-col items-center justify-center p-3 rounded-xl border-2 transition-all-300 hover:bg-slate-50 text-center focus:outline-none">
+                            <div class="p-2 bg-slate-100 rounded-lg text-slate-600 mb-2" id="icon-env-in-app"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg></div>
+                            <h3 class="font-semibold text-xs text-slate-900">In-App</h3>
                         </button>
-                        <button type="button" onclick="selectEnvironment('ctv')" id="btn-env-ctv" class="flex items-center justify-between p-3.5 rounded-xl border-2 transition-all-300 text-left hover:bg-slate-50 focus:outline-none">
-                            <div class="flex items-center space-x-3">
-                                <div class="p-2 bg-slate-100 rounded-lg text-slate-600" id="icon-env-ctv"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z" /></svg></div>
-                                <div><h3 class="font-semibold text-xs text-slate-900">CTV</h3><p class="text-[10px] text-slate-500">Connected TV y Streaming</p></div>
-                            </div>
-                            <span class="w-4 h-4 rounded-full border border-slate-300 flex items-center justify-center" id="radio-env-ctv"></span>
+                        <button type="button" onclick="selectEnvironment('ctv')" id="btn-env-ctv" class="flex flex-col items-center justify-center p-3 rounded-xl border-2 transition-all-300 hover:bg-slate-50 text-center focus:outline-none">
+                            <div class="p-2 bg-slate-100 rounded-lg text-slate-600 mb-2" id="icon-env-ctv"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z" /></svg></div>
+                            <h3 class="font-semibold text-xs text-slate-900">CTV</h3>
                         </button>
                     </div>
                 </div>
@@ -86,66 +76,66 @@
                         <h2 class="text-md font-semibold text-slate-950">¿Qué deseas crear?</h2>
                     </div>
 
-                    <div class="grid grid-cols-3 gap-3">
-                        <button type="button" onclick="selectType('sites')" id="btn-type-sites" class="flex flex-col items-center justify-center p-4 rounded-xl border-2 transition-all-300 hover:bg-slate-50 text-center focus:outline-none">
-                            <div class="p-2.5 rounded-full bg-slate-100 text-slate-600 mb-2" id="icon-type-sites"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg></div>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <button type="button" onclick="selectType('sites')" id="btn-type-sites" class="flex flex-col items-center justify-center p-3 rounded-xl border-2 transition-all-300 hover:bg-slate-50 text-center focus:outline-none">
+                            <div class="p-2 bg-slate-100 text-slate-600 mb-2" id="icon-type-sites"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg></div>
                             <span class="font-semibold text-xs text-slate-900">Sites</span>
                         </button>
-                        <button type="button" onclick="selectType('placements')" id="btn-type-placements" class="flex flex-col items-center justify-center p-4 rounded-xl border-2 transition-all-300 hover:bg-slate-50 text-center focus:outline-none">
-                            <div class="p-2.5 rounded-full bg-slate-100 text-slate-600 mb-2" id="icon-type-placements"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg></div>
+                        <button type="button" onclick="selectType('placements')" id="btn-type-placements" class="flex flex-col items-center justify-center p-3 rounded-xl border-2 transition-all-300 hover:bg-slate-50 text-center focus:outline-none">
+                            <div class="p-2 bg-slate-100 text-slate-600 mb-2" id="icon-type-placements"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg></div>
                             <span class="font-semibold text-xs text-slate-900">Placements</span>
                         </button>
-                        <button type="button" onclick="selectType('ron')" id="btn-type-ron" class="flex flex-col items-center justify-center p-4 rounded-xl border-2 transition-all-300 hover:bg-slate-50 text-center focus:outline-none">
-                            <div class="p-2.5 rounded-full bg-slate-100 text-slate-600 mb-2" id="icon-type-ron"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></div>
+                        <button type="button" onclick="selectType('ron')" id="btn-type-ron" class="flex flex-col items-center justify-center p-3 rounded-xl border-2 transition-all-300 hover:bg-slate-50 text-center focus:outline-none">
+                            <div class="p-2 bg-slate-100 text-slate-600 mb-2" id="icon-type-ron"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></div>
                             <span class="font-semibold text-xs text-slate-900">RON</span>
                         </button>
                     </div>
                 </div>
+            </div>
 
-                <!-- LEYENDAS DINÁMICAS -->
-                <div id="left-panel-dynamic-content" class="hidden space-y-6">
-                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 space-y-4">
-                        <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5"><svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477-4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg> Leyenda de Identificadores</h3>
+            <div id="left-panel-dynamic-content" class="hidden w-full">
+                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+                    <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5"><svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477-4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg> Leyenda de Identificadores</h3>
 
-                        <div id="legend-sites" class="hidden space-y-3 text-[11px] text-slate-600">
-                            <div><strong class="text-slate-800">Environment:</strong> <span class="font-mono">1</span> (Web) | <span class="font-mono">3</span> (AMP)<br><strong class="text-slate-800">Booleanos:</strong> <span class="font-mono">1</span> (Habilitado) | <span class="font-mono">0</span> (Deshabilitado)</div>
-                            <div><strong class="text-slate-800">Language ID:</strong> Campo numérico (ej. 1=Inglés, 27=Español, 34=Francés, 23=Alemán)</div>
-                        </div>
+                    <div id="legend-sites" class="hidden space-y-3 text-[11px] text-slate-600">
+                        <div><strong class="text-slate-800">Environment:</strong> <span class="font-mono">1</span> (Web) | <span class="font-mono">3</span> (AMP)<br><strong class="text-slate-800">Booleanos:</strong> <span class="font-mono">1</span> (Habilitado) | <span class="font-mono">0</span> (Deshabilitado)</div>
+                        <div><strong class="text-slate-800">Language ID:</strong> Campo numérico (ej. 1=Inglés, 27=Español, 34=Francés, 23=Alemán)</div>
+                    </div>
 
-                        <div id="legend-placements" class="hidden space-y-2 text-[11px] text-slate-600">
-                            <div><strong class="text-slate-800">Environment:</strong> <span class="font-mono">1</span> (Web) | <span class="font-mono">3</span> (AMP)</div>
-                            <div><strong class="text-slate-800">Type:</strong> 3 (Display), 1 (Skin), 2 (Video), 4 (Native)</div>
-                        </div>
+                    <div id="legend-placements" class="hidden space-y-2 text-[11px] text-slate-600">
+                        <div><strong class="text-slate-800">Environment:</strong> <span class="font-mono">1</span> (Web) | <span class="font-mono">3</span> (AMP)</div>
+                        <div><strong class="text-slate-800">Type:</strong> 3 (Display), 1 (Skin), 2 (Video), 4 (Native)</div>
+                        <div class="text-brand-600 font-medium"><strong class="text-brand-700">Formatos video:</strong> 17 (instream), 18 (outstream)</div>
+                    </div>
 
-                        <div id="legend-inapp-sites" class="hidden space-y-2 text-[11px] text-slate-600">
-                            <div><strong class="text-slate-800">Platform Auto:</strong> ios (Numérico) | android (Alfanumérico)</div>
-                        </div>
+                    <div id="legend-inapp-sites" class="hidden space-y-2 text-[11px] text-slate-600">
+                        <div><strong class="text-slate-800">Platform Auto:</strong> ios (Numérico) | android (Alfanumérico)</div>
+                    </div>
 
-                        <div id="legend-inapp-placements" class="hidden space-y-2 text-[11px] text-slate-600">
-                            <div><strong class="text-slate-800">Type:</strong> 3 (Display), 2 (Video)</div>
-                        </div>
+                    <div id="legend-inapp-placements" class="hidden space-y-2 text-[11px] text-slate-600">
+                        <div><strong class="text-slate-800">Type:</strong> 3 (Display), 2 (Video)</div>
+                        <div class="text-brand-600 font-medium"><strong class="text-brand-700">Formatos video:</strong> 17 (instream), 18 (outstream)</div>
+                    </div>
 
-                        <div id="legend-ctv-sites" class="hidden space-y-2 text-[11px] text-slate-600">
-                            <div><strong class="text-slate-800">Platform:</strong> Por defecto <code>ctv</code>.</div>
-                        </div>
+                    <div id="legend-ctv-sites" class="hidden space-y-2 text-[11px] text-slate-600">
+                        <div><strong class="text-slate-800">Platform:</strong> Por defecto <code>ctv</code>.</div>
+                    </div>
 
-                        <div id="legend-ctv-placements" class="hidden space-y-2 text-[11px] text-slate-600">
-                            <div><strong class="text-slate-800">Type:</strong> 3 (Display), 2 (Video)</div>
-                        </div>
-                        
-                        <div id="legend-ron" class="hidden space-y-2 text-[11px] text-slate-600">
-                            <span class="font-bold text-slate-900 block uppercase tracking-wide text-[10px] text-teal-700">Mapeo: RON</span>
-                            <div class="space-y-1">
-                                <div><strong class="text-slate-800">Web/In-App:</strong> Format 17 &rarr; instream | 18 &rarr; outstream | Otros &rarr; display. Key = domain/format.</div>
-                                <div class="pt-2"><strong class="text-slate-800">CTV Especial:</strong><br>1) Crea bundle/instream, bundle/outstream, bundle/video.<br>2) Identifica el primer Hash para crear keys maestras.</div>
-                            </div>
+                    <div id="legend-ctv-placements" class="hidden space-y-2 text-[11px] text-slate-600">
+                        <div><strong class="text-slate-800">Type:</strong> 3 (Display), 2 (Video)</div>
+                    </div>
+                    
+                    <div id="legend-ron" class="hidden space-y-2 text-[11px] text-slate-600">
+                        <span class="font-bold text-slate-900 block uppercase tracking-wide text-[10px] text-teal-700">Mapeo: RON</span>
+                        <div class="space-y-1">
+                            <div><strong class="text-slate-800">Web/In-App:</strong> Format 17 &rarr; instream | 18 &rarr; outstream | Otros &rarr; display. Key = domain/format.</div>
+                            <div class="pt-2"><strong class="text-slate-800">CTV Especial:</strong><br>1) Crea bundle/instream, bundle/outstream, bundle/video.<br>2) Identifica el primer Hash para crear keys maestras.</div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- PANEL DERECHO -->
-            <div id="right-panel-dynamic-content" class="lg:col-span-8 space-y-6 hidden">
+            <div id="right-panel-dynamic-content" class="w-full space-y-6 hidden">
                 
                 <!-- IMPORTADOR ESTÁNDAR -->
                 <div id="standard-import-container" class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col hidden">
@@ -180,6 +170,7 @@
                     </div>
                 </div>
 
+                <!-- SECCIÓN CONFIGURADOR DE RESULTADOS -->
                 <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
                     <div class="p-6 border-b border-slate-100 bg-slate-50 flex justify-between items-center">
                         <div>
@@ -191,6 +182,7 @@
 
                     <!-- DEFAULTS GLOBALES -->
                     <div id="global-defaults-panel" class="hidden p-6 border-b border-slate-100">
+                        
                         <!-- WEB SITES -->
                         <div id="global-sites-controls" class="hidden grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-3">
                             <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">environment</label><select onchange="updateGlobalDefault('environment', this.value)" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white"><option value="1">1 (Web)</option><option value="3">3 (AMP)</option></select></div>
@@ -218,7 +210,10 @@
                                     <button onclick="bulkAddPlacementConfigs()" class="h-10 w-full sm:w-auto bg-blue-600 text-white text-[11px] px-4 font-bold rounded uppercase whitespace-nowrap hover:bg-blue-700 shadow-sm transition-all">Generar Configs</button>
                                 </div>
                                 <div id="placement-configs-container" class="space-y-3 mt-4"></div>
-                                <button type="button" onclick="addPlacementConfig()" class="w-full mt-2 px-3 py-2 border border-dashed border-blue-400 text-xs font-semibold rounded-lg text-blue-600 bg-white hover:bg-blue-50 transition-all">+ Añadir Tipo y Formato</button>
+                                <div class="flex flex-col sm:flex-row gap-3 mt-3">
+                                    <button type="button" onclick="addPlacementConfig()" class="flex-1 px-3 py-2 border border-dashed border-blue-400 text-xs font-semibold rounded-lg text-blue-600 bg-white hover:bg-blue-50 transition-all">+ Añadir Tipo y Formato</button>
+                                    <button type="button" onclick="addGenericPlacements()" class="flex-1 px-3 py-2 border border-solid border-purple-300 text-xs font-semibold rounded-lg text-purple-700 bg-purple-50 hover:bg-purple-100 transition-all shadow-sm">✨ Add generic placement</button>
+                                </div>
                             </div>
                         </div>
 
@@ -307,8 +302,8 @@
         const AppState = {
             env: null, type: null, columns: [], rows: [], 
             baseDomains: [], 
-            isDefaultData: true, // Para rastrear y eliminar el default
-            deletedPlacements: new Set(), // Para que las filas eliminadas en preview no reaparezcan
+            isDefaultData: true, 
+            deletedPlacements: new Set(), 
             includeDomainInName: true, 
             placementConfigs: [{ id: 1, type: '3', formats: '300x250,728x90', name: 'display' }],
             defaults: {
@@ -355,11 +350,8 @@
                 else if(AppState.env==='in-app') AppState.defaults.inAppSites[f]=v;
                 else if(AppState.env==='ctv') AppState.defaults.ctvSites[f]=v;
                 
-                // Actualizar inmediatamente en las filas ya renderizadas de la tabla (SITES)
                 const colIndex = AppState.columns.indexOf(f);
-                if (colIndex !== -1) {
-                    AppState.rows.forEach(r => { if (r.length > colIndex) r[colIndex] = v; });
-                }
+                if (colIndex !== -1) { AppState.rows.forEach(r => { if (r.length > colIndex) r[colIndex] = v; }); }
                 this.renderTable(); 
             },
             
@@ -367,8 +359,6 @@
                 if(AppState.env==='web') AppState.defaults.webPlacements[f]=v; 
                 else if(AppState.env==='in-app') AppState.defaults.inAppPlacements[f]=v; 
                 else AppState.defaults.ctvPlacements[f]=v;
-                
-                // Al regenerar la matriz de placements usa siempre los defaults actuales, así que aplica automático.
                 if(AppState.type === 'placements') { this.generatePlacementMatrix(); }
             },
 
@@ -384,13 +374,28 @@
                 ns.forEach((n, idx) => AppState.placementConfigs.push({ id: idx+1, type: dT, formats: dF, name: n.trim() }));
                 t.value = ''; this.renderPlacementConfigUI(); this.generatePlacementMatrix();
             },
+            
             addPlacementConfig() {
-                const nId = AppState.placementConfigs.length > 0 ? Math.max(...AppState.placementConfigs.map(c=>c.id))+1 : 1;
+                const maxId = AppState.placementConfigs.length > 0 ? Math.max(...AppState.placementConfigs.map(c=>c.id)) : 0;
                 let dF = AppState.env==='ctv' ? '152' : (AppState.env==='in-app' ? '320x50,300x250' : '300x250,728x90');
                 let dT = AppState.env==='ctv' ? '2' : '3';
-                AppState.placementConfigs.push({ id: nId, type: dT, formats: dF, name: AppState.env==='ctv'?'instream_ctv':'display' });
+                AppState.placementConfigs.push({ id: maxId + 1, type: dT, formats: dF, name: AppState.env==='ctv'?'instream_ctv':'display' });
                 this.renderPlacementConfigUI(); this.generatePlacementMatrix();
             },
+
+            addGenericPlacements() {
+                const maxId = AppState.placementConfigs.length > 0 ? Math.max(...AppState.placementConfigs.map(c => c.id)) : 0;
+                if (AppState.env === 'ctv') {
+                    AppState.placementConfigs.push({ id: maxId + 1, type: '2', formats: '152', name: 'generic', firstDomainOnly: true, forceExactName: true });
+                } else {
+                    const df = AppState.env === 'in-app' ? '320x50,300x250' : '300x250,728x90';
+                    AppState.placementConfigs.push({ id: maxId + 1, type: '3', formats: df, name: 'generic display', firstDomainOnly: true, forceExactName: true });
+                    AppState.placementConfigs.push({ id: maxId + 2, type: '2', formats: '17', name: 'generic instream', firstDomainOnly: true, forceExactName: true });
+                    AppState.placementConfigs.push({ id: maxId + 3, type: '2', formats: '18', name: 'generic outstream', firstDomainOnly: true, forceExactName: true });
+                }
+                this.renderPlacementConfigUI(); this.generatePlacementMatrix();
+            },
+
             removePlacementConfig(i) { 
                 if(AppState.placementConfigs.length>1) { AppState.placementConfigs.splice(i,1); this.renderPlacementConfigUI(); this.generatePlacementMatrix(); } 
             },
@@ -399,20 +404,19 @@
                 if(v==='1') aF='10,11,22'; if(v==='2') aF=AppState.env==='ctv'?'152':'17'; if(v==='4') aF='222';
                 AppState.placementConfigs[i].formats = aF; this.renderPlacementConfigUI(); this.generatePlacementMatrix();
             },
-            updatePlacementConfigFormats(i, v) { 
-                // CORRECCIÓN: Al cambiar formats, ya NO alteramos el name.
-                AppState.placementConfigs[i].formats = v; 
-                this.generatePlacementMatrix(); 
-            },
+            updatePlacementConfigFormats(i, v) { AppState.placementConfigs[i].formats = v; this.generatePlacementMatrix(); },
             updatePlacementConfigName(i, v) { AppState.placementConfigs[i].name = v; this.generatePlacementMatrix(); },
 
             renderPlacementConfigUI() {
                 const c = document.getElementById('placement-configs-container'); if(!c) return; c.innerHTML='';
                 AppState.placementConfigs.forEach((cfg, i) => {
-                    let fH = cfg.type==='4' ? `<input type="text" value="222" disabled class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-slate-100 text-center text-slate-500 font-mono"/>` : (cfg.type==='2' ? `<select onchange="AppController.updatePlacementConfigFormats(${i}, this.value)" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white font-mono">${AppState.env==='ctv'?`<option value="152" ${cfg.formats==='152'?'selected':''}>152</option>`:''}<option value="17" ${cfg.formats==='17'?'selected':''}>17</option><option value="18" ${cfg.formats==='18'?'selected':''}>18</option></select>` : `<input type="text" oninput="AppController.updatePlacementConfigFormats(${i}, this.value)" value="${cfg.formats}" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white font-mono"/>`);
-                    const nH = `<input type="text" oninput="AppController.updatePlacementConfigName(${i}, this.value)" value="${cfg.name||''}" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white font-mono"/>`;
+                    let fH = cfg.type==='4' ? `<input type="text" value="222" disabled class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-slate-100 text-center text-slate-500 font-mono"/>` : (cfg.type==='2' ? `<select onchange="updatePlacementConfigFormats(${i}, this.value)" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white font-mono">${AppState.env==='ctv'?`<option value="152" ${cfg.formats==='152'?'selected':''}>152</option>`:''}<option value="17" ${cfg.formats==='17'?'selected':''}>17</option><option value="18" ${cfg.formats==='18'?'selected':''}>18</option></select>` : `<input type="text" oninput="updatePlacementConfigFormats(${i}, this.value)" value="${cfg.formats}" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white font-mono"/>`);
+                    const nH = `<input type="text" oninput="updatePlacementConfigName(${i}, this.value)" value="${cfg.name||''}" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white font-mono"/>`;
                     let tO = AppState.env==='web' ? `<option value="3" ${cfg.type==='3'?'selected':''}>3</option><option value="1" ${cfg.type==='1'?'selected':''}>1</option><option value="2" ${cfg.type==='2'?'selected':''}>2</option><option value="4" ${cfg.type==='4'?'selected':''}>4</option>` : `<option value="3" ${cfg.type==='3'?'selected':''}>3</option><option value="2" ${cfg.type==='2'?'selected':''}>2</option>`;
-                    c.innerHTML += `<div class="flex items-center gap-3 bg-white p-3 rounded-xl border border-slate-200 shadow-sm"><div class="flex-1 grid grid-cols-3 gap-3"><div><label class="block text-[9px] uppercase text-slate-500 font-bold mb-1">Type</label><select onchange="AppController.updatePlacementConfigType(${i}, this.value)" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white font-mono">${tO}</select></div><div><label class="block text-[9px] uppercase text-slate-500 font-bold mb-1">Formats</label>${fH}</div><div><label class="block text-[9px] uppercase text-slate-500 font-bold mb-1">Name</label>${nH}</div></div><button onclick="AppController.removePlacementConfig(${i})" ${AppState.placementConfigs.length===1?'disabled':''} class="mt-4 text-red-500 hover:text-red-700 bg-red-50 hover:bg-red-100 p-2 rounded-lg transition-all font-bold disabled:opacity-50 disabled:cursor-not-allowed">🗑️</button></div>`;
+                    
+                    const nameLabel = cfg.firstDomainOnly ? 'Name <span class="text-orange-500 text-[9px] font-normal">(1º dom, Sin prefijo)</span>' : 'Name';
+                    
+                    c.innerHTML += `<div class="flex items-center gap-3 bg-white p-3 rounded-xl border border-slate-200 shadow-sm"><div class="flex-1 grid grid-cols-3 gap-3"><div><label class="block text-[9px] uppercase text-slate-500 font-bold mb-1">Type</label><select onchange="updatePlacementConfigType(${i}, this.value)" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white font-mono">${tO}</select></div><div><label class="block text-[9px] uppercase text-slate-500 font-bold mb-1">Formats</label>${fH}</div><div><label class="block text-[9px] uppercase text-slate-500 font-bold mb-1">${nameLabel}</label>${nH}</div></div><button onclick="removePlacementConfig(${i})" class="mt-4 text-red-500 hover:text-red-700 bg-red-50 hover:bg-red-100 p-2 rounded-lg transition-all font-bold disabled:opacity-50 disabled:cursor-not-allowed">🗑️</button></div>`;
                 });
                 const b = document.getElementById('btn-toggle-domain-prefix');
                 if(b) {
@@ -426,14 +430,21 @@
                 if(AppState.type!=='placements') return; AppState.rows=[];
                 const d = AppState.env==='web'?AppState.defaults.webPlacements:(AppState.env==='ctv'?AppState.defaults.ctvPlacements:AppState.defaults.inAppPlacements);
                 
-                AppState.baseDomains.forEach(b => {
+                AppState.baseDomains.forEach((b, idx) => {
                     if(!b.domain) return;
                     AppState.placementConfigs.forEach(cfg => {
+                        // REGLA 1: Solo aplicar en el 1º dominio si así está marcado
+                        if(cfg.firstDomainOnly && idx !== 0) return;
+
                         const cl = AppState.env==='web'?AppUtils.cleanUrl(b.domain):b.domain.trim();
                         const cN = cfg.name || '';
-                        const fN = AppState.includeDomainInName && cl && cN ? `${cl.replace(/\./g, '_')}_${cN}` : cN;
                         
-                        // CORRECCIÓN: Hash único para evitar regenerar los que han sido borrados de la vista previa
+                        // REGLA 2: Ignorar prefijo (el punto del dominio ya no se remplaza por guion bajo en config normal tampoco)
+                        let fN = cN;
+                        if (!cfg.forceExactName) {
+                            fN = AppState.includeDomainInName && cl && cN ? `${cl}_${cN}` : cN;
+                        }
+                        
                         const uniqueKey = `${cl}|${fN}|${cfg.type}|${cfg.formats}`;
                         if (AppState.deletedPlacements.has(uniqueKey)) return;
 
@@ -455,11 +466,10 @@
                     tb.innerHTML = '';
                     AppState.rows.forEach((r, idx) => {
                         let rowHTML = `<tr class="hover:bg-slate-100 transition-colors">`;
-                        // Cuidado: r.length - 1 porque el último elemento es el uniqueKey, no se debe mostrar ni guardar
                         for(let i=0; i<r.length-1; i++) {
                             rowHTML+=`<td class="px-3 py-2 border-b border-slate-200 ${i===2?'font-bold text-slate-800':''}">${r[i]}</td>`;
                         }
-                        rowHTML+=`<td class="px-3 py-2 border-b border-slate-200 text-center"><button onclick="AppController.removeDataRow(${idx})" class="text-slate-400 hover:text-red-600 bg-slate-100 hover:bg-red-50 rounded px-2 py-1 transition-all">X</button></td></tr>`;
+                        rowHTML+=`<td class="px-3 py-2 border-b border-slate-200 text-center"><button onclick="removeDataRow(${idx})" class="text-slate-400 hover:text-red-600 bg-slate-100 hover:bg-red-50 rounded px-2 py-1 transition-all">X</button></td></tr>`;
                         tb.innerHTML += rowHTML;
                     });
                 } else c.classList.add('hidden');
@@ -484,32 +494,31 @@
                     let rH = '<tr class="hover:bg-slate-50 transition-colors">';
                     AppState.columns.forEach((_, cI) => {
                         let val = r[cI] !== undefined ? r[cI] : '';
+                        let safeVal = typeof val === 'string' ? val.replace(/"/g, '&quot;') : val;
                         let isLang = (isWebSites && cI === 1);
                         
                         if (isRon) {
                             let dis = (cI === 2) ? '' : 'disabled class="w-full bg-slate-100/50 text-slate-500 border border-transparent rounded px-2 py-1.5 text-xs font-mono"';
                             let css = (cI === 2) ? 'class="w-full border border-slate-300 rounded px-2 py-1.5 text-xs text-center font-bold text-teal-700 bg-white shadow-sm focus:border-teal-500 focus:ring-1 focus:ring-teal-500 outline-none transition-all"' : dis;
-                            rH += `<td class="px-3 py-2 border-b border-slate-200"><input type="text" ${css} value="${val}" oninput="AppController.updateCell(${rI}, ${cI}, this.value)" /></td>`;
+                            rH += `<td class="px-3 py-2 border-b border-slate-200"><input type="text" ${css} value="${safeVal}" oninput="updateCell(${rI}, ${cI}, this.value)" /></td>`;
                         } else {
                             let typ = isLang ? 'type="number"' : 'type="text"';
                             let css = isLang ? 'class="w-full border border-slate-300 rounded px-2 py-1.5 text-xs text-center font-bold text-brand-600 bg-white shadow-sm focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none transition-all"' : 'class="w-full border border-transparent hover:border-slate-300 rounded px-2 py-1.5 text-xs focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:bg-white outline-none transition-all"';
                             if (isWebSites && cI > 1) css = 'disabled class="w-full bg-slate-100/50 text-slate-500 border border-transparent rounded px-2 py-1.5 text-xs text-center"';
                             if (AppState.env !== 'web' && cI > 2) css = 'disabled class="w-full bg-slate-100/50 text-slate-500 border border-transparent rounded px-2 py-1.5 text-xs text-center"';
                             
-                            let ob = (isWebSites && cI === 0) ? `onblur="AppController.formatUrlCell(${rI}, this)"` : '';
-                            rH += `<td class="px-3 py-2 border-b border-slate-200"><input ${typ} ${css} value="${val}" oninput="AppController.updateCell(${rI}, ${cI}, this.value)" ${ob} /></td>`;
+                            let ob = (isWebSites && cI === 0) ? `onblur="formatUrlCell(${rI}, this)"` : '';
+                            rH += `<td class="px-3 py-2 border-b border-slate-200"><input ${typ} ${css} value="${safeVal}" oninput="updateCell(${rI}, ${cI}, this.value)" ${ob} /></td>`;
                         }
                     });
-                    rH += `<td class="px-3 py-2 border-b border-slate-200 text-center"><button onclick="AppController.removeDataRow(${rI})" class="text-slate-400 hover:text-red-600 bg-slate-100 hover:bg-red-50 rounded px-2 py-1 transition-all">X</button></td></tr>`;
+                    rH += `<td class="px-3 py-2 border-b border-slate-200 text-center"><button onclick="removeDataRow(${rI})" class="text-slate-400 hover:text-red-600 bg-slate-100 hover:bg-red-50 rounded px-2 py-1 transition-all">X</button></td></tr>`;
                     tb.innerHTML += rH;
                 });
             },
 
             formatUrlCell(r, input) {
-                const cleaned = AppUtils.cleanUrl(input.value);
-                input.value = cleaned; AppState.rows[r][0] = cleaned;
-                AppState.rows[r][1] = AppUtils.detectLanguage(cleaned);
-                this.renderTable();
+                const cleaned = AppUtils.cleanUrl(input.value); input.value = cleaned; AppState.rows[r][0] = cleaned;
+                AppState.rows[r][1] = AppUtils.detectLanguage(cleaned); this.renderTable();
             },
             updateCell(r, c, v) {
                 AppState.rows[r][c] = v;
@@ -518,22 +527,13 @@
             },
             addNewDataRow() { 
                 if(AppState.type==='ron') return;
-                AppState.isDefaultData = false; // Al añadir manualmente eliminamos la posibilidad de reset por defecto.
-                AppState.rows.push(Array(AppState.columns.length).fill('')); 
-                this.renderTable(); 
+                AppState.isDefaultData = false; AppState.rows.push(Array(AppState.columns.length).fill('')); this.renderTable(); 
             },
             removeDataRow(i) { 
                 if (AppState.type === 'placements') {
-                    // Cuidado: añadimos el UniqueKey a los eliminados
-                    const row = AppState.rows[i];
-                    const uniqueKey = row[row.length - 1]; // Es la última columna escondida
-                    AppState.deletedPlacements.add(uniqueKey);
-                    AppState.rows.splice(i, 1);
-                    this.renderMatrixPreviewTable();
-                } else {
-                    AppState.rows.splice(i,1); 
-                    this.renderTable(); 
-                }
+                    const row = AppState.rows[i]; const uniqueKey = row[row.length - 1];
+                    AppState.deletedPlacements.add(uniqueKey); AppState.rows.splice(i, 1); this.renderMatrixPreviewTable();
+                } else { AppState.rows.splice(i,1); this.renderTable(); }
             },
 
             selectEnvironment(env) {
@@ -574,9 +574,7 @@
                     document.getElementById('import-col-2').classList.toggle('hidden', !showTwoCols);
                 }
 
-                // Reiniciar estado "Default Data" siempre que cambiemos de pestaña
-                AppState.isDefaultData = true;
-                AppState.deletedPlacements.clear();
+                AppState.isDefaultData = true; AppState.deletedPlacements.clear();
 
                 if (isRon) {
                     document.getElementById('legend-ron').classList.remove('hidden'); AppState.rows = [];
@@ -591,7 +589,6 @@
                     document.getElementById('global-placements-controls').classList.remove('hidden');
                     document.getElementById('global-plac-env-container').classList.toggle('hidden', AppState.env!=='web');
                     
-                    // Sincronizar inputs globales visualmente
                     const d = AppState.env==='web' ? AppState.defaults.webPlacements : (AppState.env==='ctv' ? AppState.defaults.ctvPlacements : AppState.defaults.inAppPlacements);
                     const iPub = document.getElementById('global-plac-pub'); if(iPub) iPub.value = d.publisher || '';
                     const iDev = document.getElementById('global-plac-dev'); if(iDev) iDev.value = d.devices || '';
@@ -604,7 +601,6 @@
                 document.getElementById('active-template-title').innerText = t.title;
                 const btnAdd = document.getElementById('btn-add-row'); if(btnAdd) btnAdd.classList.toggle('hidden', isRon);
                 
-                // CORRECCIÓN: Botón de Descargar activado correctamente visualmente
                 const downBtn = document.getElementById('download-btn');
                 downBtn.disabled = false;
                 downBtn.classList.remove('bg-slate-400', 'cursor-not-allowed');
@@ -614,17 +610,13 @@
             },
 
             importFromPaste() {
-                const c1 = document.getElementById('import-col-1').value.split(/\r?\n/);
-                const c2 = document.getElementById('import-col-2').value.split(/\r?\n/);
+                const c1 = document.getElementById('import-col-1').value.split(/\r?\n/); const c2 = document.getElementById('import-col-2').value.split(/\r?\n/);
                 let c = 0; const isTwo = AppState.env==='ctv' && AppState.type==='sites';
                 
-                // CORRECCIÓN: Eliminar la fila default antes de procesar los pegados
                 let hasValidData = false;
                 for(let i=0; i<c1.length; i++) { if (c1[i].trim()) { hasValidData = true; break; } }
-                
                 if (hasValidData && AppState.isDefaultData) {
-                    if (AppState.type === 'placements') AppState.baseDomains = [];
-                    else AppState.rows = [];
+                    if (AppState.type === 'placements') AppState.baseDomains = []; else AppState.rows = [];
                     AppState.isDefaultData = false;
                 }
                 
@@ -663,35 +655,24 @@
                     const fI = h.findIndex(x=>x==='formats'||x==='format');
                     const hI = h.findIndex(x=>x==='hash');
                     
-                    if(AppState.env === 'ctv') {
-                        if(dI===-1||hI===-1) return this.showToast('Falta columna Bundle o Hash.');
-                    } else {
-                        if(dI===-1||fI===-1||hI===-1) return this.showToast('Falta Domain, Formats o Hash.');
-                    }
+                    if(AppState.env === 'ctv') { if(dI===-1||hI===-1) return this.showToast('Falta columna Bundle o Hash.'); } 
+                    else { if(dI===-1||fI===-1||hI===-1) return this.showToast('Falta Domain, Formats o Hash.'); }
 
                     let nR = [];
-                    
                     if (AppState.env === 'ctv') {
                         let firstHash = null; let firstBundle = null;
-                        
                         for(let i=1; i<lines.length; i++) {
-                            const cells = lines[i].split(delim);
-                            const b = cV(cells[dI]); const hs = cV(cells[hI]); 
+                            const cells = lines[i].split(delim); const b = cV(cells[dI]); const hs = cV(cells[hI]); 
                             if(!b || !hs) continue;
                             if (firstHash === null) { firstHash = hs; firstBundle = b; }
                             nR.push([`${b}/instream`, hs, '0', b]); nR.push([`${b}/outstream`, hs, '0', b]); nR.push([`${b}/video`, hs, '0', b]);
                         }
-                        
-                        if (firstHash !== null) {
-                            nR.push(['instream', firstHash, '1', firstBundle]); nR.push(['outstream', firstHash, '1', firstBundle]); nR.push(['video', firstHash, '1', firstBundle]);
-                        }
+                        if (firstHash !== null) { nR.push(['instream', firstHash, '1', firstBundle]); nR.push(['outstream', firstHash, '1', firstBundle]); nR.push(['video', firstHash, '1', firstBundle]); }
                     } else {
                         for(let i=1; i<lines.length; i++) {
-                            const cells = lines[i].split(delim);
-                            const d = cV(cells[dI]); const fV = cV(cells[fI]); const hs = cV(cells[hI]); 
+                            const cells = lines[i].split(delim); const d = cV(cells[dI]); const fV = cV(cells[fI]); const hs = cV(cells[hI]); 
                             if(!d || !hs) continue;
-                            let fS = 'display'; 
-                            if(fV==='17') fS='instream'; else if(fV==='18') fS='outstream';
+                            let fS = 'display'; if(fV==='17') fS='instream'; else if(fV==='18') fS='outstream';
                             nR.push([`${d}/${fS}`, hs, '0', d]);
                         }
                     }
@@ -702,18 +683,14 @@
 
             downloadCSV() {
                 if(!AppState.columns.length || (!AppState.rows.length && AppState.type!=='placements')) return;
-                
                 const hR = AppState.columns.join(';');
                 const dR = AppState.rows.map(row => {
-                    // CORRECCIÓN: Filtramos las columnas basándonos SOLAMENTE en AppState.columns.
-                    // Esto omite la 'uniqueKey' que añadimos oculta al final de los Placements.
                     const rowToSave = AppState.columns.map((_, colIndex) => row[colIndex]);
                     return rowToSave.map(v => {
                         let sv = v!==undefined&&v!==null?v.toString():'';
                         return (sv.includes(';')||sv.includes('"')||sv.includes('\n')) ? `"${sv.replace(/"/g, '""')}"` : sv;
                     }).join(';');
                 });
-                
                 const b = new Blob([[hR, ...dR].join('\n')], { type: 'text/csv;charset=utf-8;' });
                 const l = document.createElement("a");
                 l.href = URL.createObjectURL(b); l.download = `config_${AppState.env}_${AppState.type}.csv`;
@@ -730,12 +707,15 @@
         window.clearBaseDomains = () => AppController.clearBaseDomains();
         window.bulkAddPlacementConfigs = () => AppController.bulkAddPlacementConfigs();
         window.addPlacementConfig = () => AppController.addPlacementConfig();
+        window.addGenericPlacements = () => AppController.addGenericPlacements();
         window.removePlacementConfig = (i) => AppController.removePlacementConfig(i);
         window.updatePlacementConfigType = (i, v) => AppController.updatePlacementConfigType(i, v);
         window.updatePlacementConfigFormats = (i, v) => AppController.updatePlacementConfigFormats(i, v);
         window.updatePlacementConfigName = (i, v) => AppController.updatePlacementConfigName(i, v);
         window.addNewDataRow = () => AppController.addNewDataRow();
         window.removeDataRow = (i) => AppController.removeDataRow(i);
+        window.updateCell = (r, c, v) => AppController.updateCell(r, c, v);
+        window.formatUrlCell = (r, input) => AppController.formatUrlCell(r, input);
         window.importFromPaste = () => AppController.importFromPaste();
         window.processRonCSV = () => AppController.processRonCSV();
         window.downloadCSV = () => AppController.downloadCSV();
