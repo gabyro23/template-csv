@@ -124,12 +124,12 @@
                     <div id="legend-ctv-placements" class="hidden space-y-2 text-[11px] text-slate-600">
                         <div><strong class="text-slate-800">Type:</strong> 3 (Display), 2 (Video)</div>
                     </div>
-                    
-                    <div id="legend-ron" class="hidden space-y-2 text-[11px] text-slate-600">
-                        <span class="font-bold text-slate-900 block uppercase tracking-wide text-[10px] text-teal-700">Mapeo: RON</span>
-                        <div class="space-y-1">
-                            <div><strong class="text-slate-800">Web/In-App:</strong> Format 17 &rarr; instream | 18 &rarr; outstream | Otros &rarr; display. Key = domain/format.</div>
-                            <div class="pt-2"><strong class="text-slate-800">CTV Especial:</strong><br>1) Crea bundle/instream, bundle/outstream, bundle/video.<br>2) Identifica el primer Hash para crear keys maestras.</div>
+                        <div id="legend-ron" class="hidden space-y-2 text-[11px] text-slate-600">
+                            <span class="font-bold text-slate-900 block uppercase tracking-wide text-[10px] text-teal-700">Mapeo: RON</span>
+                            <div class="space-y-1">
+                                <div><strong class="text-slate-800">Web/In-App:</strong> Format 17 &rarr; instream | 18 &rarr; outstream | Otros &rarr; display. Key = domain/format.</div>
+                                <div class="pt-2"><strong class="text-slate-800">CTV Especial:</strong><br>1) Key = Domain para todos.<br>2) Para el placement llamado "generic", se añaden 3 filas extra (instream, outstream, video) con Default = 1.</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -655,24 +655,44 @@
                     const fI = h.findIndex(x=>x==='formats'||x==='format');
                     const hI = h.findIndex(x=>x==='hash');
                     
-                    if(AppState.env === 'ctv') { if(dI===-1||hI===-1) return this.showToast('Falta columna Bundle o Hash.'); } 
-                    else { if(dI===-1||fI===-1||hI===-1) return this.showToast('Falta Domain, Formats o Hash.'); }
+                    // Buscamos la columna de Nombre, con un respaldo a la Columna C (índice 2) si falla
+                    let nI = h.findIndex(x=>x==='name'||x==='placement'||x==='placement name');
+                    if (nI === -1 && h.length > 2) nI = 2;
+                    
+                    if(AppState.env === 'ctv') {
+                        if(dI===-1||hI===-1) return this.showToast('Falta columna Bundle o Hash.');
+                    } else {
+                        if(dI===-1||fI===-1||hI===-1) return this.showToast('Falta Domain, Formats o Hash.');
+                    }
 
                     let nR = [];
+                    
                     if (AppState.env === 'ctv') {
-                        let firstHash = null; let firstBundle = null;
                         for(let i=1; i<lines.length; i++) {
-                            const cells = lines[i].split(delim); const b = cV(cells[dI]); const hs = cV(cells[hI]); 
+                            const cells = lines[i].split(delim);
+                            const b = cV(cells[dI]); 
+                            const hs = cV(cells[hI]);
+                            const pName = nI !== -1 && cells[nI] ? cV(cells[nI]).toLowerCase() : '';
+                            
                             if(!b || !hs) continue;
-                            if (firstHash === null) { firstHash = hs; firstBundle = b; }
-                            nR.push([`${b}/instream`, hs, '0', b]); nR.push([`${b}/outstream`, hs, '0', b]); nR.push([`${b}/video`, hs, '0', b]);
+                            
+                            // 1. Fila estándar para todos (Key = Domain, Default = 0)
+                            nR.push([b, hs, '0', b]);
+                            
+                            // 2. Regla especial si el placement se llama "generic"
+                            if (pName === 'generic') {
+                                nR.push(['instream', hs, '1', b]);
+                                nR.push(['outstream', hs, '1', b]);
+                                nR.push(['video', hs, '1', b]);
+                            }
                         }
-                        if (firstHash !== null) { nR.push(['instream', firstHash, '1', firstBundle]); nR.push(['outstream', firstHash, '1', firstBundle]); nR.push(['video', firstHash, '1', firstBundle]); }
                     } else {
                         for(let i=1; i<lines.length; i++) {
-                            const cells = lines[i].split(delim); const d = cV(cells[dI]); const fV = cV(cells[fI]); const hs = cV(cells[hI]); 
+                            const cells = lines[i].split(delim);
+                            const d = cV(cells[dI]); const fV = cV(cells[fI]); const hs = cV(cells[hI]); 
                             if(!d || !hs) continue;
-                            let fS = 'display'; if(fV==='17') fS='instream'; else if(fV==='18') fS='outstream';
+                            let fS = 'display'; 
+                            if(fV==='17') fS='instream'; else if(fV==='18') fS='outstream';
                             nR.push([`${d}/${fS}`, hs, '0', d]);
                         }
                     }
