@@ -1,752 +1,1426 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSV Template</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: { 50: '#f0f7ff', 100: '#e0effe', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8', 900: '#1e3a8a' }
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        .transition-all-300 { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        .sync-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
-        .sync-scroll::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 3px; }
-        input:focus, select:focus, textarea:focus { outline: none; box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5); border-color: transparent; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSV Template Generator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Inria+Serif:ital,wght@1,400;1,700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: { extend: {
+    fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['"Inria Serif"', 'serif'] },
+    colors: {
+      ink:      '#1B043F',
+      muted:    '#5B5773',
+      line:     '#D3DCF2',
+      canvas:   '#F5F7FC',
+      primary: { DEFAULT: '#FF4F00', hover: '#E04500', soft: '#FFEDE5' },
+      grape:   { DEFAULT: '#611BC5', hover: '#4E139F', soft: '#EFE7FB' },
+      info:    { DEFAULT: '#0066FF', soft: '#E5F0FF' },
+      accent:  '#F971FF',
+      ok:      { DEFAULT: '#0F8A5F', soft: '#E3F4EC' },
+      warn:    { DEFAULT: '#B86E00', soft: '#FFF3DC' },
+      danger:  { DEFAULT: '#D6283B', soft: '#FCE6E8' }
+    }
+  } }
+}
+</script>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-sans">
+<body class="bg-canvas text-ink font-sans antialiased min-h-screen">
 
-    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <div class="p-2 bg-brand-100 text-brand-600 rounded-lg">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                    </svg>
-                </div>
-                <div>
-                    <h1 class="text-lg font-bold text-slate-900 tracking-tight">CSV Template Generator</h1>
-                    <p class="text-xs text-slate-500 font-medium">Herramienta integral para Sites y Placements.</p>
-                </div>
-            </div>
+  <header class="bg-ink text-white">
+    <div class="h-1 bg-gradient-to-r from-grape to-primary"></div>
+    <div class="h-16 flex items-center justify-between max-w-7xl mx-auto px-6">
+      <div class="flex items-center gap-3">
+        <!-- Logo SVG oficial -->
+        <svg class="h-5 w-auto shrink-0" aria-label="Logo" width="124" height="25" viewBox="0 0 124 25" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:c2pa="http://c2pa.org/manifest"><metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYTpiYzQzMDJlZi0zZmU2LTRkMzYtYTc0Ni04NGM4NjQ5NTQ1NzgAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaIpoxTjRV8XNINEaXh68lt4AAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDo3MDA3NzNkZi00M2MwLTRhMTQtYWE3Ny1mNTcyMjZiMWZlODFscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNowab/SvO4vlQntrIslSkPcgAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggGHwZQySf/J0+fkOWpRu0+0AtvR/NwTrOAUtAj3O5QsikZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaDY2DrbqwH2IENgvyNI/R2UAAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRNAAAAAAAAAAAAAAAAAGRoYXNoWCCOmvFlZfulGcxhnQNU375oi907fX/xgIOVqn2j0GCrc2RuYW1lbmp1bWJmIG1hbmlmZXN0amV4Y2x1c2lvbnOBomVzdGFydBigZmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOmJjNDMwMmVmLTNmZTYtNGQzNi1hNzQ2LTg0Yzg2NDk1NDU3OC9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOjQ2YTA0OTNmLTZmOTctNDA5NS1hY2ZmLThkMmZlNmM2MDM1MHJjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCAYfBlDJJ/8nT5+Q5alG7T7QC29H83BOs4BS0CPc7lCyKJjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFggIvTOoM/8wzrmm8oatuVmJHnZvSlpXwNxvjDogZfxO4GiY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFggAuBOVoDkjfXXfwQ8a0H3Mr0DtGE93XvKLKvZ6nfW+k50Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQM/ZjZtPVdtw46cl8w1AI/m+3ajKJMSKuj7NYp8G+VfdCikZPMcO121j5g8f/Oxike8ANL3EViRkZyEuK35RjP0=</c2pa:manifest></metadata><path fill-rule="evenodd" clip-rule="evenodd" d="M54.4316 0C53.827 0 53.2579 0.236658 52.8301 0.667884L48.0652 5.4622C47.6374 5.89263 47.4014 6.46442 47.4014 7.07354C47.4014 7.68265 47.6366 8.25445 48.0652 8.68488C48.493 9.11531 49.062 9.35276 49.6666 9.35276C50.2712 9.35276 50.8403 9.1161 51.2681 8.68488L56.033 3.88977C56.4608 3.45934 56.6968 2.88675 56.6968 2.27843C56.6968 1.67011 56.4608 1.09752 56.033 0.66709C55.6052 0.236658 55.037 0 54.4316 0ZM53.22 0.447903C53.1308 0.507465 53.0456 0.574968 52.9651 0.64803C53.0456 0.574174 53.1308 0.507465 53.22 0.447903ZM51.2129 8.62929C51.1355 8.70711 51.0534 8.77859 50.9666 8.84291C51.0526 8.77859 51.1347 8.70711 51.2129 8.62929ZM89.7006 0.357818H65.6762C64.471 0.357818 63.4907 1.34416 63.4907 2.55683C63.4907 3.76951 64.471 4.75585 65.6762 4.75585H74.2708C74.9622 4.78682 75.5044 5.35623 75.5044 6.05191V22.7816C75.525 24.0991 76.6268 24.8861 77.6797 24.8861C78.0767 24.8861 78.6576 24.7765 79.1746 24.2571C79.563 23.8664 79.7832 23.347 79.795 22.8014V6.0535C79.795 5.37052 80.3783 4.7892 81.0958 4.75743H89.7006C90.9058 4.75743 91.8861 3.7703 91.8861 2.55763C91.8861 1.34495 90.9058 0.358612 89.7006 0.358612V0.357818ZM21.4418 4.75791H5.59211L5.59053 4.75871C4.89911 4.78968 4.35687 5.3583 4.35687 6.05477V10.3035L16.5411 10.3019C17.7464 10.3019 18.7267 11.2883 18.7267 12.5009C18.7267 13.7136 17.7464 14.6999 16.5411 14.6999H4.35766V18.9383C4.35766 19.6539 4.93621 20.2368 5.64815 20.2368L21.441 20.2431C22.647 20.2431 23.6273 21.2295 23.6273 22.4422C23.6273 23.6548 22.647 24.6412 21.4418 24.6412H1.45229C0.651163 24.6412 0 23.986 0 23.1799V1.82034C0 1.01506 0.651163 0.35909 1.45229 0.35909H21.4418C22.647 0.35909 23.6273 1.34543 23.6273 2.5581C23.6273 3.77078 22.647 4.75791 21.4418 4.75791ZM105.14 20.236L120.933 20.2423V20.2431C122.139 20.2431 123.119 21.2295 123.119 22.4422C123.119 23.6548 122.139 24.6412 120.934 24.6412H100.944C100.143 24.6412 99.4918 23.986 99.4918 23.1799V1.82034C99.4918 1.01506 100.143 0.35909 100.944 0.35909H120.934C122.139 0.35909 123.119 1.34543 123.119 2.5581C123.119 3.77078 122.139 4.75791 120.934 4.75791H105.084C104.392 4.78889 103.849 5.3575 103.849 6.05398V10.3027L116.034 10.3011C117.239 10.3011 118.219 11.2875 118.219 12.5001C118.219 13.7128 117.239 14.6991 116.034 14.6991H103.849V18.9376C103.849 19.6531 104.428 20.236 105.14 20.236ZM37.2799 16.3152C37.7077 15.8848 38.276 15.6474 38.8814 15.6474C39.4868 15.6474 40.055 15.8848 40.4828 16.3152C40.9098 16.7449 41.1451 17.3175 41.1451 17.9266C41.1451 18.5357 40.9098 19.1083 40.4828 19.5379L35.7179 24.3322C35.2901 24.7635 34.721 25.0001 34.1164 25.0001C33.5118 25.0001 32.9428 24.7627 32.515 24.3322C31.6318 23.4436 31.6318 21.9982 32.515 21.1096L37.2799 16.3152ZM39.9106 15.9849C39.8483 15.9515 39.7835 15.9206 39.7188 15.8936C39.7843 15.9206 39.8483 15.9515 39.9106 15.9849ZM38.0432 15.8936C38.1742 15.8388 38.3107 15.7975 38.4504 15.7697C38.3107 15.7975 38.1742 15.8396 38.0432 15.8936ZM33.1338 24.6864C33.1638 24.7015 33.1938 24.7158 33.2245 24.7301C33.1938 24.7166 33.1638 24.7015 33.1338 24.6864ZM33.601 24.8588C33.5253 24.8405 33.4511 24.8183 33.3785 24.7921C33.4511 24.8183 33.5261 24.8405 33.601 24.8588ZM34.1165 0C34.7218 0 35.2901 0.237452 35.7179 0.667884L35.7187 0.668678L40.4836 5.46299C40.9107 5.89263 41.1459 6.46521 41.1459 7.07433C41.1459 7.68345 40.9107 8.25603 40.4836 8.68567C40.0559 9.1161 39.4868 9.35355 38.8822 9.35355C38.2776 9.35355 37.7085 9.1161 37.2807 8.68567L32.5158 3.89056C32.0872 3.46013 31.852 2.88834 31.852 2.27922C31.852 1.67011 32.0872 1.09832 32.515 0.667884C32.9428 0.237452 33.5111 0 34.1165 0ZM32.571 0.724269C32.6484 0.646442 32.7305 0.574968 32.8173 0.510641C32.7313 0.574968 32.6492 0.646442 32.571 0.724269ZM33.2798 0.246188C33.3777 0.204892 33.4795 0.171537 33.5829 0.14533C33.4795 0.171537 33.3785 0.204892 33.2798 0.246188ZM34.1172 0.0794155C33.9349 0.0794155 33.7558 0.101652 33.5829 0.14533C33.7558 0.101652 33.9341 0.0794155 34.1172 0.0794155ZM37.3368 8.62849C37.4915 8.78494 37.6651 8.91439 37.853 9.01524C37.6659 8.91359 37.4915 8.78414 37.3368 8.62849ZM37.853 9.01524C37.9153 9.0486 37.9792 9.07957 38.0447 9.10657C37.98 9.07957 37.9153 9.0486 37.853 9.01524ZM38.1442 9.14548C38.2113 9.16931 38.2792 9.18996 38.3478 9.20743C38.2792 9.18996 38.2105 9.16931 38.1442 9.14548ZM40.4276 8.62928C40.8537 8.20052 41.0669 7.63739 41.0669 7.07434C41.067 7.63759 40.8539 8.20077 40.4276 8.62928ZM51.2671 16.3132C50.8393 15.8828 50.2702 15.6453 49.6656 15.6453C49.061 15.6453 48.492 15.882 48.0642 16.3124C47.181 17.2011 47.181 18.6464 48.0642 19.5351L52.8291 24.3294C53.2569 24.7598 53.8252 24.9973 54.4306 24.9973C55.036 24.9973 55.6042 24.7606 56.032 24.3294C56.4598 23.899 56.6958 23.3264 56.6958 22.7181C56.6958 22.1098 56.4598 21.5372 56.032 21.1067L51.2671 16.3124V16.3132ZM50.5023 15.8915C50.5678 15.9185 50.6317 15.9495 50.6941 15.9828C50.6317 15.9495 50.567 15.9185 50.5023 15.8915ZM49.1313 15.7915C49.2307 15.7668 49.3318 15.7486 49.4352 15.7382C49.3326 15.7494 49.2307 15.7668 49.1313 15.7915ZM48.3657 16.156C48.2789 16.2203 48.1968 16.2918 48.1194 16.3696C48.1976 16.2918 48.2797 16.2203 48.3657 16.156ZM47.84 16.7143C47.9197 16.5928 48.0129 16.4768 48.1194 16.3696C48.0129 16.4768 47.9197 16.592 47.84 16.7143ZM48.1194 19.4803C48.0129 19.3731 47.9197 19.2579 47.84 19.1356C47.9197 19.2571 48.0129 19.3731 48.1194 19.4803ZM53.4637 24.6939C53.4882 24.7058 53.5134 24.7178 53.5387 24.7297C53.5134 24.7185 53.4882 24.7066 53.4637 24.6939ZM42.2013 12.3454C42.2013 11.0755 43.2282 10.0423 44.4903 10.0423C45.7523 10.0423 46.7792 11.0755 46.7792 12.3454C46.7792 13.6152 45.7523 14.6484 44.4903 14.6484C43.2282 14.6484 42.2013 13.6152 42.2013 12.3454ZM42.3055 12.0078C42.3166 11.934 42.3316 11.8617 42.3497 11.791C42.3316 11.8617 42.3166 11.9348 42.3055 12.0078ZM46.0538 13.9186C46.1036 13.8685 46.1517 13.8153 46.1967 13.7605C46.1517 13.8153 46.1044 13.8685 46.0538 13.9186Z" fill="#FFFFFF"></path></svg>
+        <span class="h-5 w-px bg-white/20"></span>
+        <span class="text-lg font-bold">CSV <span class="font-serif italic font-normal">Template</span></span>
+      </div>
+      <nav class="flex gap-1 p-1 bg-white/10 rounded-lg">
+        <button class="px-4 py-1.5 text-sm font-medium rounded-md bg-white text-ink">Generator</button>
+        <button class="px-4 py-1.5 text-sm font-medium rounded-md text-white/70 hover:text-white">Docs</button>
+      </nav>
+    </div>
+  </header>
+
+  <section class="bg-white border-b border-line">
+    <div class="max-w-7xl mx-auto px-6 py-5 flex flex-col lg:flex-row gap-6 lg:items-center lg:justify-between">
+      <div class="flex flex-col gap-1 max-w-xl">
+        <span class="text-xs font-medium uppercase tracking-wide text-muted">About this tool</span>
+        <p class="text-sm text-ink" id="tool-legend-description">Comprehensive CSV template generator and converter for Sites, Placements, and RON mappings across Web, In-App, and CTV.</p>
+      </div>
+      <ol id="tool-legend-steps" class="flex flex-col sm:flex-row gap-4 sm:gap-6">
+        <li class="flex items-center gap-2">
+          <span class="w-6 h-6 rounded-full bg-grape-soft text-grape text-xs font-bold flex items-center justify-center shrink-0">1</span>
+          <span class="text-sm">Select environment and target</span>
+        </li>
+        <li class="flex items-center gap-2">
+          <span class="w-6 h-6 rounded-full bg-grape-soft text-grape text-xs font-bold flex items-center justify-center shrink-0">2</span>
+          <span class="text-sm">Upload or customize data</span>
+        </li>
+        <li class="flex items-center gap-2">
+          <span class="w-6 h-6 rounded-full bg-grape-soft text-grape text-xs font-bold flex items-center justify-center shrink-0">3</span>
+          <span class="text-sm">Download CSV file</span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <main class="max-w-7xl mx-auto px-6 py-8 flex flex-col gap-6">
+
+    <!-- Step 1 & 2 Cards -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+      <!-- Step 1: Environment Selection -->
+      <section class="bg-white border border-line rounded-xl p-6 flex flex-col gap-4">
+        <div class="flex flex-col gap-1">
+          <div class="flex items-center gap-2">
+            <span class="w-6 h-6 rounded-full bg-grape-soft text-grape text-xs font-bold flex items-center justify-center shrink-0">1</span>
+            <h2 class="text-base font-bold text-ink">Select Environment</h2>
+          </div>
+          <p class="text-xs text-muted">Choose the target platform to apply specific validation rules.</p>
         </div>
-    </header>
-
-    <main class="flex-1 max-w-[1400px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div class="flex flex-col gap-8">
-            
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
-                
-                <!-- SECCIÓN 1: Seleccionar Entorno -->
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-                    <div class="flex items-center space-x-2 mb-4">
-                        <span class="flex items-center justify-center w-6 h-6 rounded-full bg-brand-100 text-brand-600 text-xs font-bold">1</span>
-                        <h2 class="text-md font-semibold text-slate-950">Selecciona el Entorno</h2>
-                    </div>
-                    
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        <button type="button" onclick="selectEnvironment('web')" id="btn-env-web" class="flex flex-col items-center justify-center p-3 rounded-xl border-2 transition-all-300 hover:bg-slate-50 text-center focus:outline-none">
-                            <div class="p-2 bg-slate-100 rounded-lg text-slate-600 mb-2" id="icon-env-web"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" /></svg></div>
-                            <h3 class="font-semibold text-xs text-slate-900">Web</h3>
-                        </button>
-                        <button type="button" onclick="selectEnvironment('in-app')" id="btn-env-in-app" class="flex flex-col items-center justify-center p-3 rounded-xl border-2 transition-all-300 hover:bg-slate-50 text-center focus:outline-none">
-                            <div class="p-2 bg-slate-100 rounded-lg text-slate-600 mb-2" id="icon-env-in-app"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg></div>
-                            <h3 class="font-semibold text-xs text-slate-900">In-App</h3>
-                        </button>
-                        <button type="button" onclick="selectEnvironment('ctv')" id="btn-env-ctv" class="flex flex-col items-center justify-center p-3 rounded-xl border-2 transition-all-300 hover:bg-slate-50 text-center focus:outline-none">
-                            <div class="p-2 bg-slate-100 rounded-lg text-slate-600 mb-2" id="icon-env-ctv"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z" /></svg></div>
-                            <h3 class="font-semibold text-xs text-slate-900">CTV</h3>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- SECCIÓN 2: Seleccionar Objetivo -->
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-                    <div class="flex items-center space-x-2 mb-4">
-                        <span class="flex items-center justify-center w-6 h-6 rounded-full bg-brand-100 text-brand-600 text-xs font-bold">2</span>
-                        <h2 class="text-md font-semibold text-slate-950">¿Qué deseas crear?</h2>
-                    </div>
-
-                    <div class="grid grid-cols-3 gap-3">
-                        <button type="button" onclick="selectType('sites')" id="btn-type-sites" class="flex flex-col items-center justify-center p-4 rounded-2xl border-2 transition-all-300 hover:bg-slate-50 text-center focus:outline-none">
-                            <div class="p-2.5 rounded-full bg-slate-100 text-slate-600 mb-2" id="icon-type-sites"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg></div>
-                            <span class="font-semibold text-xs text-slate-900">Sites</span>
-                        </button>
-                        <button type="button" onclick="selectType('placements')" id="btn-type-placements" class="flex flex-col items-center justify-center p-4 rounded-2xl border-2 transition-all-300 hover:bg-slate-50 text-center focus:outline-none">
-                            <div class="p-2.5 rounded-full bg-slate-100 text-slate-600 mb-2" id="icon-type-placements"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg></div>
-                            <span class="font-semibold text-xs text-slate-900">Placements</span>
-                        </button>
-                        <button type="button" onclick="selectType('ron')" id="btn-type-ron" class="flex flex-col items-center justify-center p-4 rounded-2xl border-2 transition-all-300 hover:bg-slate-50 text-center focus:outline-none">
-                            <div class="p-2.5 rounded-full bg-slate-100 text-slate-600 mb-2" id="icon-type-ron"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></div>
-                            <span class="font-semibold text-xs text-slate-900">RON</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div id="left-panel-dynamic-content" class="hidden w-full">
-                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 space-y-4">
-                    <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5"><svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477-4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg> Leyenda de Identificadores</h3>
-
-                    <div id="legend-sites" class="hidden space-y-3 text-[11px] text-slate-600">
-                        <div><strong class="text-slate-800">Environment:</strong> <span class="font-mono">1</span> (Web) | <span class="font-mono">3</span> (AMP)<br><strong class="text-slate-800">Booleanos:</strong> <span class="font-mono">1</span> (Habilitado) | <span class="font-mono">0</span> (Deshabilitado)</div>
-                        <div><strong class="text-slate-800">Language ID:</strong> Campo numérico (ej. 1=Inglés, 27=Español, 34=Francés, 23=Alemán)</div>
-                    </div>
-
-                    <div id="legend-placements" class="hidden space-y-2 text-[11px] text-slate-600">
-                        <div><strong class="text-slate-800">Environment:</strong> <span class="font-mono">1</span> (Web) | <span class="font-mono">3</span> (AMP)</div>
-                        <div><strong class="text-slate-800">Type:</strong> 3 (Display), 1 (Skin), 2 (Video), 4 (Native)</div>
-                        <div class="text-brand-600 font-medium"><strong class="text-brand-700">Formatos video:</strong> 17 (instream), 18 (outstream)</div>
-                    </div>
-
-                    <div id="legend-inapp-sites" class="hidden space-y-2 text-[11px] text-slate-600">
-                        <div><strong class="text-slate-800">Platform Auto:</strong> ios (Numérico) | android (Alfanumérico)</div>
-                    </div>
-
-                    <div id="legend-inapp-placements" class="hidden space-y-2 text-[11px] text-slate-600">
-                        <div><strong class="text-slate-800">Type:</strong> 3 (Display), 2 (Video)</div>
-                        <div class="text-brand-600 font-medium"><strong class="text-brand-700">Formatos video:</strong> 17 (instream), 18 (outstream)</div>
-                    </div>
-
-                    <div id="legend-ctv-sites" class="hidden space-y-2 text-[11px] text-slate-600">
-                        <div><strong class="text-slate-800">Platform:</strong> Por defecto <code>ctv</code>.</div>
-                    </div>
-
-                    <div id="legend-ctv-placements" class="hidden space-y-2 text-[11px] text-slate-600">
-                        <div><strong class="text-slate-800">Type:</strong> 3 (Display), 2 (Video)</div>
-                    </div>
-                        <div id="legend-ron" class="hidden space-y-2 text-[11px] text-slate-600">
-                        <div id="legend-placements" class="hidden space-y-2 text-[11px] text-slate-600">
-                            <div><strong class="text-slate-800">Environment:</strong> <span class="font-mono">1</span> (Web) | <span class="font-mono">3</span> (AMP)</div>
-                            <div><strong class="text-slate-800">Type:</strong> 3 (Display), 1 (Skin), 2 (Video), 4 (Native)</div>
-                            <div class="text-brand-600 font-medium"><strong class="text-brand-700">Formatos video:</strong> 17 (instream), 18 (outstream)</div>
-                            <div class="text-purple-600 font-medium"><strong class="text-purple-700">Formatos skin:</strong> 10 (Classic), 11 (Animated), 44 (Expandable)</div>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="right-panel-dynamic-content" class="w-full space-y-6 hidden">
-                
-                <!-- IMPORTADOR ESTÁNDAR -->
-                <div id="standard-import-container" class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col hidden">
-                    <div class="flex items-center space-x-2 mb-2">
-                        <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" /></svg>
-                        <h2 class="text-sm font-semibold text-slate-950">Importador Masivo</h2>
-                    </div>
-                    <p id="import-desc" class="text-[11px] text-slate-500 mb-3 leading-relaxed">Copia tus datos desde Excel y pégalos en la celda.</p>
-                    <div class="flex flex-col border border-slate-200 rounded-lg overflow-hidden shadow-inner flex-1 bg-slate-50">
-                        <div class="flex bg-slate-100 text-[10px] font-bold text-slate-500 uppercase tracking-wider border-b border-slate-200">
-                            <div class="flex-1 p-2 truncate" id="import-col-1-header">URL / Bundle</div>
-                            <div class="flex-1 p-2 border-l border-slate-200 truncate hidden" id="import-col-2-header">Name (Opcional)</div>
-                        </div>
-                        <div class="flex h-32 bg-white relative">
-                            <textarea id="import-col-1" wrap="off" class="sync-scroll flex-1 p-2 text-xs resize-none outline-none font-mono focus:bg-blue-50/20" placeholder="Pega los datos aquí..."></textarea>
-                            <textarea id="import-col-2" wrap="off" class="sync-scroll flex-1 p-2 text-xs resize-none outline-none font-mono border-l border-slate-200 focus:bg-blue-50/20 hidden" placeholder="Nombres..."></textarea>
-                        </div>
-                    </div>
-                    <button onclick="importFromPaste()" id="btn-import-execute" class="w-full mt-4 py-2.5 text-sm font-bold uppercase rounded-lg text-white bg-green-600 hover:bg-green-700 shadow-sm transition-all">Procesar Datos Pegados</button>
-                </div>
-
-                <!-- IMPORTADOR RON -->
-                <div id="ron-import-container" class="hidden bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col">
-                    <div class="flex items-center space-x-2 mb-2">
-                        <svg class="w-5 h-5 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" /></svg>
-                        <h2 class="text-sm font-semibold text-slate-950">Subir CSV (Mappeo RON)</h2>
-                    </div>
-                    <p class="text-[11px] text-slate-500 mb-3">Sube el archivo para que el sistema procese Domain/Bundle, Formats y Hash.</p>
-                    <div class="flex flex-col border border-dashed border-slate-300 rounded-lg p-8 items-center justify-center bg-slate-50">
-                        <input type="file" id="ron-csv-upload" accept=".csv" class="mb-4 text-xs text-slate-600 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100 cursor-pointer" />
-                        <button onclick="processRonCSV()" class="px-6 py-2.5 bg-teal-600 text-white text-sm font-bold rounded-lg shadow-sm hover:bg-teal-700 transition-all">Procesar Archivo CSV</button>
-                    </div>
-                </div>
-
-                <!-- SECCIÓN CONFIGURADOR DE RESULTADOS -->
-                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
-                    <div class="p-6 border-b border-slate-100 bg-slate-50 flex justify-between items-center">
-                        <div>
-                            <span class="text-xs font-bold text-brand-600 uppercase tracking-widest block mb-1">Configuración Activa</span>
-                            <h2 class="text-xl font-bold text-slate-900" id="active-template-title">Opciones</h2>
-                        </div>
-                        <button onclick="downloadCSV()" id="download-btn" class="px-6 py-2.5 text-sm font-semibold rounded-xl text-white bg-slate-400 cursor-not-allowed transition-all" disabled>Descargar CSV</button>
-                    </div>
-
-                    <!-- DEFAULTS GLOBALES -->
-                    <div id="global-defaults-panel" class="hidden p-6 border-b border-slate-100">
-                        
-                        <!-- WEB SITES -->
-                        <div id="global-sites-controls" class="hidden grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-3">
-                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">environment</label><select onchange="updateGlobalDefault('environment', this.value)" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white"><option value="1">1 (Web)</option><option value="3">3 (AMP)</option></select></div>
-                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">child_lt14</label><select onchange="updateGlobalDefault('child_lt14', this.value)" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white"><option value="0">0</option><option value="1">1</option></select></div>
-                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">child_bt1418</label><select onchange="updateGlobalDefault('child_bt1418', this.value)" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white"><option value="0">0</option><option value="1">1</option></select></div>
-                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">gambling</label><select onchange="updateGlobalDefault('gambling', this.value)" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white"><option value="1">1</option><option value="0">0</option></select></div>
-                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">alcohol</label><select onchange="updateGlobalDefault('alcohol', this.value)" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white"><option value="1">1</option><option value="0">0</option></select></div>
-                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">prebid</label><select onchange="updateGlobalDefault('prebid', this.value)" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white"><option value="1">1</option><option value="0">0</option></select></div>
-                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">ortb</label><select onchange="updateGlobalDefault('ortb', this.value)" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white"><option value="0">0</option><option value="1">1</option></select></div>
-                        </div>
-
-                        <!-- PLACEMENTS -->
-                        <div id="global-placements-controls" class="hidden space-y-6">
-                            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 bg-slate-50 p-4 rounded-xl border border-slate-200">
-                                <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Publisher ID</label><input type="text" id="global-plac-pub" oninput="updateGlobalPlacementDefault('publisher', this.value)" value="1001" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white" /></div>
-                                <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Devices</label><input type="text" id="global-plac-dev" oninput="updateGlobalPlacementDefault('devices', this.value)" value="desktop,mobile,tablet" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white" /></div>
-                                <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Native</label><input type="text" value="1" disabled class="w-full px-2 py-1.5 text-xs bg-slate-100 border border-slate-200 rounded text-center text-slate-400" /></div>
-                                <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Prebid</label><select id="global-plac-prebid" onchange="updateGlobalPlacementDefault('prebid', this.value)" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white"><option value="1">1 (Habilitado)</option><option value="0">0 (Tag Based)</option></select></div>
-                                <div id="global-plac-env-container"><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Environment</label><select id="global-plac-env" onchange="updateGlobalPlacementDefault('environment', this.value)" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white"><option value="1">1 (Web)</option><option value="3">3 (AMP)</option></select></div>
-                            </div>
-                            <div class="space-y-4 pt-2">
-                                <div class="flex justify-between items-center border-b border-slate-200 pb-2"><span class="text-xs font-bold text-slate-800 uppercase">Configuración de Combinaciones</span><button type="button" id="btn-toggle-domain-prefix" onclick="toggleDomainInName()" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-blue-600 hover:bg-blue-700 text-white transition-all shadow-sm">✓ Prefijo URL (Activo)</button></div>
-                                <div class="bg-blue-50/50 p-4 rounded-xl border border-blue-100 flex flex-col sm:flex-row gap-3 items-end shadow-inner">
-                                    <textarea id="bulk-placement-names" wrap="off" rows="2" class="w-full text-xs font-mono p-2 border border-slate-300 rounded resize-y" placeholder="Ej: display_1\ndisplay_2\n(Pegar Nombres Masivos)"></textarea>
-                                    <button onclick="bulkAddPlacementConfigs()" class="h-10 w-full sm:w-auto bg-blue-600 text-white text-[11px] px-4 font-bold rounded uppercase whitespace-nowrap hover:bg-blue-700 shadow-sm transition-all">Generar Configs</button>
-                                </div>
-                                <div id="placement-configs-container" class="space-y-3 mt-4"></div>
-                                <div class="flex flex-col sm:flex-row gap-3 mt-3">
-                                    <button type="button" onclick="addPlacementConfig()" class="flex-1 px-3 py-2 border border-dashed border-blue-400 text-xs font-semibold rounded-lg text-blue-600 bg-white hover:bg-blue-50 transition-all">+ Añadir Tipo y Formato</button>
-                                    <button type="button" onclick="addGenericPlacements()" class="flex-1 px-3 py-2 border border-solid border-purple-300 text-xs font-semibold rounded-lg text-purple-700 bg-purple-50 hover:bg-purple-100 transition-all shadow-sm">✨ Add generic placement</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- IN-APP SITES -->
-                        <div id="global-inapp-sites-controls" class="hidden grid grid-cols-2 sm:grid-cols-6 gap-3">
-                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">publisher</label><input type="text" oninput="updateGlobalDefault('publisher', this.value)" value="232" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white" /></div>
-                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">child_lt14</label><select onchange="updateGlobalDefault('child_lt14', this.value)" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white"><option value="0">0</option><option value="1">1</option></select></div>
-                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">gambling</label><select onchange="updateGlobalDefault('gambling', this.value)" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white"><option value="1">1</option><option value="0">0</option></select></div>
-                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">alcohol</label><select onchange="updateGlobalDefault('alcohol', this.value)" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white"><option value="1">1</option><option value="0">0</option></select></div>
-                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">ortb</label><select onchange="updateGlobalDefault('ortb', this.value)" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white"><option value="1">1</option><option value="0">0</option></select></div>
-                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">prebid</label><select onchange="updateGlobalDefault('prebid', this.value)" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white"><option value="1">1</option><option value="0">0</option></select></div>
-                        </div>
-
-                        <!-- CTV SITES -->
-                        <div id="global-ctv-sites-controls" class="hidden grid grid-cols-2 sm:grid-cols-6 gap-3">
-                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">publisher</label><input type="text" oninput="updateGlobalDefault('publisher', this.value)" value="1433" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white" /></div>
-                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">child_lt14</label><select onchange="updateGlobalDefault('child_lt14', this.value)" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white"><option value="0">0</option><option value="1">1</option></select></div>
-                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">gambling</label><select onchange="updateGlobalDefault('gambling', this.value)" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white"><option value="1">1</option><option value="0">0</option></select></div>
-                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">alcohol</label><select onchange="updateGlobalDefault('alcohol', this.value)" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white"><option value="1">1</option><option value="0">0</option></select></div>
-                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">ortb</label><select onchange="updateGlobalDefault('ortb', this.value)" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white"><option value="1">1</option><option value="0">0</option></select></div>
-                            <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">prebid</label><select onchange="updateGlobalDefault('prebid', this.value)" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white"><option value="1">1</option><option value="0">0</option></select></div>
-                        </div>
-                    </div>
-
-                    <!-- TABLA MANUAL (SITES Y RON) -->
-                    <div id="manual-grid-section" class="p-6">
-                        <div class="flex justify-between mb-4">
-                            <div><h3 class="text-xs font-bold text-slate-500 uppercase" id="data-editor-title">Editor de Datos</h3></div>
-                            <button onclick="addNewDataRow()" id="btn-add-row" class="px-4 py-1.5 border border-brand-500 text-xs font-semibold rounded-lg text-brand-600 bg-white hover:bg-brand-50 transition-all">+ Añadir Fila</button>
-                        </div>
-                        <div class="overflow-x-auto border border-slate-200 rounded-xl bg-slate-50 shadow-inner max-h-[400px]">
-                            <table class="min-w-full divide-y divide-slate-200 text-left text-sm text-slate-600">
-                                <thead class="bg-slate-200/50 text-slate-700 uppercase text-[10px] sticky top-0" id="preview-thead"><tr><th class="p-4 text-center">Cargando...</th></tr></thead>
-                                <tbody class="divide-y divide-slate-200 bg-white" id="preview-tbody"></tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <!-- MATRIZ PREVIEW (PLACEMENTS) -->
-                    <div id="placement-matrix-preview-section" class="hidden p-6 border-t border-slate-100 bg-slate-50/50">
-                        <div class="flex justify-between items-center mb-4">
-                            <h3 class="text-xs font-bold text-slate-700 uppercase">Vista Previa Output (Placements)</h3>
-                            <div class="flex items-center gap-3">
-                                <span class="text-[10px] bg-blue-100 text-blue-800 px-3 py-1.5 rounded-lg font-mono font-bold border border-blue-200" id="placement-preview-counter">0 Placements</span>
-                                <button onclick="clearBaseDomains()" class="px-3 py-1.5 bg-red-50 hover:bg-red-100 text-red-600 font-bold rounded-lg text-[10px] border border-red-200 transition-all">Vaciar Entradas</button>
-                            </div>
-                        </div>
-                        <div class="overflow-x-auto border border-slate-200 rounded-xl bg-white shadow-inner max-h-[400px]">
-                            <table class="min-w-full divide-y divide-slate-200 text-left text-xs">
-                                <thead class="bg-slate-200/50 text-slate-700 uppercase text-[10px] sticky top-0" id="placement-matrix-thead"><tr><th class="p-4 text-center">Cargando...</th></tr></thead>
-                                <tbody class="divide-y divide-slate-200 font-mono" id="placement-matrix-preview-tbody"></tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <div id="toast-message" class="hidden mx-6 mb-6 p-4 bg-green-50 text-green-800 rounded-xl border border-green-200 flex items-center space-x-2 transition-all">
-                        <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                        <span class="text-sm font-bold" id="toast-text">¡Acción exitosa!</span>
-                    </div>
-                </div>
-            </div>
+        <div class="grid grid-cols-3 gap-3">
+          <button type="button" onclick="selectEnvironment('web')" id="btn-env-web" class="flex flex-col items-center justify-center p-4 rounded-xl border border-line hover:border-grape transition-all text-center">
+            <svg class="w-5 h-5 text-grape mb-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" /></svg>
+            <span class="text-sm font-medium text-ink">Web</span>
+          </button>
+          <button type="button" onclick="selectEnvironment('in-app')" id="btn-env-in-app" class="flex flex-col items-center justify-center p-4 rounded-xl border border-line hover:border-grape transition-all text-center">
+            <svg class="w-5 h-5 text-grape mb-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
+            <span class="text-sm font-medium text-ink">In-App</span>
+          </button>
+          <button type="button" onclick="selectEnvironment('ctv')" id="btn-env-ctv" class="flex flex-col items-center justify-center p-4 rounded-xl border border-line hover:border-grape transition-all text-center">
+            <svg class="w-5 h-5 text-grape mb-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z" /></svg>
+            <span class="text-sm font-medium text-ink">CTV</span>
+          </button>
         </div>
-    </main>
+      </section>
 
-    <script>
-        const AppConfig = {
-            templatesData: {
-                'web': {
-                    'sites': { title: 'Web - Sites & Bundles', columns: ['url', 'language_id', 'environment', 'child_lt14', 'child_bt1418', 'gambling', 'alcohol', 'prebid', 'ortb'], sample: ['eldiario.es', '27', '1', '0', '0', '1', '1', '1', '0'] },
-                    'placements': { title: 'Web - Placements', columns: ['publisher', 'domain', 'name', 'type', 'formats', 'devices', 'native', 'prebid', 'environment'], sample: [] },
-                    'ron': { title: 'Mappeo RON (Web)', columns: ['Key', 'Value', 'Default', 'bundleDomain'], sample: [] }
-                },
-                'in-app': {
-                    'sites': { title: 'In-App - Sites & Bundles', columns: ['publisher', 'platform', 'bundle', 'child_lt14', 'child_bt1418', 'gambling', 'alcohol', 'cmpRA', 'cmpIAB', 'cmpID', 'cmpName', 'ortb', 'prebid'], sample: ['232', 'android', 'com.app.example', '0', '0', '1', '1', '0', '0', '0', '0', '1', '1'] },
-                    'placements': { title: 'In-App - Placements', columns: ['publisher', 'bundle', 'name', 'type', 'formats', 'devices', 'native', 'prebid'], sample: [] },
-                    'ron': { title: 'Mappeo RON (In-App)', columns: ['Key', 'Value', 'Default', 'bundleDomain'], sample: [] }
-                },
-                'ctv': {
-                    'sites': { title: 'CTV - Sites & Channels', columns: ['publisher', 'platform', 'bundle', 'name', 'child_lt14', 'child_bt1418', 'gambling', 'alcohol', 'cmpRA', 'cmpIAB', 'cmpID', 'cmpName', 'ortb', 'prebid'], sample: ['1433', 'ctv', '1227390', 'ChannelName', '0', '0', '1', '1', '0', '0', '0', '0', '1', '1'] },
-                    'placements': { title: 'CTV - Placements', columns: ['publisher', 'bundle', 'name', 'type', 'formats', 'devices', 'native', 'prebid'], sample: [] },
-                    'ron': { title: 'Mappeo RON (CTV)', columns: ['Key', 'Value', 'Default', 'bundleDomain'], sample: [] }
-                }
+      <!-- Step 2: Target Selection -->
+      <section class="bg-white border border-line rounded-xl p-6 flex flex-col gap-4">
+        <div class="flex flex-col gap-1">
+          <div class="flex items-center gap-2">
+            <span class="w-6 h-6 rounded-full bg-grape-soft text-grape text-xs font-bold flex items-center justify-center shrink-0">2</span>
+            <h2 class="text-base font-bold text-ink">What do you want to create?</h2>
+          </div>
+          <p class="text-xs text-muted">Configure inventory type or file name mapping.</p>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <button type="button" onclick="selectType('sites')" id="btn-type-sites" class="flex flex-col items-center justify-center p-4 rounded-xl border border-line hover:border-grape transition-all text-center">
+            <svg class="w-5 h-5 text-grape mb-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
+            <span class="text-sm font-medium text-ink">Sites/Bundles</span>
+          </button>
+          <button type="button" onclick="selectType('placements')" id="btn-type-placements" class="flex flex-col items-center justify-center p-4 rounded-xl border border-line hover:border-grape transition-all text-center">
+            <svg class="w-5 h-5 text-grape mb-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>
+            <span class="text-sm font-medium text-ink">Placements</span>
+          </button>
+          <button type="button" onclick="selectType('ron')" id="btn-type-ron" class="flex flex-col items-center justify-center p-4 rounded-xl border border-line hover:border-grape transition-all text-center">
+            <svg class="w-5 h-5 text-grape mb-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg>
+            <span class="text-sm font-medium text-ink">RON</span>
+          </button>
+        </div>
+      </section>
+
+    </div>
+
+    <section id="workflow-steps-banner" class="hidden bg-white border border-line rounded-xl p-6 flex flex-col gap-3">
+      <div class="flex items-center justify-between">
+        <span class="text-xs font-medium uppercase tracking-wide text-muted" id="workflow-steps-badge">Workflow Steps</span>
+        <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs font-medium bg-grape-soft text-grape font-mono" id="workflow-steps-indicator">Active Flow</span>
+      </div>
+      <ol id="workflow-steps-list" class="flex flex-col sm:flex-row gap-4 sm:gap-6 pt-1">
+        <!-- Dynamically populated in English -->
+      </ol>
+    </section>
+
+    <section id="left-panel-dynamic-content" class="hidden bg-white border border-line rounded-xl p-6 flex flex-col gap-3">
+      <div class="flex items-center gap-2">
+        <svg class="w-5 h-5 text-muted" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+        <h3 class="text-xs font-medium uppercase tracking-wide text-muted">Identifier Legend & Conventions</h3>
+      </div>
+
+      <div id="legend-sites" class="hidden text-xs text-muted flex flex-col gap-1">
+        <p><span class="font-semibold text-ink">Environment:</span> <span class="font-mono text-ink">1</span> (Web) | <span class="font-mono text-ink">3</span> (AMP) &bull; <span class="font-semibold text-ink">Booleans:</span> <span class="font-mono text-ink">1</span> (Enabled) | <span class="font-mono text-ink">0</span> (Disabled)</p>
+        <p><span class="font-semibold text-ink">Language ID:</span> Numeric (e.g. 1=English, 27=Spanish, 34=French, 23=German, 89=Portuguese)</p>
+      </div>
+
+      <div id="legend-placements" class="hidden text-xs text-muted flex flex-col gap-1">
+        <p><span class="font-semibold text-ink">Environment:</span> <span class="font-mono text-ink">1</span> (Web) | <span class="font-mono text-ink">3</span> (AMP)</p>
+        <p><span class="font-semibold text-ink">Type:</span> 3 (Display), 1 (Skin), 2 (Video), 4 (Native)</p>
+        <p><span class="font-semibold text-ink">Video formats:</span> 17 (Instream), 18 (Outstream)</p>
+      </div>
+
+      <div id="legend-inapp-sites" class="hidden text-xs text-muted">
+        <p><span class="font-semibold text-ink">Auto Platform:</span> ios (numeric identifier) | android (alphanumeric/package)</p>
+      </div>
+
+      <div id="legend-inapp-placements" class="hidden text-xs text-muted flex flex-col gap-1">
+        <p><span class="font-semibold text-ink">Type:</span> 3 (Display), 2 (Video)</p>
+        <p><span class="font-semibold text-ink">Video formats:</span> 17 (Instream), 18 (Outstream)</p>
+      </div>
+
+      <div id="legend-ctv-sites" class="hidden text-xs text-muted">
+        <p><span class="font-semibold text-ink">Platform:</span> Set to <code class="font-mono text-ink">ctv</code> by default.</p>
+      </div>
+
+      <div id="legend-ctv-placements" class="hidden text-xs text-muted">
+        <p><span class="font-semibold text-ink">Type:</span> 3 (Display), 2 (Video) &bull; Typical CTV format: <span class="font-mono text-ink">152</span></p>
+      </div>
+    </section>
+
+    <div id="right-panel-dynamic-content" class="hidden flex flex-col gap-6">
+
+      <!-- Standard Importer Card (Sites & Placements) -->
+      <section id="standard-import-container" class="hidden bg-white border border-line rounded-xl p-6 flex flex-col gap-4">
+        <div class="flex flex-col gap-1">
+          <div class="flex items-center gap-2">
+            <span class="w-6 h-6 rounded-full bg-grape-soft text-grape text-xs font-bold flex items-center justify-center shrink-0">1</span>
+            <h2 class="text-base font-bold text-ink" id="standard-import-title">Paste or Upload Bulk Data</h2>
+          </div>
+          <p id="import-desc" class="text-xs text-muted">Paste rows copied directly from Excel or a text editor.</p>
+        </div>
+
+        <div id="sites-clean-notice" class="hidden flex items-start gap-2.5 px-3.5 py-2.5 rounded-lg bg-warn-soft text-warn text-xs">
+          <svg class="w-4 h-4 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+          <div>
+            <strong class="font-bold">Format check:</strong> Please ensure domains or bundles are clean (without <span class="font-mono">https://</span> or <span class="font-mono">www.</span>) and contain no duplicate entries.
+          </div>
+        </div>
+
+        <div class="flex flex-col border border-line rounded-xl overflow-hidden bg-canvas">
+          <div class="flex bg-canvas border-b border-line text-xs font-medium uppercase tracking-wide text-muted">
+            <div class="flex-1 px-4 py-2" id="import-col-1-header">URL / Bundle</div>
+            <div class="flex-1 px-4 py-2 border-l border-line hidden" id="import-col-2-header">Name (Optional)</div>
+          </div>
+          <div class="flex h-32 bg-white">
+            <textarea id="import-col-1" wrap="off" class="flex-1 p-3 text-xs font-mono resize-none bg-white text-ink placeholder-muted focus:outline-none focus:ring-1 focus:ring-grape" placeholder="Paste one URL or Bundle per line..."></textarea>
+            <textarea id="import-col-2" wrap="off" class="flex-1 p-3 text-xs font-mono resize-none bg-white text-ink border-l border-line placeholder-muted focus:outline-none focus:ring-1 focus:ring-grape hidden" placeholder="Matching names..."></textarea>
+          </div>
+        </div>
+        <div class="flex justify-end gap-3">
+          <button type="button" onclick="clearImportInputs()" class="px-4 py-2 rounded-lg bg-white border border-line hover:border-grape text-ink text-sm font-medium">Clear</button>
+          <button type="button" onclick="importFromPaste()" id="btn-import-execute" class="px-4 py-2 rounded-lg bg-primary hover:bg-primary-hover text-white text-sm font-medium">Process Pasted Data</button>
+        </div>
+      </section>
+
+      <section id="ron-import-container" class="hidden bg-white border border-line rounded-xl p-6 flex flex-col gap-6">
+        
+        <!-- RON Step 1: Upload CSV -->
+        <div class="flex flex-col gap-3">
+          <div class="flex items-center gap-2">
+            <span class="w-6 h-6 rounded-full bg-grape-soft text-grape text-xs font-bold flex items-center justify-center shrink-0">1</span>
+            <h2 class="text-base font-bold text-ink">Upload Placements CSV File</h2>
+          </div>
+          <p class="text-xs text-muted">Select or drag and drop your placements CSV file (Domain/Bundle, Formats, and Hash).</p>
+          
+          <label id="ron-drop-zone" class="border-2 border-dashed border-line rounded-xl p-8 text-center bg-canvas hover:border-grape cursor-pointer flex flex-col items-center justify-center gap-2 transition-all">
+            <input type="file" id="ron-csv-upload" accept=".csv" class="hidden" onchange="ronFileSelected(this)" />
+            <svg class="w-8 h-8 text-grape" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" /></svg>
+            <span class="text-sm font-medium text-ink" id="ron-upload-label">Select or drop the placements .csv file</span>
+            <span class="text-xs text-muted">Supported formats: comma or semicolon delimited</span>
+          </label>
+        </div>
+
+        <!-- RON Step 2: Trigger process -->
+        <div class="pt-5 border-t border-line flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div class="flex items-center gap-2">
+            <span class="w-6 h-6 rounded-full bg-grape-soft text-grape text-xs font-bold flex items-center justify-center shrink-0">2</span>
+            <div>
+              <h3 class="text-sm font-bold text-ink">Click "Process CSV File"</h3>
+              <p class="text-xs text-muted">Automatically generates the RON mapping for paths and hashes.</p>
+            </div>
+          </div>
+          <button type="button" onclick="processRonCSV()" id="btn-process-ron-csv" class="px-4 py-2 rounded-lg bg-primary hover:bg-primary-hover text-white text-sm font-medium flex items-center gap-2 shrink-0">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+            <span>Process CSV File</span>
+          </button>
+        </div>
+
+      </section>
+
+      <section class="bg-white border border-line rounded-xl flex flex-col">
+        <div class="p-6 border-b border-line flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div class="flex items-center gap-2.5">
+            <span class="w-6 h-6 rounded-full bg-grape-soft text-grape text-xs font-bold flex items-center justify-center shrink-0" id="step-number-config">3</span>
+            <div class="flex flex-col gap-0.5">
+              <span class="text-xs font-medium uppercase tracking-wide text-muted" id="step-sublabel-config">Step 3</span>
+              <h2 class="text-base font-bold text-ink" id="active-template-title">Download CSV</h2>
+            </div>
+          </div>
+          <button onclick="downloadCSV()" id="download-btn" class="px-4 py-2 rounded-lg bg-primary hover:bg-primary-hover text-white text-sm font-medium opacity-40 cursor-not-allowed flex items-center gap-2" disabled>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+            <span>Download CSV</span>
+          </button>
+        </div>
+
+        <!-- Global Defaults Panel -->
+        <div id="global-defaults-panel" class="hidden p-6 border-b border-line bg-canvas/60 flex flex-col gap-4">
+
+          <!-- Web Sites Defaults -->
+          <div id="global-sites-controls" class="hidden grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-3">
+            <div class="flex flex-col gap-1.5">
+              <label class="text-xs font-medium uppercase tracking-wide text-muted">environment</label>
+              <select onchange="updateGlobalDefault('environment', this.value)" class="w-full px-3 py-2 rounded-lg bg-white border border-line text-sm text-ink focus:outline-none focus:border-grape focus:ring-2 focus:ring-grape/20">
+                <option value="1">1 (Web)</option>
+                <option value="3">3 (AMP)</option>
+              </select>
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label class="text-xs font-medium uppercase tracking-wide text-muted">child_lt14</label>
+              <select onchange="updateGlobalDefault('child_lt14', this.value)" class="w-full px-3 py-2 rounded-lg bg-white border border-line text-sm text-ink focus:outline-none focus:border-grape focus:ring-2 focus:ring-grape/20">
+                <option value="0">0</option>
+                <option value="1">1</option>
+              </select>
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label class="text-xs font-medium uppercase tracking-wide text-muted">child_bt1418</label>
+              <select onchange="updateGlobalDefault('child_bt1418', this.value)" class="w-full px-3 py-2 rounded-lg bg-white border border-line text-sm text-ink focus:outline-none focus:border-grape focus:ring-2 focus:ring-grape/20">
+                <option value="0">0</option>
+                <option value="1">1</option>
+              </select>
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label class="text-xs font-medium uppercase tracking-wide text-muted">gambling</label>
+              <select onchange="updateGlobalDefault('gambling', this.value)" class="w-full px-3 py-2 rounded-lg bg-white border border-line text-sm text-ink focus:outline-none focus:border-grape focus:ring-2 focus:ring-grape/20">
+                <option value="1">1</option>
+                <option value="0">0</option>
+              </select>
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label class="text-xs font-medium uppercase tracking-wide text-muted">alcohol</label>
+              <select onchange="updateGlobalDefault('alcohol', this.value)" class="w-full px-3 py-2 rounded-lg bg-white border border-line text-sm text-ink focus:outline-none focus:border-grape focus:ring-2 focus:ring-grape/20">
+                <option value="1">1</option>
+                <option value="0">0</option>
+              </select>
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label class="text-xs font-medium uppercase tracking-wide text-muted">prebid</label>
+              <select onchange="updateGlobalDefault('prebid', this.value)" class="w-full px-3 py-2 rounded-lg bg-white border border-line text-sm text-ink focus:outline-none focus:border-grape focus:ring-2 focus:ring-grape/20">
+                <option value="1">1</option>
+                <option value="0">0</option>
+              </select>
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label class="text-xs font-medium uppercase tracking-wide text-muted">ortb</label>
+              <select onchange="updateGlobalDefault('ortb', this.value)" class="w-full px-3 py-2 rounded-lg bg-white border border-line text-sm text-ink focus:outline-none focus:border-grape focus:ring-2 focus:ring-grape/20">
+                <option value="0">0</option>
+                <option value="1">1</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Placements Controls -->
+          <div id="global-placements-controls" class="hidden flex flex-col gap-4">
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+              <div class="flex flex-col gap-1.5">
+                <label class="text-xs font-medium uppercase tracking-wide text-muted">Publisher ID</label>
+                <input type="text" id="global-plac-pub" oninput="updateGlobalPlacementDefault('publisher', this.value)" value="1001" class="w-full px-3 py-2 rounded-lg bg-white border border-line text-sm text-ink focus:outline-none focus:border-grape focus:ring-2 focus:ring-grape/20" />
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label class="text-xs font-medium uppercase tracking-wide text-muted">Devices</label>
+                <input type="text" id="global-plac-dev" oninput="updateGlobalPlacementDefault('devices', this.value)" value="desktop,mobile,tablet" class="w-full px-3 py-2 rounded-lg bg-white border border-line text-sm text-ink focus:outline-none focus:border-grape focus:ring-2 focus:ring-grape/20" />
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label class="text-xs font-medium uppercase tracking-wide text-muted">Native</label>
+                <input type="text" value="1" disabled class="w-full px-3 py-2 rounded-lg bg-canvas border border-line text-sm text-muted text-center cursor-not-allowed" />
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label class="text-xs font-medium uppercase tracking-wide text-muted">Prebid</label>
+                <select id="global-plac-prebid" onchange="updateGlobalPlacementDefault('prebid', this.value)" class="w-full px-3 py-2 rounded-lg bg-white border border-line text-sm text-ink focus:outline-none focus:border-grape focus:ring-2 focus:ring-grape/20">
+                  <option value="1">1 (Enabled)</option>
+                  <option value="0">0 (Tag Based)</option>
+                </select>
+              </div>
+              <div id="global-plac-env-container" class="flex flex-col gap-1.5">
+                <label class="text-xs font-medium uppercase tracking-wide text-muted">Environment</label>
+                <select id="global-plac-env" onchange="updateGlobalPlacementDefault('environment', this.value)" class="w-full px-3 py-2 rounded-lg bg-white border border-line text-sm text-ink focus:outline-none focus:border-grape focus:ring-2 focus:ring-grape/20">
+                  <option value="1">1 (Web)</option>
+                  <option value="3">3 (AMP)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Combinations builder -->
+            <div class="flex flex-col gap-3 pt-2 border-t border-line">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-medium uppercase tracking-wide text-muted">Format & Name Generator</span>
+                <button type="button" id="btn-toggle-domain-prefix" onclick="toggleDomainInName()" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-grape text-white hover:bg-grape-hover transition-all">URL Prefix: Active</button>
+              </div>
+              <div class="flex flex-col sm:flex-row gap-3 items-end">
+                <textarea id="bulk-placement-names" wrap="off" rows="2" class="w-full px-3 py-2 rounded-lg bg-white border border-line text-sm text-ink font-mono focus:outline-none focus:border-grape focus:ring-2 focus:ring-grape/20" placeholder="Paste bulk names (one per line): display_1, display_2..."></textarea>
+                <button type="button" onclick="bulkAddPlacementConfigs()" class="shrink-0 px-4 py-2 rounded-lg bg-white border border-line hover:border-grape text-ink text-sm font-medium">Generate Configs</button>
+              </div>
+              <div id="placement-configs-container" class="flex flex-col gap-2 mt-2"></div>
+              <div class="flex flex-col sm:flex-row gap-3 pt-2">
+                <button type="button" onclick="addPlacementConfig()" class="flex-1 px-4 py-2 rounded-lg bg-white border border-line hover:border-grape text-grape text-sm font-medium">+ Add Type & Format</button>
+                <button type="button" onclick="addGenericPlacements()" class="flex-1 px-4 py-2 rounded-lg bg-grape-soft text-grape hover:bg-grape/20 text-sm font-medium">Add Generic Placements</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- In-App Sites Defaults -->
+          <div id="global-inapp-sites-controls" class="hidden grid grid-cols-2 sm:grid-cols-6 gap-3">
+            <div class="flex flex-col gap-1.5">
+              <label class="text-xs font-medium uppercase tracking-wide text-muted">publisher</label>
+              <input type="text" oninput="updateGlobalDefault('publisher', this.value)" value="232" class="w-full px-3 py-2 rounded-lg bg-white border border-line text-sm text-ink focus:outline-none focus:border-grape focus:ring-2 focus:ring-grape/20" />
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label class="text-xs font-medium uppercase tracking-wide text-muted">child_lt14</label>
+              <select onchange="updateGlobalDefault('child_lt14', this.value)" class="w-full px-3 py-2 rounded-lg bg-white border border-line text-sm text-ink focus:outline-none focus:border-grape focus:ring-2 focus:ring-grape/20">
+                <option value="0">0</option>
+                <option value="1">1</option>
+              </select>
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label class="text-xs font-medium uppercase tracking-wide text-muted">gambling</label>
+              <select onchange="updateGlobalDefault('gambling', this.value)" class="w-full px-3 py-2 rounded-lg bg-white border border-line text-sm text-ink focus:outline-none focus:border-grape focus:ring-2 focus:ring-grape/20">
+                <option value="1">1</option>
+                <option value="0">0</option>
+              </select>
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label class="text-xs font-medium uppercase tracking-wide text-muted">alcohol</label>
+              <select onchange="updateGlobalDefault('alcohol', this.value)" class="w-full px-3 py-2 rounded-lg bg-white border border-line text-sm text-ink focus:outline-none focus:border-grape focus:ring-2 focus:ring-grape/20">
+                <option value="1">1</option>
+                <option value="0">0</option>
+              </select>
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label class="text-xs font-medium uppercase tracking-wide text-muted">ortb</label>
+              <select onchange="updateGlobalDefault('ortb', this.value)" class="w-full px-3 py-2 rounded-lg bg-white border border-line text-sm text-ink focus:outline-none focus:border-grape focus:ring-2 focus:ring-grape/20">
+                <option value="0">0</option>
+                <option value="1">1</option>
+              </select>
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label class="text-xs font-medium uppercase tracking-wide text-muted">prebid</label>
+              <select onchange="updateGlobalDefault('prebid', this.value)" class="w-full px-3 py-2 rounded-lg bg-white border border-line text-sm text-ink focus:outline-none focus:border-grape focus:ring-2 focus:ring-grape/20">
+                <option value="1">1</option>
+                <option value="0">0</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- CTV Sites Defaults -->
+          <div id="global-ctv-sites-controls" class="hidden grid grid-cols-2 sm:grid-cols-6 gap-3">
+            <div class="flex flex-col gap-1.5">
+              <label class="text-xs font-medium uppercase tracking-wide text-muted">publisher</label>
+              <input type="text" oninput="updateGlobalDefault('publisher', this.value)" value="1433" class="w-full px-3 py-2 rounded-lg bg-white border border-line text-sm text-ink focus:outline-none focus:border-grape focus:ring-2 focus:ring-grape/20" />
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label class="text-xs font-medium uppercase tracking-wide text-muted">child_lt14</label>
+              <select onchange="updateGlobalDefault('child_lt14', this.value)" class="w-full px-3 py-2 rounded-lg bg-white border border-line text-sm text-ink focus:outline-none focus:border-grape focus:ring-2 focus:ring-grape/20">
+                <option value="0">0</option>
+                <option value="1">1</option>
+              </select>
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label class="text-xs font-medium uppercase tracking-wide text-muted">gambling</label>
+              <select onchange="updateGlobalDefault('gambling', this.value)" class="w-full px-3 py-2 rounded-lg bg-white border border-line text-sm text-ink focus:outline-none focus:border-grape focus:ring-2 focus:ring-grape/20">
+                <option value="1">1</option>
+                <option value="0">0</option>
+              </select>
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label class="text-xs font-medium uppercase tracking-wide text-muted">alcohol</label>
+              <select onchange="updateGlobalDefault('alcohol', this.value)" class="w-full px-3 py-2 rounded-lg bg-white border border-line text-sm text-ink focus:outline-none focus:border-grape focus:ring-2 focus:ring-grape/20">
+                <option value="1">1</option>
+                <option value="0">0</option>
+              </select>
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label class="text-xs font-medium uppercase tracking-wide text-muted">ortb</label>
+              <select onchange="updateGlobalDefault('ortb', this.value)" class="w-full px-3 py-2 rounded-lg bg-white border border-line text-sm text-ink focus:outline-none focus:border-grape focus:ring-2 focus:ring-grape/20">
+                <option value="0">0</option>
+                <option value="1">1</option>
+              </select>
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label class="text-xs font-medium uppercase tracking-wide text-muted">prebid</label>
+              <select onchange="updateGlobalDefault('prebid', this.value)" class="w-full px-3 py-2 rounded-lg bg-white border border-line text-sm text-ink focus:outline-none focus:border-grape focus:ring-2 focus:ring-grape/20">
+                <option value="1">1</option>
+                <option value="0">0</option>
+              </select>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Manual Table (Sites & RON) -->
+        <div id="manual-grid-section" class="p-6 flex flex-col gap-4 transition-all">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <h3 class="text-base font-bold text-ink" id="data-editor-title">Data Editor</h3>
+              <span id="data-rows-count" class="text-xs text-muted font-mono"></span>
+            </div>
+            <div class="flex items-center gap-4">
+              <button type="button" onclick="toggleExpandTable('manual-grid-section', 'btn-expand-manual')" id="btn-expand-manual" class="text-sm font-medium text-grape hover:text-grape-hover flex items-center gap-1.5">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" /></svg>
+                <span id="btn-expand-manual-text">Expand table</span>
+              </button>
+              <button onclick="addNewDataRow()" id="btn-add-row" class="text-sm font-medium text-grape hover:text-grape-hover flex items-center gap-1">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg>
+                <span>Add Row</span>
+              </button>
+            </div>
+          </div>
+          <div id="manual-table-scroll" class="overflow-x-auto border border-line rounded-xl bg-white max-h-[420px]">
+            <table class="w-full text-sm">
+              <thead class="bg-canvas sticky top-0 z-10">
+                <tr id="preview-thead" class="text-xs font-medium uppercase tracking-wide text-muted">
+                  <th class="px-4 py-3 text-left">Loading...</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-line" id="preview-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Matrix Preview Section (Placements) -->
+        <div id="placement-matrix-preview-section" class="hidden p-6 border-t border-line flex flex-col gap-4 transition-all">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <h3 class="text-base font-bold text-ink">Generated Placements Preview</h3>
+              <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs font-medium bg-grape-soft text-grape font-mono tabular-nums" id="placement-preview-counter">0 Placements</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <button type="button" onclick="toggleExpandTable('placement-matrix-preview-section', 'btn-expand-placement')" id="btn-expand-placement" class="text-sm font-medium text-grape hover:text-grape-hover flex items-center gap-1.5">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" /></svg>
+                <span id="btn-expand-placement-text">Expand table</span>
+              </button>
+              <button onclick="clearBaseDomains()" class="px-3 py-1.5 rounded-lg bg-danger-soft text-danger hover:bg-danger/20 text-xs font-medium">Clear Inputs</button>
+            </div>
+          </div>
+          <div id="placement-table-scroll" class="overflow-x-auto border border-line rounded-xl bg-white max-h-[420px]">
+            <table class="w-full text-sm">
+              <thead class="bg-canvas sticky top-0 z-10">
+                <tr id="placement-matrix-thead" class="text-xs font-medium uppercase tracking-wide text-muted">
+                  <th class="px-4 py-3 text-left">Loading...</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-line font-mono text-xs" id="placement-matrix-preview-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+
+  </main>
+
+  <div id="table-expand-backdrop" class="hidden fixed inset-0 bg-ink/60 z-40" onclick="closeAllExpandedTables()"></div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="hidden fixed top-4 right-4 bg-ink text-white text-sm px-4 py-3 rounded-lg shadow-lg flex items-center gap-2 z-50">
+    <svg class="w-4 h-4 text-ok" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+    <span id="toast-text">Action completed</span>
+  </div>
+
+  <script>
+    const AppConfig = {
+      templatesData: {
+        'web': {
+          'sites': { title: 'Web - Sites & Bundles', columns: ['url', 'language_id', 'environment', 'child_lt14', 'child_bt1418', 'gambling', 'alcohol', 'prebid', 'ortb'], sample: ['eldiario.es', '27', '1', '0', '0', '1', '1', '1', '0'] },
+          'placements': { title: 'Web - Placements', columns: ['publisher', 'domain', 'name', 'type', 'formats', 'devices', 'native', 'prebid', 'environment'], sample: [] },
+          'ron': { title: 'Download CSV (RON Mapping)', columns: ['Key', 'Value', 'Default', 'bundleDomain'], sample: [] }
+        },
+        'in-app': {
+          'sites': { title: 'In-App - Sites & Bundles', columns: ['publisher', 'platform', 'bundle', 'child_lt14', 'child_bt1418', 'gambling', 'alcohol', 'cmpRA', 'cmpIAB', 'cmpID', 'cmpName', 'ortb', 'prebid'], sample: ['232', 'android', 'com.app.example', '0', '0', '1', '1', '0', '0', '0', '0', '1', '1'] },
+          'placements': { title: 'In-App - Placements', columns: ['publisher', 'bundle', 'name', 'type', 'formats', 'devices', 'native', 'prebid'], sample: [] },
+          'ron': { title: 'Download CSV (RON Mapping)', columns: ['Key', 'Value', 'Default', 'bundleDomain'], sample: [] }
+        },
+        'ctv': {
+          'sites': { title: 'CTV - Sites & Channels', columns: ['publisher', 'platform', 'bundle', 'name', 'child_lt14', 'child_bt1418', 'gambling', 'alcohol', 'cmpRA', 'cmpIAB', 'cmpID', 'cmpName', 'ortb', 'prebid'], sample: ['1433', 'ctv', '1227390', 'ChannelName', '0', '0', '1', '1', '0', '0', '0', '0', '1', '1'] },
+          'placements': { title: 'CTV - Placements', columns: ['publisher', 'bundle', 'name', 'type', 'formats', 'devices', 'native', 'prebid'], sample: [] },
+          'ron': { title: 'Download CSV (RON Mapping)', columns: ['Key', 'Value', 'Default', 'bundleDomain'], sample: [] }
+        }
+      }
+    };
+
+    const AppState = {
+      env: null,
+      type: null,
+      columns: [],
+      rows: [],
+      baseDomains: [],
+      isDefaultData: true,
+      deletedPlacements: new Set(),
+      includeDomainInName: true,
+      placementConfigs: [{ id: 1, type: '3', formats: '300x250,728x90', name: 'display' }],
+      defaults: {
+        webSites: { environment: '1', child_lt14: '0', child_bt1418: '0', gambling: '1', alcohol: '1', prebid: '1', ortb: '0' },
+        webPlacements: { publisher: '1001', devices: 'desktop,mobile,tablet', native: '1', prebid: '1', environment: '1' },
+        inAppSites: { publisher: '232', child_lt14: '0', child_bt1418: '0', gambling: '1', alcohol: '1', cmpRA: '0', cmpIAB: '0', cmpID: '0', cmpName: '0', ortb: '1', prebid: '1' },
+        inAppPlacements: { publisher: '232', devices: 'mobile,tablet', native: '1', prebid: '1' },
+        ctvSites: { publisher: '1433', child_lt14: '0', child_bt1418: '0', gambling: '1', alcohol: '1', cmpRA: '0', cmpIAB: '0', cmpID: '0', cmpName: '0', ortb: '1', prebid: '1' },
+        ctvPlacements: { publisher: '232', devices: 'ctv', native: '1', prebid: '1' }
+      }
+    };
+
+    const AppUtils = {
+      cleanUrl(url) {
+        return url ? url.toLowerCase().trim().replace(/^(https?:\/\/)?/, '').split(/[/?#:]/)[0].replace(/^www\./, '').replace(/\.+$/, '') : '';
+      },
+      detectPlatform(b) {
+        return b && /^\d+$/.test(b.trim()) ? 'ios' : 'android';
+      },
+      detectLanguage(url) {
+        if (!url) return 1;
+        let c = url.toLowerCase().trim().replace(/^(https?:\/\/)?(www\.)?/, '');
+        const p = c.split('/')[0].split('.');
+        if (p.length > 1) {
+          const t = p[p.length - 1];
+          const tm = { 'es': 27, 'mx': 27, 'ar': 27, 'cl': 27, 'fr': 34, 'de': 23, 'it': 51, 'pt': 89, 'br': 89, 'ru': 94, 'ja': 53, 'jp': 53, 'ca': 18 };
+          if (tm[t]) return tm[t];
+        }
+        const d = p.length > 1 ? p[p.length - 2] : p[0];
+        if (d.includes('diario') || d.includes('juegos') || d.includes('noticias')) return 27;
+        return 1;
+      }
+    };
+
+    const AppController = {
+      init() {
+        const t1 = document.getElementById('import-col-1');
+        const t2 = document.getElementById('import-col-2');
+        if (t1 && t2) {
+          t1.addEventListener('scroll', () => t2.scrollTop = t1.scrollTop);
+          t2.addEventListener('scroll', () => t1.scrollTop = t2.scrollTop);
+        }
+
+        const dropZone = document.getElementById('ron-drop-zone');
+        const fileInput = document.getElementById('ron-csv-upload');
+
+        if (dropZone && fileInput) {
+          ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, (e) => {
+              e.preventDefault();
+              e.stopPropagation();
+            }, false);
+          });
+
+          ['dragenter', 'dragover'].forEach(eventName => {
+            dropZone.addEventListener(eventName, () => {
+              dropZone.classList.add('border-grape', 'bg-grape-soft');
+              dropZone.classList.remove('bg-canvas');
+            }, false);
+          });
+
+          ['dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, () => {
+              dropZone.classList.remove('border-grape', 'bg-grape-soft');
+              dropZone.classList.add('bg-canvas');
+            }, false);
+          });
+
+          dropZone.addEventListener('drop', (e) => {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            if (files && files.length > 0) {
+              const file = files[0];
+              if (!file.name.toLowerCase().endsWith('.csv')) {
+                AppController.showToast('Only .csv files are supported', true);
+                return;
+              }
+              fileInput.files = files;
+              ronFileSelected(fileInput);
+              AppController.showToast(`File uploaded: ${file.name}`);
             }
-        };
+          }, false);
+        }
+      },
 
-        const AppState = {
-            env: null, type: null, columns: [], rows: [], 
-            baseDomains: [], 
-            isDefaultData: true, 
-            deletedPlacements: new Set(), 
-            includeDomainInName: true, 
-            placementConfigs: [{ id: 1, type: '3', formats: '300x250,728x90', name: 'display' }],
-            defaults: {
-                webSites: { environment: '1', child_lt14: '0', child_bt1418: '0', gambling: '1', alcohol: '1', prebid: '1', ortb: '0' },
-                webPlacements: { publisher: '1001', devices: 'desktop,mobile,tablet', native: '1', prebid: '1', environment: '1' },
-                inAppSites: { publisher: '232', child_lt14: '0', child_bt1418: '0', gambling: '1', alcohol: '1', cmpRA: '0', cmpIAB: '0', cmpID: '0', cmpName: '0', ortb: '1', prebid: '1' },
-                inAppPlacements: { publisher: '232', devices: 'mobile,tablet', native: '1', prebid: '1' },
-                ctvSites: { publisher: '1433', child_lt14: '0', child_bt1418: '0', gambling: '1', alcohol: '1', cmpRA: '0', cmpIAB: '0', cmpID: '0', cmpName: '0', ortb: '1', prebid: '1' },
-                ctvPlacements: { publisher: '232', devices: 'ctv', native: '1', prebid: '1' }
+      showToast(msg, isError = false) {
+        const t = document.getElementById('toast');
+        const txt = document.getElementById('toast-text');
+        txt.innerText = msg;
+        t.className = isError 
+          ? 'fixed top-4 right-4 bg-danger text-white text-sm px-4 py-3 rounded-lg shadow-lg flex items-center gap-2 z-50'
+          : 'fixed top-4 right-4 bg-ink text-white text-sm px-4 py-3 rounded-lg shadow-lg flex items-center gap-2 z-50';
+        t.classList.remove('hidden');
+        setTimeout(() => t.classList.add('hidden'), 3500);
+      },
+
+      updateWorkflowSteps() {
+        const banner = document.getElementById('workflow-steps-banner');
+        const list = document.getElementById('workflow-steps-list');
+        const indicator = document.getElementById('workflow-steps-indicator');
+        const legendSteps = document.getElementById('tool-legend-steps');
+        const legendDesc = document.getElementById('tool-legend-description');
+        const stepNumConfig = document.getElementById('step-number-config');
+        const stepSublabelConfig = document.getElementById('step-sublabel-config');
+
+        if (!AppState.env || !AppState.type) {
+          if (banner) banner.classList.add('hidden');
+          return;
+        }
+
+        banner.classList.remove('hidden');
+        const envLabel = AppState.env.toUpperCase();
+
+        if (AppState.type === 'ron') {
+          indicator.innerText = `RON Flow (${envLabel})`;
+          legendDesc.innerText = `Maps placement files into RON routes for ${envLabel} environment.`;
+          
+          const ronStepsHTML = `
+            <li class="flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-grape-soft text-grape text-xs font-bold flex items-center justify-center shrink-0">1</span>
+              <span class="text-sm font-medium text-ink">Upload placements CSV file</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-grape-soft text-grape text-xs font-bold flex items-center justify-center shrink-0">2</span>
+              <span class="text-sm font-medium text-ink">Click "Process CSV File"</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-grape-soft text-grape text-xs font-bold flex items-center justify-center shrink-0">3</span>
+              <span class="text-sm font-medium text-ink">Download CSV</span>
+            </li>
+          `;
+
+          list.innerHTML = ronStepsHTML;
+          legendSteps.innerHTML = ronStepsHTML;
+          if (stepNumConfig) stepNumConfig.innerText = '3';
+          if (stepSublabelConfig) stepSublabelConfig.innerText = 'Step 3';
+        } else if (AppState.type === 'sites') {
+          indicator.innerText = `Sites/Bundles Flow (${envLabel})`;
+          legendDesc.innerText = `Generates template and validations for Sites and Bundles in ${envLabel}.`;
+
+          const sitesStepsHTML = `
+            <li class="flex items-start gap-2">
+              <span class="w-6 h-6 rounded-full bg-grape-soft text-grape text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">1</span>
+              <div class="flex flex-col">
+                <span class="text-sm font-medium text-ink">Paste URLs / Bundles</span>
+                <span class="text-xs text-muted">Review that domains or bundles are clean (no https:// or www) and have no duplicates</span>
+              </div>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="w-6 h-6 rounded-full bg-grape-soft text-grape text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">2</span>
+              <div class="flex flex-col">
+                <span class="text-sm font-medium text-ink">Configure global defaults</span>
+              </div>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="w-6 h-6 rounded-full bg-grape-soft text-grape text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">3</span>
+              <div class="flex flex-col">
+                <span class="text-sm font-medium text-ink">Download CSV</span>
+              </div>
+            </li>
+          `;
+
+          list.innerHTML = sitesStepsHTML;
+          legendSteps.innerHTML = sitesStepsHTML;
+          if (stepNumConfig) stepNumConfig.innerText = '3';
+          if (stepSublabelConfig) stepSublabelConfig.innerText = 'Step 3';
+        } else if (AppState.type === 'placements') {
+          indicator.innerText = `Placements Flow (${envLabel})`;
+          legendDesc.innerText = `Builds bulk placement matrices for ${envLabel}.`;
+
+          const placStepsHTML = `
+            <li class="flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-grape-soft text-grape text-xs font-bold flex items-center justify-center shrink-0">1</span>
+              <span class="text-sm font-medium text-ink">Enter domains / bundles</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-grape-soft text-grape text-xs font-bold flex items-center justify-center shrink-0">2</span>
+              <span class="text-sm font-medium text-ink">Configure formats and types</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-grape-soft text-grape text-xs font-bold flex items-center justify-center shrink-0">3</span>
+              <span class="text-sm font-medium text-ink">Download CSV</span>
+            </li>
+          `;
+
+          list.innerHTML = placStepsHTML;
+          legendSteps.innerHTML = placStepsHTML;
+          if (stepNumConfig) stepNumConfig.innerText = '3';
+          if (stepSublabelConfig) stepSublabelConfig.innerText = 'Step 3';
+        }
+      },
+
+      updateGlobalDefault(f, v) {
+        if (AppState.env === 'web') AppState.defaults.webSites[f] = v;
+        else if (AppState.env === 'in-app') AppState.defaults.inAppSites[f] = v;
+        else if (AppState.env === 'ctv') AppState.defaults.ctvSites[f] = v;
+
+        const colIndex = AppState.columns.indexOf(f);
+        if (colIndex !== -1) {
+          AppState.rows.forEach(r => { if (r.length > colIndex) r[colIndex] = v; });
+        }
+        this.renderTable();
+      },
+
+      updateGlobalPlacementDefault(f, v) {
+        if (AppState.env === 'web') AppState.defaults.webPlacements[f] = v;
+        else if (AppState.env === 'in-app') AppState.defaults.inAppPlacements[f] = v;
+        else AppState.defaults.ctvPlacements[f] = v;
+        if (AppState.type === 'placements') {
+          this.generatePlacementMatrix();
+        }
+      },
+
+      toggleDomainInName() {
+        AppState.includeDomainInName = !AppState.includeDomainInName;
+        this.generatePlacementMatrix();
+        this.renderPlacementConfigUI();
+      },
+
+      clearBaseDomains() {
+        AppState.baseDomains = [];
+        this.generatePlacementMatrix();
+        this.showToast('Placement entries cleared');
+      },
+
+      bulkAddPlacementConfigs() {
+        const t = document.getElementById('bulk-placement-names');
+        if (!t || !t.value.trim()) return;
+        const ns = t.value.split(/\r?\n/).filter(n => n.trim() !== '');
+        let dF = AppState.env === 'ctv' ? '152' : (AppState.env === 'in-app' ? '320x50,300x250' : '300x250,728x90');
+        let dT = AppState.env === 'ctv' ? '2' : '3';
+        AppState.placementConfigs = [];
+        ns.forEach((n, idx) => AppState.placementConfigs.push({ id: idx + 1, type: dT, formats: dF, name: n.trim() }));
+        t.value = '';
+        this.renderPlacementConfigUI();
+        this.generatePlacementMatrix();
+        this.showToast(`${ns.length} configurations added`);
+      },
+
+      addPlacementConfig() {
+        const maxId = AppState.placementConfigs.length > 0 ? Math.max(...AppState.placementConfigs.map(c => c.id)) : 0;
+        let dF = AppState.env === 'ctv' ? '152' : (AppState.env === 'in-app' ? '320x50,300x250' : '300x250,728x90');
+        let dT = AppState.env === 'ctv' ? '2' : '3';
+        AppState.placementConfigs.push({ id: maxId + 1, type: dT, formats: dF, name: AppState.env === 'ctv' ? 'instream_ctv' : 'display' });
+        this.renderPlacementConfigUI();
+        this.generatePlacementMatrix();
+      },
+
+      addGenericPlacements() {
+        const maxId = AppState.placementConfigs.length > 0 ? Math.max(...AppState.placementConfigs.map(c => c.id)) : 0;
+        if (AppState.env === 'ctv') {
+          AppState.placementConfigs.push({ id: maxId + 1, type: '2', formats: '152', name: 'generic', firstDomainOnly: true, forceExactName: true });
+        } else {
+          const df = AppState.env === 'in-app' ? '320x50,300x250' : '300x250,728x90';
+          AppState.placementConfigs.push({ id: maxId + 1, type: '3', formats: df, name: 'generic display', firstDomainOnly: true, forceExactName: true });
+          AppState.placementConfigs.push({ id: maxId + 2, type: '2', formats: '17', name: 'generic instream', firstDomainOnly: true, forceExactName: true });
+          AppState.placementConfigs.push({ id: maxId + 3, type: '2', formats: '18', name: 'generic outstream', firstDomainOnly: true, forceExactName: true });
+        }
+        this.renderPlacementConfigUI();
+        this.generatePlacementMatrix();
+        this.showToast('Generic placements added');
+      },
+
+      removePlacementConfig(i) {
+        if (AppState.placementConfigs.length > 1) {
+          AppState.placementConfigs.splice(i, 1);
+          this.renderPlacementConfigUI();
+          this.generatePlacementMatrix();
+        } else {
+          this.showToast('At least one configuration is required', true);
+        }
+      },
+
+      updatePlacementConfigType(i, v) {
+        AppState.placementConfigs[i].type = v;
+        let aF = AppState.env === 'in-app' ? '320x50,300x250' : '300x250,728x90';
+        if (v === '1') aF = '10,11,44';
+        if (v === '2') aF = AppState.env === 'ctv' ? '152' : '17';
+        if (v === '4') aF = '222';
+        AppState.placementConfigs[i].formats = aF;
+        this.renderPlacementConfigUI();
+        this.generatePlacementMatrix();
+      },
+
+      updatePlacementConfigFormats(i, v) {
+        AppState.placementConfigs[i].formats = v;
+        this.generatePlacementMatrix();
+      },
+
+      updatePlacementConfigName(i, v) {
+        AppState.placementConfigs[i].name = v;
+        this.generatePlacementMatrix();
+      },
+
+      renderPlacementConfigUI() {
+        const c = document.getElementById('placement-configs-container');
+        if (!c) return;
+        c.innerHTML = '';
+        AppState.placementConfigs.forEach((cfg, i) => {
+          let fH = cfg.type === '4' 
+            ? `<input type="text" value="222" disabled class="w-full px-3 py-2 rounded-lg bg-canvas border border-line text-sm text-muted font-mono text-center cursor-not-allowed"/>`
+            : (cfg.type === '2' 
+                ? `<select onchange="updatePlacementConfigFormats(${i}, this.value)" class="w-full px-3 py-2 rounded-lg bg-white border border-line text-sm text-ink font-mono focus:outline-none focus:border-grape focus:ring-2 focus:ring-grape/20">
+                     ${AppState.env === 'ctv' ? `<option value="152" ${cfg.formats === '152' ? 'selected' : ''}>152</option>` : ''}
+                     <option value="17" ${cfg.formats === '17' ? 'selected' : ''}>17 (Instream)</option>
+                     <option value="18" ${cfg.formats === '18' ? 'selected' : ''}>18 (Outstream)</option>
+                   </select>` 
+                : `<input type="text" oninput="updatePlacementConfigFormats(${i}, this.value)" value="${cfg.formats}" class="w-full px-3 py-2 rounded-lg bg-white border border-line text-sm text-ink font-mono focus:outline-none focus:border-grape focus:ring-2 focus:ring-grape/20"/>`);
+
+          const nH = `<input type="text" oninput="updatePlacementConfigName(${i}, this.value)" value="${cfg.name || ''}" class="w-full px-3 py-2 rounded-lg bg-white border border-line text-sm text-ink font-mono focus:outline-none focus:border-grape focus:ring-2 focus:ring-grape/20"/>`;
+          let tO = AppState.env === 'web' 
+            ? `<option value="3" ${cfg.type === '3' ? 'selected' : ''}>3 (Display)</option>
+               <option value="1" ${cfg.type === '1' ? 'selected' : ''}>1 (Skin)</option>
+               <option value="2" ${cfg.type === '2' ? 'selected' : ''}>2 (Video)</option>
+               <option value="4" ${cfg.type === '4' ? 'selected' : ''}>4 (Native)</option>` 
+            : `<option value="3" ${cfg.type === '3' ? 'selected' : ''}>3 (Display)</option>
+               <option value="2" ${cfg.type === '2' ? 'selected' : ''}>2 (Video)</option>`;
+
+          const nameLabel = cfg.firstDomainOnly 
+            ? 'Name <span class="text-warn text-[10px] font-normal">(1st dom)</span>' 
+            : 'Name';
+
+          c.innerHTML += `
+            <div class="flex items-center gap-3 bg-white p-3 rounded-lg border border-line">
+              <div class="flex-1 grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div class="flex flex-col gap-1">
+                  <label class="text-xs font-medium uppercase tracking-wide text-muted">Type</label>
+                  <select onchange="updatePlacementConfigType(${i}, this.value)" class="w-full px-3 py-2 rounded-lg bg-white border border-line text-sm text-ink font-mono focus:outline-none focus:border-grape focus:ring-2 focus:ring-grape/20">${tO}</select>
+                </div>
+                <div class="flex flex-col gap-1">
+                  <label class="text-xs font-medium uppercase tracking-wide text-muted">Formats</label>
+                  ${fH}
+                </div>
+                <div class="flex flex-col gap-1">
+                  <label class="text-xs font-medium uppercase tracking-wide text-muted">${nameLabel}</label>
+                  ${nH}
+                </div>
+              </div>
+              <button type="button" onclick="removePlacementConfig(${i})" aria-label="Delete configuration" class="mt-4 p-2 rounded-lg bg-danger-soft text-danger hover:bg-danger/20 transition-all shrink-0">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+              </button>
+            </div>
+          `;
+        });
+
+        const b = document.getElementById('btn-toggle-domain-prefix');
+        if (b) {
+          b.innerText = AppState.includeDomainInName ? "URL Prefix: Active" : "URL Prefix: Inactive";
+          b.className = AppState.includeDomainInName 
+            ? "px-3 py-1.5 rounded-lg text-xs font-medium bg-grape text-white hover:bg-grape-hover transition-all"
+            : "px-3 py-1.5 rounded-lg text-xs font-medium bg-canvas border border-line text-muted hover:border-grape transition-all";
+        }
+      },
+
+      generatePlacementMatrix() {
+        if (AppState.type !== 'placements') return;
+        AppState.rows = [];
+        const d = AppState.env === 'web' 
+          ? AppState.defaults.webPlacements 
+          : (AppState.env === 'ctv' ? AppState.defaults.ctvPlacements : AppState.defaults.inAppPlacements);
+
+        AppState.baseDomains.forEach((b, idx) => {
+          if (!b.domain) return;
+          AppState.placementConfigs.forEach(cfg => {
+            if (cfg.firstDomainOnly && idx !== 0) return;
+
+            const cl = AppState.env === 'web' ? AppUtils.cleanUrl(b.domain) : b.domain.trim();
+            const cN = cfg.name || '';
+            let fN = cN;
+            if (!cfg.forceExactName) {
+              fN = AppState.includeDomainInName && cl && cN ? `${cl}_${cN}` : cN;
             }
-        };
 
-        const AppUtils = {
-            cleanUrl(url) { return url ? url.toLowerCase().trim().replace(/^(https?:\/\/)?/, '').split(/[/?#:]/)[0].replace(/^www\./, '').replace(/\.+$/, '') : ''; },
-            detectPlatform(b) { return b && /^\d+$/.test(b.trim()) ? 'ios' : 'android'; },
-            detectLanguage(url) {
-                if (!url) return 1;
-                let c = url.toLowerCase().trim().replace(/^(https?:\/\/)?(www\.)?/, '');
-                const p = c.split('/')[0].split('.');
-                if (p.length > 1) {
-                    const t = p[p.length - 1];
-                    const tm = { 'es':27, 'mx':27, 'ar':27, 'cl':27, 'fr':34, 'de':23, 'it':51, 'pt':89, 'br':89, 'ru':94, 'ja':53, 'jp':53, 'ca':18 };
-                    if (tm[t]) return tm[t];
-                }
-                const d = p.length > 1 ? p[p.length - 2] : p[0];
-                if(d.includes('diario') || d.includes('juegos') || d.includes('noticias')) return 27;
-                return 1;
+            const uniqueKey = `${cl}|${fN}|${cfg.type}|${cfg.formats}`;
+            if (AppState.deletedPlacements.has(uniqueKey)) return;
+
+            if (AppState.env === 'web') {
+              AppState.rows.push([d.publisher, cl, fN, cfg.type, cfg.formats, d.devices, d.native, d.prebid, d.environment, uniqueKey]);
+            } else {
+              AppState.rows.push([d.publisher, cl, fN, cfg.type, cfg.formats, d.devices, d.native, d.prebid, uniqueKey]);
             }
-        };
+          });
+        });
+        this.renderMatrixPreviewTable();
+      },
 
-        const AppController = {
-            init() {
-                const t1 = document.getElementById('import-col-1'); const t2 = document.getElementById('import-col-2');
-                if(t1 && t2) { t1.addEventListener('scroll', () => t2.scrollTop = t1.scrollTop); t2.addEventListener('scroll', () => t1.scrollTop = t2.scrollTop); }
-            },
-            showToast(msg) { 
-                document.getElementById('toast-text').innerText = msg; 
-                document.getElementById('toast-message').classList.remove('hidden'); 
-                setTimeout(() => document.getElementById('toast-message').classList.add('hidden'), 4000); 
-            },
-            
-            updateGlobalDefault(f, v) { 
-                if(AppState.env==='web') AppState.defaults.webSites[f]=v; 
-                else if(AppState.env==='in-app') AppState.defaults.inAppSites[f]=v;
-                else if(AppState.env==='ctv') AppState.defaults.ctvSites[f]=v;
-                
-                const colIndex = AppState.columns.indexOf(f);
-                if (colIndex !== -1) { AppState.rows.forEach(r => { if (r.length > colIndex) r[colIndex] = v; }); }
-                this.renderTable(); 
-            },
-            
-            updateGlobalPlacementDefault(f, v) {
-                if(AppState.env==='web') AppState.defaults.webPlacements[f]=v; 
-                else if(AppState.env==='in-app') AppState.defaults.inAppPlacements[f]=v; 
-                else AppState.defaults.ctvPlacements[f]=v;
-                if(AppState.type === 'placements') { this.generatePlacementMatrix(); }
-            },
+      renderMatrixPreviewTable() {
+        const c = document.getElementById('placement-matrix-preview-section');
+        const tb = document.getElementById('placement-matrix-preview-tbody');
+        if (AppState.type === 'placements') {
+          c.classList.remove('hidden');
+          const unq = new Set(AppState.baseDomains.map(b => b.domain).filter(d => d !== '')).size;
+          document.getElementById('placement-preview-counter').innerText = `${AppState.rows.length} Placements | ${unq} Entries`;
 
-            toggleDomainInName() { AppState.includeDomainInName = !AppState.includeDomainInName; this.generatePlacementMatrix(); this.renderPlacementConfigUI(); },
-            clearBaseDomains() { AppState.baseDomains = []; this.generatePlacementMatrix(); },
-            
-            bulkAddPlacementConfigs() {
-                const t = document.getElementById('bulk-placement-names'); if(!t || !t.value.trim()) return;
-                const ns = t.value.split(/\r?\n/).filter(n => n.trim()!=='');
-                let dF = AppState.env==='ctv' ? '152' : (AppState.env==='in-app' ? '320x50,300x250' : '300x250,728x90');
-                let dT = AppState.env==='ctv' ? '2' : '3';
-                AppState.placementConfigs = [];
-                ns.forEach((n, idx) => AppState.placementConfigs.push({ id: idx+1, type: dT, formats: dF, name: n.trim() }));
-                t.value = ''; this.renderPlacementConfigUI(); this.generatePlacementMatrix();
-            },
-            
-            addPlacementConfig() {
-                const maxId = AppState.placementConfigs.length > 0 ? Math.max(...AppState.placementConfigs.map(c=>c.id)) : 0;
-                let dF = AppState.env==='ctv' ? '152' : (AppState.env==='in-app' ? '320x50,300x250' : '300x250,728x90');
-                let dT = AppState.env==='ctv' ? '2' : '3';
-                AppState.placementConfigs.push({ id: maxId + 1, type: dT, formats: dF, name: AppState.env==='ctv'?'instream_ctv':'display' });
-                this.renderPlacementConfigUI(); this.generatePlacementMatrix();
-            },
+          const theadHTML = AppState.env === 'web'
+            ? `<th class="px-4 py-3 text-left">publisher</th><th class="px-4 py-3 text-left">domain</th><th class="px-4 py-3 text-left">name</th><th class="px-4 py-3 text-left">type</th><th class="px-4 py-3 text-left">formats</th><th class="px-4 py-3 text-left">devices</th><th class="px-4 py-3 text-left">native</th><th class="px-4 py-3 text-left">prebid</th><th class="px-4 py-3 text-left">environment</th><th class="px-4 py-3 text-center">Action</th>`
+            : `<th class="px-4 py-3 text-left">publisher</th><th class="px-4 py-3 text-left">bundle</th><th class="px-4 py-3 text-left">name</th><th class="px-4 py-3 text-left">type</th><th class="px-4 py-3 text-left">formats</th><th class="px-4 py-3 text-left">devices</th><th class="px-4 py-3 text-left">native</th><th class="px-4 py-3 text-left">prebid</th><th class="px-4 py-3 text-center">Action</th>`;
+          document.getElementById('placement-matrix-thead').innerHTML = theadHTML;
+          tb.innerHTML = '';
 
-            addGenericPlacements() {
-                const maxId = AppState.placementConfigs.length > 0 ? Math.max(...AppState.placementConfigs.map(c => c.id)) : 0;
-                if (AppState.env === 'ctv') {
-                    AppState.placementConfigs.push({ id: maxId + 1, type: '2', formats: '152', name: 'generic', firstDomainOnly: true, forceExactName: true });
-                } else {
-                    const df = AppState.env === 'in-app' ? '320x50,300x250' : '300x250,728x90';
-                    AppState.placementConfigs.push({ id: maxId + 1, type: '3', formats: df, name: 'generic display', firstDomainOnly: true, forceExactName: true });
-                    AppState.placementConfigs.push({ id: maxId + 2, type: '2', formats: '17', name: 'generic instream', firstDomainOnly: true, forceExactName: true });
-                    AppState.placementConfigs.push({ id: maxId + 3, type: '2', formats: '18', name: 'generic outstream', firstDomainOnly: true, forceExactName: true });
-                }
-                this.renderPlacementConfigUI(); this.generatePlacementMatrix();
-            },
-
-            removePlacementConfig(i) { 
-                if(AppState.placementConfigs.length>1) { AppState.placementConfigs.splice(i,1); this.renderPlacementConfigUI(); this.generatePlacementMatrix(); } 
-            },
-            updatePlacementConfigType(i, v) {
-                AppState.placementConfigs[i].type = v; let aF = AppState.env==='in-app'?'320x50,300x250':'300x250,728x90';
-                if(v==='1') aF='10,11,44'; if(v==='2') aF=AppState.env==='ctv'?'152':'17'; if(v==='4') aF='222';
-                AppState.placementConfigs[i].formats = aF; this.renderPlacementConfigUI(); this.generatePlacementMatrix();
-            },
-            updatePlacementConfigFormats(i, v) { AppState.placementConfigs[i].formats = v; this.generatePlacementMatrix(); },
-            updatePlacementConfigName(i, v) { AppState.placementConfigs[i].name = v; this.generatePlacementMatrix(); },
-
-            renderPlacementConfigUI() {
-                const c = document.getElementById('placement-configs-container'); if(!c) return; c.innerHTML='';
-                AppState.placementConfigs.forEach((cfg, i) => {
-                    let fH = cfg.type==='4' ? `<input type="text" value="222" disabled class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-slate-100 text-center text-slate-500 font-mono"/>` : (cfg.type==='2' ? `<select onchange="updatePlacementConfigFormats(${i}, this.value)" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white font-mono">${AppState.env==='ctv'?`<option value="152" ${cfg.formats==='152'?'selected':''}>152</option>`:''}<option value="17" ${cfg.formats==='17'?'selected':''}>17</option><option value="18" ${cfg.formats==='18'?'selected':''}>18</option></select>` : `<input type="text" oninput="updatePlacementConfigFormats(${i}, this.value)" value="${cfg.formats}" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white font-mono"/>`);
-                    const nH = `<input type="text" oninput="updatePlacementConfigName(${i}, this.value)" value="${cfg.name||''}" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white font-mono"/>`;
-                    let tO = AppState.env==='web' ? `<option value="3" ${cfg.type==='3'?'selected':''}>3</option><option value="1" ${cfg.type==='1'?'selected':''}>1</option><option value="2" ${cfg.type==='2'?'selected':''}>2</option><option value="4" ${cfg.type==='4'?'selected':''}>4</option>` : `<option value="3" ${cfg.type==='3'?'selected':''}>3</option><option value="2" ${cfg.type==='2'?'selected':''}>2</option>`;
-                    
-                    const nameLabel = cfg.firstDomainOnly ? 'Name <span class="text-orange-500 text-[9px] font-normal">(1º dom, Sin prefijo)</span>' : 'Name';
-                    
-                    c.innerHTML += `<div class="flex items-center gap-3 bg-white p-3 rounded-xl border border-slate-200 shadow-sm"><div class="flex-1 grid grid-cols-3 gap-3"><div><label class="block text-[9px] uppercase text-slate-500 font-bold mb-1">Type</label><select onchange="updatePlacementConfigType(${i}, this.value)" class="w-full px-2 py-1.5 text-xs border border-slate-300 rounded bg-white font-mono">${tO}</select></div><div><label class="block text-[9px] uppercase text-slate-500 font-bold mb-1">Formats</label>${fH}</div><div><label class="block text-[9px] uppercase text-slate-500 font-bold mb-1">${nameLabel}</label>${nH}</div></div><button onclick="removePlacementConfig(${i})" class="mt-4 text-red-500 hover:text-red-700 bg-red-50 hover:bg-red-100 p-2 rounded-lg transition-all font-bold disabled:opacity-50 disabled:cursor-not-allowed">🗑️</button></div>`;
-                });
-                const b = document.getElementById('btn-toggle-domain-prefix');
-                if(b) {
-                    b.innerHTML = AppState.includeDomainInName ? "✓ Prefijo URL (Activo)" : "✗ Nombre Libre";
-                    b.classList.toggle('bg-blue-600', AppState.includeDomainInName);
-                    b.classList.toggle('bg-slate-500', !AppState.includeDomainInName);
-                }
-            },
-
-            generatePlacementMatrix() {
-                if(AppState.type!=='placements') return; AppState.rows=[];
-                const d = AppState.env==='web'?AppState.defaults.webPlacements:(AppState.env==='ctv'?AppState.defaults.ctvPlacements:AppState.defaults.inAppPlacements);
-                
-                AppState.baseDomains.forEach((b, idx) => {
-                    if(!b.domain) return;
-                    AppState.placementConfigs.forEach(cfg => {
-                        // REGLA 1: Solo aplicar en el 1º dominio si así está marcado
-                        if(cfg.firstDomainOnly && idx !== 0) return;
-
-                        const cl = AppState.env==='web'?AppUtils.cleanUrl(b.domain):b.domain.trim();
-                        const cN = cfg.name || '';
-                        
-                        // REGLA 2: Ignorar prefijo (el punto del dominio ya no se remplaza por guion bajo en config normal tampoco)
-                        let fN = cN;
-                        if (!cfg.forceExactName) {
-                            fN = AppState.includeDomainInName && cl && cN ? `${cl}_${cN}` : cN;
-                        }
-                        
-                        const uniqueKey = `${cl}|${fN}|${cfg.type}|${cfg.formats}`;
-                        if (AppState.deletedPlacements.has(uniqueKey)) return;
-
-                        if(AppState.env==='web') AppState.rows.push([d.publisher, cl, fN, cfg.type, cfg.formats, d.devices, d.native, d.prebid, d.environment, uniqueKey]);
-                        else AppState.rows.push([d.publisher, cl, fN, cfg.type, cfg.formats, d.devices, d.native, d.prebid, uniqueKey]);
-                    });
-                });
-                this.renderMatrixPreviewTable();
-            },
-
-            renderMatrixPreviewTable() {
-                const c = document.getElementById('placement-matrix-preview-section'); const tb = document.getElementById('placement-matrix-preview-tbody');
-                if(AppState.type==='placements') {
-                    c.classList.remove('hidden'); 
-                    const unq = new Set(AppState.baseDomains.map(b=>b.domain).filter(d=>d!=='')).size;
-                    document.getElementById('placement-preview-counter').innerText=`${AppState.rows.length} Placements | ${unq} Entradas`;
-                    
-                    document.getElementById('placement-matrix-thead').innerHTML = AppState.env==='web' ? `<tr><th class="px-3 py-2">pub</th><th class="px-3 py-2">domain</th><th class="px-3 py-2">name</th><th class="px-3 py-2">type</th><th class="px-3 py-2">formats</th><th class="px-3 py-2">dev</th><th class="px-3 py-2">nat</th><th class="px-3 py-2">preb</th><th class="px-3 py-2">env</th><th class="px-3 py-2 text-center">🗑️</th></tr>` : `<tr><th class="px-3 py-2">pub</th><th class="px-3 py-2">bundle</th><th class="px-3 py-2">name</th><th class="px-3 py-2">type</th><th class="px-3 py-2">formats</th><th class="px-3 py-2">dev</th><th class="px-3 py-2">nat</th><th class="px-3 py-2">preb</th><th class="px-3 py-2 text-center">🗑️</th></tr>`;
-                    tb.innerHTML = '';
-                    AppState.rows.forEach((r, idx) => {
-                        let rowHTML = `<tr class="hover:bg-slate-100 transition-colors">`;
-                        for(let i=0; i<r.length-1; i++) {
-                            let val = r[i] !== undefined ? r[i] : '';
-                            let safeVal = typeof val === 'string' ? val.replace(/"/g, '&quot;') : val;
-                            let css = 'w-full bg-transparent border border-transparent hover:border-slate-300 rounded px-2 py-1 text-xs focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:bg-white outline-none transition-all';
-                            rowHTML+=`<td class="px-2 py-1 border-b border-slate-200"><input type="text" class="${css} ${i===2?'font-bold text-slate-800':''}" value="${safeVal}" oninput="AppController.updatePlacementCell(${idx}, ${i}, this.value)" /></td>`;
-                        }
-                        rowHTML+=`<td class="px-3 py-2 border-b border-slate-200 text-center"><button onclick="AppController.removeDataRow(${idx})" class="text-slate-400 hover:text-red-600 bg-slate-100 hover:bg-red-50 rounded px-2 py-1 transition-all">X</button></td></tr>`;
-                        tb.innerHTML += rowHTML;
-                    });
-                } else c.classList.add('hidden');
-            },
-
-            renderTable() {
-                if (AppState.type === 'placements') return;
-                const th = document.getElementById('preview-thead'); const tb = document.getElementById('preview-tbody');
-                
-                let headHtml = '<tr>'; 
-                AppState.columns.forEach(c => headHtml += `<th class="px-4 py-3 border-b border-slate-200 bg-slate-100">${c}</th>`); 
-                headHtml += '<th class="px-4 py-3 border-b border-slate-200 bg-slate-100 text-center">🗑️</th></tr>';
-                th.innerHTML = headHtml;
-                tb.innerHTML = '';
-
-                if (AppState.rows.length === 0) return;
-
-                const isWebSites = (AppState.env === 'web' && AppState.type === 'sites');
-                const isRon = (AppState.type === 'ron');
-
-                AppState.rows.forEach((r, rI) => {
-                    let rH = '<tr class="hover:bg-slate-50 transition-colors">';
-                    AppState.columns.forEach((_, cI) => {
-                        let val = r[cI] !== undefined ? r[cI] : '';
-                        let safeVal = typeof val === 'string' ? val.replace(/"/g, '&quot;') : val;
-                        let isLang = (isWebSites && cI === 1);
-                        
-                        if (isRon) {
-                            let css = 'class="w-full border border-transparent hover:border-slate-300 rounded px-2 py-1.5 text-xs focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:bg-white outline-none transition-all"';
-                            if (cI === 2) {
-                                css = 'class="w-full border border-slate-300 rounded px-2 py-1.5 text-xs text-center font-bold text-teal-700 bg-white shadow-sm focus:border-teal-500 focus:ring-1 focus:ring-teal-500 outline-none transition-all"';
-                            }
-                            rH += `<td class="px-3 py-2 border-b border-slate-200"><input type="text" ${css} value="${safeVal}" oninput="AppController.updateCell(${rI}, ${cI}, this.value)" /></td>`;
-                        } else {
-                            let typ = isLang ? 'type="number"' : 'type="text"';
-                            let css = isLang ? 'class="w-full border border-slate-300 rounded px-2 py-1.5 text-xs text-center font-bold text-brand-600 bg-white shadow-sm focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none transition-all"' : 'class="w-full border border-transparent hover:border-slate-300 rounded px-2 py-1.5 text-xs focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:bg-white outline-none transition-all"';
-                            
-                            let ob = (isWebSites && cI === 0) ? `onblur="AppController.formatUrlCell(${rI}, this)"` : '';
-                            rH += `<td class="px-3 py-2 border-b border-slate-200"><input ${typ} ${css} value="${safeVal}" oninput="AppController.updateCell(${rI}, ${cI}, this.value)" ${ob} /></td>`;
-                        }
-                    });
-                    rH += `<td class="px-3 py-2 border-b border-slate-200 text-center"><button onclick="AppController.removeDataRow(${rI})" class="text-slate-400 hover:text-red-600 bg-slate-100 hover:bg-red-50 rounded px-2 py-1 transition-all">X</button></td></tr>`;
-                    tb.innerHTML += rH;
-                });
-            },
-
-            formatUrlCell(r, input) {
-                const cleaned = AppUtils.cleanUrl(input.value); input.value = cleaned; AppState.rows[r][0] = cleaned;
-                AppState.rows[r][1] = AppUtils.detectLanguage(cleaned); this.renderTable();
-            },
-            updateCell(r, c, v) {
-                AppState.rows[r][c] = v;
-                if(AppState.type==='sites' && AppState.env==='web' && c===0) { AppState.rows[r][1] = AppUtils.detectLanguage(v); }
-                if(AppState.type==='sites' && AppState.env==='in-app' && c===2) { AppState.rows[r][1] = AppUtils.detectPlatform(v); }
-            },
-            updatePlacementCell(r, c, v) {
-                if (AppState.rows[r]) {
-                    AppState.rows[r][c] = v;
-                }
-            },
-            addNewDataRow() { 
-                if(AppState.type==='ron') return;
-                AppState.isDefaultData = false; AppState.rows.push(Array(AppState.columns.length).fill('')); this.renderTable(); 
-            },
-            removeDataRow(i) { 
-                if (AppState.type === 'placements') {
-                    const row = AppState.rows[i]; const uniqueKey = row[row.length - 1];
-                    AppState.deletedPlacements.add(uniqueKey); AppState.rows.splice(i, 1); this.renderMatrixPreviewTable();
-                } else { AppState.rows.splice(i,1); this.renderTable(); }
-            },
-
-            selectEnvironment(env) {
-                AppState.env = env; ['web','in-app','ctv'].forEach(e => {
-                    document.getElementById(`btn-env-${e}`).classList.toggle('border-brand-500', e===env);
-                    document.getElementById(`icon-env-${e}`).classList.toggle('bg-brand-100', e===env);
-                    document.getElementById(`icon-env-${e}`).classList.toggle('text-brand-600', e===env);
-                }); this.checkSelectionComplete();
-            },
-            selectType(type) {
-                AppState.type = type; ['sites','placements','ron'].forEach(t => {
-                    document.getElementById(`btn-type-${t}`).classList.toggle('border-brand-500', t===type);
-                    document.getElementById(`icon-type-${t}`).classList.toggle('bg-brand-100', t===type);
-                    document.getElementById(`icon-type-${t}`).classList.toggle('text-brand-600', t===type);
-                }); this.checkSelectionComplete();
-            },
-
-            checkSelectionComplete() {
-                if(!AppState.env || !AppState.type) return;
-                document.getElementById('left-panel-dynamic-content').classList.remove('hidden');
-                document.getElementById('right-panel-dynamic-content').classList.remove('hidden');
-                
-                ['sites','placements','inapp-sites','inapp-placements','ctv-sites','ctv-placements','ron'].forEach(id => { const el = document.getElementById(`legend-${id}`); if(el) el.classList.add('hidden'); });
-                ['sites','placements','inapp-sites','ctv-sites'].forEach(id => { const el = document.getElementById(`global-${id}-controls`); if(el) el.classList.add('hidden'); });
-                
-                const t = AppConfig.templatesData[AppState.env][AppState.type]; AppState.columns = [...t.columns];
-                const isRon = AppState.type==='ron';
-                
-                document.getElementById('standard-import-container').classList.toggle('hidden', isRon);
-                document.getElementById('ron-import-container').classList.toggle('hidden', !isRon);
-                document.getElementById('global-defaults-panel').classList.toggle('hidden', isRon);
-                document.getElementById('manual-grid-section').classList.toggle('hidden', AppState.type==='placements');
-                document.getElementById('placement-matrix-preview-section').classList.toggle('hidden', AppState.type!=='placements');
-
-                const showTwoCols = (AppState.env === 'ctv' && AppState.type === 'sites');
-                if(!isRon) {
-                    document.getElementById('import-col-2-header').classList.toggle('hidden', !showTwoCols);
-                    document.getElementById('import-col-2').classList.toggle('hidden', !showTwoCols);
-                }
-
-                AppState.isDefaultData = true; AppState.deletedPlacements.clear();
-
-                if (isRon) {
-                    document.getElementById('legend-ron').classList.remove('hidden'); AppState.rows = [];
-                } else if(AppState.type==='sites') {
-                    document.getElementById(`legend-${AppState.env==='web'?'sites':(AppState.env==='in-app'?'inapp-sites':'ctv-sites')}`).classList.remove('hidden');
-                    document.getElementById(`global-${AppState.env==='web'?'sites':(AppState.env==='in-app'?'inapp-sites':'ctv-sites')}-controls`).classList.remove('hidden');
-                    if(AppState.env==='web') AppState.rows=[[t.sample[0], AppUtils.detectLanguage(t.sample[0]), AppState.defaults.webSites.environment, AppState.defaults.webSites.child_lt14, AppState.defaults.webSites.child_bt1418, AppState.defaults.webSites.gambling, AppState.defaults.webSites.alcohol, AppState.defaults.webSites.prebid, AppState.defaults.webSites.ortb]];
-                    if(AppState.env==='in-app') AppState.rows=[[AppState.defaults.inAppSites.publisher, AppUtils.detectPlatform(t.sample[2]), t.sample[2], AppState.defaults.inAppSites.child_lt14, AppState.defaults.inAppSites.child_bt1418, AppState.defaults.inAppSites.gambling, AppState.defaults.inAppSites.alcohol, AppState.defaults.inAppSites.cmpRA, AppState.defaults.inAppSites.cmpIAB, AppState.defaults.inAppSites.cmpID, AppState.defaults.inAppSites.cmpName, AppState.defaults.inAppSites.ortb, AppState.defaults.inAppSites.prebid]];
-                    if(AppState.env==='ctv') AppState.rows=[[AppState.defaults.ctvSites.publisher, t.sample[1], t.sample[2], t.sample[3], AppState.defaults.ctvSites.child_lt14, AppState.defaults.ctvSites.child_bt1418, AppState.defaults.ctvSites.gambling, AppState.defaults.ctvSites.alcohol, AppState.defaults.ctvSites.cmpRA, AppState.defaults.ctvSites.cmpIAB, AppState.defaults.ctvSites.cmpID, AppState.defaults.ctvSites.cmpName, AppState.defaults.ctvSites.ortb, AppState.defaults.ctvSites.prebid]];
-                } else if(AppState.type==='placements') {
-                    document.getElementById(`legend-${AppState.env==='web'?'placements':(AppState.env==='in-app'?'inapp-placements':'ctv-placements')}`).classList.remove('hidden');
-                    document.getElementById('global-placements-controls').classList.remove('hidden');
-                    document.getElementById('global-plac-env-container').classList.toggle('hidden', AppState.env!=='web');
-                    
-                    const d = AppState.env==='web' ? AppState.defaults.webPlacements : (AppState.env==='ctv' ? AppState.defaults.ctvPlacements : AppState.defaults.inAppPlacements);
-                    const iPub = document.getElementById('global-plac-pub'); if(iPub) iPub.value = d.publisher || '';
-                    const iDev = document.getElementById('global-plac-dev'); if(iDev) iDev.value = d.devices || '';
-                    const iPre = document.getElementById('global-plac-prebid'); if(iPre) iPre.value = d.prebid || '1';
-                    
-                    AppState.baseDomains = [{ domain: AppState.env==='ctv'?'1227390':(AppState.env==='in-app'?'com.app.ejemplo':'eldiario.es'), baseName: 'demo' }];
-                    this.renderPlacementConfigUI(); this.generatePlacementMatrix();
-                }
-
-                document.getElementById('active-template-title').innerText = t.title;
-                const btnAdd = document.getElementById('btn-add-row'); if(btnAdd) btnAdd.classList.toggle('hidden', isRon);
-                
-                const downBtn = document.getElementById('download-btn');
-                downBtn.disabled = false;
-                downBtn.classList.remove('bg-slate-400', 'cursor-not-allowed');
-                downBtn.classList.add('bg-brand-600', 'hover:bg-brand-700', 'cursor-pointer', 'shadow-md');
-                
-                this.renderTable();
-            },
-
-            importFromPaste() {
-                const c1 = document.getElementById('import-col-1').value.split(/\r?\n/); const c2 = document.getElementById('import-col-2').value.split(/\r?\n/);
-                let c = 0; const isTwo = AppState.env==='ctv' && AppState.type==='sites';
-                
-                let hasValidData = false;
-                for(let i=0; i<c1.length; i++) { if (c1[i].trim()) { hasValidData = true; break; } }
-                if (hasValidData && AppState.isDefaultData) {
-                    if (AppState.type === 'placements') AppState.baseDomains = []; else AppState.rows = [];
-                    AppState.isDefaultData = false;
-                }
-                
-                for(let i=0; i<(isTwo?Math.max(c1.length,c2.length):c1.length); i++) {
-                    let v1=(c1[i]||'').trim(); let v2=(c2[i]||'').trim();
-                    if(!isTwo && v1.includes('\t')) { const p=v1.split('\t'); v1=p[0].trim(); v2=p[1]?p[1].trim():''; }
-                    if(!v1 && !v2) continue;
-                    
-                    if(AppState.type==='placements') {
-                        AppState.baseDomains.push({ domain: AppState.env==='web'?AppUtils.cleanUrl(v1):v1, baseName: v2 });
-                    } else if(AppState.env==='web' && AppState.type==='sites') {
-                        const cl = AppUtils.cleanUrl(v1); AppState.rows.push([cl, AppUtils.detectLanguage(cl), AppState.defaults.webSites.environment, AppState.defaults.webSites.child_lt14, AppState.defaults.webSites.child_bt1418, AppState.defaults.webSites.gambling, AppState.defaults.webSites.alcohol, AppState.defaults.webSites.prebid, AppState.defaults.webSites.ortb]);
-                    } else if(AppState.env==='in-app' && AppState.type==='sites') {
-                        AppState.rows.push([AppState.defaults.inAppSites.publisher, AppUtils.detectPlatform(v1), v1, AppState.defaults.inAppSites.child_lt14, AppState.defaults.inAppSites.child_bt1418, AppState.defaults.inAppSites.gambling, AppState.defaults.inAppSites.alcohol, AppState.defaults.inAppSites.cmpRA, AppState.defaults.inAppSites.cmpIAB, AppState.defaults.inAppSites.cmpID, AppState.defaults.inAppSites.cmpName, AppState.defaults.inAppSites.ortb, AppState.defaults.inAppSites.prebid]);
-                    } else if(AppState.env==='ctv' && AppState.type==='sites') {
-                        AppState.rows.push([AppState.defaults.ctvSites.publisher, 'ctv', v1, v2, AppState.defaults.ctvSites.child_lt14, AppState.defaults.ctvSites.child_bt1418, AppState.defaults.ctvSites.gambling, AppState.defaults.ctvSites.alcohol, AppState.defaults.ctvSites.cmpRA, AppState.defaults.ctvSites.cmpIAB, AppState.defaults.ctvSites.cmpID, AppState.defaults.ctvSites.cmpName, AppState.defaults.ctvSites.ortb, AppState.defaults.ctvSites.prebid]);
-                    }
-                    c++;
-                }
-                if(AppState.type==='placements') this.generatePlacementMatrix(); else this.renderTable();
-                document.getElementById('import-col-1').value=''; document.getElementById('import-col-2').value=''; this.showToast(`${c} fila(s) procesada(s).`);
-            },
-
-            processRonCSV() {
-                const f = document.getElementById('ron-csv-upload').files[0]; if(!f) return;
-                const r = new FileReader();
-                r.onload = (e) => {
-                    const lines = e.target.result.split(/\r?\n/).filter(x=>x.trim());
-                    if(lines.length<2) return this.showToast('CSV vacío.');
-                    
-                    const delim = lines[0].includes(';') ? ';' : ',';
-                    const cV = (v) => v ? v.replace(/^"|"$/g,'').trim() : '';
-                    const h = lines[0].split(delim).map(x=>cV(x).toLowerCase());
-                    
-                    const dI = h.findIndex(x=>x==='domain'||x==='bundle'||x==='url');
-                    const fI = h.findIndex(x=>x==='formats'||x==='format');
-                    const hI = h.findIndex(x=>x==='hash');
-                    
-                    // Buscamos la columna de Nombre, con un respaldo a la Columna C (índice 2) si falla
-                    let nI = h.findIndex(x=>x==='name'||x==='placement'||x==='placement name');
-                    if (nI === -1 && h.length > 2) nI = 2;
-                    
-                    if(AppState.env === 'ctv') {
-                        if(dI===-1||hI===-1) return this.showToast('Falta columna Bundle o Hash.');
-                    } else {
-                        if(dI===-1||fI===-1||hI===-1) return this.showToast('Falta Domain, Formats o Hash.');
-                    }
-
-                    let nR = [];
-                    
-                    if (AppState.env === 'ctv') {
-                        for(let i=1; i<lines.length; i++) {
-                            const cells = lines[i].split(delim);
-                            const b = cV(cells[dI]); 
-                            const hs = cV(cells[hI]);
-                            const pName = nI !== -1 && cells[nI] ? cV(cells[nI]).toLowerCase() : '';
-                            
-                            if(!b || !hs) continue;
-                            
-                            // 1. Fila estándar para todos (Key = Domain, Default = 0)
-                            nR.push([b, hs, '0', b]);
-                            
-                            // 2. Regla especial si el placement se llama "generic"
-                            if (pName === 'generic') {
-                                nR.push(['instream', hs, '1', b]);
-                                nR.push(['outstream', hs, '1', b]);
-                                nR.push(['video', hs, '1', b]);
-                            }
-                        }
-                    } else {
-                        for(let i=1; i<lines.length; i++) {
-                            const cells = lines[i].split(delim);
-                            const d = cV(cells[dI]); const fV = cV(cells[fI]); const hs = cV(cells[hI]); 
-                            if(!d || !hs) continue;
-                            let fS = 'display'; 
-                            if(fV==='17') fS='instream'; else if(fV==='18') fS='outstream';
-                            nR.push([`${d}/${fS}`, hs, '0', d]);
-                        }
-                    }
-                    AppState.rows = nR; this.renderTable(); this.showToast(`¡RON Mappeado con éxito!`);
-                };
-                r.readAsText(f);
-            },
-
-            downloadCSV() {
-                if(!AppState.columns.length || (!AppState.rows.length && AppState.type!=='placements')) return;
-                const hR = AppState.columns.join(';');
-                const dR = AppState.rows.map(row => {
-                    const rowToSave = AppState.columns.map((_, colIndex) => row[colIndex]);
-                    return rowToSave.map(v => {
-                        let sv = v!==undefined&&v!==null?v.toString():'';
-                        return (sv.includes(';')||sv.includes('"')||sv.includes('\n')) ? `"${sv.replace(/"/g, '""')}"` : sv;
-                    }).join(';');
-                });
-                const b = new Blob([[hR, ...dR].join('\n')], { type: 'text/csv;charset=utf-8;' });
-                const l = document.createElement("a");
-                l.href = URL.createObjectURL(b); l.download = `config_${AppState.env}_${AppState.type}.csv`;
-                l.click(); this.showToast(`¡Descarga lista!`);
+          AppState.rows.forEach((r, idx) => {
+            let rowHTML = `<tr class="hover:bg-canvas">`;
+            for (let i = 0; i < r.length - 1; i++) {
+              let val = r[i] !== undefined ? r[i] : '';
+              let safeVal = typeof val === 'string' ? val.replace(/"/g, '&quot;') : val;
+              rowHTML += `<td class="px-4 py-2 border-b border-line"><input type="text" class="w-full bg-transparent px-2 py-1 rounded text-xs text-ink font-mono focus:bg-white focus:outline-none focus:ring-1 focus:ring-grape" value="${safeVal}" oninput="AppController.updatePlacementCell(${idx}, ${i}, this.value)" /></td>`;
             }
-        };
+            rowHTML += `
+              <td class="px-4 py-2 border-b border-line text-center">
+                <button type="button" onclick="AppController.removeDataRow(${idx})" class="p-1 rounded text-muted hover:text-danger hover:bg-danger-soft transition-all" aria-label="Delete placement">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                </button>
+              </td></tr>`;
+            tb.innerHTML += rowHTML;
+          });
+        } else {
+          c.classList.add('hidden');
+        }
+      },
 
-        document.addEventListener('DOMContentLoaded', () => AppController.init());
-        window.selectEnvironment = (e) => AppController.selectEnvironment(e);
-        window.selectType = (t) => AppController.selectType(t);
-        window.updateGlobalDefault = (f, v) => AppController.updateGlobalDefault(f, v);
-        window.updateGlobalPlacementDefault = (f, v) => AppController.updateGlobalPlacementDefault(f, v);
-        window.toggleDomainInName = () => AppController.toggleDomainInName();
-        window.clearBaseDomains = () => AppController.clearBaseDomains();
-        window.bulkAddPlacementConfigs = () => AppController.bulkAddPlacementConfigs();
-        window.addPlacementConfig = () => AppController.addPlacementConfig();
-        window.addGenericPlacements = () => AppController.addGenericPlacements();
-        window.removePlacementConfig = (i) => AppController.removePlacementConfig(i);
-        window.updatePlacementConfigType = (i, v) => AppController.updatePlacementConfigType(i, v);
-        window.updatePlacementConfigFormats = (i, v) => AppController.updatePlacementConfigFormats(i, v);
-        window.updatePlacementConfigName = (i, v) => AppController.updatePlacementConfigName(i, v);
-        window.addNewDataRow = () => AppController.addNewDataRow();
-        window.removeDataRow = (i) => AppController.removeDataRow(i);
-        window.updatePlacementCell = (r, c, v) => AppController.updatePlacementCell(r, c, v);
-        window.importFromPaste = () => AppController.importFromPaste();
-        window.processRonCSV = () => AppController.processRonCSV();
-        window.downloadCSV = () => AppController.downloadCSV();
-    </script>
+      renderTable() {
+        if (AppState.type === 'placements') return;
+        const th = document.getElementById('preview-thead');
+        const tb = document.getElementById('preview-tbody');
+
+        let headHtml = '';
+        AppState.columns.forEach(c => {
+          headHtml += `<th class="px-4 py-3 text-left">${c}</th>`;
+        });
+        headHtml += '<th class="px-4 py-3 text-center">Action</th>';
+        th.innerHTML = headHtml;
+        tb.innerHTML = '';
+
+        const cnt = document.getElementById('data-rows-count');
+        if (cnt) cnt.innerText = `${AppState.rows.length} row(s)`;
+
+        if (AppState.rows.length === 0) return;
+
+        const isWebSites = (AppState.env === 'web' && AppState.type === 'sites');
+        const isRon = (AppState.type === 'ron');
+
+        AppState.rows.forEach((r, rI) => {
+          let rH = '<tr class="hover:bg-canvas">';
+          AppState.columns.forEach((_, cI) => {
+            let val = r[cI] !== undefined ? r[cI] : '';
+            let safeVal = typeof val === 'string' ? val.replace(/"/g, '&quot;') : val;
+            let isLang = (isWebSites && cI === 1);
+
+            if (isRon) {
+              let styleClasses = cI === 2
+                ? 'w-full px-2 py-1.5 rounded text-xs text-center font-bold text-grape bg-canvas border border-line focus:bg-white focus:outline-none focus:ring-1 focus:ring-grape font-mono'
+                : 'w-full px-2 py-1.5 rounded text-xs text-ink bg-transparent focus:bg-white focus:outline-none focus:ring-1 focus:ring-grape font-mono';
+              rH += `<td class="px-3 py-2 border-b border-line"><input type="text" class="${styleClasses}" value="${safeVal}" oninput="AppController.updateCell(${rI}, ${cI}, this.value)" /></td>`;
+            } else {
+              let typ = isLang ? 'type="number"' : 'type="text"';
+              let styleClasses = isLang
+                ? 'w-full px-2 py-1.5 rounded text-xs text-center font-bold text-grape bg-canvas border border-line focus:bg-white focus:outline-none focus:ring-1 focus:ring-grape font-mono'
+                : 'w-full px-2 py-1.5 rounded text-xs text-ink bg-transparent focus:bg-white focus:outline-none focus:ring-1 focus:ring-grape font-mono';
+              let ob = (isWebSites && cI === 0) ? `onblur="AppController.formatUrlCell(${rI}, this)"` : '';
+              rH += `<td class="px-3 py-2 border-b border-line"><input ${typ} class="${styleClasses}" value="${safeVal}" oninput="AppController.updateCell(${rI}, ${cI}, this.value)" ${ob} /></td>`;
+            }
+          });
+          rH += `
+            <td class="px-3 py-2 border-b border-line text-center">
+              <button type="button" onclick="AppController.removeDataRow(${rI})" class="p-1 rounded text-muted hover:text-danger hover:bg-danger-soft transition-all" aria-label="Delete row">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+              </button>
+            </td></tr>`;
+          tb.innerHTML += rH;
+        });
+      },
+
+      formatUrlCell(r, input) {
+        const cleaned = AppUtils.cleanUrl(input.value);
+        input.value = cleaned;
+        AppState.rows[r][0] = cleaned;
+        AppState.rows[r][1] = AppUtils.detectLanguage(cleaned);
+        this.renderTable();
+      },
+
+      updateCell(r, c, v) {
+        AppState.rows[r][c] = v;
+        if (AppState.type === 'sites' && AppState.env === 'web' && c === 0) {
+          AppState.rows[r][1] = AppUtils.detectLanguage(v);
+        }
+        if (AppState.type === 'sites' && AppState.env === 'in-app' && c === 2) {
+          AppState.rows[r][1] = AppUtils.detectPlatform(v);
+        }
+      },
+
+      updatePlacementCell(r, c, v) {
+        if (AppState.rows[r]) {
+          AppState.rows[r][c] = v;
+        }
+      },
+
+      addNewDataRow() {
+        if (AppState.type === 'ron') return;
+        AppState.isDefaultData = false;
+        AppState.rows.push(Array(AppState.columns.length).fill(''));
+        this.renderTable();
+      },
+
+      removeDataRow(i) {
+        if (AppState.type === 'placements') {
+          const row = AppState.rows[i];
+          const uniqueKey = row[row.length - 1];
+          AppState.deletedPlacements.add(uniqueKey);
+          AppState.rows.splice(i, 1);
+          this.renderMatrixPreviewTable();
+        } else {
+          AppState.rows.splice(i, 1);
+          this.renderTable();
+        }
+      },
+
+      selectEnvironment(env) {
+        AppState.env = env;
+        ['web', 'in-app', 'ctv'].forEach(e => {
+          const btn = document.getElementById(`btn-env-${e}`);
+          if (btn) {
+            btn.classList.toggle('border-grape', e === env);
+            btn.classList.toggle('bg-grape-soft', e === env);
+            btn.classList.toggle('bg-white', e !== env);
+            btn.classList.toggle('border-line', e !== env);
+          }
+        });
+        this.checkSelectionComplete();
+      },
+
+      selectType(type) {
+        AppState.type = type;
+        ['sites', 'placements', 'ron'].forEach(t => {
+          const btn = document.getElementById(`btn-type-${t}`);
+          if (btn) {
+            btn.classList.toggle('border-grape', t === type);
+            btn.classList.toggle('bg-grape-soft', t === type);
+            btn.classList.toggle('bg-white', t !== type);
+            btn.classList.toggle('border-line', t !== type);
+          }
+        });
+        this.checkSelectionComplete();
+      },
+
+      checkSelectionComplete() {
+        if (!AppState.env || !AppState.type) return;
+        const isRon = AppState.type === 'ron';
+        document.getElementById('left-panel-dynamic-content').classList.toggle('hidden', isRon);
+        document.getElementById('right-panel-dynamic-content').classList.remove('hidden');
+
+        ['sites', 'placements', 'inapp-sites', 'inapp-placements', 'ctv-sites', 'ctv-placements'].forEach(id => {
+          const el = document.getElementById(`legend-${id}`);
+          if (el) el.classList.add('hidden');
+        });
+        ['sites', 'placements', 'inapp-sites', 'ctv-sites'].forEach(id => {
+          const el = document.getElementById(`global-${id}-controls`);
+          if (el) el.classList.add('hidden');
+        });
+
+        const t = AppConfig.templatesData[AppState.env][AppState.type];
+        AppState.columns = [...t.columns];
+
+        document.getElementById('standard-import-container').classList.toggle('hidden', isRon);
+        document.getElementById('ron-import-container').classList.toggle('hidden', !isRon);
+        document.getElementById('global-defaults-panel').classList.toggle('hidden', isRon);
+        document.getElementById('manual-grid-section').classList.toggle('hidden', AppState.type === 'placements');
+        document.getElementById('placement-matrix-preview-section').classList.toggle('hidden', AppState.type !== 'placements');
+
+        const showTwoCols = (AppState.env === 'ctv' && AppState.type === 'sites');
+        if (!isRon) {
+          document.getElementById('import-col-2-header').classList.toggle('hidden', !showTwoCols);
+          document.getElementById('import-col-2').classList.toggle('hidden', !showTwoCols);
+        }
+
+        const sitesNotice = document.getElementById('sites-clean-notice');
+        if (sitesNotice) {
+          sitesNotice.classList.toggle('hidden', AppState.type !== 'sites');
+        }
+
+        AppState.isDefaultData = true;
+        AppState.deletedPlacements.clear();
+
+        if (isRon) {
+          AppState.rows = [];
+        } else if (AppState.type === 'sites') {
+          document.getElementById(`legend-${AppState.env === 'web' ? 'sites' : (AppState.env === 'in-app' ? 'inapp-sites' : 'ctv-sites')}`).classList.remove('hidden');
+          document.getElementById(`global-${AppState.env === 'web' ? 'sites' : (AppState.env === 'in-app' ? 'inapp-sites' : 'ctv-sites')}-controls`).classList.remove('hidden');
+          if (AppState.env === 'web') {
+            AppState.rows = [[t.sample[0], AppUtils.detectLanguage(t.sample[0]), AppState.defaults.webSites.environment, AppState.defaults.webSites.child_lt14, AppState.defaults.webSites.child_bt1418, AppState.defaults.webSites.gambling, AppState.defaults.webSites.alcohol, AppState.defaults.webSites.prebid, AppState.defaults.webSites.ortb]];
+          }
+          if (AppState.env === 'in-app') {
+            AppState.rows = [[AppState.defaults.inAppSites.publisher, AppUtils.detectPlatform(t.sample[2]), t.sample[2], AppState.defaults.inAppSites.child_lt14, AppState.defaults.inAppSites.child_bt1418, AppState.defaults.inAppSites.gambling, AppState.defaults.inAppSites.alcohol, AppState.defaults.inAppSites.cmpRA, AppState.defaults.inAppSites.cmpIAB, AppState.defaults.inAppSites.cmpID, AppState.defaults.inAppSites.cmpName, AppState.defaults.inAppSites.ortb, AppState.defaults.inAppSites.prebid]];
+          }
+          if (AppState.env === 'ctv') {
+            AppState.rows = [[AppState.defaults.ctvSites.publisher, t.sample[1], t.sample[2], t.sample[3], AppState.defaults.ctvSites.child_lt14, AppState.defaults.ctvSites.child_bt1418, AppState.defaults.ctvSites.gambling, AppState.defaults.ctvSites.alcohol, AppState.defaults.ctvSites.cmpRA, AppState.defaults.ctvSites.cmpIAB, AppState.defaults.ctvSites.cmpID, AppState.defaults.ctvSites.cmpName, AppState.defaults.ctvSites.ortb, AppState.defaults.ctvSites.prebid]];
+          }
+        } else if (AppState.type === 'placements') {
+          document.getElementById(`legend-${AppState.env === 'web' ? 'placements' : (AppState.env === 'in-app' ? 'inapp-placements' : 'ctv-placements')}`).classList.remove('hidden');
+          document.getElementById('global-placements-controls').classList.remove('hidden');
+          document.getElementById('global-plac-env-container').classList.toggle('hidden', AppState.env !== 'web');
+
+          const d = AppState.env === 'web' ? AppState.defaults.webPlacements : (AppState.env === 'ctv' ? AppState.defaults.ctvPlacements : AppState.defaults.inAppPlacements);
+          const iPub = document.getElementById('global-plac-pub'); if (iPub) iPub.value = d.publisher || '';
+          const iDev = document.getElementById('global-plac-dev'); if (iDev) iDev.value = d.devices || '';
+          const iPre = document.getElementById('global-plac-prebid'); if (iPre) iPre.value = d.prebid || '1';
+
+          AppState.baseDomains = [{ domain: AppState.env === 'ctv' ? '1227390' : (AppState.env === 'in-app' ? 'com.app.example' : 'eldiario.es'), baseName: 'demo' }];
+          this.renderPlacementConfigUI();
+          this.generatePlacementMatrix();
+        }
+
+        document.getElementById('active-template-title').innerText = isRon ? 'Download CSV' : t.title;
+        const btnAdd = document.getElementById('btn-add-row');
+        if (btnAdd) btnAdd.classList.toggle('hidden', isRon);
+
+        const downBtn = document.getElementById('download-btn');
+        downBtn.disabled = false;
+        downBtn.classList.remove('opacity-40', 'cursor-not-allowed');
+
+        this.updateWorkflowSteps();
+        this.renderTable();
+      },
+
+      importFromPaste() {
+        const c1 = document.getElementById('import-col-1').value.split(/\r?\n/);
+        const c2 = document.getElementById('import-col-2').value.split(/\r?\n/);
+        let c = 0;
+        const isTwo = AppState.env === 'ctv' && AppState.type === 'sites';
+
+        let hasValidData = false;
+        for (let i = 0; i < c1.length; i++) {
+          if (c1[i].trim()) { hasValidData = true; break; }
+        }
+        if (hasValidData && AppState.isDefaultData) {
+          if (AppState.type === 'placements') AppState.baseDomains = [];
+          else AppState.rows = [];
+          AppState.isDefaultData = false;
+        }
+
+        for (let i = 0; i < (isTwo ? Math.max(c1.length, c2.length) : c1.length); i++) {
+          let v1 = (c1[i] || '').trim();
+          let v2 = (c2[i] || '').trim();
+          if (!isTwo && v1.includes('\t')) {
+            const p = v1.split('\t');
+            v1 = p[0].trim();
+            v2 = p[1] ? p[1].trim() : '';
+          }
+          if (!v1 && !v2) continue;
+
+          if (AppState.type === 'placements') {
+            AppState.baseDomains.push({ domain: AppState.env === 'web' ? AppUtils.cleanUrl(v1) : v1, baseName: v2 });
+          } else if (AppState.env === 'web' && AppState.type === 'sites') {
+            const cl = AppUtils.cleanUrl(v1);
+            AppState.rows.push([cl, AppUtils.detectLanguage(cl), AppState.defaults.webSites.environment, AppState.defaults.webSites.child_lt14, AppState.defaults.webSites.child_bt1418, AppState.defaults.webSites.gambling, AppState.defaults.webSites.alcohol, AppState.defaults.webSites.prebid, AppState.defaults.webSites.ortb]);
+          } else if (AppState.env === 'in-app' && AppState.type === 'sites') {
+            AppState.rows.push([AppState.defaults.inAppSites.publisher, AppUtils.detectPlatform(v1), v1, AppState.defaults.inAppSites.child_lt14, AppState.defaults.inAppSites.child_bt1418, AppState.defaults.inAppSites.gambling, AppState.defaults.inAppSites.alcohol, AppState.defaults.inAppSites.cmpRA, AppState.defaults.inAppSites.cmpIAB, AppState.defaults.inAppSites.cmpID, AppState.defaults.inAppSites.cmpName, AppState.defaults.inAppSites.ortb, AppState.defaults.inAppSites.prebid]);
+          } else if (AppState.env === 'ctv' && AppState.type === 'sites') {
+            AppState.rows.push([AppState.defaults.ctvSites.publisher, 'ctv', v1, v2, AppState.defaults.ctvSites.child_lt14, AppState.defaults.ctvSites.child_bt1418, AppState.defaults.ctvSites.gambling, AppState.defaults.ctvSites.alcohol, AppState.defaults.ctvSites.cmpRA, AppState.defaults.ctvSites.cmpIAB, AppState.defaults.ctvSites.cmpID, AppState.defaults.ctvSites.cmpName, AppState.defaults.ctvSites.ortb, AppState.defaults.ctvSites.prebid]);
+          }
+          c++;
+        }
+
+        if (AppState.type === 'placements') this.generatePlacementMatrix();
+        else this.renderTable();
+
+        document.getElementById('import-col-1').value = '';
+        document.getElementById('import-col-2').value = '';
+        this.showToast(`${c} row(s) processed`);
+      },
+
+      processRonCSV() {
+        const fileInput = document.getElementById('ron-csv-upload');
+        const f = fileInput.files[0];
+        if (!f) return this.showToast('Please select a CSV file', true);
+        const r = new FileReader();
+        r.onload = (e) => {
+          const lines = e.target.result.split(/\r?\n/).filter(x => x.trim());
+          if (lines.length < 2) return this.showToast('CSV is empty or missing headers', true);
+
+          const delim = lines[0].includes(';') ? ';' : ',';
+          const cV = (v) => v ? v.replace(/^"|"$/g, '').trim() : '';
+          const h = lines[0].split(delim).map(x => cV(x).toLowerCase());
+
+          const dI = h.findIndex(x => x === 'domain' || x === 'bundle' || x === 'url');
+          const fI = h.findIndex(x => x === 'formats' || x === 'format');
+          const hI = h.findIndex(x => x === 'hash');
+
+          let nI = h.findIndex(x => x === 'name' || x === 'placement' || x === 'placement name');
+          if (nI === -1 && h.length > 2) nI = 2;
+
+          if (AppState.env === 'ctv') {
+            if (dI === -1 || hI === -1) return this.showToast('Missing Bundle or Hash column', true);
+          } else {
+            if (dI === -1 || fI === -1 || hI === -1) return this.showToast('Missing Domain, Formats, or Hash column', true);
+          }
+
+          let nR = [];
+          if (AppState.env === 'ctv') {
+            for (let i = 1; i < lines.length; i++) {
+              const cells = lines[i].split(delim);
+              const b = cV(cells[dI]);
+              const hs = cV(cells[hI]);
+              const pName = nI !== -1 && cells[nI] ? cV(cells[nI]).toLowerCase() : '';
+              if (!b || !hs) continue;
+
+              nR.push([b, hs, '0', b]);
+              if (pName === 'generic') {
+                nR.push(['instream', hs, '1', b]);
+                nR.push(['outstream', hs, '1', b]);
+                nR.push(['video', hs, '1', b]);
+              }
+            }
+          } else {
+            for (let i = 1; i < lines.length; i++) {
+              const cells = lines[i].split(delim);
+              const d = cV(cells[dI]);
+              const fV = cV(cells[fI]);
+              const hs = cV(cells[hI]);
+              if (!d || !hs) continue;
+              let fS = 'display';
+              if (fV === '17') fS = 'instream';
+              else if (fV === '18') fS = 'outstream';
+              nR.push([`${d}/${fS}`, hs, '0', d]);
+            }
+          }
+          nR = this.filterRonRows(nR);
+          AppState.rows = nR;
+          this.renderTable();
+          this.showToast(`RON mapping generated (${nR.length} rows)`);
+        };
+        r.readAsText(f);
+      },
+
+      filterRonRows(rows) {
+        const valGroups = {};
+        rows.forEach(r => {
+          const val = r[1] !== undefined && r[1] !== null ? String(r[1]).trim() : '';
+          if (!val) return;
+          if (!valGroups[val]) valGroups[val] = [];
+          valGroups[val].push(r);
+        });
+
+        return rows.filter(r => {
+          const val = r[1] !== undefined && r[1] !== null ? String(r[1]).trim() : '';
+          const group = valGroups[val];
+          if (group && group.length === 4) {
+            const zeros = group.filter(x => String(x[2]).trim() === '0');
+            const ones = group.filter(x => String(x[2]).trim() === '1');
+            // If there are 4 rows with the same Value (1 with default 0 and 3 with default 1), remove the default 0 row
+            if (zeros.length === 1 && ones.length === 3 && String(r[2]).trim() === '0') {
+              return false;
+            }
+          }
+          return true;
+        });
+      },
+
+      downloadCSV() {
+        if (AppState.type === 'ron') {
+          AppState.rows = this.filterRonRows(AppState.rows);
+        }
+        if (!AppState.columns.length || (!AppState.rows.length && AppState.type !== 'placements')) {
+          return this.showToast('No data to export', true);
+        }
+        const hR = AppState.columns.join(';');
+        const dR = AppState.rows.map(row => {
+          const rowToSave = AppState.columns.map((_, colIndex) => row[colIndex]);
+          return rowToSave.map(v => {
+            let sv = v !== undefined && v !== null ? v.toString() : '';
+            return (sv.includes(';') || sv.includes('"') || sv.includes('\n')) ? `"${sv.replace(/"/g, '""')}"` : sv;
+          }).join(';');
+        });
+        const b = new Blob([[hR, ...dR].join('\n')], { type: 'text/csv;charset=utf-8;' });
+        const l = document.createElement("a");
+        l.href = URL.createObjectURL(b);
+        l.download = `config_${AppState.env}_${AppState.type}.csv`;
+        l.click();
+        this.showToast('Download started');
+      }
+    };
+
+    function clearImportInputs() {
+      document.getElementById('import-col-1').value = '';
+      document.getElementById('import-col-2').value = '';
+    }
+
+    function ronFileSelected(input) {
+      const lbl = document.getElementById('ron-upload-label');
+      if (input.files && input.files[0]) {
+        lbl.innerText = input.files[0].name;
+      }
+    }
+
+    let activeExpandedSectionId = null;
+
+    function toggleExpandTable(sectionId, btnId) {
+      const section = document.getElementById(sectionId);
+      const backdrop = document.getElementById('table-expand-backdrop');
+      const btn = document.getElementById(btnId);
+      const isExpanded = section.classList.contains('fixed');
+      const scrollWrapper = section.querySelector('.overflow-x-auto');
+
+      if (!isExpanded) {
+        if (activeExpandedSectionId && activeExpandedSectionId !== sectionId) {
+          toggleExpandTable(activeExpandedSectionId, activeExpandedSectionId === 'manual-grid-section' ? 'btn-expand-manual' : 'btn-expand-placement');
+        }
+        section.classList.add('fixed', 'inset-4', 'sm:inset-8', 'z-50', 'bg-white', 'shadow-2xl', 'border', 'border-line', 'rounded-xl', 'flex', 'flex-col', 'overflow-hidden');
+        if (scrollWrapper) {
+          scrollWrapper.classList.remove('max-h-[420px]');
+          scrollWrapper.classList.add('flex-1', 'h-full');
+        }
+        backdrop.classList.remove('hidden');
+        document.body.classList.add('overflow-hidden');
+        activeExpandedSectionId = sectionId;
+        if (btn) {
+          btn.innerHTML = `
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+            <span id="${btnId}-text">Collapse table</span>
+          `;
+        }
+      } else {
+        section.classList.remove('fixed', 'inset-4', 'sm:inset-8', 'z-50', 'shadow-2xl', 'overflow-hidden');
+        if (scrollWrapper) {
+          scrollWrapper.classList.remove('flex-1', 'h-full');
+          scrollWrapper.classList.add('max-h-[420px]');
+        }
+        backdrop.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+        activeExpandedSectionId = null;
+        if (btn) {
+          btn.innerHTML = `
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" /></svg>
+            <span id="${btnId}-text">Expand table</span>
+          `;
+        }
+      }
+    }
+
+    function closeAllExpandedTables() {
+      if (activeExpandedSectionId) {
+        toggleExpandTable(activeExpandedSectionId, activeExpandedSectionId === 'manual-grid-section' ? 'btn-expand-manual' : 'btn-expand-placement');
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeAllExpandedTables();
+    });
+
+    document.addEventListener('DOMContentLoaded', () => AppController.init());
+    window.selectEnvironment = (e) => AppController.selectEnvironment(e);
+    window.selectType = (t) => AppController.selectType(t);
+    window.updateGlobalDefault = (f, v) => AppController.updateGlobalDefault(f, v);
+    window.updateGlobalPlacementDefault = (f, v) => AppController.updateGlobalPlacementDefault(f, v);
+    window.toggleDomainInName = () => AppController.toggleDomainInName();
+    window.clearBaseDomains = () => AppController.clearBaseDomains();
+    window.bulkAddPlacementConfigs = () => AppController.bulkAddPlacementConfigs();
+    window.addPlacementConfig = () => AppController.addPlacementConfig();
+    window.addGenericPlacements = () => AppController.addGenericPlacements();
+    window.removePlacementConfig = (i) => AppController.removePlacementConfig(i);
+    window.updatePlacementConfigType = (i, v) => AppController.updatePlacementConfigType(i, v);
+    window.updatePlacementConfigFormats = (i, v) => AppController.updatePlacementConfigFormats(i, v);
+    window.updatePlacementConfigName = (i, v) => AppController.updatePlacementConfigName(i, v);
+    window.addNewDataRow = () => AppController.addNewDataRow();
+    window.removeDataRow = (i) => AppController.removeDataRow(i);
+    window.updatePlacementCell = (r, c, v) => AppController.updatePlacementCell(r, c, v);
+    window.importFromPaste = () => AppController.importFromPaste();
+    window.processRonCSV = () => AppController.processRonCSV();
+    window.downloadCSV = () => AppController.downloadCSV();
+    window.clearImportInputs = clearImportInputs;
+    window.ronFileSelected = ronFileSelected;
+    window.toggleExpandTable = toggleExpandTable;
+    window.closeAllExpandedTables = closeAllExpandedTables;
+  </script>
 </body>
 </html>
